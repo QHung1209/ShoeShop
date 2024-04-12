@@ -36,4 +36,12 @@ public class Colors {
     public void setColor_name(String color_name) {
         this.color_name = color_name;
     }
+
+    public Set<Inventories> getListInventory() {
+        return listInventory;
+    }
+
+    public void setListInventory(Set<Inventories> listInventory) {
+        this.listInventory = listInventory;
+    }
 }

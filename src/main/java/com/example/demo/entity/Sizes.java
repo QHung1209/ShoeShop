@@ -19,7 +19,7 @@ public class Sizes {
     @Column(name="size_name")
     private String size_name;
 
-    @OneToMany(mappedBy = "colors")
+    @OneToMany(mappedBy = "sizes")
     private Set<Inventories> listInventory;
     
     public Set<Inventories> getListInventory() {
