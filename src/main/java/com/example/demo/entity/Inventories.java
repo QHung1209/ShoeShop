@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,6 +14,9 @@ public class Inventories {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int inventory_id;
+
+    @Column(name="quantity")
+    private int quantity;
 
     @ManyToOne
     @JoinColumn(name = "shoe_id")
@@ -69,4 +73,13 @@ public class Inventories {
     public void setCategories(Categories categories) {
         this.categories = categories;
     }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
 }
