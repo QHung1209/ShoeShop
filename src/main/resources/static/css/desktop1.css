@@ -12,7 +12,7 @@
   box-sizing: border-box;
 }
 
-.sn-phm-5 a {
+ a {
   color: black;
   /* Màu văn bản của liên kết */
   text-decoration: none;
@@ -20,7 +20,7 @@
 }
 
 /* Hiệu ứng hover */
-.sn-phm-5 a:hover {
+a:hover {
   color: #F15E2C;
   text-decoration: none;
 }

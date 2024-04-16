@@ -2,18 +2,52 @@
   margin: 0;
   padding: 0;
 }
-.sn-phm-5 a {
+ a {
   color: black;
-  /* Màu văn bản của liên kết */
   text-decoration: none;
-  /* Loại bỏ gạch chân */
 }
 
 /* Hiệu ứng hover */
-.sn-phm-5 a:hover {
+ a:hover {
   color: #F15E2C;
   text-decoration: none;
 }
+
+.container-hover-image {
+  display: flex;
+  justify-content: center;
+  width: 285px;
+  height: 285px;
+  position: relative;
+}
+
+.rectangle-38 {
+  background: 50% / cover no-repeat;
+  margin-bottom: 15px;
+  width: 285px;
+  height: 285px;
+  opacity: 1;
+}
+
+.button-hover {
+  
+  position: absolute;
+  top: 85%;
+  text-align: center;
+  opacity: 1;
+}
+
+.button-hover a {
+  text-align: center;
+  color: rgb(212, 12, 12);
+  opacity: 0;
+  z-index: 99;
+}
+
+.container-hover-image:hover .button-hover a{
+  opacity: 1;
+}
+
 .desktop-2 {
   background: #FFFFFF;
   display: flex;
@@ -387,7 +421,7 @@ li {
 
 .tn-giy {
   border-radius: 3px;
-  margin: 0 2px 13px 0;
+  margin: 3% 0 3% 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -412,12 +446,6 @@ li {
   box-sizing: border-box;
 }
 
-.rectangle-38 img {
-  background: 50% / cover no-repeat;
-  margin-bottom: 15px;
-  width: 285px;
-  height: 285px;
-}
 
 
 .container-4 {
