@@ -282,19 +282,19 @@ margin-left: 14%;
 
 
  .banner {
-  background: url('../assets/images/rectangle8.png') 50% / cover no-repeat;
+  background: url('../images/rectangle8.png') 50% / cover no-repeat;
   margin-bottom: 67px;
   width: 100%;
   height: 641px;
 }
  .rectangle-9 {
-  background: url('../assets/images/banner-phu_2m-600x320.jpg') 50% / cover no-repeat;
+  background: url('../images/banner-phu_2m-600x320.jpg') 50% / cover no-repeat;
   margin-right: 30px;
   width: 600px;
   height: 300px;
 }
  .rectangle-10 {
-  background: url('../assets/images/Banner_Sale-off-1.jpg') 50% / cover no-repeat;
+  background: url('../images/Banner_Sale-off-1.jpg') 50% / cover no-repeat;
   width: 600px;
   height: 300px;
 }
@@ -423,19 +423,19 @@ margin-left: 14%;
   color: #000000;
 }
  .rectangle-25 {
-  background: url('../assets/images/rectangle25.png') 50% / cover no-repeat;
+  background: url('../images/rectangle25.png') 50% / cover no-repeat;
   margin-bottom: 2px;
   width: 390px;
   height: 230px;
 }
  .rectangle-26 {
-  background: url('../assets/images/rectangle26.png') 50% / cover no-repeat;
+  background: url('../images/rectangle26.png') 50% / cover no-repeat;
   margin-top: 2px;
   width: 390px;
   height: 230px;
 }
  .rectangle-27 {
-  background: url('../assets/images/rectangle27.png') 50% / cover no-repeat;
+  background: url('../images/rectangle27.png') 50% / cover no-repeat;
   margin-top: 2px;
   width: 390px;
   height: 230px;
