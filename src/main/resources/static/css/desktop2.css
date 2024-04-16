@@ -2,7 +2,18 @@
   margin: 0;
   padding: 0;
 }
+.sn-phm-5 a {
+  color: black;
+  /* Màu văn bản của liên kết */
+  text-decoration: none;
+  /* Loại bỏ gạch chân */
+}
 
+/* Hiệu ứng hover */
+.sn-phm-5 a:hover {
+  color: #F15E2C;
+  text-decoration: none;
+}
 .desktop-2 {
   background: #FFFFFF;
   display: flex;
