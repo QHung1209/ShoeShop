@@ -353,6 +353,9 @@ li {
   width: 285px;
   box-sizing: border-box;
 }
+.component-11:hover{
+  background-color: #cbcbcb;
+}
 
 .limited-edition-1 {
   overflow-wrap: break-word;
