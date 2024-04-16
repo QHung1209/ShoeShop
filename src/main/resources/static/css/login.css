@@ -1,0 +1,45 @@
+.form-login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #ccc;
+    padding: 40px;
+    
+    border-radius: 5px;
+    width: 400px;
+    /* Đặt chiều rộng của form */
+    text-align: center;
+    /* Căn giữa nội dung */
+}
+
+.form-login input {
+    display: block;
+    width: 92%;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    padding: 15px;
+    font-size: 16px;
+}
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Các nút sẽ nằm ở hai bên đối với không gian ngang */
+    margin-top: 15px; /* Khoảng cách giữa các nút và input fields */
+}
+
+.form-login button {
+    display: block;
+    width: 40%;
+    margin-bottom: 20px;
+   
+    padding: 15px;
+    font-size: 16px;
+}
+
+.form-login button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
