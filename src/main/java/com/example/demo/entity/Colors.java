@@ -19,7 +19,7 @@ public class Colors {
     private String color_name;
 
     @OneToMany(mappedBy = "colors")
-    private Set<Inventories> listInventory;
+    private Set<Products> listProduct;
 
     public int getColor_id() {
         return color_id;
@@ -37,11 +37,11 @@ public class Colors {
         this.color_name = color_name;
     }
 
-    public Set<Inventories> getListInventory() {
-        return listInventory;
+    public Set<Products> getListProduct() {
+        return listProduct;
     }
 
-    public void setListInventory(Set<Inventories> listInventory) {
-        this.listInventory = listInventory;
+    public void setListProduct(Set<Products> listProduct) {
+        this.listProduct = listProduct;
     }
 }

@@ -17,17 +17,17 @@ public class Sizes {
     private int size_id;
     
     @Column(name="size_name")
-    private String size_name;
+    private int size_name;
 
     @OneToMany(mappedBy = "sizes")
-    private Set<Inventories> listInventory;
+    private Set<Products> listProduct;
     
-    public Set<Inventories> getListInventory() {
-        return listInventory;
+    public Set<Products> getListProduct() {
+        return listProduct;
     }
 
-    public void setListInventory(Set<Inventories> listInventory) {
-        this.listInventory = listInventory;
+    public void setListProduct(Set<Products> listProduct) {
+        this.listProduct = listProduct;
     }
 
     public int getSize_id() {
@@ -38,11 +38,11 @@ public class Sizes {
         this.size_id = size_id;
     }
 
-    public String getSize_name() {
+    public int getSize_name() {
         return size_name;
     }
 
-    public void setSize_name(String size_name) {
+    public void setSize_name(int size_name) {
         this.size_name = size_name;
     }
 

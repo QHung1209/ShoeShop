@@ -40,8 +40,8 @@ public class Products {
     private Materials materials;
 
     @ManyToOne
-    @JoinColumn(name = "type_id")
-    private Types types;
+    @JoinColumn(name = "style_id")
+    private Styles styles;
 
     @Column(name="quantity")
     private int quantity;
@@ -132,12 +132,12 @@ public class Products {
         this.materials = materials;
     }
 
-    public Types getTypes() {
-        return types;
+    public Styles getStyles() {
+        return styles;
     }
 
-    public void setTypes(Types types) {
-        this.types = types;
+    public void setTypes(Styles styles) {
+        this.styles = styles;
     }
 
     public String getImage_url() {

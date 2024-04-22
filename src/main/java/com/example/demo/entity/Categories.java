@@ -20,7 +20,7 @@ public class Categories {
     private String category_name;
 
     @OneToMany(mappedBy = "categories")
-    private Set<Inventories> listInventory;
+    private Set<Products> listProduct;
 
     public int getCategory_id() {
         return category_id;
@@ -38,12 +38,12 @@ public class Categories {
         this.category_name = category_name;
     }
 
-    public Set<Inventories> getListInventory() {
-        return listInventory;
+    public Set<Products> getListProduct() {
+        return listProduct;
     }
 
-    public void setListInventory(Set<Inventories> listInventory) {
-        this.listInventory = listInventory;
+    public void setListProduct(Set<Products> listProduct) {
+        this.listProduct = listProduct;
     }
 
 }

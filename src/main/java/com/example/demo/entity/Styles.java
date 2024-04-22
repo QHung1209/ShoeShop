@@ -10,32 +10,23 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Materials {
-
+public class Styles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int material_id;
+    private int style_id;
 
-    @Column(name="material_name")
-    private String material_name;
+    @Column(name="Style_name")
+    private String style_name;
 
-    @OneToMany(mappedBy = "materials")
+    @OneToMany(mappedBy = "styles")
     private Set<Products> listProduct;
 
-    public int getMaterial_id() {
-        return material_id;
+    public int getStyle_id() {
+        return style_id;
     }
 
-    public void setMaterial_id(int material_id) {
-        this.material_id = material_id;
-    }
-
-    public String getMaterial_name() {
-        return material_name;
-    }
-
-    public void setMaterial_name(String material_name) {
-        this.material_name = material_name;
+    public void Style_id(int type_id) {
+        this.style_id = type_id;
     }
 
     public Set<Products> getListProduct() {
@@ -45,4 +36,17 @@ public class Materials {
     public void setListProduct(Set<Products> listProduct) {
         this.listProduct = listProduct;
     }
+
+    public void setStyle_id(int style_id) {
+        this.style_id = style_id;
+    }
+
+    public String getStyle_name() {
+        return style_name;
+    }
+
+    public void setStyle_name(String style_name) {
+        this.style_name = style_name;
+    }
+
 }

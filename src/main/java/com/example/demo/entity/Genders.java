@@ -15,10 +15,34 @@ public class Genders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int gender_id;
 
-    @Column(name="material_name")
+    @Column(name="gender_name")
     private String gender_name;
 
     @OneToMany(mappedBy = "genders")
-    private Set<Products> listInventory;
+    private Set<Products> listProduct;
+
+    public int getGender_id() {
+        return gender_id;
+    }
+
+    public void setGender_id(int gender_id) {
+        this.gender_id = gender_id;
+    }
+
+    public String getGender_name() {
+        return gender_name;
+    }
+
+    public void setGender_name(String gender_name) {
+        this.gender_name = gender_name;
+    }
+
+    public Set<Products> getListProduct() {
+        return listProduct;
+    }
+
+    public void setListProduct(Set<Products> listProduct) {
+        this.listProduct = listProduct;
+    }
 
 }
