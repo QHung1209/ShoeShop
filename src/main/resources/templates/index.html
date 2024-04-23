@@ -3,25 +3,26 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="src\main\webapp\styles\login.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     </head>
     <body>
     <div class="form-login">
         <div class="login">
             <h2>Login now</h2>
         </div>
-        <form action="http://localhost:8082/demo/" method="post">
-            <div><input type="text" name="username" placeholder="Enter your username">
+        <form action="http://localhost:8080/login/signin" method="post">
+            <div><input id="username" type="text" name="username" placeholder="Enter your username">
             </div>
             <div>
-                <input type="text" name="password" placeholder="Enter your password">
+                <input id="password" type="text" name="password" placeholder="Enter your password">
             </div>
             <div class="button-container">
-                <button>Login</button>
+                <button id="btn-login">Login</button>
                 <button>Register</button>
             </div>
         </form>
     </div>
+    <script src="./custom.js"></script>
 </body>
 </html>
 
