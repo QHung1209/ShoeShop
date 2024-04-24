@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,9 +31,9 @@ public class ProductService implements ProductServiceImp {
 
 
     @Override
-    public List<ProductDTO> getProduct() {
+    public List<ProductDTO> getAllProduct() {
         List<ProductDTO> ProductDTOs = new ArrayList<>();
-        PageRequest pageRequest = PageRequest.of(0, 12);
+        PageRequest pageRequest = PageRequest.of(0, Integer.MAX_VALUE);
         Page<Products> listData = ProductRepository.findAll(pageRequest);
 
         for (Products data : listData) {
@@ -52,6 +54,45 @@ public class ProductService implements ProductServiceImp {
         return ProductDTOs;
     }
 
+    @Override 
+    public Set<String> getStyle()
+    {
+        PageRequest pageRequest = PageRequest.of(0, Integer.MAX_VALUE);
+        Page<Products> listData = ProductRepository.findAll(pageRequest);
+        Set<String> styleSet = new HashSet<String>();
+        for(Products data: listData)
+        {
+            styleSet.add(data.getStyles().getStyle_name());
+        }
+        return styleSet;
 
+    }
 
+    @Override 
+    public Set<String> getCategory()
+    {
+        PageRequest pageRequest = PageRequest.of(0, Integer.MAX_VALUE);
+        Page<Products> listData = ProductRepository.findAll(pageRequest);
+        Set<String> categorySet = new HashSet<String>();
+        for(Products data: listData)
+        {
+            categorySet.add(data.getCategories().getCategory_name());
+        }
+        return categorySet;
+
+    }
+
+    @Override 
+    public Set<String> getMaterial()
+    {
+        PageRequest pageRequest = PageRequest.of(0, Integer.MAX_VALUE);
+        Page<Products> listData = ProductRepository.findAll(pageRequest);
+        Set<String> materialSet = new HashSet<String>();
+        for(Products data: listData)
+        {
+            materialSet.add(data.getMaterials().getMaterial_name());
+        }
+        return materialSet;
+
+    }
 }
