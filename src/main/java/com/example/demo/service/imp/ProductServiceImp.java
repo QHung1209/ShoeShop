@@ -1,6 +1,7 @@
 package com.example.demo.service.imp;
 
 import java.util.List;
+import java.util.Set;
 
 import com.example.demo.dto.ProductDTO;
 
@@ -18,6 +19,9 @@ public interface ProductServiceImp {
     int price,
     String image_url);
 
-    List<ProductDTO> getProduct();
+    List<ProductDTO> getAllProduct();
+    Set<String> getStyle();
+    Set<String> getCategory();
+    Set<String> getMaterial();
 }
      
