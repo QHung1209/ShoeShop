@@ -22,7 +22,34 @@ public class ProductController {
     public ResponseEntity<?> getProduct() {
 
         ResponseData responseData = new ResponseData();
-        responseData.setData(productServiceImp.getProduct());
+        responseData.setData(productServiceImp.getAllProduct());
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
+
+    @GetMapping("/allstylename")
+    public ResponseEntity<?> getStyleName() {
+
+        ResponseData responseData = new ResponseData();
+        responseData.setData(productServiceImp.getStyle());
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
+    }
+
+    @GetMapping("/allcategoryname")
+    public ResponseEntity<?> getCategoryName() {
+
+        ResponseData responseData = new ResponseData();
+        responseData.setData(productServiceImp.getCategory());
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
+    }
+
+    
+    @GetMapping("/allmaterialname")
+    public ResponseEntity<?> getMaterialName() {
+
+        ResponseData responseData = new ResponseData();
+        responseData.setData(productServiceImp.getMaterial());
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
+    }
+
+    
 }
