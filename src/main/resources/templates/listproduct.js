@@ -27,4 +27,71 @@ $(document).ready(function () {
             }
 
         });
+
+        
+    $.ajax({
+        method: "GET",
+        url: "http://localhost:8080/product/allstylename"
+
+    })
+        .done(function (msg) {
+            if (msg) {
+                $.each(msg.data, function (index, value) {
+                    console.log(value);
+                    var html = ` <div class="component-11">
+                    <span class="limited-edition-1">
+                      ${value}
+                    </span>
+                  </div>`
+
+                    $("#kieu-dang").append(html)
+                })
+            }
+
+        });
+        
+        $.ajax({
+          method: "GET",
+          url: "http://localhost:8080/product/allcategoryname"
+  
+      })
+          .done(function (msg) {
+              if (msg) {
+                  $.each(msg.data, function (index, value) {
+                      console.log(value);
+                      var html = ` <div class="component-11">
+                      <span class="limited-edition-1">
+                        ${value}
+                      </span>
+                    </div>`
+  
+                      $("#dong-san-pham").append(html)
+                  })
+              }
+  
+          });
+
+          $.ajax({
+            method: "GET",
+            url: "http://localhost:8080/product/allmaterialname"
+    
+        })
+            .done(function (msg) {
+                if (msg) {
+                    $.each(msg.data, function (index, value) {
+                        console.log(value);
+                        var html = ` <div class="component-11">
+                        <span class="limited-edition-1">
+                          ${value}
+                        </span>
+                      </div>`
+    
+                        $("#chat-lieu").append(html)
+                    })
+                }
+    
+            });
+  
+
+
 })
