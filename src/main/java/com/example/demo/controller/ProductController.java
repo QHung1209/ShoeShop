@@ -18,6 +18,7 @@ public class ProductController {
 
     @Autowired
     ProductServiceImp productServiceImp;
+
     @GetMapping("/allproduct")
     public ResponseEntity<?> getProduct() {
 
@@ -42,7 +43,6 @@ public class ProductController {
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 
-    
     @GetMapping("/allmaterialname")
     public ResponseEntity<?> getMaterialName() {
 
