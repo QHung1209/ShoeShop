@@ -43,6 +43,7 @@ public class CustomFilterSecurity {
         .requestMatchers(HttpMethod.GET, "/product/allcategoryname").permitAll()
         .requestMatchers(HttpMethod.GET, "/product/allmaterialname").permitAll()
         .requestMatchers(HttpMethod.POST, "/login/signin").permitAll()
+        .requestMatchers(HttpMethod.POST, "/main/page").permitAll()
         .anyRequest().authenticated());
        
         http.csrf(AbstractHttpConfigurer::disable);
