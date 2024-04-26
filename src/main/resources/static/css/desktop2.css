@@ -342,15 +342,13 @@ li {
 
 }
 
-.limited-edition {
-  overflow-wrap: break-word;
-  font-family: 'Inter';
-  font-weight: 400;
-  font-size: 18px;
-  color: #000000;
+
+
+.myinputCheckbox {
+  display: none;
 }
 
-.component-11 {
+label {
   background: #FFFFFF;
   position: relative;
   margin-bottom: 9px;
@@ -358,17 +356,26 @@ li {
   width: 285px;
   box-sizing: border-box;
 }
-.component-11:hover{
+
+label:hover{
   background-color: #cbcbcb;
+  
 }
 
-.limited-edition-1 {
-  overflow-wrap: break-word;
+.text {
+    overflow-wrap: break-word;
   font-family: 'Inter';
-  font-weight: 400;
   font-size: 18px;
   color: #000000;
+  /* Màu chữ */
 }
+
+.myinputCheckbox:checked+label {
+  background-color: #cbcbcb;
+  font-weight:  bolder;
+}
+
+
 
 .trng-thi {
   
