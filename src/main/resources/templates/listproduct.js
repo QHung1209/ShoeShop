@@ -17,11 +17,16 @@ function updateURL() {
     queryParams_dongsanpham.push(checkbox.id);
   });
 
+  var checkedCheckboxes_chatlieu = document.querySelectorAll('.chat-lieu:checked');
+  var queryParams_chatlieu = [];
+  checkedCheckboxes_chatlieu.forEach(function (checkbox) {
+    queryParams_chatlieu.push(checkbox.id);
+  });
   // Get base URL
   var url = window.location.href.split('?')[0];
 
   // Additional parameters such as gender and category
-  if (queryParams.length > 0 || queryParams_kieudang.length > 0 || queryParams_dongsanpham.length > 0) {
+  if (queryParams.length > 0 || queryParams_kieudang.length > 0 || queryParams_dongsanpham.length > 0 || queryParams_chatlieu.length > 0) {
     url += '?'; // Add '?' if it doesn't exist
   }
 
@@ -46,6 +51,15 @@ function updateURL() {
     else
       url += 'categories=';
     url += queryParams_dongsanpham.join(',');
+  }
+
+  if (queryParams_chatlieu.length > 0) {
+    if (queryParams.length > 0 || queryParams_kieudang.length > 0 || queryParams_dongsanpham.length > 0) {
+      url += '&materials='; // Add '&' to append to existing params
+    }
+    else
+      url += 'materials=';
+    url += queryParams_chatlieu.join(',');
   }
 
   window.history.replaceState({}, document.title, url);
@@ -132,7 +146,7 @@ $(document).ready(function () {
       if (msg) {
         $.each(msg.data, function (index, value) {
           console.log(value);
-          var html = ` <input type="checkbox" class="myinputCheckbox" id="${value}" name=" ${value}">
+          var html = ` <input type="checkbox" class="chat-lieu" id="${value}" name="${value}">
           <label for="${value}">
               <span class="text"> ${value}</span>
           </label>`
@@ -146,6 +160,6 @@ $(document).ready(function () {
   $(document).on('change', '.myinputCheckbox', updateURL);
   $(document).on('change', '.kieu-dang', updateURL);
   $(document).on('change', '.dong-san-pham', updateURL);
-
+  $(document).on('change', '.chat-lieu', updateURL);
 
 })

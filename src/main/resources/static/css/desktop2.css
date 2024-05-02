@@ -391,6 +391,13 @@ label:hover{
   font-weight:  bolder;
 }
 
+.chat-lieu {
+  display: none;
+}
+.chat-lieu:checked+label {
+  background-color: #cbcbcb;
+  font-weight:  bolder;
+}
 
 .trng-thi {
   
