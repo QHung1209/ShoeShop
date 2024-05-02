@@ -375,6 +375,21 @@ label:hover{
   font-weight:  bolder;
 }
 
+.kieu-dang {
+  display: none;
+}
+.kieu-dang:checked+label {
+  background-color: #cbcbcb;
+  font-weight:  bolder;
+}
+
+.dong-san-pham {
+  display: none;
+}
+.dong-san-pham:checked+label {
+  background-color: #cbcbcb;
+  font-weight:  bolder;
+}
 
 
 .trng-thi {
