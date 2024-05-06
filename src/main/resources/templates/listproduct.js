@@ -1,3 +1,25 @@
+function filter(param) {
+  $.ajax({
+    method: "GET",
+    url: `http://localhost:8080/product/filter?${param.toString()}`
+  })
+    .done(function (msg) {
+      if (msg) {
+        $("#container-san-pham").empty(); // Xóa hết nội dung cũ trước khi thêm mới
+        $.each(msg.data, function (index, value) {
+          var html = `<div class="san-pham">
+                    <div class="container-hover-image">
+                        <a href=""><img class="rectangle-38" src="${value.image_url}" alt=""></a>
+                        <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
+                    </div>
+                    <a href="" class="ten-giay">${value.shoe_name}</a>
+                    <span class="vnd">${value.price} VND</span>
+                </div>`;
+          $("#container-san-pham").append(html);
+        });
+      }
+    });
+}
 function updateURL() {
   var checkedCheckboxes = document.querySelectorAll('.myinputCheckbox:checked');
   var queryParams = [];
@@ -35,34 +57,39 @@ function updateURL() {
     url += queryParams.join(',');
   }
 
-  if (queryParams_kieudang.length > 0 ) {
-    if (queryParams.length > 0 ) {
-      url += '&styles='; // Add '&' to append to existing params
+  if (queryParams_kieudang.length > 0) {
+    if (queryParams.length > 0) {
+      url += '&style='; // Add '&' to append to existing params
     }
     else
-      url += 'styles=';
+      url += 'style=';
     url += queryParams_kieudang.join(',');
   }
 
   if (queryParams_dongsanpham.length > 0) {
     if (queryParams.length > 0 || queryParams_kieudang.length > 0) {
-      url += '&categories='; // Add '&' to append to existing params
+      url += '&category='; // Add '&' to append to existing params
     }
     else
-      url += 'categories=';
+      url += 'category=';
     url += queryParams_dongsanpham.join(',');
   }
 
   if (queryParams_chatlieu.length > 0) {
     if (queryParams.length > 0 || queryParams_kieudang.length > 0 || queryParams_dongsanpham.length > 0) {
-      url += '&materials='; // Add '&' to append to existing params
+      url += '&material='; // Add '&' to append to existing params
     }
     else
-      url += 'materials=';
+      url += 'material=';
     url += queryParams_chatlieu.join(',');
   }
 
   window.history.replaceState({}, document.title, url);
+  let searchParams = new URLSearchParams(window.location.search)
+  console.log(searchParams.toString())
+
+  filter(searchParams);
+
 }
 
 
@@ -91,6 +118,7 @@ $(document).ready(function () {
                   </div>`
 
           $("#container-san-pham").append(html)
+
         })
       }
 
@@ -106,7 +134,7 @@ $(document).ready(function () {
       if (msg) {
         $.each(msg.data, function (index, value) {
           console.log(value);
-          var html = ` <input type="checkbox" class="kieu-dang" id="${value}" name=" ${value}">
+          var html = ` <input type="checkbox" class="kieu-dang" id="${value}" name="${value}">
                     <label for="${value}">
                         <span class="text"> ${value}</span>
                     </label>`
@@ -126,7 +154,7 @@ $(document).ready(function () {
       if (msg) {
         $.each(msg.data, function (index, value) {
           console.log(value);
-          var html = ` <input type="checkbox" class="dong-san-pham" id="${value}" name=" ${value}">
+          var html = ` <input type="checkbox" class="dong-san-pham" id="${value}" name="${value}">
           <label for="${value}">
               <span class="text"> ${value}</span>
           </label>`
@@ -161,5 +189,7 @@ $(document).ready(function () {
   $(document).on('change', '.kieu-dang', updateURL);
   $(document).on('change', '.dong-san-pham', updateURL);
   $(document).on('change', '.chat-lieu', updateURL);
+
+
 
 })

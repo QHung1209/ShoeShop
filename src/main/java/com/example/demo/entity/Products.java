@@ -136,7 +136,7 @@ public class Products {
         return styles;
     }
 
-    public void setTypes(Styles styles) {
+    public void setStyle(Styles styles) {
         this.styles = styles;
     }
 
