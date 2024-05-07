@@ -10,6 +10,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../static/css/desktop2.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.12"
+    integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2"
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -38,7 +42,7 @@
         </div>
         <div class="topbar-item">
           <div class="icon-dang-nhap">
-            <img class="img-dang-nhap" src="../static/assets/vectors/vector11_x2.svg" />
+            <img class="img-dang-nhap" src="../static/vectors/vector11_x2.svg" />
           </div>
           <div class="tra-cuu-hang">
             <span class="tra-cuu-hang-1">
@@ -124,341 +128,77 @@
             </div>
           </div>
         </div>
+      
         <div class="line-1">
         </div>
-        <div class="trng-thi">
-          <div class="tr-ng-th-i">
-            TRẠNG THÁI
-          </div>
-          <div class="component-11">
-            <span class="limited-edition">
-              Limited edition
-            </span>
-          </div>
-          <div class="component-11">
-            <span class="limited-edition">
-              Online only
-            </span>
-          </div>
-          <div class="component-11">
-            <span class="limited-edition">
-              Sale off
-            </span>
-          </div>
-          <div class="component-11">
-            <span class="limited-edition">
-              New arrival
-            </span>
-          </div>
-        </div>
-        <div class="line-1">
-        </div>
-        <div class="trng-thi">
+
+
+
+        <div class="trng-thi" id="kieu-dang">
           <div class="tr-ng-th-i">
             KIỂU DÁNG
           </div>
-          <div class="component-11">
-            <span class="limited-edition-1">
-              Low top
-            </span>
-          </div>
-          <div class="component-11">
-            <span class="limited-edition-1">
-              High top
-            </span>
-          </div>
-          <div class="component-11">
-            <span class="limited-edition-1">
-              Slip-on
-            </span>
-          </div>
-          <div class="component-11">
-            <span class="limited-edition-1">
-              Mid top
-            </span>
-          </div>
-          <div class="component-11">
-            <span class="limited-edition-1">
-              Mule
-            </span>
-          </div>
+
+          <!-- call api kieu dang  "http://localhost:8080/product/allstyle" -->
+
         </div>
         <div class="line-1">
+
+
+
         </div>
-        <div class="trng-thi">
+        <div class="trng-thi" id="dong-san-pham">
           <div class="tr-ng-th-i">
             DÒNG SẢN PHẨM
           </div>
-          <div class="component-11">
-            <span class="limited-edition-1">
-              Basas
-            </span>
-          </div>
-          <div class="component-11">
-            <span class="limited-edition-1">
-              Vintas
-            </span>
-          </div>
-          <div class="component-11">
-            <span class="limited-edition-1">
-              Urbas
-            </span>
-          </div>
-          <div class="component-11">
-            <span class="limited-edition-1">
-              Pattas
-            </span>
-          </div>
+          <!--call api -->
         </div>
+
+
+
         <div class="line-1">
         </div>
-        <div class="trng-thi">
+
+
+        <div class="trng-thi" id="gia">
           <div class="tr-ng-th-i">
             GIÁ
           </div>
-          <div class="component-11">
-            <span class="limited-edition-1">
-              &gt;600k
-            </span>
-          </div>
-          <div class="component-11">
-            <span class="limited-edition-1">
-              300k - 599k
-            </span>
-          </div>
-          <div class="component-11">
-            <span class="limited-edition-1">
-              100k - 299k
-            </span>
-          </div>
+          
+            <input type="checkbox" class="myinputCheckbox" id="1000" name="1000"  >
+            <label for="1000">
+              <span class="text">&gt;1000k</span>
+            </label>
+  
+            <input type="checkbox" class="myinputCheckbox" id="600-999" name="600-900" >
+            <label for="600-999">
+              <span class="text">600k - 999k</span>
+            </label>
+
+            <input type="checkbox" class="myinputCheckbox" id="300-599" name="300-599">
+            <label for="300-599">
+              <span class="text">300k - 599k</span>
+            </label>
+          
         </div>
         <div class="line-1">
         </div>
-        <div class="trng-thi">
+
+
+
+        <div class="trng-thi" id="chat-lieu">
           <div class="tr-ng-th-i">
             CHẤT LIỆU
           </div>
-          <div class="component-11">
-            <span class="limited-edition-1">
-              Canvas
-            </span>
-          </div>
-          <div class="component-11">
-            <span class="limited-edition-1">
-              Suede
-            </span>
-          </div>
-          <div class="component-11">
-            <span class="limited-edition-1">
-              Leather
-            </span>
-          </div>
-          <div class="component-11">
-            <span class="limited-edition-1">
-              Cotton
-            </span>
-          </div>
+          <!--call api chat lieu-->
         </div>
       </div>
       <div class="banner-list-sp">
         <div class="banner">
         </div>
         <div class="list-san-pham">
-          <div class="container-4">
-            <div class="san-pham">
-              <div class="container-hover-image">
-                <a href=""><img class="rectangle-38" img src="../static/images/rectangle37.png" alt=""></a>
-                <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
-              </div>
-              <a href="" class="ten-giay">
-                Tên giày
-              </a>
-              <span class="vnd">
-                500000 VND
-              </span>
-            </div>
-            <div class="san-pham">
-              <div class="container-hover-image">
-                <a href=""><img class="rectangle-38" img src="../static/images/rectangle39.png" alt=""></a>
-                <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
-              </div>
-              <a href="" class="ten-giay">
-                Tên giày
-              </a>
-              <span class="vnd">
-                500000 VND
-              </span>
-            </div>
-            <div class="san-pham">
-              <div class="container-hover-image">
-                <a href=""><img class="rectangle-38" img src="../static/images/rectangle40.png" alt=""></a>
-
-                <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
-              </div>
-              <a href="" class="ten-giay">
-                Tên giày
-              </a>
-              <span class="vnd">
-                500000 VND
-              </span>
-            </div>
-          </div>
-          <div class="container-4">
-            <div class="san-pham">
-              <div class="container-hover-image">
-                <a href=""><img class="rectangle-38" img src="../static/images/rectangle41.png" alt=""></a>
-                <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
-              </div>
-              <a href="" class="ten-giay">
-                Tên giày
-              </a>
-              <span class="vnd">
-                500000 VND
-              </span>
-            </div>
-            <div class="san-pham">
-              <div class="container-hover-image">
-                <a href=""><img class="rectangle-38" img src="../static/images/rectangle42.png" alt=""></a>
-
-                <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
-              </div>
-              <a href="" class="ten-giay">
-                Tên giày
-              </a>
-              <span class="vnd">
-                500000 VND
-              </span>
-            </div>
-            <div class="san-pham">
-              <div class="container-hover-image">
-                <a href=""><img class="rectangle-38" img src="../static/images/rectangle43.png" alt=""></a>
-                <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
-              </div>
-              <a href="" class="ten-giay">
-                Tên giày
-              </a>
-              <span class="vnd">
-                500000 VND
-              </span>
-            </div>
-          </div>
-          <div class="container-4">
-            <div class="san-pham">
-              <div class="container-hover-image">
-                <a href=""><img class="rectangle-38" img src="../static/images/rectangle44.png" alt=""></a>
-                <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
-              </div>
-              <a href="" class="ten-giay">
-                Tên giày
-              </a>
-              <span class="vnd">
-                500000 VND
-              </span>
-            </div>
-            <div class="san-pham">
-              <div class="container-hover-image">
-                <a href=""><img class="rectangle-38" img src="../static/images/rectangle45.png" alt=""></a>
-
-                <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
-              </div>
-              <a href="" class="ten-giay">
-                Tên giày
-              </a>
-              <span class="vnd">
-                500000 VND
-              </span>
-            </div>
-            <div class="san-pham">
-              <div class="container-hover-image">
-                <a href=""><img class="rectangle-38" img src="../static/images/rectangle46.png" alt=""></a>
-                <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
-              </div>
-              <a href="" class="ten-giay">
-                Tên giày
-              </a>
-              <span class="vnd">
-                500000 VND
-              </span>
-            </div>
-          </div>
-          <div class="container-4">
-            <div class="san-pham">
-              <div class="container-hover-image">
-                <a href=""><img class="rectangle-38" img src="../static/images/rectangle47.png" alt=""></a>
-                <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
-              </div>
-              <a href="" class="ten-giay">
-                Tên giày
-              </a>
-              <span class="vnd">
-                500000 VND
-              </span>
-            </div>
-            <div class="san-pham">
-              <div class="container-hover-image">
-                <a href=""><img class="rectangle-38" img src="../static/images/rectangle48.png" alt=""></a>
-                <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
-              </div>
-              <a href="" class="ten-giay">
-                Tên giày
-              </a>
-              <span class="vnd">
-                500000 VND
-              </span>
-            </div>
-            <div class="san-pham">
-              <div class="container-hover-image">
-                <a href=""><img class="rectangle-38" img src="../static/images/rectangle49.png" alt=""></a>
-
-                <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
-              </div>
-              <a href="" class="ten-giay">
-                Tên giày
-              </a>
-              <span class="vnd">
-                500000 VND
-              </span>
-            </div>
-          </div>
-          <div class="container-4">
-            <div class="san-pham">
-              <div class="container-hover-image">
-                <a href=""><img class="rectangle-38" img src="../static/images/rectangle50.png" alt=""></a>
-                <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
-              </div>
-              <a href="" class="ten-giay">
-                Tên giày
-              </a>
-              <span class="vnd">
-                500000 VND
-              </span>
-            </div>
-            <div class="san-pham">
-
-              <div class="container-hover-image">
-                <a href=""><img class="rectangle-38" img src="../static/images/rectangle51.png" alt=""></a>
-
-                <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
-              </div>
-              <a href="" class="ten-giay">
-                Tên giày
-              </a>
-              <span class="vnd">
-                500000 VND
-              </span>
-            </div>
-            <div class="san-pham">
-              <div class="container-hover-image">
-                <a href=""><img class="rectangle-38" img src="../static/images/rectangle49.png" alt=""></a>
-                <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
-              </div>
-              <a href="" class="ten-giay">
-                Tên giày
-              </a>
-              <span class="vnd">
-                500000 VND
-              </span>
-            </div>
+          <div id="container-san-pham" class="container-4">
+            <!-- call api list san pham -->
           </div>
         </div>
       </div>
@@ -472,6 +212,8 @@
       </div>
     </div>
   </div>
+
+  <script src="./listproduct.js"></script>
 </body>
 
 </html>
