@@ -9,32 +9,32 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
-@Entity(name="Colors")
-public class Colors {
+@Entity
+public class Genders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int color_id;
+    private int gender_id;
 
-    @Column(name="color_name")
-    private String color_name;
+    @Column(name="gender_name")
+    private String gender_name;
 
-    @OneToMany(mappedBy = "colors")
+    @OneToMany(mappedBy = "genders")
     private Set<Products> listProduct;
 
-    public int getColor_id() {
-        return color_id;
+    public int getGender_id() {
+        return gender_id;
     }
 
-    public void setColor_id(int color_id) {
-        this.color_id = color_id;
+    public void setGender_id(int gender_id) {
+        this.gender_id = gender_id;
     }
 
-    public String getColor_name() {
-        return color_name;
+    public String getGender_name() {
+        return gender_name;
     }
 
-    public void setColor_name(String color_name) {
-        this.color_name = color_name;
+    public void setGender_name(String gender_name) {
+        this.gender_name = gender_name;
     }
 
     public Set<Products> getListProduct() {
@@ -44,4 +44,5 @@ public class Colors {
     public void setListProduct(Set<Products> listProduct) {
         this.listProduct = listProduct;
     }
+
 }

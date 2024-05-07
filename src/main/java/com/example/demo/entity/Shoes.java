@@ -23,14 +23,14 @@ public class Shoes {
     private int price;
 
     @OneToMany(mappedBy = "shoes")
-    private Set<Inventories> listInventory;
+    private Set<Products> listProduct;
 
-    public Set<Inventories> getListInventory() {
-        return listInventory;
+    public Set<Products> getListProduct() {
+        return listProduct;
     }
 
-    public void setListInventory(Set<Inventories> listInventory) {
-        this.listInventory = listInventory;
+    public void setListProduct(Set<Products> listProduct) {
+        this.listProduct = listProduct;
     }
 
     public int getShoe_id() {
