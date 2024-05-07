@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Desktop - 3</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+
+  <!-- Link to desktop1.css -->
+  <link rel="stylesheet" href="../static/css/desktop3.css" />
+
+  <!-- Box icons-->
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+</head>
+<body>
+
+  <!-- Header section -->
+  <header>
+    <!-- Tra cứu đơn hàng -->
+    <div class="content">
+      <a href="#"><i class='bx bx-archive'></i> Tra cứu đơn hàng</a>
+    </div>
+    <!-- Giỏ hàng -->
+    <div class="content">
+      <a href="#"><i class='bx bx-cart-alt' ></i> Giỏ hàng</a>
+    </div>
+    <!-- Đăng nhập -->
+    <div class="content">
+      <a href="#"><i class='bx bx-user' ></i> Đăng nhập</a>
+    </div>
+  </header>
+  
+  <!-- Navbar section -->
+  <section class="logo-and-navbar" >
+    <a href="#" class="logo"><img src="../static/images/logo.png" alt=""></a>
+
+    <ul class="navbar">
+      <li><a href="#products">SẢN PHẨM</a></li>
+      <li><p>|</p></li>
+      <li><a href="#male">NAM</a></li>
+      <li><p>|</p></li>
+      <li><a href="#female">NỮ</a></li>
+      <li><p>|</p></li>
+      <li><a href="#new-products">SẢN PHẨM MỚI</a></li>
+      <li><p>|</p></li>
+      <li><a href="#discount">KHUYẾN MÃI</a></li>
+    </ul>
+  </section>
+
+  <!-- Banner section-->
+  <section class="banner">
+    <div class="content">
+      <h2>Free Shipping với hóa đơn từ 900k</h2>
+      <div class="search">
+        <i class='bx bx-search'></i>
+        <input type="text" placeholder="Search"> 
+      </div>
+    </div>
+
+
+
+  <!-- Path to product -->
+  <div class="path-to-product">
+    <ol class="breadcrumb">
+      <li><a href="#">Giày</a></li>
+      <li>|</li>
+      <li><a href="#">Vintas</a></li>
+      <li>|</li>
+      <li class="active"><a href="#">Vintas Public 2000s - Low Top</a></li>
+    </ol>
+  </div>
+
+  <!-- Product detail -->
+  <section class="product-detail">
+
+    <!-- images of product -->
+    <div class="detail-images">
+      <div class="main-image">
+        <img src="../static/images/rectangle62.png" alt="">
+      </div>
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="../static/images/rectangle62.png" alt=""></div>
+          <div class="swiper-slide"><img src="../static/images/rectangle64.png" alt=""></div>
+          <div class="swiper-slide"><img src="../static/images/rectangle65.png" alt=""></div>
+          <div class="swiper-slide"><img src="../static/images/rectangle66.png" alt=""></div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+    <!-- info of product -->
+    <div class="detail-info">
+
+      <h4>Vintas Public 2000s - low top - insignia blue</h4>
+      <h6>
+        <span>Mã sản phẩm: <strong>AV00209</strong></span>
+      </h6>
+      <h5>
+        <span> 620.000 VND</span>
+      </h5>
+      <div class="product-colors">
+        <ol>
+          <li class="main-color"><a href="#"><i class='bx bxs-square'></i></a></li>
+          <li class="color2"><a href="#"><i class='bx bxs-square'></i></a></li>
+          <li class="color3"><a href="#"><i class='bx bxs-square'></i></a></li>
+        </ol>
+      </div>
+
+      <div class="select-size-quantity">
+        <div class="select-size">
+          <h4>Size</h4>
+          <select name="size" id="">
+            <option value="">35</option>
+            <option value="">36</option>
+            <option value="">36.5</option>
+            <option value="">37</option>
+            <option value="">38</option>
+            <option value="">38.5</option>
+            <option value="">39</option>
+            <option value="">40</option>
+            <option value="">40.5</option>
+            <option value="">41</option>
+            <option value="">42</option>
+            <option value="">42.5</option>
+            <option value="">43</option>
+            <option value="">44</option>
+            <option value="">44.5</option>
+            <option value="">45</option>
+            <option value="">46</option>
+          </select>
+        </div>
+  
+        <div class="select-quantity">
+          <h4>Số lượng</h4>
+          <select name="quantity" id="">
+            <option value="">1</option>
+            <option value="">2</option>
+            <option value="">3</option>
+            <option value="">4</option>
+            <option value="">5</option>
+            <option value="">6</option>
+            <option value="">7</option>
+            <option value="">8</option>
+            <option value="">9</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="box-pay">
+        <a href="#" class="add-to-cart">thêm vào giỏ hàng</a>
+        <br>
+        <a href="#" class="pay">thanh toán</a>
+      </div>
+
+      <div class="info-product">
+        <div class="row1">
+          <p class="info" id="change1">thông tin sản phẩm</p>
+          <i class='bx bx-chevron-down' id="info_btn"></i>
+        </div>
+        <div class="row2" id="row2_info">
+          <p>Gender: Unisex</p>
+          <p>Size run: 35 - 46</p>
+          <p>Upper: Canvas</p>
+          <p>Outsole: Rubber</p>
+          <img src="../static/images/image1.png" alt="">
+        </div>
+
+        <div class="product-exchange">
+          <div class="row1">
+            <p class="info" id="change2">quy định đổi sản phẩm</p>
+            <i class='bx bx-chevron-down' id="exchange_btn"></i>
+          </div>
+          <div class="row2" id="row2_exchange">
+            <ul>
+              <li>Chỉ đổi hàng 1 lần duy nhất, mong các bạn cân nhắc kỹ trước khi quyết định.</li>
+              <li>Thời hạn đổi sản phẩm khi mua trực tiếp tại cửa hàng là 07 ngày, kể từ ngày mua. Đổi sản phẩm khi mua online là 14 ngày, kể từ ngày nhận hàng.</li>
+              <li>Sản phẩm đổi phải kèm hóa đơn. Bắt buộc phải còn nguyên tem, hộp, nhãn mác.</li>
+              <li>Sản phẩm đổi không có dấu hiệu đã qua sử dụng, không giặt tẩy, bám bẩn, biến dạng.</li>
+              <li>Ananas chỉ ưu tiên hỗ trợ đổi size. Trong trường hợp sản phẩm hết size cần đổi, bạn có thể đổi sang 01 sản phẩm khác: <br>
+                  - Nếu sản phẩm muốn đổi ngang giá trị hoặc có giá trị cao hơn, bạn sẽ cần bù khoảng chênh lệch tại thời điểm đổi (nếu có). <br>
+                  - Nếu bạn mong muốn đổi sản phẩm có giá trị thấp hơn, chúng tôi sẽ không hoàn lại tiền.
+              </li>
+              <li>Trong trường hợp sản phẩm - size bạn muốn đổi không còn hàng trong hệ thống. Vui lòng chọn sản phẩm khác.</li>
+              <li>Không hoàn trả bằng tiền mặt dù bất cứ trong trường hợp nào. Mong bạn thông cảm.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- related products -->
+  <section class="relate-products">
+    <h4>sản phẩm liên quan</h4>
+    <div class="big-box">
+      <div class="box">
+        <img src="../static/images/rectangle79.png" alt="">
+        <p class="name">Tên giày</p>
+        <p class="price">1.190.000 <span>VND</span></p>
+      </div>
+      <div class="box">
+        <img src="../static/images/rectangle80.png" alt="">
+        <p class="name">Tên giày</p>
+        <p class="price">1.190.000 <span>VND</span></p>
+      </div>
+      <div class="box">
+        <img src="../static/images/rectangle81.png" alt="">
+        <p class="name">Tên giày</p>
+        <p class="price">1.190.000 <span>VND</span></p>
+      </div>
+      <div class="box">
+        <img src="../static/images/rectangle82.png" alt="">
+        <p class="name">Tên giày</p>
+        <p class="price">1.190.000 <span>VND</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer section -->
+  <footer>
+
+  </footer>
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- desktop3 JS-->
+<script src="../static/js/desktop3.js"></script>
+</body>
+</html>
