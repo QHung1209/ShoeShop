@@ -11,166 +11,135 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../static/css/desktop2.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
   <script src="https://unpkg.com/htmx.org@1.9.12"
     integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2"
     crossorigin="anonymous"></script>
 </head>
 
 <body>
-  <div class="desktop-2">
-    <div class="header">
-      <div class="topbar">
-        <div class="topbar-item">
-          <div class="icon-tra-cuu-don-hang">
-            <img class="img-tra-cuu" src="../static/vectors/vector1_x2.svg" />
-          </div>
-          <div class="tra-cuu-hang">
-            <span class="tra-cuu-hang-1">
-              Tra cứu đơn hàng
-            </span>
-          </div>
-        </div>
-        <div class="topbar-item">
-          <div class="iconcart">
-            <img class="img-gio-hang" src="../static/vectors/vector3_x2.svg" />
-          </div>
-          <div class="tra-cuu-hang">
-            <span class="tra-cuu-hang-1">
-              Giỏ hàng
-            </span>
-          </div>
-        </div>
-        <div class="topbar-item">
-          <div class="icon-dang-nhap">
-            <img class="img-dang-nhap" src="../static/vectors/vector11_x2.svg" />
-          </div>
-          <div class="tra-cuu-hang">
-            <span class="tra-cuu-hang-1">
-              Đăng nhập
-            </span>
-          </div>
-        </div>
-      </div>
 
-      <div class="menu">
 
-        <a href="./desktop1.html" class="logo"> <img src="../static/images/image2.png" alt=""></a>
-        <ul class="nav-bar">
-          <div class="sn-phm">
-            <li class="item-menu">
-              <a class="item" href="./desktop2.html">SẢN PHẨM</a>
-            </li>
+  <header>
+    <!-- Tra cứu đơn hàng -->
+    <div class="content">
+      <a href="#"><i class='bx bx-archive'></i> Tra cứu đơn hàng</a>
+    </div>
+    <!-- Giỏ hàng -->
+    <div class="content">
+      <a href="#"><i class='bx bx-cart-alt'></i> Giỏ hàng</a>
+    </div>
+    <!-- Đăng nhập -->
+    <div class="content">
+      <a href="#"><i class='bx bx-user'></i> Đăng nhập</a>
+    </div>
+  </header>
 
-            <li class="line-16">
-            </li>
+  <section class="logo-and-navbar">
+    <a href="#" class="logo"><img src="../static/images/logo.png" alt=""></a>
 
-            <li class="item-menu">
-              <a class="item" href=""> NAM</a>
-            </li>
+    <ul class="navbar">
+      <li><a href="#products">SẢN PHẨM</a></li>
+      <li>
+        <p>|</p>
+      </li>
+      <li><a href="#male">NAM</a></li>
+      <li>
+        <p>|</p>
+      </li>
+      <li><a href="#female">NỮ</a></li>
+      <li>
+        <p>|</p>
+      </li>
+      <li><a href="#new-products">SẢN PHẨM MỚI</a></li>
+      <li>
+        <p>|</p>
+      </li>
+      <li><a href="#discount">KHUYẾN MÃI</a></li>
+    </ul>
+  </section>
 
-            <li class="line-16">
-            </li>
-
-            <li class="item-menu">
-              <a class="item" href=""> NỮ</a>
-            </li>
-
-            <li class="line-16">
-            </li>
-
-            <li class="item-menu">
-              <a class="item" href=""> SẢN PHẨM MỚI</a>
-            </li>
-
-            <li class="line-16">
-            </li>
-
-            <li class="item-menu">
-              <a class="item" href=""> KHUYẾN MÃI</a>
-            </li>
-
-          </div>
-        </ul>
-      </div>
-      <div class="hot-news">
-        <span class="free-shipping-vi-hon-t-900-k">
-          Free Shipping với hoá đơn từ 900k
-        </span>
-        <div class="search-box">
-          <span class="search">
-            Search
-          </span>
-        </div>
+  <section class="bannerr">
+    <div class="content">
+      <h2>Free Shipping với hóa đơn từ 900k</h2>
+      <div class="search">
+        <i class='bx bx-search'></i>
+        <input type="text" placeholder="Search">
       </div>
     </div>
-    <div class="container-5">
-      <div class="menu-1">
-        <div class="tt-cnam-n">
-          <div class="component-8">
-            <div class="component-81">
-              <a href="" class="tat-ca">
-                TẤT CẢ
-              </a>
+  </section>
+
+  </div>
+  <div class="desktop-2">
+    <div class="header">
+      <div class="container-5">
+        <div class="menu-1">
+          <div class="tt-cnam-n">
+            <div class="component-8">
+              <div class="component-81">
+                <a href="" class="tat-ca">
+                  TẤT CẢ
+                </a>
+              </div>
+            </div>
+            <div class="component-9">
+              <div class="component-82">
+                <a href="" class="tat-ca">
+                  NAM
+                </a>
+              </div>
+            </div>
+            <div class="component-10">
+              <div class="component-83">
+                <a href="" class="tat-ca">
+                  NỮ
+                </a>
+              </div>
             </div>
           </div>
-          <div class="component-9">
-            <div class="component-82">
-              <a href="" class="tat-ca">
-                NAM
-              </a>
+
+          <div class="line-1">
+          </div>
+
+
+
+          <div class="trng-thi" id="kieu-dang">
+            <div class="tr-ng-th-i">
+              KIỂU DÁNG
             </div>
+
+            <!-- call api kieu dang  "http://localhost:8080/product/allstyle" -->
+
           </div>
-          <div class="component-10">
-            <div class="component-83">
-              <a href="" class="tat-ca">
-                NỮ
-              </a>
+          <div class="line-1">
+
+
+
+          </div>
+          <div class="trng-thi" id="dong-san-pham">
+            <div class="tr-ng-th-i">
+              DÒNG SẢN PHẨM
             </div>
-          </div>
-        </div>
-      
-        <div class="line-1">
-        </div>
-
-
-
-        <div class="trng-thi" id="kieu-dang">
-          <div class="tr-ng-th-i">
-            KIỂU DÁNG
+            <!--call api -->
           </div>
 
-          <!-- call api kieu dang  "http://localhost:8080/product/allstyle" -->
-
-        </div>
-        <div class="line-1">
 
 
-
-        </div>
-        <div class="trng-thi" id="dong-san-pham">
-          <div class="tr-ng-th-i">
-            DÒNG SẢN PHẨM
+          <div class="line-1">
           </div>
-          <!--call api -->
-        </div>
 
 
+          <div class="trng-thi" id="gia">
+            <div class="tr-ng-th-i">
+              GIÁ
+            </div>
 
-        <div class="line-1">
-        </div>
-
-
-        <div class="trng-thi" id="gia">
-          <div class="tr-ng-th-i">
-            GIÁ
-          </div>
-          
-            <input type="checkbox" class="myinputCheckbox" id="1000" name="1000"  >
+            <input type="checkbox" class="myinputCheckbox" id="1000" name="1000">
             <label for="1000">
               <span class="text">&gt;1000k</span>
             </label>
-  
-            <input type="checkbox" class="myinputCheckbox" id="600-999" name="600-900" >
+
+            <input type="checkbox" class="myinputCheckbox" id="600-999" name="600-900">
             <label for="600-999">
               <span class="text">600k - 999k</span>
             </label>
@@ -179,41 +148,41 @@
             <label for="300-599">
               <span class="text">300k - 599k</span>
             </label>
-          
-        </div>
-        <div class="line-1">
-        </div>
 
-
-
-        <div class="trng-thi" id="chat-lieu">
-          <div class="tr-ng-th-i">
-            CHẤT LIỆU
           </div>
-          <!--call api chat lieu-->
+          <div class="line-1">
+          </div>
+
+
+
+          <div class="trng-thi" id="chat-lieu">
+            <div class="tr-ng-th-i">
+              CHẤT LIỆU
+            </div>
+            <!--call api chat lieu-->
+          </div>
+        </div>
+        <div class="banner-list-sp">
+          <div class="banner">
+          </div>
+          <div class="list-san-pham">
+            <div id="container-san-pham" class="container-4">
+              <!-- call api list san pham -->
+            </div>
+          </div>
         </div>
       </div>
-      <div class="banner-list-sp">
-        <div class="banner">
+      <div class="footer">
+        <div class="rectangle-22">
         </div>
-        <div class="list-san-pham">
-          <div id="container-san-pham" class="container-4">
-            <!-- call api list san pham -->
-          </div>
+        <div class="rectangle-23">
+        </div>
+        <div class="rectangle-24">
         </div>
       </div>
     </div>
-    <div class="footer">
-      <div class="rectangle-22">
-      </div>
-      <div class="rectangle-23">
-      </div>
-      <div class="rectangle-24">
-      </div>
-    </div>
-  </div>
 
-  <script src="./listproduct.js"></script>
+    <script src="./listproduct.js"></script>
 </body>
 
 </html>
