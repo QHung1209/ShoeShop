@@ -112,13 +112,13 @@ header .content a:hover{
   color: var(--text-color);
 }
 .banner .content .search {
-  position: absolute;
-  right: 100px;
-  display: flex;
-  font-size: 20px;
-  font-weight: 600;
-  align-items: center;
-  gap: 0.5rem;
+    position: absolute;
+    right: 100px;
+    display: flex;
+    font-size: 20px;
+    font-weight: 600;
+    align-items: center;
+    gap: 0.5rem;
 } 
 .banner .content .search input{
     width: 200px;
@@ -127,7 +127,165 @@ header .content a:hover{
     outline: none;
     background: var(--light--grey-color);
     color: var(--text-color);
-  }
-  .banner .content .search input::placeholder{
+}
+    .banner .content .search input::placeholder{
     color: var(--text-color);
-  }
+}
+
+/* Cart */
+.cart{
+    width: 1000px;
+    height: 40px;
+    background-color: var(--light--grey-color);
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cart p{
+    font-size: 30px;
+    font-weight: 600;
+    text-align: left;
+    text-transform: uppercase;
+    color: var(--text-color);
+    padding-left: 10px;
+}
+
+/* detail cart */
+.detail-cart{
+    width: 1000px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.detail-cart .column1{
+    float: left;
+    width: 60%;
+}
+.detail-cart .column1 img{
+    float: left;
+    width: 20%;
+    height: auto;
+}
+.detail-cart .column1 .detail{
+    float: left;
+    padding-left: 20px;
+}
+.detail-cart .column1 .detail .name{
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-color);
+    padding-bottom: 5px;
+}
+.detail-cart .column1 .detail .price{
+  font-size: 20px;
+  font-weight: 600;
+  padding-bottom: 5px;
+  color: var(--grey-color);
+}
+.detail-cart .column1 .detail .row{
+  display: flex;
+  align-items: center;
+}
+.detail-cart .column1 .detail .row .size{
+  float: left;
+  width: 50%;
+}
+.detail-cart .column1 .detail .row .size .box{
+  width: 100px;
+  height: 30px;
+  background-color: var(--light--grey-color);
+}
+.detail-cart .column1 .detail .row .quantity{
+  float: left;
+  width: 50%;
+}
+.detail-cart .column1 .detail .row .quantity .box{
+  width: 100px;
+  height: 30px;
+  background-color: var(--light--grey-color);
+}
+
+.detail-cart .column2{
+    float: left;
+    width: 40%;
+}
+.detail-cart .column2 .list-group{
+  background-color: var(--light--grey-color);
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+}
+.detail-cart .column2 .list-group .li1{
+  font-size: 25px;
+  font-weight: 600;
+  border-bottom: 2px solid var(--grey-color);
+}
+.detail-cart .column2 .list-group .li2{
+  font-size: 20px;
+  font-weight: 600;
+  padding-top: 10px;
+}
+.detail-cart .column2 .list-group .li3{
+  padding-top: 10px;
+  display: flex;
+  grid-column: 0;
+  padding-bottom: 20px;
+  border-bottom: 2px dashed var(--grey-color);
+}
+.detail-cart .column2 .list-group .li3 input{
+  height: 30px;
+  float: left;
+  width: 262px;
+  outline: none;
+}
+.detail-cart .column2 .list-group .li3 button{
+  height: 30px;
+  float: left;
+  width: 108px;
+  background: var(--light--orange-color);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--white-color);
+  border: none;
+}
+.detail-cart .column2 .list-group .li4{
+  font-size: 15px;
+  font-weight: 600;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.detail-cart .column2 .list-group .li5{
+  font-size: 15px;
+  font-weight: 600;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px dashed var(--grey-color);
+}
+.detail-cart .column2 .list-group .li6{
+  font-size: 15px;
+  font-weight: 900;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.detail-cart .column2 .pay-btn{
+  margin-top: 20px;
+  width: 100%;
+  font-size: 55px;
+  font-weight: 900;
+  text-align: center;
+  background-color: var(--light--orange-color);
+  color: var(--white-color);
+  border: none;
+}
+
+/* footer */
+footer {
+  max-width: 100%;
+  background-color: var(--grey-color);
+  height: 200px;
+}
