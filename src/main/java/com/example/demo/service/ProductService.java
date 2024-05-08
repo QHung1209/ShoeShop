@@ -38,10 +38,8 @@ public class ProductService implements ProductServiceImp {
             ProductDTO temp = new ProductDTO();
             temp.setShoe_name(data.getShoes().getName());
             temp.setColor(data.getColors().getColor_name());
-            temp.setSize(data.getSizes().getSize_name());
             temp.setCategory(data.getCategories().getCategory_name());
             temp.setDiscount(data.getDiscount());
-            temp.setQuantity(data.getQuantity());
             temp.setGender(data.getGenders().getGender_name());
             temp.setMaterial(data.getMaterials().getMaterial_name());
             temp.setStyle(data.getStyles().getStyle_name());
@@ -58,10 +56,9 @@ public class ProductService implements ProductServiceImp {
             ProductDTO temp = new ProductDTO();
             temp.setShoe_name(data.getShoes().getName());
             temp.setColor(data.getColors().getColor_name());
-            temp.setSize(data.getSizes().getSize_name());
             temp.setCategory(data.getCategories().getCategory_name());
             temp.setDiscount(data.getDiscount());
-            temp.setQuantity(data.getQuantity());
+          
             temp.setGender(data.getGenders().getGender_name());
             temp.setMaterial(data.getMaterials().getMaterial_name());
             temp.setStyle(data.getStyles().getStyle_name());
