@@ -82,4 +82,11 @@ public class ProductController {
         responseData.setData(productServiceImp.filter(styles, materials, categories, prices));
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
+    @GetMapping("/detail")
+    public ResponseEntity<?> getDetail(@RequestParam(value ="id", required = false) int id) {
+
+        ResponseData responseData = new ResponseData();
+        responseData.setData(productServiceImp.detail(id));
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
+    }
 }

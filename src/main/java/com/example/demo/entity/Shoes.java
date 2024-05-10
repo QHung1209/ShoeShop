@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,13 +23,13 @@ public class Shoes {
     private int price;
 
     @OneToMany(mappedBy = "shoes")
-    private Set<Products> listProduct;
+    private List<Products> listProduct;
 
-    public Set<Products> getListProduct() {
+    public List<Products> getListProduct() {
         return listProduct;
     }
 
-    public void setListProduct(Set<Products> listProduct) {
+    public void setListProduct(List<Products> listProduct) {
         this.listProduct = listProduct;
     }
 

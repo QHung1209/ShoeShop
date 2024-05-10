@@ -3,6 +3,13 @@ package com.example.demo.payload;
 public class ResponseData {
 
     private int status = 200;
+    private boolean success = true;
+    public boolean isSuccess() {
+        return success;
+    }
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
     private String desc;
     private Object data;
     public int getStatus() {

@@ -29,7 +29,13 @@
     </div>
     <!-- Đăng nhập -->
     <div class="content">
-      <a href="#"><i class='bx bx-user' ></i> Đăng nhập</a>
+      <!--<a href="#"><i class='bx bx-user'></i> Đăng nhập</a>-->
+      <a href="#" class="btn-login" id="btn-login" onclick="toggleDropdown(event)"><i class='bx bx-user'></i> Tài Khoản</a>
+      <div id="myDropdown" class="dropdown-content">
+        <a href="#">Link 1</a>
+        <a href="#" id="logout">Đăng xuất</a>
+        <a href="#">Link 3</a>
+      </div>
     </div>
   </header>
   
@@ -38,7 +44,7 @@
     <a href="#" class="logo"><img src="../static/images/logo.png" alt=""></a>
 
     <ul class="navbar">
-      <li><a href="#products">SẢN PHẨM</a></li>
+      <li><a href="./desktop2.html">SẢN PHẨM</a></li>
       <li><p>|</p></li>
       <li><a href="#male">NAM</a></li>
       <li><p>|</p></li>
@@ -126,6 +132,6 @@
   <footer>
   
   </footer>
-
+  <script src="./header.js"></script>
 </body>
 </html>

@@ -57,7 +57,7 @@
     margin-top: 15px; /* Khoảng cách giữa các nút và input fields */
 }
 
-.form-login button {
+.form-login .btn-login {
     display: block;
     width: 100%;
     margin-bottom: 20px;

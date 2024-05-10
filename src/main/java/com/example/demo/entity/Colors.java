@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,12 +18,16 @@ public class Colors {
     @Column(name="color_name")
     private String color_name;
 
+    @Column(name="color_code")
+    private String color_code;
+    
     @OneToMany(mappedBy = "colors")
-    private Set<Products> listProduct;
+    private List<Products> listProduct;
 
     public int getColor_id() {
         return color_id;
     }
+
 
     public void setColor_id(int color_id) {
         this.color_id = color_id;
@@ -37,11 +41,21 @@ public class Colors {
         this.color_name = color_name;
     }
 
-    public Set<Products> getListProduct() {
+    public List<Products> getListProduct() {
         return listProduct;
     }
 
-    public void setListProduct(Set<Products> listProduct) {
+    public void setListProduct(List<Products> listProduct) {
         this.listProduct = listProduct;
+    }
+
+
+    public String getColor_code() {
+        return color_code;
+    }
+
+
+    public void setColor_code(String color_code) {
+        this.color_code = color_code;
     }
 }

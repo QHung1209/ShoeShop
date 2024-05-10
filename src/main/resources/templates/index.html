@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Shoe Shop</title>
-        <!-- Link to login.css -->
-        <link rel="stylesheet" 
-        href="../static/css/login.css" />
 
-        <!-- Link to Box icons -->
-        <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Shoe Shop</title>
+    <!-- Link to login.css -->
+    <link rel="stylesheet" href="../static/css/index.css" />
 
-    </head>
+    <!-- Link to Box icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
 <body>
     <!-- Form login-->
     <div class="form-login">
         <div class="login">
             <h2>Login</h2>
         </div>
-        <form action="">
+        <form>
             <!-- Username box-->
             <div class="username-box">
                 <i class='bx bx-user'></i>
-                <input type="text" name="username" placeholder="Enter your username">
+                <input type="text" id="username" name="username" placeholder="Enter your username">
             </div>
             <!-- Password box-->
             <div class="password-box">
-                <i class='bx bx-key' ></i>
-                <input type="text" name="password" placeholder="Enter your password">
+                <i class='bx bx-key'></i>
+                <input type="text" id="password" name="password" placeholder="Enter your password">
             </div>
             <!-- Content box-->
             <div class="content">
@@ -41,7 +41,7 @@
             </div>
             <!-- Login button-->
             <div class="button-container">
-                <button class="btn-login" >Login</button>
+                <a class="btn-login" href="#">Login</a>
             </div>
             <!-- Signup Box-->
             <div class="signup-link">
@@ -49,5 +49,8 @@
             </div>
         </form>
     </div>
+    <script src="./custom.js"></script>
 </body>
+
+
 </html>
