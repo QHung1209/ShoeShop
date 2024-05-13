@@ -55,7 +55,9 @@ public class Products {
     @JoinColumn(name = "style_id")
     private Styles styles;
 
-
+    @OneToMany(mappedBy = "products")
+    private List<Carts> carts;
+    
     @Column(name="image_url")
     private String image_url;
 
@@ -144,6 +146,14 @@ public class Products {
 
     public void setStyles(Styles styles) {
         this.styles = styles;
+    }
+
+    public List<Carts> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(List<Carts> carts) {
+        this.carts = carts;
     }
 
 }

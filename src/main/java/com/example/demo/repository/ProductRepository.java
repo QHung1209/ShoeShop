@@ -35,5 +35,6 @@ public interface ProductRepository extends JpaRepository<Products, Integer> {
 
         @Query("SELECT p FROM Products p WHERE p.shoes.name = :shoe_name")
         List<Products> findByShoesName(String shoe_name);
+        
 
 }

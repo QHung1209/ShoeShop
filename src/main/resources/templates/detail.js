@@ -24,7 +24,9 @@ $(document).ready(function () {
 
                 var html2 = `<h4>${value.shoe_name} - ${value.color_name}</h4>
                     <h6>
-                      <span>Mã sản phẩm: <strong>${value.product_id}</strong></span>
+                    
+                      <span class="product_id" id="${value.product_id}" >Mã sản phẩm: <strong>${value.product_id}</strong></span>
+                     
                     </h6>
                     <h5>
                       <span> ${value.price} VND</span>
@@ -52,27 +54,64 @@ $(document).ready(function () {
 
         });
 
+
+
+
     document.getElementById("add").addEventListener("click", function () {
         var token = localStorage.getItem("token");
-        console.log(token)// Assume token is stored in localStorage after login
+
         if (!token) {
-            window.location.href = "./index.html"; // Redirect to login page if token is not present
+            window.location.href = "./index.html";
         }
-        else
-            alert("them thanh cong");
+        else {
+            console.log($('span.product_id').attr('id'))
+            console.log($('#size').val())
+            console.log($('#quantity').val())
+            $.ajax({
+                method: "GET",
+                url: "http://localhost:8080/user/getId",
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            })
+                .done(function (msg) {
+                    if (msg) {
+                        $.ajax({
+                            method: "POST",
+                            url: "http://localhost:8080/cart/insertCart",
+                            data: {
+                                user_id: msg.data.sub,
+                                product_id: $('span.product_id').attr('id'),
+                                size_id: $('#size').val(),
+                                quantity: $('#quantity').val()
+                            },
+                            
+                        })
+                        .done(function (msg2) {
+                            if(msg2)
+                                alert("Thêm thành công");
+                        })
+                    }
+                });
+            
+        }
+
     });
 
     document.getElementById("btn-login").addEventListener("click", function () {
         var token = localStorage.getItem("token");
-        localStorage.setItem("url_temp",url_temp)
+        localStorage.setItem("url_temp", url_temp)
         if (!token) {
             window.location.href = "./index.html"; // Redirect to login page if token is not present
         }
-        
+
     });
     document.getElementById("logout").addEventListener("click", function () {
         localStorage.removeItem("token")
         window.location.href = "./desktop1.html"; // Redirect to login page if token is not present
 
     });
+
+
+
 })  

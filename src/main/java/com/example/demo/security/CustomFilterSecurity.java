@@ -46,6 +46,9 @@ public class CustomFilterSecurity {
         .requestMatchers(HttpMethod.POST, "/login/signin").permitAll()
         .requestMatchers(HttpMethod.POST, "/main/page").permitAll()
         .requestMatchers(HttpMethod.GET, "/index").permitAll()
+        .requestMatchers(HttpMethod.GET, "/user/**").permitAll()
+        .requestMatchers(HttpMethod.POST, "/cart/**").permitAll()
+        .requestMatchers(HttpMethod.GET, "/cart/**").permitAll()
         .requestMatchers(HttpMethod.GET, "/product/detail").permitAll()
         .anyRequest().authenticated());
        
