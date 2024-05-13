@@ -1,7 +1,7 @@
 package com.example.demo.entity;
 
 import java.util.List;
-
+import com.example.demo.entity.Admin.Admins;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
-@Entity(name = "Roles")
+@Entity(name = "roles")
 public class Roles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +20,9 @@ public class Roles {
 
     @OneToMany(mappedBy = "roles")
     private List<Users> usersList;
+
+    @OneToMany(mappedBy = "roles")
+    private List<Admins> adminsList;
 
     public int getRole_id() {
         return role_id;
