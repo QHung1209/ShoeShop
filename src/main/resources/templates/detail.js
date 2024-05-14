@@ -29,7 +29,7 @@ $(document).ready(function () {
                      
                     </h6>
                     <h5>
-                      <span> ${value.price} VND</span>
+                      <span> ${value.price.toLocaleString('vi-VN')} VND</span>
                     </h5>`
                 $(".name_id_price").append(html2)
 
@@ -80,20 +80,20 @@ $(document).ready(function () {
                             method: "POST",
                             url: "http://localhost:8080/cart/insertCart",
                             data: {
-                                user_id: msg.data.sub,
+                                user_id: msg.data.userId,
                                 product_id: $('span.product_id').attr('id'),
                                 size_id: $('#size').val(),
                                 quantity: $('#quantity').val()
                             },
-                            
+
                         })
-                        .done(function (msg2) {
-                            if(msg2)
-                                alert("Thêm thành công");
-                        })
+                            .done(function (msg2) {
+                                if (msg2)
+                                    alert("Thêm thành công");
+                            })
                     }
                 });
-            
+
         }
 
     });

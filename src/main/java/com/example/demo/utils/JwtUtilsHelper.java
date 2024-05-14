@@ -15,9 +15,9 @@ public class JwtUtilsHelper {
     @Value("${jwt.privateKey}")
     private String privateKey;
  
-    public String generateToken(int username) {
+    public String generateToken(int userId, String username) {
         SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(privateKey));
-        String jws = Jwts.builder().subject(Integer.toString(username)).signWith(key).compact();
+        String jws = Jwts.builder().subject(username).claim("userId", userId).signWith(key).compact();
         return jws;
     }
 

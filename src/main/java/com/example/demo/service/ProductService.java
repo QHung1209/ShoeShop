@@ -183,4 +183,9 @@ public class ProductService implements ProductServiceImp {
         return materialSet;
 
     }
+    @Override
+    public int getQuantity(int shoe_id, int size_id)
+    {
+        return ProductRepository.quantity(shoe_id, size_id);
+    }
 }

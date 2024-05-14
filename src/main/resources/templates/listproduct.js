@@ -14,7 +14,7 @@ function filter(param) {
                         <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
                     </div>
                     <a href="" class="ten-giay">${value.shoe_name}</a>
-                    <span class="vnd">${value.price} VND</span>
+                    <span class="vnd">${value.price.toLocaleString('vi-VN')} VND</span>
                 </div>`;
           $("#container-san-pham").append(html);
         });
@@ -119,7 +119,7 @@ $(document).ready(function () {
                       ${value.shoe_name}
                     </a>
                     <span class="vnd">
-                      ${value.price} VND
+                      ${value.price.toLocaleString('vi-VN')} VND
                     </span>
                   </div>`
 

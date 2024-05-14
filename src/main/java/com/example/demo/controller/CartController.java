@@ -16,7 +16,7 @@ import com.example.demo.utils.JwtUtilsHelper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = {"http://127.0.0.1:5500"})
 @RestController
 @RequestMapping("/cart")
 public class CartController {
@@ -27,7 +27,14 @@ public class CartController {
     @Autowired
     JwtUtilsHelper jwtUtilsHelper;
 
-    
+    @DeleteMapping("deleteCart")
+    public ResponseEntity<?> deleteCart(@RequestParam int user_id,
+            @RequestParam int product_id,
+            @RequestParam int size_id) {
+        ResponseData responseData = new ResponseData();
+        responseData.setData(cartServiceImp.deleteCart(user_id, product_id, size_id));
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
+    }
     @GetMapping("/getAllCarts")
     public ResponseEntity<?> getCart() {
 
@@ -47,13 +54,6 @@ public class CartController {
 
     }
 
-    @DeleteMapping("/deleteCart")
-    public ResponseEntity<?> deleteCart(@RequestParam int user_id,
-            @RequestParam int product_id,
-            @RequestParam int size_id) {
-        ResponseData responseData = new ResponseData();
-        responseData.setData(cartServiceImp.deleteCart(user_id, product_id, size_id));
-        return null;
-    }
+
 
 }

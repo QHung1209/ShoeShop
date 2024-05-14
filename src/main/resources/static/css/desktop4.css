@@ -165,6 +165,7 @@ header .content a:hover{
 }
 .detail-cart .column1 .col {
 padding-bottom: 5%;
+display: flex;
 }
 .detail-cart .column1 .col img{
     float: left;
@@ -174,6 +175,7 @@ padding-bottom: 5%;
 .detail-cart .column1 .col .detail{
     float: left;
     padding-left: 20px;
+    flex-grow: 0.8;
 }
 .detail-cart .column1 .col .detail .name{
     font-size: 20px;
@@ -200,48 +202,48 @@ padding-bottom: 5%;
   height: 30px;
   background-color: var(--light--grey-color);
 }
-.detail-cart .column1 .col .detail .row .boxx{
+.boxx{
   width: 100px;
   height: 30px;
   margin-top: auto;
   cursor: pointer;
 }
-.detail-cart .column1 .col .detail .row .quantity{
+.quantity{
   float: left;
   width: 50%;
 }
-.detail-cart .column1 .col .detail .row .quantity .box{
+.box{
   width: 100px;
   height: 30px;
   background-color: var(--light--grey-color);
 }
-.product-detail .select{
+.select{
   width: 50%;
 }
-.product-detail .select-size-quantity{
+.select-size-quantity{
   display: flex;
   column-gap: 2rem;
   margin-top: 20px;
   margin-bottom: 20px;
 }
-.product-detail .select-size-quantity .select-size{
+.select-size{
   width: 50%;
 }
-.product-detail .select-size-quantity .select-size h4,
-.product-detail .select-size-quantity .select-quantity h4{
-  height: 60px;
-  font-size: 35px;
+.select-size h4,
+.select-quantity h4{
+  height: 30px;
+  font-size: 15px;
   font-weight: 600;
   text-transform: uppercase;
 }
-.product-detail .select-size-quantity .select-size select,
-.product-detail .select-size-quantity .select-quantity select{
+.select-size select,
+.select-quantity select{
   width: 100%;
   height: 40px;
   outline: none;
 }
 
-.product-detail .select-size-quantity .select-quantity{
+.select-quantity{
   width: 50%;
 }
 
