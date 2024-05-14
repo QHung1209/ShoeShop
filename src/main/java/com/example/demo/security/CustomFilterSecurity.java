@@ -18,27 +18,48 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class CustomFilterSecurity {
 
-
     @Bean
     public UserDetailsService users() {
         UserDetails user = User.builder()
-            .username("user")
-            .password("1234")
-            .roles("USER")
-            .build();
+                .username("user")
+                .password("1234")
+                .roles("USER")
+                .build();
         UserDetails admin = User.builder()
-            .username("admin")
-            .password("123")
-            .roles("ADMIN")
-            .build();
+                .username("admin")
+                .password("123")
+                .roles("ADMIN")
+                .build();
         return new InMemoryUserDetailsManager(user, admin);
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-        .authorizeRequests(request -> 
-        request.requestMatchers(HttpMethod.GET, "/product/allproduct").permitAll()
+        .authorizeRequests(request -> request.requestMatchers(HttpMethod.GET, "/product/allproduct").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/allstylename").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/allcategoryname").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/allmaterialname").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login/signin").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/main/page").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/index").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/login/signup").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/login/signin").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product/shoes").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product/colors").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product/sizes").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product/genders").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product/materials").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product/styles").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product//categories").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getShoes").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getSizes").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getMaterials").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getStyles").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getCategories").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product/file/{filename:.+}").permitAll()
+.requestMatchers(HttpMethod.GET, "/product/allproduct").permitAll()
         .requestMatchers(HttpMethod.GET, "/product/allstylename").permitAll()
         .requestMatchers(HttpMethod.GET, "/product/allcategoryname").permitAll()
         .requestMatchers(HttpMethod.GET, "/product/allmaterialname").permitAll()
@@ -51,9 +72,7 @@ public class CustomFilterSecurity {
         .requestMatchers(HttpMethod.GET, "/cart/**").permitAll()
         .requestMatchers(HttpMethod.GET, "/product/detail").permitAll()
         .anyRequest().authenticated());
-       
         http.csrf(AbstractHttpConfigurer::disable);
-        return http.build(); 
+        return http.build();
     }
 }
- 
