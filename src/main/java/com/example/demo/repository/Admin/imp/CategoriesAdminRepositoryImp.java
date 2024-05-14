@@ -11,4 +11,6 @@ public interface CategoriesAdminRepositoryImp {
     Categories saveCategory(Categories categories);
 
     void delete(Categories categories);
+
+    void updateCategoryName(String category_name, String newCategoryName);
 }

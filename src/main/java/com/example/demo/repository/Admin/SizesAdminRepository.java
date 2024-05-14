@@ -45,11 +45,16 @@ public class SizesAdminRepository implements SizesAdminRepositoryImp {
         return sizes;
     }
 
-
     @Override
     public void delete(Sizes size) {
         String sql = "DELETE FROM sizes WHERE size_name = ?";
         jdbcTemplate.update(sql, size.getSize_name());
     }
-    
+
+    @Override
+    public void updateSizeName(int size_name, int newSizeName) {
+        String sql = "UPDATE sizes SET size_name = ? WHERE size_name = ?";
+        jdbcTemplate.update(sql, newSizeName, size_name);
+    }
+
 }

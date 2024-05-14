@@ -52,4 +52,10 @@ public class MaterialsAdminRepository implements MaterialAdminRepositoryImp {
         String sql = "DELETE FROM materials WHERE material_name = ?";
         jdbcTemplate.update(sql, material.getMaterial_name());
     }
+
+    @Override
+    public void updateMaterialName(String material_name, String newMaterialName) {
+        String sql = "UPDATE materials SET material_name = ? WHERE material_name = ?";
+        jdbcTemplate.update(sql, newMaterialName, material_name);
+    }
 }

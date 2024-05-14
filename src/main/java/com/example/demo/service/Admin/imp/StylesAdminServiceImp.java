@@ -12,4 +12,6 @@ public interface StylesAdminServiceImp {
     List<StylesDTO> getStyles();
 
     ResponseEntity<Void> deleteStyleByName(String style_name);
+
+    ResponseEntity<Void> updateStyleName(String style_name, String newStyleName);
 }

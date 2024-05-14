@@ -59,4 +59,15 @@ public class SizesAdminService implements SizesAdminServiceImp {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @Override
+    public ResponseEntity<Void> updateSizeName(int size_name ,int newSizeName) {
+        Sizes existingSize = sizesAdminRepository.findBySizeName(size_name);
+        if (existingSize != null) {
+            sizesAdminRepository.updateSizeName(size_name, newSizeName);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

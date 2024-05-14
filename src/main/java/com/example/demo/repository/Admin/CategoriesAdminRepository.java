@@ -1,4 +1,5 @@
 package com.example.demo.repository.Admin;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,13 +10,13 @@ import com.example.demo.repository.Admin.imp.CategoriesAdminRepositoryImp;
 import java.util.List;
 
 @Repository
-public class CategoriesAdminRepository implements CategoriesAdminRepositoryImp{
+public class CategoriesAdminRepository implements CategoriesAdminRepositoryImp {
 
-     @Autowired
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Override
-        public Categories findByCategoryName(String category_name) {
+    public Categories findByCategoryName(String category_name) {
         String sql = "SELECT * FROM categories WHERE category_name = ?";
         return jdbcTemplate.queryForObject(sql, new Object[] { category_name }, (rs, rowNum) -> {
             Categories categories = new Categories();
@@ -50,5 +51,11 @@ public class CategoriesAdminRepository implements CategoriesAdminRepositoryImp{
     public void delete(Categories categories) {
         String sql = "DELETE FROM categories WHERE category_name = ?";
         jdbcTemplate.update(sql, categories.getCategory_name());
+    }
+
+    @Override
+    public void updateCategoryName(String category_name, String newCategoryName) {
+        String sql = "UPDATE categories SET category_name = ? WHERE category_name = ?";
+        jdbcTemplate.update(sql, newCategoryName, category_name);
     }
 }

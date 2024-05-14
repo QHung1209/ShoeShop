@@ -13,4 +13,6 @@ public interface StylesAdminRepositoryImp {
     Styles saveStyle(Styles style);
 
     void delete(Styles style);
+
+    void updateStyleName(String style_name, String newStyleName);
 }

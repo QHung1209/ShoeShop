@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.payload.ResponseData;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.demo.service.Admin.imp.FileAdminServiceImp;
@@ -152,7 +153,10 @@ public class ProductAdminController {
     }
 
     // Cập nhật dữ liệu từ sizes table
-
+    @PutMapping("/updateSizeName")
+    public ResponseEntity<Void> updateSizeName(@RequestParam int size_name, @RequestParam int newSizeName) {
+        return sizesAdminServiceImp.updateSizeName(size_name, newSizeName);
+    }
     // Xóa dữ liệu từ sizes table
     @DeleteMapping("/deleteSizes/{size_name}")
     public ResponseEntity<Void> deleteSizeByName(@PathVariable Integer size_name) {
@@ -189,14 +193,16 @@ public class ProductAdminController {
     }
 
     // Cập nhật dữ liệu từ materials table
-
+    @PutMapping("/updateMaterialName")
+    public ResponseEntity<Void> updateMaterialName(@RequestParam String material_name, @RequestParam String newMaterialName) {
+        return materialsAdminServiceImp.updateMaterialName(material_name, newMaterialName);
+    }
 
     // Xóa dữ liệu từ materials table
     @DeleteMapping("/deleteMaterials/{material_name}")
     public ResponseEntity<Void> deleteMaterialByName(@PathVariable String material_name) {
         return materialsAdminServiceImp.deleteMaterialByName(material_name);
     }
-
 
     // #Styles
 
@@ -217,6 +223,12 @@ public class ProductAdminController {
         ResponseData responseData = new ResponseData();
         responseData.setData(stylesAdminServiceImp.getStyles());
         return new ResponseEntity<>(responseData, HttpStatus.OK);
+    }
+
+    // Cập nhật dữ liệu từ styles table
+    @PutMapping("/updateStyleName")
+    public ResponseEntity<Void> updateStyleName(@RequestParam String style_name, @RequestParam String newStyleName) {
+        return stylesAdminServiceImp.updateStyleName(style_name, newStyleName);
     }
 
     // Xóa dữ liệu từ styles table
@@ -246,9 +258,18 @@ public class ProductAdminController {
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 
+    // Cập nhật dữ liệu từ Categories table
+    @PutMapping("/updateCategoryName")
+    public ResponseEntity<Void> updateCategoryName(@RequestParam String category_name, @RequestParam String newCategoryName) {
+        return categoriesAdminServiceImp.updateCategoryName(category_name, newCategoryName);
+    }
+
+
     // Xóa dữ liệu từ Categories table
     @DeleteMapping("/deleteCategories/{category_name}")
     public ResponseEntity<Void> deleteCategoryByName(@PathVariable String category_name) {
         return categoriesAdminServiceImp.deleteCategoryByName(category_name);
     }
+
+
 }

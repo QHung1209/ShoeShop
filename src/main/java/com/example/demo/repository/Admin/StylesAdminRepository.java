@@ -51,4 +51,10 @@ public class StylesAdminRepository implements StylesAdminRepositoryImp {
         String sql = "DELETE FROM styles WHERE style_name = ?";
         jdbcTemplate.update(sql, style.getStyle_name());
     }
+
+    @Override
+    public void updateStyleName(String style_name, String newStyleName) {
+        String sql = "UPDATE styles SET style_name = ? WHERE style_name = ?";
+        jdbcTemplate.update(sql, newStyleName, style_name);
+    }
 }

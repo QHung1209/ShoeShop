@@ -8,4 +8,5 @@ public interface MaterialsAdminServiceImp {
     boolean insertMaterials(String material_name);
     List<MaterialsDTO> getMaterials();
     ResponseEntity<Void> deleteMaterialByName(String material_name);
+    ResponseEntity<Void> updateMaterialName(String material_name, String newMaterialName);
 }

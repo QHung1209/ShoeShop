@@ -10,5 +10,7 @@ public interface SizesAdminRepositoryImp {
 
     Sizes saveSize(Sizes sizes);
 
+    void updateSizeName(int size_name, int newSizeName);
+
     void delete(Sizes size);
 }

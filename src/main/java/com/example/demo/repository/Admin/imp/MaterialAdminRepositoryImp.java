@@ -11,4 +11,6 @@ public interface MaterialAdminRepositoryImp {
     Materials findByMaterialName(String material_name);
 
     void delete(Materials material);
+
+    void updateMaterialName(String material_name, String newMaterialName);
 }

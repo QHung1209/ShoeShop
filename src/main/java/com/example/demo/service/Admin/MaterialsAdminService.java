@@ -59,4 +59,15 @@ public class MaterialsAdminService implements MaterialsAdminServiceImp {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @Override
+    public ResponseEntity<Void> updateMaterialName(String material_name, String newMaterialName) {
+        Materials materials = materialsAdminRepository.findByMaterialName(material_name);
+        if (materials != null) {
+            materialsAdminRepository.updateMaterialName(material_name, newMaterialName);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

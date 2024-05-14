@@ -12,4 +12,6 @@ public interface SizesAdminServiceImp {
     List<SizesDTO> getSizes();
 
     ResponseEntity<Void> deleteSizeByName(int size_name);
+
+    ResponseEntity<Void> updateSizeName(int size_name, int newSizeName);
 }
