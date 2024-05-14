@@ -16,7 +16,7 @@ public class Materials {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int material_id;
 
-    @Column(name="material_name")
+    @Column(name = "material_name")
     private String material_name;
 
     @OneToMany(mappedBy = "materials")

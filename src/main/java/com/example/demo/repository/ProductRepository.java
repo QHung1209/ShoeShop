@@ -36,8 +36,9 @@ public interface ProductRepository extends JpaRepository<Products, Integer> {
         @Query("SELECT p FROM Products p WHERE p.shoes.name = :shoe_name")
         List<Products> findByShoesName(String shoe_name);
 
+        /*
         @Query("SELECT i.quantity FROM Products p JOIN p.inventories i WHERE p.shoes.shoe_id = :shoe_id  AND i.sizes.size_id = :size_id" )
         int quantity(int shoe_id, int size_id);
-        
+         */
 
 }

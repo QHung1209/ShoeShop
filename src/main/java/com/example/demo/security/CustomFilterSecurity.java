@@ -35,20 +35,44 @@ public class CustomFilterSecurity {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-            http
-                .authorizeRequests(request -> request.requestMatchers(HttpMethod.GET, "/product/allproduct").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/product/**").permitAll()
+        http
+        .authorizeRequests(request -> request.requestMatchers(HttpMethod.GET, "/product/allproduct").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/allstylename").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/allcategoryname").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/allmaterialname").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login/signin").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/main/page").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/index").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/login/signup").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/login/signin").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product/shoes").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product/colors").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product/sizes").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product/genders").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product/materials").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product/styles").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product//categories").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getShoes").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getSizes").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getMaterials").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getStyles").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getCategories").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product/file/{filename:.+}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/allproduct").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/allstylename").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/allcategoryname").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/allmaterialname").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/filter").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login/signin").permitAll()
                         .requestMatchers(HttpMethod.POST, "/main/page").permitAll()
                         .requestMatchers(HttpMethod.GET, "/index").permitAll()
                         .requestMatchers(HttpMethod.GET, "/user/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/user/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/cart/insertCart").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/cart/getAllCarts").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/cart/deleteCart").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/cart/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/cart/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/detail").permitAll()
                         .anyRequest().authenticated());
-
-        http.csrf(AbstractHttpConfigurer::disable);
+                        http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
 

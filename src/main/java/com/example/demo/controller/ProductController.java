@@ -89,12 +89,5 @@ public class ProductController {
         responseData.setData(productServiceImp.detail(id));
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
-    @GetMapping("/getQuantity")
-    public ResponseEntity<?> getQuantity(@RequestParam int shoe_id,
-    @RequestParam int size_id) {
 
-        ResponseData responseData = new ResponseData();
-        responseData.setData(productServiceImp.getQuantity(shoe_id, size_id));
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
-    }
 }
