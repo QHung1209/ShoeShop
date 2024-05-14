@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
-import java.util.Set;
-
+import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,14 +19,14 @@ public class Sizes {
     private int size_name;
 
     @OneToMany(mappedBy = "sizes")
-    private Set<Products> listProduct;
+    private List<Inventory> listInventories;
     
-    public Set<Products> getListProduct() {
-        return listProduct;
+    public List<Inventory> getListInventories() {
+        return listInventories;
     }
 
-    public void setListProduct(Set<Products> listProduct) {
-        this.listProduct = listProduct;
+    public void setListInventories(List<Inventory> lInventories) {
+        this.listInventories = lInventories;
     }
 
     public int getSize_id() {

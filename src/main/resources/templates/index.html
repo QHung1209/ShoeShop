@@ -1,29 +1,56 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    </head>
-    <body>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Shoe Shop</title>
+    <!-- Link to login.css -->
+    <link rel="stylesheet" href="../static/css/index.css" />
+
+    <!-- Link to Box icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- Form login-->
     <div class="form-login">
         <div class="login">
-            <h2>Login now</h2>
+            <h2>Login</h2>
         </div>
-        <form action="http://localhost:8080/login/signin" method="post">
-            <div><input id="username" type="text" name="username" placeholder="Enter your username">
+        <form>
+            <!-- Username box-->
+            <div class="username-box">
+                <i class='bx bx-user'></i>
+                <input type="text" id="username" name="username" placeholder="Enter your username">
             </div>
-            <div>
-                <input id="password" type="text" name="password" placeholder="Enter your password">
+            <!-- Password box-->
+            <div class="password-box">
+                <i class='bx bx-key'></i>
+                <input type="text" id="password" name="password" placeholder="Enter your password">
             </div>
+            <!-- Content box-->
+            <div class="content">
+                <div class="remember-box">
+                    <input type="checkbox" id="remember-me" value="remember" name="remember">
+                    <label for="remember-me">Remember me</label>
+                </div>
+                <div class="forgot-password-box">
+                    <a href="#">Forgot password?</a>
+                </div>
+            </div>
+            <!-- Login button-->
             <div class="button-container">
-                <button id="btn-login">Login</button>
-                <button>Register</button>
+                <a class="btn-login" href="#">Login</a>
+            </div>
+            <!-- Signup Box-->
+            <div class="signup-link">
+                <p>Not a member? <a href="#">Signup now</a></p>
             </div>
         </form>
     </div>
     <script src="./custom.js"></script>
 </body>
+
+
 </html>
-
-

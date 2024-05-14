@@ -36,7 +36,7 @@ public class CustomFilterSecurity {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests(request -> request.requestMatchers(HttpMethod.GET, "/product/allproduct").permitAll()
+        .authorizeRequests(request -> request.requestMatchers(HttpMethod.GET, "/product/allproduct").permitAll()
                         .requestMatchers(HttpMethod.GET, "/product/allstylename").permitAll()
                         .requestMatchers(HttpMethod.GET, "/product/allcategoryname").permitAll()
                         .requestMatchers(HttpMethod.GET, "/product/allmaterialname").permitAll()
@@ -58,10 +58,20 @@ public class CustomFilterSecurity {
                         .requestMatchers(HttpMethod.GET, "/admin/product/getMaterials").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/getStyles").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/getCategories").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/admin/product/file/{filename:.+}").permitAll());
-
-        // .anyRequest().authenticated());
-
+                        .requestMatchers(HttpMethod.POST, "/admin/product/file/{filename:.+}").permitAll()
+.requestMatchers(HttpMethod.GET, "/product/allproduct").permitAll()
+        .requestMatchers(HttpMethod.GET, "/product/allstylename").permitAll()
+        .requestMatchers(HttpMethod.GET, "/product/allcategoryname").permitAll()
+        .requestMatchers(HttpMethod.GET, "/product/allmaterialname").permitAll()
+        .requestMatchers(HttpMethod.GET, "/product/filter").permitAll()
+        .requestMatchers(HttpMethod.POST, "/login/signin").permitAll()
+        .requestMatchers(HttpMethod.POST, "/main/page").permitAll()
+        .requestMatchers(HttpMethod.GET, "/index").permitAll()
+        .requestMatchers(HttpMethod.GET, "/user/**").permitAll()
+        .requestMatchers(HttpMethod.POST, "/cart/**").permitAll()
+        .requestMatchers(HttpMethod.GET, "/cart/**").permitAll()
+        .requestMatchers(HttpMethod.GET, "/product/detail").permitAll()
+        .anyRequest().authenticated());
         http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }

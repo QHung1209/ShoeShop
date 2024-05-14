@@ -33,10 +33,13 @@ public class LoginService implements LoginServiceImp{
     }
 
     @Override
-    public boolean checkLogin(String username, String password) {
-       List<Users> listUser = userRepository.findByUsernameAndPassword(username, password);
-        
-       return listUser.size() > 0;
+    public UserDTO checkLogin(String username, String password) {
+       Users listUser = userRepository.findByUsernameAndPassword(username, password);
+        UserDTO temp = new UserDTO();
+        temp.setUser_id(listUser.getUser_id());
+        temp.setName(listUser.getName());
+        temp.setAddress(listUser.getAddress());
+       return temp;
     }
 
 

@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,7 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
-@Entity
+@Entity(name = "Materials")
 public class Materials {
 
     @Id
@@ -20,7 +20,7 @@ public class Materials {
     private String material_name;
 
     @OneToMany(mappedBy = "materials")
-    private Set<Products> listProduct;
+    private List<Products> listProduct;
 
     public int getMaterial_id() {
         return material_id;
@@ -38,11 +38,11 @@ public class Materials {
         this.material_name = material_name;
     }
 
-    public Set<Products> getListProduct() {
+    public List<Products> getListProduct() {
         return listProduct;
     }
 
-    public void setListProduct(Set<Products> listProduct) {
+    public void setListProduct(List<Products> listProduct) {
         this.listProduct = listProduct;
     }
 }

@@ -2,8 +2,10 @@ package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.UserDTO;
 import com.example.demo.payload.ResponseData;
 import com.example.demo.service.imp.LoginServiceImp;
+import com.example.demo.utils.JwtUtilsHelper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,20 +21,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 public class LoginController {
 
-    @Autowired
-    LoginServiceImp loginServiceImp;
+     @Autowired
+     LoginServiceImp loginServiceImp;
 
-   @PostMapping("/signin")
-   public ResponseEntity<?> signin(@RequestParam String username, @RequestParam String password) {
-       ResponseData responseData = new ResponseData();
-        if(loginServiceImp.checkLogin(username, password))
-       {
-            responseData.setData(true);
-       }
-       else
-            responseData.setData(false);
-       
-       return new ResponseEntity<>(responseData, HttpStatus.OK);
-   }
+     @Autowired
+     JwtUtilsHelper jwtUtilsHelper;
+
+     @PostMapping("/signin")
+     public ResponseEntity<?> signin(@RequestParam String username, @RequestParam String password) {
+          ResponseData responseData = new ResponseData();
+          UserDTO temp = loginServiceImp.checkLogin(username, password);
+          if (temp!=null) {
+               String token = jwtUtilsHelper.generateToken(temp.getUser_id());
+               responseData.setData(token);
+          } else {
+               responseData.setData(false);
+               responseData.setSuccess(false);
+          }
+
+          return new ResponseEntity<>(responseData, HttpStatus.OK);
+     }
 
 }
