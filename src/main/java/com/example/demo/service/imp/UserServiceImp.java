@@ -5,4 +5,5 @@ import com.example.demo.dto.UserDTO;
 public interface UserServiceImp {
 
     List<UserDTO> getAllUser();
+    public UserDTO findUserByJwt(String jwt);
 }

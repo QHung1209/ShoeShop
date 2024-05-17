@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.Inventory;
 import com.example.demo.entity.Products;
+import com.example.demo.dto.InventoryDTO;
 import com.example.demo.dto.ProductDTO;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.service.imp.ProductServiceImp;
@@ -36,12 +39,11 @@ public class ProductService implements ProductServiceImp {
 
         for (Products data : listData) {
             ProductDTO temp = new ProductDTO();
+            temp.setProduct_id(data.getProduct_id());
             temp.setShoe_name(data.getShoes().getName());
-            temp.setColor(data.getColors().getColor_name());
-            temp.setSize(data.getSizes().getSize_name());
+            temp.setColor_name(data.getColors().getColor_name());
             temp.setCategory(data.getCategories().getCategory_name());
             temp.setDiscount(data.getDiscount());
-            temp.setQuantity(data.getQuantity());
             temp.setGender(data.getGenders().getGender_name());
             temp.setMaterial(data.getMaterials().getMaterial_name());
             temp.setStyle(data.getStyles().getStyle_name());
@@ -56,12 +58,12 @@ public class ProductService implements ProductServiceImp {
         List<ProductDTO> productDTOs = new ArrayList<>();
         for (Products data : productsPage) {
             ProductDTO temp = new ProductDTO();
+            temp.setProduct_id(data.getProduct_id());
             temp.setShoe_name(data.getShoes().getName());
-            temp.setColor(data.getColors().getColor_name());
-            temp.setSize(data.getSizes().getSize_name());
+            temp.setColor_name(data.getColors().getColor_name());
             temp.setCategory(data.getCategories().getCategory_name());
             temp.setDiscount(data.getDiscount());
-            temp.setQuantity(data.getQuantity());
+
             temp.setGender(data.getGenders().getGender_name());
             temp.setMaterial(data.getMaterials().getMaterial_name());
             temp.setStyle(data.getStyles().getStyle_name());
@@ -100,6 +102,53 @@ public class ProductService implements ProductServiceImp {
     }
 
     @Override
+    public ProductDTO detail(int id) {
+        Optional<Products> productDetail = ProductRepository.findById(id);
+
+        ProductDTO productDTO = new ProductDTO();
+        if (productDetail.isPresent()) {
+
+            productDTO.setCategory(productDetail.get().getCategories().getCategory_name());
+            productDTO.setColor_code(productDetail.get().getColors().getColor_code());
+            productDTO.setColor_name(productDetail.get().getColors().getColor_name());
+            productDTO.setDiscount(productDetail.get().getDiscount());
+            productDTO.setGender(productDetail.get().getGenders().getGender_name());
+            productDTO.setImage_url(productDetail.get().getImage_url());
+            productDTO.setMaterial(productDetail.get().getMaterials().getMaterial_name());
+            productDTO.setPrice(productDetail.get().getShoes().getPrice());
+            productDTO.setProduct_id(productDetail.get().getProduct_id());
+            productDTO.setShoe_name(productDetail.get().getShoes().getName());
+            productDTO.setStyle(productDetail.get().getStyles().getStyle_name());
+
+            List<ProductDTO> related_product = new ArrayList<>();
+            List<Products> related = ProductRepository.findByShoesName(productDTO.getShoe_name());
+            for (Products re : related) {
+                ProductDTO temp = new ProductDTO();
+                temp.setColor_code(re.getColors().getColor_code());
+                temp.setColor_name(re.getColors().getColor_name());
+                temp.setProduct_id(re.getProduct_id());
+                related_product.add(temp);
+            }
+            productDTO.setRelated_products(related_product);
+
+            List<InventoryDTO> inventoryDTOs = new ArrayList<>();
+            List<Inventory> inventories = productDetail.get().getListInventories();
+            for (Inventory inv : inventories) {
+                InventoryDTO temp = new InventoryDTO();
+                temp.setInventory_id(inv.getInventory_id());
+                temp.setProduct_id(inv.getProducts().getProduct_id());
+                temp.setSize_id(inv.getSizes().getSize_id());
+                temp.setSize_name(inv.getSizes().getSize_name());
+                temp.setQuantity(inv.getQuantity());
+                inventoryDTOs.add(temp);
+            }
+            productDTO.setInventoryDTOs(inventoryDTOs);
+        }
+        return productDTO;
+
+    }
+
+    @Override
     public Set<String> getStyle() {
         PageRequest pageRequest = PageRequest.of(0, Integer.MAX_VALUE);
         Page<Products> listData = ProductRepository.findAll(pageRequest);
@@ -134,4 +183,10 @@ public class ProductService implements ProductServiceImp {
         return materialSet;
 
     }
+    /* 
+    @Override
+    public int getQuantity(int shoe_id, int size_id)
+    {
+        return ProductRepository.quantity(shoe_id, size_id);
+    }*/
 }

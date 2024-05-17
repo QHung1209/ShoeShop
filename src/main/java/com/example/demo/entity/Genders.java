@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,7 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
-@Entity
+@Entity(name = "Genders")
 public class Genders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class Genders {
     private String gender_name;
 
     @OneToMany(mappedBy = "genders")
-    private Set<Products> listProduct;
+    private List<Products> listProduct;
 
     public int getGender_id() {
         return gender_id;
@@ -37,11 +37,11 @@ public class Genders {
         this.gender_name = gender_name;
     }
 
-    public Set<Products> getListProduct() {
+    public List<Products> getListProduct() {
         return listProduct;
     }
 
-    public void setListProduct(Set<Products> listProduct) {
+    public void setListProduct(List<Products> listProduct) {
         this.listProduct = listProduct;
     }
 

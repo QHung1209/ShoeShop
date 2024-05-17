@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#btn-login").click(function () {
+    $(".btn-login").click(function () {
 
         var user = $("#username").val();
         var pass = $("#password").val();
@@ -13,8 +13,15 @@ $(document).ready(function () {
             }
         })
             .done(function (msg) {
-                if (msg.data) {
-                    window.location.href ="./desktop1.html"
+                console.log(msg)
+                if (msg.success) {
+                    localStorage.setItem("token", msg.data)
+                    if (localStorage.getItem("url_temp")) {
+                        window.location.href = localStorage.getItem("url_temp")
+                    }
+                    else
+                        window.location.href = "./desktop1.html"
+
                 }
                 else {
                     alert("Sai thông tin đăng nhập");

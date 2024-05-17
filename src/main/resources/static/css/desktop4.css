@@ -160,49 +160,91 @@ header .content a:hover{
 .detail-cart .column1{
     float: left;
     width: 60%;
+    display: flex; /* Sử dụng flexbox */
+    flex-wrap: wrap;
 }
-.detail-cart .column1 img{
+.detail-cart .column1 .col {
+padding-bottom: 5%;
+display: flex;
+}
+.detail-cart .column1 .col img{
     float: left;
     width: 20%;
     height: auto;
 }
-.detail-cart .column1 .detail{
+.detail-cart .column1 .col .detail{
     float: left;
     padding-left: 20px;
+    flex-grow: 0.8;
 }
-.detail-cart .column1 .detail .name{
+.detail-cart .column1 .col .detail .name{
     font-size: 20px;
     font-weight: 600;
     color: var(--text-color);
     padding-bottom: 5px;
 }
-.detail-cart .column1 .detail .price{
+.detail-cart .column1 .col .detail .price{
   font-size: 20px;
   font-weight: 600;
   padding-bottom: 5px;
   color: var(--grey-color);
 }
-.detail-cart .column1 .detail .row{
+.detail-cart .column1 .col .detail .row{
   display: flex;
   align-items: center;
 }
-.detail-cart .column1 .detail .row .size{
+.detail-cart .column1 .col .detail .row .size{
   float: left;
   width: 50%;
 }
-.detail-cart .column1 .detail .row .size .box{
+.detail-cart .column1 .col .detail .row .size .box{
   width: 100px;
   height: 30px;
   background-color: var(--light--grey-color);
 }
-.detail-cart .column1 .detail .row .quantity{
+.boxx{
+  width: 100px;
+  height: 30px;
+  margin-top: auto;
+  cursor: pointer;
+}
+.quantity{
   float: left;
   width: 50%;
 }
-.detail-cart .column1 .detail .row .quantity .box{
+.box{
   width: 100px;
   height: 30px;
   background-color: var(--light--grey-color);
+}
+.select{
+  width: 50%;
+}
+.select-size-quantity{
+  display: flex;
+  column-gap: 2rem;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.select-size{
+  width: 50%;
+}
+.select-size h4,
+.select-quantity h4{
+  height: 30px;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.select-size select,
+.select-quantity select{
+  width: 100%;
+  height: 40px;
+  outline: none;
+}
+
+.select-quantity{
+  width: 50%;
 }
 
 .detail-cart .column2{
@@ -282,7 +324,29 @@ header .content a:hover{
   color: var(--white-color);
   border: none;
 }
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
 
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
 /* footer */
 footer {
   max-width: 100%;

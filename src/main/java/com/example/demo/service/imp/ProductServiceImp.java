@@ -24,5 +24,9 @@ public interface ProductServiceImp {
     Set<String> getStyle();
     Set<String> getCategory();
     Set<String> getMaterial();
+    ProductDTO detail(int id);
+    /*int getQuantity(int shoe_id, int size_id);*/
+    
+    
 }
      

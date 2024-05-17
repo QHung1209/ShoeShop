@@ -10,12 +10,16 @@ import com.example.demo.dto.UserDTO;
 import com.example.demo.entity.Users;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.imp.UserServiceImp;
+import com.example.demo.utils.JwtUtilsHelper;
 
 @Service
 public class UserService implements UserServiceImp {
 
     @Autowired
     UserRepository userRepository;
+
+       @Autowired
+     JwtUtilsHelper jwtUtilsHelper;
 
     @Override
     public List<UserDTO> getAllUser() {
@@ -32,6 +36,15 @@ public class UserService implements UserServiceImp {
         }
         return lUserDTOs;
     }
+
+    @Override
+    public UserDTO findUserByJwt(String jwt) {
+
+        
+        UserDTO temp = new UserDTO();
+
+        return temp;
+      }
 
 
 

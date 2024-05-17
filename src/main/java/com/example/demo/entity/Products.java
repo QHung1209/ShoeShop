@@ -1,5 +1,8 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity(name="Products")
 public class Products {
@@ -14,6 +18,17 @@ public class Products {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int product_id;
+
+    @OneToMany(mappedBy = "products")
+    private List<Inventory> listInventories;
+    
+    public List<Inventory> getListInventories() {
+        return listInventories;
+    }
+
+    public void setListInventories(List<Inventory> lInventories) {
+        this.listInventories = lInventories;
+    }
 
     @ManyToOne
     @JoinColumn(name = "shoe_id")
@@ -23,9 +38,6 @@ public class Products {
     @JoinColumn(name = "color_id")
     private Colors colors;
 
-    @ManyToOne
-    @JoinColumn(name = "size_id")
-    private Sizes sizes;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -43,22 +55,14 @@ public class Products {
     @JoinColumn(name = "style_id")
     private Styles styles;
 
-    @Column(name="quantity")
-    private int quantity;
-
+    @OneToMany(mappedBy = "products")
+    private List<Carts> carts;
+    
     @Column(name="image_url")
     private String image_url;
 
     @Column(name="discount")
     private int discount;
-
-    public int getproduct_id() {
-        return product_id;
-    }
-
-    public void setproduct_id(int product_id) {
-        this.product_id = product_id;
-    }
 
     public Shoes getShoes() {
         return shoes;
@@ -76,28 +80,12 @@ public class Products {
         this.colors = colors;
     }
 
-    public Sizes getSizes() {
-        return sizes;
-    }
-
-    public void setSizes(Sizes sizes) {
-        this.sizes = sizes;
-    }
-
     public Categories getCategories() {
         return categories;
     }
 
     public void setCategories(Categories categories) {
         this.categories = categories;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public String getImage() {
@@ -154,6 +142,18 @@ public class Products {
 
     public void setDiscount(int discount) {
         this.discount = discount;
+    }
+
+    public void setStyles(Styles styles) {
+        this.styles = styles;
+    }
+
+    public List<Carts> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(List<Carts> carts) {
+        this.carts = carts;
     }
 
 }

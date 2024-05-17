@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity(name = "Users")
 public class Users {
@@ -29,6 +32,9 @@ public class Users {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Roles roles;
+
+    @OneToMany(mappedBy = "users")
+    List<Carts> listCarts;
 
     public int getUser_id() {
         return user_id;
@@ -77,6 +83,22 @@ public class Users {
 
     public void setRoles(Roles roles) {
         this.roles = roles;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Carts> getListCarts() {
+        return listCarts;
+    }
+
+    public void setListCarts(List<Carts> listCarts) {
+        this.listCarts = listCarts;
     }
 
     

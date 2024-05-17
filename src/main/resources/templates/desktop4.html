@@ -9,14 +9,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <!-- Link to desktop1.css -->
   <link rel="stylesheet" href="../static/css/desktop4.css" />
 
   <!-- Box icons-->
-  <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 </head>
+
 <body>
 
   <!-- Header section -->
@@ -27,27 +27,41 @@
     </div>
     <!-- Giỏ hàng -->
     <div class="content">
-      <a href="#"><i class='bx bx-cart-alt' ></i> Giỏ hàng</a>
+      <a href="#"><i class='bx bx-cart-alt'></i> Giỏ hàng</a>
     </div>
     <!-- Đăng nhập -->
     <div class="content">
-      <a href="#"><i class='bx bx-user' ></i> Đăng nhập</a>
+      <!--<a href="#"><i class='bx bx-user'></i> Đăng nhập</a>-->
+      <a href="#" class="btn-login" id="btn-login" onclick="toggleDropdown(event)"><i class='bx bx-user'></i> Tài Khoản</a>
+      <div id="myDropdown" class="dropdown-content">
+        <a href="#">Link 1</a>
+        <a href="#" id="logout">Đăng xuất</a>
+        <a href="#">Link 3</a>
+      </div>
     </div>
   </header>
-  
+
   <!-- Navbar section -->
-  <section class="logo-and-navbar" >
+  <section class="logo-and-navbar">
     <a href="#" class="logo"><img src="../static/images/logo.png" alt=""></a>
 
     <ul class="navbar">
-      <li><a href="#products">SẢN PHẨM</a></li>
-      <li><p>|</p></li>
+      <li><a href="./desktop2.html">SẢN PHẨM</a></li>
+      <li>
+        <p>|</p>
+      </li>
       <li><a href="#male">NAM</a></li>
-      <li><p>|</p></li>
+      <li>
+        <p>|</p>
+      </li>
       <li><a href="#female">NỮ</a></li>
-      <li><p>|</p></li>
+      <li>
+        <p>|</p>
+      </li>
       <li><a href="#new-products">SẢN PHẨM MỚI</a></li>
-      <li><p>|</p></li>
+      <li>
+        <p>|</p>
+      </li>
       <li><a href="#discount">KHUYẾN MÃI</a></li>
     </ul>
   </section>
@@ -58,73 +72,60 @@
       <h2>Free Shipping với hóa đơn từ 900k</h2>
       <div class="search">
         <i class='bx bx-search'></i>
-        <input type="text" placeholder="Search"> 
+        <input type="text" placeholder="Search">
       </div>
     </div>
 
     <!-- Cart -->
     <div class="cart">
-        <p>giỏ hàng</p>
+      <p>giỏ hàng</p>
     </div>
 
     <!-- detail cart -->
     <section class="detail-cart">
-        <div class="column1">
-            <img src="../static/images/rectangle62.png" alt="">
-            <div class="detail">
-                <p class="name">Vintas Public 2000s - Low Top - Insignia Blue</p>
-                <p class="price">Giá: 620.000 <span>VND</span></p>
-                <div class="row">
-                    <div class="size">
-                        <p class="name">Size</p>
-                        <p class="box"></p>
-                    </div>
-                    <div class="quantity">
-                        <p class="name">Số lượng</p>
-                        <p class="box"></p>
-                    </div>
-                </div>
+      <div class="column1">
+        <!--
+        <div class="col">
+          
+          <img src="../static/images/rectangle62.png" alt="">
+          <div class="detail">
+            <p class="name">Vintas Public 2000s - Low Top - Insignia Blue</p>
+            <p class="price">Giá: 620.000 <span>VND</span></p>
+            <div class="row">
+              <div class="size">
+                <p class="name">Size</p>
+                <p class="box"></p>
+              </div>
+              <div class="quantity">
+                <p class="name">Số lượng</p>
+                <p class="box"></p>
+              </div>
+              <button class="boxx"><i class='bx bx-trash-alt' ></i></button>
             </div>
+          </div>
         </div>
-        <div class="column2">
-            <div class="order">
-                <ul class="list-group">
-                    <li class="li1">ĐƠN HÀNG</li>
-                    <li class="li2">NHẬP MÃ KHUYẾN MÃI</li>
-                    <li class="li3">
-                        <input type="text">
-                        <span>
-                            <button class="btn" type="button">ÁP DỤNG</button>
-                        </span>
-                    </li>
-                    <li class="li4">
-                        <p class="order">Đơn hàng</p>
-                        <p class="price">620.000 <span>VND</span></p>
-                    </li>
-                    <li class="li5">
-                        <p class="discount">Giảm</p>
-                        <p class="price">0 <span>VND</span></p>
-                    </li>
-                    <li class="li6">
-                        <p class="provisional">Tạm tính</p>
-                        <p class="price">620.000 <span>VND</span></p>
-                    </li>
-                </ul>
-                <button class="pay-btn">THANH TOÁN</button>
-            </div>
-        </div>
+        -->
+      </div>
+
+
+
+      <div class="column2">
+        
+      </div>
     </section>
 
-  
 
-  <!-- footer section -->
-  <footer>
 
-  </footer>
-<!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- footer section -->
+    <footer>
 
-<!-- desktop3 JS-->
-<script src="../static/js/desktop3.js"></script>
+    </footer>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- desktop3 JS-->
+    <script src="./cart.js"></script>
+   
 </body>
+
 </html>

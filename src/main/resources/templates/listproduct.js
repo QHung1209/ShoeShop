@@ -1,3 +1,4 @@
+
 function filter(param) {
   $.ajax({
     method: "GET",
@@ -9,11 +10,11 @@ function filter(param) {
         $.each(msg.data, function (index, value) {
           var html = `<div class="san-pham">
                     <div class="container-hover-image">
-                        <a href=""><img class="rectangle-38" src="${value.image_url}" alt=""></a>
+                        <a href="desktop3.html?id=${value.product_id}"><img class="rectangle-38" src="${value.image_url}" alt=""></a>
                         <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
                     </div>
                     <a href="" class="ten-giay">${value.shoe_name}</a>
-                    <span class="vnd">${value.price} VND</span>
+                    <span class="vnd">${value.price.toLocaleString('vi-VN')} VND</span>
                 </div>`;
           $("#container-san-pham").append(html);
         });
@@ -95,9 +96,14 @@ function updateURL() {
 
 $(document).ready(function () {
   var link_product = "http://localhost:8080/product/allproduct"
+  var token = localStorage.getItem("token")
+  console.log(token)
   $.ajax({
     method: "GET",
-    url: link_product
+    url: link_product,
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
 
   })
     .done(function (msg) {
@@ -106,14 +112,14 @@ $(document).ready(function () {
           console.log(value);
           var html = `<div class="san-pham">
                     <div class="container-hover-image">
-                      <a href=""><img class="rectangle-38" img src="${value.image_url}" alt=""></a>
+                      <a href="desktop3.html?id=${value.product_id}"><img class="rectangle-38" img src="${value.image_url}" alt=""></a>
                       <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
                     </div>
                     <a href="" class="ten-giay">
                       ${value.shoe_name}
                     </a>
                     <span class="vnd">
-                      ${value.price} VND
+                      ${value.price.toLocaleString('vi-VN')} VND
                     </span>
                   </div>`
 
@@ -185,10 +191,12 @@ $(document).ready(function () {
       updateURL();
     });
 
-  $(document).on('change', '.myinputCheckbox', updateURL);
-  $(document).on('change', '.kieu-dang', updateURL);
-  $(document).on('change', '.dong-san-pham', updateURL);
-  $(document).on('change', '.chat-lieu', updateURL);
+
+
+  $(document).on('click', '.myinputCheckbox', updateURL);
+  $(document).on('click', '.kieu-dang', updateURL);
+  $(document).on('click', '.dong-san-pham', updateURL);
+  $(document).on('click', '.chat-lieu', updateURL);
 
 
 
