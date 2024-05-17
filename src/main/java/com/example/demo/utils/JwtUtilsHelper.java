@@ -2,6 +2,7 @@ package com.example.demo.utils;
 
 import javax.crypto.SecretKey;
 
+import io.jsonwebtoken.Jwt;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -15,9 +16,9 @@ public class JwtUtilsHelper {
     @Value("${jwt.privateKey}")
     private String privateKey;
  
-    public String generateToken(int username) {
+    public String generateToken(String data) {
         SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(privateKey));
-        String jws = Jwts.builder().subject(Integer.toString(username)).signWith(key).compact();
+        String jws = Jwts.builder().subject(data).signWith(key).compact();
         return jws;
     }
 
@@ -28,6 +29,16 @@ public class JwtUtilsHelper {
         
         Claims claims =Jwts.parser().verifyWith(key).build().parseSignedClaims(Jwt).getPayload();
         return claims;
+    }
+
+    public boolean verifyToken(String token){
+        try {
+            SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(privateKey));
+            Jwts.parser().verifyWith(key).build().parse(token);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 
 }
