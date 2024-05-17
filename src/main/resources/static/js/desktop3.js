@@ -55,7 +55,7 @@ function toggleDropdown(event) {
 
 // Đóng dropdown khi click ra ngoài dropdown
 window.onclick = function (event) {
-  if (!event.target.matches('.btn-login')) {
+  if (!event.target.matches('.account')) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
     for (var i = 0; i < dropdowns.length; i++) {
       var openDropdown = dropdowns[i];

@@ -18,29 +18,38 @@ function getSelectedValues(button) {
 $(document).ready(function () {
   var url_temp = window.location.href
 
-
-
   $.ajax({
     method: "GET",
-    url: "http://localhost:8080/cart/getAllCarts"
-
+    url: "http://localhost:8080/user/Detail",
+    headers: {
+      "Authorization": "Bearer " + localStorage.getItem("token")
+    }
   })
     .done(function (msg) {
-      if (msg) {
-        var totalPrice = 0;
-        $.each(msg.data, function (index, value) {
-          totalPrice+=value.price * value.quantity
-          console.log(totalPrice);
-          var html = `<div class="col">
-                    <img src="${value.image_url}" alt="">
+      $.ajax({
+        method: "GET",
+        url: "http://localhost:8080/cart/getAllCarts",
+        data: {
+          user_id: msg.data.user.user_id
+        }
+
+      })
+        .done(function (msg2) {
+          if (msg2) {
+            var totalPrice = 0;
+            $.each(msg2.data, function (index, value) {
+              totalPrice += value.productDTO.price * value.quantity
+              console.log(totalPrice);
+              var html = `<div class="col">
+                    <img src="${value.productDTO.image_url}" alt="">
                     <div class="detail">
-                      <p class="name" id="${value.product_id}">${value.shoe_name}</p>
-                      <p class="price">Giá: ${value.price.toLocaleString('vi-VN')} <span>VND</span></p>
+                      <p class="name" id="${value.productDTO.product_id}">${value.productDTO.shoe_name} - ${value.productDTO.color_name}</p>
+                      <p class="price">Giá: ${value.productDTO.price.toLocaleString('vi-VN')} <span>VND</span></p>
                       <div class="row">
                         <div class="size">
                         <p class="name">Size</p>
                           <select name="size" id="size" class="box">
-                          <option value="${value.size_id} id="size" " hidden selected>${value.size_name}</option>
+                          <option value="${value.size_id}" id="size" hidden selected>${value.size_name}</option>
                             <option value="100">38</option>
                             <option value="101">39</option>
                             <option value="102">40</option>
@@ -55,7 +64,7 @@ $(document).ready(function () {
                         <div class="quantity">
                           <p class="name">Số lượng</p>
                           <select name="quantity" id="quantity" class="box">
-                            <option value="${value.quantity}" id="${value.quantity}" selected > ${value.quantity} </option>
+                            <option value="${value.quantity}" id="${value.quantity}"hidden selected > ${value.quantity} </option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -73,9 +82,9 @@ $(document).ready(function () {
                     </div>
                   </div>`
 
-          $(".column1").append(html)
-        })
-        var order = `<div class="order">
+              $(".column1").append(html)
+            })
+            var order = `<div class="order">
         <ul class="list-group">
           <li class="li1">ĐƠN HÀNG</li>
           <li class="li2">NHẬP MÃ KHUYẾN MÃI</li>
@@ -95,25 +104,27 @@ $(document).ready(function () {
           </li>
           <li class="li6">
             <p class="provisional">Tạm tính</p>
-            <p class="price">620.000 <span>VND</span></p>
+            <p class="price">${totalPrice.toLocaleString('vi-Vn')} <span>VND</span></p>
           </li>
         </ul>
         <button class="pay-btn">THANH TOÁN</button>
       </div>`
-      $(".column2").append(order)
-      }
+            $(".column2").append(order)
+          }
 
-    });
+        });
 
-
+    })
 
   $(".column1").on("click", ".boxx", function () {
     var detailElement = $(this).closest('.detail');
     var product_id = detailElement.find('.name').attr('id');
     var size_id = detailElement.find('#size').val();
+    console.log(product_id)
+    console.log(size_id)
     $.ajax({
       method: "GET",
-      url: "http://localhost:8080/user/getId",
+      url: "http://localhost:8080/user/Detail",
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("token")
       }
@@ -127,7 +138,7 @@ $(document).ready(function () {
             method: "DELETE",
             url: "http://localhost:8080/cart/deleteCart",
             data: {
-              user_id: msg.data.userId,
+              user_id: msg.data.user.user_id,
               product_id: product_id,
               size_id: size_id
             }
@@ -140,7 +151,17 @@ $(document).ready(function () {
       });
   });
 
-  document.getElementById("btn-login").addEventListener("click", function () {
+
+  document.getElementById("cart").addEventListener("click", function () {
+    var token = localStorage.getItem("token");
+    localStorage.setItem("url_temp", url_temp)
+    if (!token) {
+      window.location.href = "./index.html"; // Redirect to login page if token is not present
+    }
+    window.location.href = "./desktop4.html";
+  });
+
+  document.getElementById("account").addEventListener("click", function () {
     var token = localStorage.getItem("token");
     localStorage.setItem("url_temp", url_temp)
     if (!token) {

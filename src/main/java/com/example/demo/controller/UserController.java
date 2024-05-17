@@ -41,11 +41,6 @@ public class UserController {
         return "added";
     }
 
-    @GetMapping("/getDetail/{id}/{username}")
-    public String getDetail(@PathVariable("id") int id, @PathVariable() String username) {
-        return "Hello " + id + " " + username;
-    }
-
     @PostMapping("/update")
     public String updateUser(@RequestBody List<user> user) {
         //TODO: process POST request
@@ -55,7 +50,7 @@ public class UserController {
         }
         return "" ;
      }
-     @GetMapping("/getId")
+     @GetMapping("/Detail")
     public ResponseEntity<?>  getUser(@RequestHeader("Authorization") String jwt) {
 
         ResponseData responseData = new ResponseData();

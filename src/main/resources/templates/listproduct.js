@@ -22,6 +22,7 @@ function filter(param) {
     });
 }
 function updateURL() {
+
   var checkedCheckboxes = document.querySelectorAll('.myinputCheckbox:checked');
   var queryParams = [];
   checkedCheckboxes.forEach(function (checkbox) {
@@ -97,6 +98,7 @@ function updateURL() {
 $(document).ready(function () {
   var link_product = "http://localhost:8080/product/allproduct"
   var token = localStorage.getItem("token")
+  var url_temp = window.location.href
   console.log(token)
   $.ajax({
     method: "GET",
@@ -191,6 +193,29 @@ $(document).ready(function () {
       updateURL();
     });
 
+  document.getElementById("cart").addEventListener("click", function () {
+    var token = localStorage.getItem("token");
+    localStorage.setItem("url_temp", url_temp)
+    if (!token) {
+      window.location.href = "./index.html"; // Redirect to login page if token is not present
+    }
+    else{
+    window.location.href = "./desktop4.html";
+    }
+  });
+  document.getElementById("account").addEventListener("click", function () {
+    var token = localStorage.getItem("token");
+    localStorage.setItem("url_temp", url_temp)
+    if (!token) {
+      window.location.href = "./index.html"; // Redirect to login page if token is not present
+    }
+
+  });
+  document.getElementById("logout").addEventListener("click", function () {
+    localStorage.removeItem("token")
+    window.location.href = "./desktop1.html"; // Redirect to login page if token is not present
+
+  });
 
 
   $(document).on('click', '.myinputCheckbox', updateURL);

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.payload.ResponseData;
 import com.example.demo.service.imp.CartServiceImp;
+import com.example.demo.service.imp.InventoryImp;
 import com.example.demo.utils.JwtUtilsHelper;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,8 @@ public class CartController {
     CartServiceImp cartServiceImp;
 
     @Autowired
+    InventoryImp inventoryImp;
+    @Autowired
     JwtUtilsHelper jwtUtilsHelper;
 
     @DeleteMapping("deleteCart")
@@ -36,10 +39,10 @@ public class CartController {
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
     @GetMapping("/getAllCarts")
-    public ResponseEntity<?> getCart() {
+    public ResponseEntity<?> getCart(@RequestParam int user_id) {
 
         ResponseData responseData = new ResponseData();
-        responseData.setData(cartServiceImp.getAllCart());
+        responseData.setData(cartServiceImp.getAllCart(user_id));
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 

@@ -1,3 +1,29 @@
+function checkSelects() {
+    var select1 = document.getElementById('size');
+    var select2 = document.getElementById('quantity');
+
+    if (select1.value !== "" && select2.value !== "") {
+        $.ajax({
+            method: "GET",
+            url: "http://localhost:8080/inventory/getQuantity",
+            data: {
+                product_id: $('span.product_id').attr('id'),
+                size_id: $('#size').val()
+            }
+        })
+            .done(function (msg) {
+                if (msg) {
+                    console.log(msg.data)
+                    if(msg.data == 0)
+                        {
+                            alert(`Sản phẩm đã hết size này`)
+                            select1.value = "";
+                            select2.value = "";
+                        }
+                }
+            });
+    }
+}
 $(document).ready(function () {
 
     let searchParams = new URLSearchParams(window.location.search)
@@ -69,7 +95,7 @@ $(document).ready(function () {
             console.log($('#quantity').val())
             $.ajax({
                 method: "GET",
-                url: "http://localhost:8080/user/getId",
+                url: "http://localhost:8080/user/Detail",
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem("token")
                 }
@@ -80,7 +106,7 @@ $(document).ready(function () {
                             method: "POST",
                             url: "http://localhost:8080/cart/insertCart",
                             data: {
-                                user_id: msg.data.userId,
+                                user_id: msg.data.user.user_id,
                                 product_id: $('span.product_id').attr('id'),
                                 size_id: $('#size').val(),
                                 quantity: $('#quantity').val()
@@ -98,7 +124,17 @@ $(document).ready(function () {
 
     });
 
-    document.getElementById("btn-login").addEventListener("click", function () {
+    document.getElementById("cart").addEventListener("click", function () {
+        var token = localStorage.getItem("token");
+        localStorage.setItem("url_temp", url_temp)
+        if (!token) {
+          window.location.href = "./index.html"; // Redirect to login page if token is not present
+        }
+        else{
+        window.location.href = "./desktop4.html";
+        }
+      });
+    document.getElementById("account").addEventListener("click", function () {
         var token = localStorage.getItem("token");
         localStorage.setItem("url_temp", url_temp)
         if (!token) {
@@ -112,6 +148,7 @@ $(document).ready(function () {
 
     });
 
-
+    document.getElementById('size').addEventListener('change', checkSelects);
+    document.getElementById('quantity').addEventListener('change', checkSelects);
 
 })  

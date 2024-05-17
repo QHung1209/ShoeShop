@@ -12,10 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LoginService implements LoginServiceImp{
+public class LoginService implements LoginServiceImp {
 
     @Autowired
     UserRepository userRepository;
+
     @Override
     public List<UserDTO> getAllUsers() {
         List<Users> listUser = userRepository.findAll();
@@ -34,13 +35,15 @@ public class LoginService implements LoginServiceImp{
 
     @Override
     public UserDTO checkLogin(String username, String password) {
-       Users listUser = userRepository.findByUsernameAndPassword(username, password);
+        Users listUser = userRepository.findByUsernameAndPassword(username, password);
         UserDTO temp = new UserDTO();
         temp.setUser_id(listUser.getUser_id());
+        temp.setUsername(username);
+        temp.setTelephone(listUser.getTelephone());
         temp.setName(listUser.getName());
         temp.setAddress(listUser.getAddress());
-       return temp;
+        temp.setPassword(password);
+        return temp;
     }
-
 
 }

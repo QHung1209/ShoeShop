@@ -5,6 +5,8 @@ import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.example.demo.dto.UserDTO;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -15,9 +17,9 @@ public class JwtUtilsHelper {
     @Value("${jwt.privateKey}")
     private String privateKey;
  
-    public String generateToken(int userId, String username) {
+    public String generateToken(UserDTO user) {
         SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(privateKey));
-        String jws = Jwts.builder().subject(username).claim("userId", userId).signWith(key).compact();
+        String jws = Jwts.builder().claim("user", user).signWith(key).compact();
         return jws;
     }
 

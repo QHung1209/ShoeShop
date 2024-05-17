@@ -32,7 +32,7 @@ public class LoginController {
           ResponseData responseData = new ResponseData();
           UserDTO temp = loginServiceImp.checkLogin(username, password);
           if (temp!=null) {
-               String token = jwtUtilsHelper.generateToken(temp.getUser_id(), username);
+               String token = jwtUtilsHelper.generateToken(temp);
                responseData.setData(token);
           } else {
                responseData.setData(false);
