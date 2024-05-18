@@ -33,6 +33,8 @@ public class Users {
     @OneToMany(mappedBy = "users")
     List<Carts> listCarts;
 
+    @OneToMany(mappedBy = "users")
+    List<Orders> listOrders;
     public int getUser_id() {
         return user_id;
     }
@@ -96,6 +98,14 @@ public class Users {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public List<Orders> getListOrders() {
+        return listOrders;
+    }
+
+    public void setListOrders(List<Orders> listOrders) {
+        this.listOrders = listOrders;
     }
 
     

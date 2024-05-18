@@ -82,14 +82,13 @@
           
         <input class="info" type="text" name="cusName" id="cusNam" placeholder="  Họ tên" value="hehe">
         <input class="info" type="text" name="cusNumber" id="cusNumber" placeholder="  Số điện thoại">
-        <input class="info" type="text" name="cusEmail" id="cusEmail" placeholder="  Email">
         <input class="info" type="text" name="cusAddress" id="cusAddress" placeholder="  Địa chỉ">
 
-        <select name="ls_province" class="ls_province"></select>
+        <select name="ls_province" id="ls_province" class="ls_province"></select>
 
         <div class="district-ward">
-          <select name="ls_district" class="ls_district"></select>
-          <select name="ls_ward" class="ls_ward"></select>
+          <select name="ls_district" id="ls_district" class="ls_district"></select>
+          <select name="ls_ward" id="ls_ward" class="ls_ward"></select>
         </div>
     
         </div>
@@ -184,13 +183,14 @@
 
           <div class="row8">
             <p class="total">Tổng cộng</p>
-            <p class="total_price"> </p>
+            <p class="total_price" id="total_price"> </p>
           </div>
 
-          <button class="complete-payment">Hoàn tất đặt hàng</button>
+          <a href="#" class="complete-payment" id="complete-payment">Hoàn tất đặt hàng</a>
         </div>
       </div>
     </section>
+
 
     <!-- footer section -->
     <footer>
@@ -204,7 +204,6 @@
 
     <!-- desktop3 JS-->
     <script src="../static/js/desktop5.js"></script>
-
 
 </body>
 

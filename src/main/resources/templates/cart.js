@@ -1,46 +1,38 @@
-function getSelectedValues(button) {
-  // Lấy phần tử cha của nút (thẻ div chứa size và số lượng)
-  var parentDiv = button.parentNode;
-
-  // Tìm phần tử con chứa size và số lượng
-  var sizeSelect = parentDiv.querySelector("#size");
-  var quantitySelect = parentDiv.querySelector("#quantity");
-
-  // Lấy giá trị của size và số lượng được chọn
-  var selectedSize = sizeSelect.options[sizeSelect.selectedIndex].text;
-  var selectedQuantity = quantitySelect.options[quantitySelect.selectedIndex].text;
-
-  // In ra giá trị của size và số lượng được chọn
-  console.log("Selected size: " + selectedSize);
-  console.log("Selected quantity: " + selectedQuantity);
+async function getUserDetail() {
+  try {
+    const response = await $.ajax({
+      method: "GET",
+      url: "http://localhost:8080/user/Detail",
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("token")
+      }
+    });
+    // Xử lý dữ liệu ở đây nếu cần
+    return response.data.user;
+  } catch (error) {
+    console.error("Lỗi khi lấy dữ liệu:", error);
+    throw error;
+  }
 }
 
-$(document).ready(function () {
+$(document).ready(async function () {
   var url_temp = window.location.href
+  const userDetails = await getUserDetail()
 
   $.ajax({
     method: "GET",
-    url: "http://localhost:8080/user/Detail",
-    headers: {
-      "Authorization": "Bearer " + localStorage.getItem("token")
+    url: "http://localhost:8080/cart/getAllCarts",
+    data: {
+      user_id: userDetails.user_id
     }
   })
-    .done(function (msg) {
-      $.ajax({
-        method: "GET",
-        url: "http://localhost:8080/cart/getAllCarts",
-        data: {
-          user_id: msg.data.user.user_id
-        }
-
-      })
-        .done(function (msg2) {
-          if (msg2) {
-            var totalPrice = 0;
-            $.each(msg2.data, function (index, value) {
-              totalPrice += value.productDTO.price * value.quantity
-              console.log(totalPrice);
-              var html = `<div class="col">
+    .done(function (msg2) {
+      if (msg2) {
+        var totalPrice = 0;
+        $.each(msg2.data, function (index, value) {
+          totalPrice += value.productDTO.price * value.quantity
+          console.log(totalPrice);
+          var html = `<div class="col">
                     <img src="${value.productDTO.image_url}" alt="">
                     <div class="detail">
                       <p class="name" id="${value.productDTO.product_id}">${value.productDTO.shoe_name} - ${value.productDTO.color_name}</p>
@@ -82,9 +74,9 @@ $(document).ready(function () {
                     </div>
                   </div>`
 
-              $(".column1").append(html)
-            })
-            var order = `<div class="order">
+          $(".column1").append(html)
+        })
+        var order = `<div class="order">
         <ul class="list-group">
           <li class="li1">ĐƠN HÀNG</li>
           <li class="li2">NHẬP MÃ KHUYẾN MÃI</li>
@@ -109,72 +101,60 @@ $(document).ready(function () {
         </ul>
         <button class="pay-btn">THANH TOÁN</button>
       </div>`
-            $(".column2").append(order)
-          }
+        $(".column2").append(order)
+      }
 
-        });
+    });
 
-    })
+})
 
-  $(".column1").on("click", ".boxx", function () {
-    var detailElement = $(this).closest('.detail');
-    var product_id = detailElement.find('.name').attr('id');
-    var size_id = detailElement.find('#size').val();
-    console.log(product_id)
-    console.log(size_id)
+$(".column1").on("click", ".boxx", function () {
+  var detailElement = $(this).closest('.detail');
+  var product_id = detailElement.find('.name').attr('id');
+  var size_id = detailElement.find('#size').val();
+  console.log(product_id)
+  console.log(size_id)
+
+  console.log(msg.data)
+  console.log(product_id)
+  console.log(size_id)
+  if (msg) {
     $.ajax({
-      method: "GET",
-      url: "http://localhost:8080/user/Detail",
-      headers: {
-        "Authorization": "Bearer " + localStorage.getItem("token")
+      method: "DELETE",
+      url: "http://localhost:8080/cart/deleteCart",
+      data: {
+        user_id: userDetails.user_id,
+        product_id: product_id,
+        size_id: size_id
       }
     })
-      .done(function (msg) {
-        console.log(msg.data)
-        console.log(product_id)
-        console.log(size_id)
-        if (msg) {
-          $.ajax({
-            method: "DELETE",
-            url: "http://localhost:8080/cart/deleteCart",
-            data: {
-              user_id: msg.data.user.user_id,
-              product_id: product_id,
-              size_id: size_id
-            }
-          })
-            .done(function (msg2) {
-              if (msg2)
-                location.reload();
-            })
-        }
-      });
-  });
+      .done(function (msg2) {
+        if (msg2)
+          location.reload();
+      })
+  }
+});
 
 
-  document.getElementById("cart").addEventListener("click", function () {
-    var token = localStorage.getItem("token");
-    localStorage.setItem("url_temp", url_temp)
-    if (!token) {
-      window.location.href = "./index.html"; // Redirect to login page if token is not present
-    }
-    window.location.href = "./desktop4.html";
-  });
+document.getElementById("cart").addEventListener("click", function () {
+  var token = localStorage.getItem("token");
+  localStorage.setItem("url_temp", url_temp)
+  if (!token) {
+    window.location.href = "./index.html"; // Redirect to login page if token is not present
+  }
+  window.location.href = "./desktop4.html";
+});
 
-  document.getElementById("account").addEventListener("click", function () {
-    var token = localStorage.getItem("token");
-    localStorage.setItem("url_temp", url_temp)
-    if (!token) {
-      window.location.href = "./index.html"; // Redirect to login page if token is not present
-    }
+document.getElementById("account").addEventListener("click", function () {
+  var token = localStorage.getItem("token");
+  localStorage.setItem("url_temp", url_temp)
+  if (!token) {
+    window.location.href = "./index.html"; // Redirect to login page if token is not present
+  }
 
-  });
-  document.getElementById("logout").addEventListener("click", function () {
-    localStorage.removeItem("token")
-    window.location.href = "./desktop1.html"; // Redirect to login page if token is not present
+});
+document.getElementById("logout").addEventListener("click", function () {
+  localStorage.removeItem("token")
+  window.location.href = "./desktop1.html"; // Redirect to login page if token is not present
 
-  });
-
-
-
-})  
+});

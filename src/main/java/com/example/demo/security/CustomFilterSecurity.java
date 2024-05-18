@@ -72,6 +72,8 @@ public class CustomFilterSecurity {
                         .requestMatchers(HttpMethod.GET, "/cart/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/cart/deleteCart").permitAll()
                         .requestMatchers(HttpMethod.GET, "/product/detail").permitAll()
+                        .requestMatchers("/order/**").permitAll()
+                        .requestMatchers("/orderDetail/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/inventory/**").permitAll()
                         .anyRequest().authenticated());
                         http.csrf(AbstractHttpConfigurer::disable);
