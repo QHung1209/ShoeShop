@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap');
 
 * {
-  font-family: "Quicksand", sans-serif;
+  font-family: "Nunito Sans", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -305,7 +305,7 @@ header .content a:hover {
 
 .tra-cuu-hang-1 {
   overflow-wrap: break-word;
-  font-family: 'Inter';
+  font-family: 'Nunito Sans';
   font-weight: 700;
   font-size: 15px;
   letter-spacing: 0.5px;
@@ -369,7 +369,7 @@ li {
 
 .item-menu {
   overflow-wrap: break-word;
-  font-family: 'Inter';
+  font-family: 'Nunito Sans';
   font-weight: 700;
   font-size: 20px;
   color: #000000;
@@ -405,7 +405,7 @@ li {
 .free-shipping-vi-hon-t-900-k {
   position: relative;
   overflow-wrap: break-word;
-  font-family: 'Inter';
+  font-family: 'Nunito Sans';
   font-style: italic;
   font-weight: 400;
   font-size: 28px;
@@ -427,7 +427,7 @@ li {
 
 .search {
   overflow-wrap: break-word;
-  font-family: 'Inter';
+  font-family: 'Nunito Sans';
   font-weight: 400;
   font-size: 20px;
   color: #000000;
@@ -447,7 +447,7 @@ li {
 
 .tat-ca {
   overflow-wrap: break-word;
-  font-family: 'Inter';
+  font-family: 'Nunito Sans';
   font-weight: 700;
   font-size: 20px;
   font-weight: bold;
@@ -535,7 +535,7 @@ li {
   display: inline-block;
   align-self: flex-start;
   overflow-wrap: break-word;
-  font-family: 'Inter';
+  font-family: 'Nunito Sans';
   font-weight: 700;
   font-size: 20px;
 
@@ -556,17 +556,22 @@ label {
   box-sizing: border-box;
 }
 
-label:hover {
+/* label:hover {
   background-color: #cbcbcb;
-
-}
+} */
 
 .text {
   overflow-wrap: break-word;
-  font-family: 'Inter';
+  font-family: 'Nunito Sans';
   font-size: 18px;
   color: #000000;
   /* Màu chữ */
+}
+
+
+.myinputCheckbox:hover+label {
+  background-color: #cbcbcb;
+ 
 }
 
 .myinputCheckbox:checked+label {
@@ -577,7 +582,9 @@ label:hover {
 .kieu-dang {
   display: none;
 }
-
+.kieu-dang:hover+label {
+  background-color: #cbcbcb;
+}
 .kieu-dang:checked+label {
   background-color: #cbcbcb;
   font-weight: bolder;
@@ -587,6 +594,10 @@ label:hover {
   display: none;
 }
 
+.dong-san-pham:hover+label {
+  background-color: #cbcbcb;
+  
+}
 .dong-san-pham:checked+label {
   background-color: #cbcbcb;
   font-weight: bolder;
@@ -595,7 +606,10 @@ label:hover {
 .chat-lieu {
   display: none;
 }
-
+.chat-lieu:hover+label {
+  background-color: #cbcbcb;
+  
+}
 .chat-lieu:checked+label {
   background-color: #cbcbcb;
   font-weight: bolder;
@@ -610,6 +624,30 @@ label:hover {
   box-sizing: border-box;
 }
 
+.Gen-der {
+  display: flex;
+  flex-wrap: nowrap;
+  text-align: center;
+  box-sizing: border-box;
+}
+.text-gender{
+  font-family: 'Nunito Sans';
+  font-size: 18px;
+  color: #b0a7a7;
+  font-weight: 850;
+  /* Màu chữ */
+}
+
+.text-gender:hover{
+  color: #000000;
+}
+
+.gender {
+  display: none;
+}
+.gender:checked + label .text-gender  {
+  color: #000000;
+}
 
 .component-23 {
   background: #FFFFFF;
@@ -621,7 +659,7 @@ label:hover {
 
 .limited-edition-13 {
   overflow-wrap: break-word;
-  font-family: 'Inter';
+  font-family: 'Nunito Sans';
   font-weight: 400;
   font-size: 18px;
   color: #000000;
@@ -659,8 +697,8 @@ label:hover {
 
 .ten-giay {
   overflow-wrap: break-word;
-  font-family: 'Inter';
-  font-weight: 700;
+  font-family: 'Nunito Sans';
+  font-weight: 850;
   font-size: 16px;
   letter-spacing: 0.6px;
   color: #000000;
@@ -678,10 +716,14 @@ label:hover {
   color: #F15E2C;
 }
 
+.color_name{
+  margin-bottom: 2%;
+}
+
 .vnd {
   margin-left: 1px;
   overflow-wrap: break-word;
-  font-family: 'Inter';
+  font-family: 'Nunito Sans';
   font-weight: 700;
   font-size: 16px;
   letter-spacing: 0.6px;

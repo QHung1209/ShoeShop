@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <!-- Link to desktop1.css -->
   <link rel="stylesheet" href="../static/css/desktop1.css" />
   <!-- Box icons-->
@@ -25,7 +26,7 @@
     </div>
     <!-- Giỏ hàng -->
     <div class="content">
-      <a href="#"><i class='bx bx-cart-alt' ></i> Giỏ hàng</a>
+      <a href="#" class="cart" id="cart"><i class='bx bx-cart-alt' ></i> Giỏ hàng</a>
     </div>
     <!-- Đăng nhập -->
     <div class="content">
@@ -33,7 +34,7 @@
       <a href="#" class="account" id="account" onclick="toggleDropdown(event)"><i class='bx bx-user'></i> Tài Khoản</a>
       <div id="myDropdown" class="dropdown-content">
         <a href="#">Link 1</a>
-        <a href="#" id="logout">Đăng xuất</a>
+        <a href="#" class="logout" id="logout">Đăng xuất</a>
       </div>
     </div>
   </header>

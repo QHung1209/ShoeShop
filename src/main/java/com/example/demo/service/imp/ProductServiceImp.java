@@ -20,7 +20,7 @@ public interface ProductServiceImp {
     String image_url);
 
     List<ProductDTO> getAllProduct();
-    List<ProductDTO> filter(List<String> styles, List<String> material, List<String> categories, List<String> price);
+    List<ProductDTO> filter(List<String> styles, List<String> material, List<String> categories, List<String> gender, List<String> price);
     Set<String> getStyle();
     Set<String> getCategory();
     Set<String> getMaterial();

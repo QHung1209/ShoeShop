@@ -31,6 +31,21 @@ public class ProductService implements ProductServiceImp {
         throw new UnsupportedOperationException("Unimplemented method 'insertProduct'");
     }
 
+    public static ProductDTO geProductDTO(Products data)
+    {
+        ProductDTO temp = new ProductDTO();
+        temp.setProduct_id(data.getProduct_id());
+        temp.setShoe_name(data.getShoes().getName());
+        temp.setColor_name(data.getColors().getColor_name());
+        temp.setCategory(data.getCategories().getCategory_name());
+        temp.setDiscount(data.getDiscount());
+        temp.setGender(data.getGenders().getGender_name());
+        temp.setMaterial(data.getMaterials().getMaterial_name());
+        temp.setStyle(data.getStyles().getStyle_name());
+        temp.setImage_url(data.getImage());
+        temp.setPrice(data.getShoes().getPrice());
+        return temp;
+    }
     @Override
     public List<ProductDTO> getAllProduct() {
         List<ProductDTO> ProductDTOs = new ArrayList<>();
@@ -38,18 +53,7 @@ public class ProductService implements ProductServiceImp {
         Page<Products> listData = ProductRepository.findAll(pageRequest);
 
         for (Products data : listData) {
-            ProductDTO temp = new ProductDTO();
-            temp.setProduct_id(data.getProduct_id());
-            temp.setShoe_name(data.getShoes().getName());
-            temp.setColor_name(data.getColors().getColor_name());
-            temp.setCategory(data.getCategories().getCategory_name());
-            temp.setDiscount(data.getDiscount());
-            temp.setGender(data.getGenders().getGender_name());
-            temp.setMaterial(data.getMaterials().getMaterial_name());
-            temp.setStyle(data.getStyles().getStyle_name());
-            temp.setImage_url(data.getImage());
-            temp.setPrice(data.getShoes().getPrice());
-            ProductDTOs.add(temp);
+            ProductDTOs.add(geProductDTO(data));
         }
         return ProductDTOs;
     }
@@ -57,45 +61,33 @@ public class ProductService implements ProductServiceImp {
     public List<ProductDTO> mapProductsToDTOs(Page<Products> productsPage) {
         List<ProductDTO> productDTOs = new ArrayList<>();
         for (Products data : productsPage) {
-            ProductDTO temp = new ProductDTO();
-            temp.setProduct_id(data.getProduct_id());
-            temp.setShoe_name(data.getShoes().getName());
-            temp.setColor_name(data.getColors().getColor_name());
-            temp.setCategory(data.getCategories().getCategory_name());
-            temp.setDiscount(data.getDiscount());
-
-            temp.setGender(data.getGenders().getGender_name());
-            temp.setMaterial(data.getMaterials().getMaterial_name());
-            temp.setStyle(data.getStyles().getStyle_name());
-            temp.setImage_url(data.getImage());
-            temp.setPrice(data.getShoes().getPrice());
-            productDTOs.add(temp);
+            productDTOs.add(geProductDTO(data));
         }
         return productDTOs;
     }
 
-    public List<ProductDTO> filter(List<String> styles, List<String> material, List<String> categories,
+    public List<ProductDTO> filter(List<String> styles, List<String> material, List<String> categories, List<String> gender,
             List<String> prices) {
         List<ProductDTO> productDTOs = new ArrayList<>();
         PageRequest pageRequest = PageRequest.of(0, Integer.MAX_VALUE);
 
         if (prices == null) {
             productDTOs.addAll(mapProductsToDTOs(
-                    ProductRepository.findProductsGT1000(styles, material, categories, prices, pageRequest)));
+                    ProductRepository.findProductsGT1000(styles, material, categories, gender,prices, pageRequest)));
             return productDTOs;
         }
 
         if (prices.contains("1000")) {
             productDTOs.addAll(mapProductsToDTOs(
-                    ProductRepository.findProductsGT1000(styles, material, categories, prices, pageRequest)));
+                    ProductRepository.findProductsGT1000(styles, material, categories, gender,prices, pageRequest)));
         }
         if (prices.contains("600-999")) {
             productDTOs.addAll(mapProductsToDTOs(
-                    ProductRepository.findProducts6_9(styles, material, categories, prices, pageRequest)));
+                    ProductRepository.findProducts6_9(styles, material, categories, gender,prices, pageRequest)));
         }
         if (prices.contains("300-599")) {
             productDTOs.addAll(mapProductsToDTOs(
-                    ProductRepository.findProducts3_5(styles, material, categories, prices, pageRequest)));
+                    ProductRepository.findProducts3_5(styles, material, categories, gender,prices, pageRequest)));
         }
 
         return productDTOs;
@@ -108,17 +100,7 @@ public class ProductService implements ProductServiceImp {
         ProductDTO productDTO = new ProductDTO();
         if (productDetail.isPresent()) {
 
-            productDTO.setCategory(productDetail.get().getCategories().getCategory_name());
-            productDTO.setColor_code(productDetail.get().getColors().getColor_code());
-            productDTO.setColor_name(productDetail.get().getColors().getColor_name());
-            productDTO.setDiscount(productDetail.get().getDiscount());
-            productDTO.setGender(productDetail.get().getGenders().getGender_name());
-            productDTO.setImage_url(productDetail.get().getImage_url());
-            productDTO.setMaterial(productDetail.get().getMaterials().getMaterial_name());
-            productDTO.setPrice(productDetail.get().getShoes().getPrice());
-            productDTO.setProduct_id(productDetail.get().getProduct_id());
-            productDTO.setShoe_name(productDetail.get().getShoes().getName());
-            productDTO.setStyle(productDetail.get().getStyles().getStyle_name());
+            productDTO = geProductDTO(productDetail.get());
 
             List<ProductDTO> related_product = new ArrayList<>();
             List<Products> related = ProductRepository.findByShoesName(productDTO.getShoe_name());

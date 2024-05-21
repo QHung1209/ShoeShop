@@ -30,7 +30,8 @@ public class CartService implements CartServiceImp {
         List<Carts> listData = cartRepository.findAllCartById(user_id);
 
         for (Carts ca : listData) {
-            // Kiểm tra sản phẩm đó trong kho còn không, nếu không còn thì không hiện lên giao diện
+            // Kiểm tra sản phẩm đó trong kho còn không, nếu không còn thì không hiện lên
+            // giao diện
             if (inventoryReposity.Quantity(ca.getProducts().getProduct_id(), ca.getSizes().getSize_id()) == 0)
                 continue;
             ProductDTO proTemp = new ProductDTO();
@@ -86,6 +87,19 @@ public class CartService implements CartServiceImp {
         // Tìm và xóa giỏ hàng dựa trên user_id và product_id
         Carts carts = cartRepository.findCartByUserIdAndProductId(user_id, product_id, size_id);
         cartRepository.delete(carts);
+        return true;
+    }
+
+    @Override
+    public boolean updateCart(int user_id, int cart_id, int product_id, int size_id, int quantity) {
+        Carts existingCart = cartRepository.findCartByUserIdAndProductId(user_id, product_id, size_id);
+        if (existingCart != null && existingCart.getCart_id() != cart_id) {
+            existingCart.setQuantity(quantity);
+            cartRepository.save(existingCart);
+            cartRepository.deleteAllCartByCartId(cart_id);
+        } else if(existingCart != null && existingCart.getCart_id() == cart_id || existingCart == null) {
+            cartRepository.updateCartBy(cart_id, size_id, quantity);
+        } 
         return true;
     }
 

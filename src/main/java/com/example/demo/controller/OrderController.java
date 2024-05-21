@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import java.sql.Timestamp;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +14,8 @@ import com.example.demo.service.imp.OrderServiceImp;
 import com.example.demo.utils.JwtUtilsHelper;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @CrossOrigin("*")
 @RestController
@@ -28,6 +29,7 @@ public class OrderController {
     @PostMapping("/insertOrder")
     public ResponseEntity<?> insertCart(@RequestParam int user_id,
             @RequestParam String address,
+            @RequestParam String name,
             @RequestParam String telephone,
             @RequestParam double total_amount,
             @RequestParam String date_order) {
@@ -35,8 +37,17 @@ public class OrderController {
         long timestampLong = Long.parseLong(date_order);
 
         Timestamp timestamp = new Timestamp(timestampLong);
-        responseData.setData(orderServiceImp.insertOrder(user_id, address, telephone, total_amount, timestamp));
+        responseData.setData(orderServiceImp.insertOrder(user_id, address,name, telephone, total_amount, timestamp));
         return new ResponseEntity<>(responseData, HttpStatus.OK);
 
     }
+
+    @GetMapping("/getAllOrder")
+    public ResponseEntity<?> findAllOrder(@RequestParam int user_id) {
+        ResponseData responseData = new ResponseData();
+        responseData.setData(orderServiceImp.findAllOrderByUserId(user_id));
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
+
+    }
+    
 }

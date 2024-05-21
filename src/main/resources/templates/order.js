@@ -32,8 +32,10 @@ $(document).ready(async function () {
 
     if (cartDetails) {
         var total = 0;
+        var totalSale = 0;
         $.each(cartDetails, function (index, value) {
             total += value.productDTO.price * value.quantity;
+            totalSale += value.productDTO.price * value.quantity * value.productDTO.discount / 100;
             var product = `<div class="row2">
                                         <p class="name" value="${value.productDTO.product_id}">${value.productDTO.shoe_name} - Insignia Blue</p>
                                         <p class="price">${(value.productDTO.price * value.quantity).toLocaleString('vi-VN')}</p>
@@ -53,7 +55,7 @@ $(document).ready(async function () {
                 
                             <div class="row5">
                                 <p class="promo">Giảm</p>
-                                <p class="price">-124.000 VND</p>
+                                <p class="price">-${totalSale.toLocaleString('vi-VN')} VND</p>
                             </div>
                 
                             <div class="row6">
@@ -73,13 +75,13 @@ $(document).ready(async function () {
         $(".ls_district").append(`<option value="${cleanedParts[cleanedParts.length - 2]}" id="${cleanedParts[cleanedParts.length - 2]}" hidden selected>${cleanedParts[cleanedParts.length - 2]}</option>`);
         $(".ls_province").append(`<option value="${cleanedParts[cleanedParts.length - 3]}" id="${cleanedParts[cleanedParts.length - 3]}" hidden selected>${cleanedParts[cleanedParts.length - 3]}</option>`);
 
-        $(".total_price").append(`${total.toLocaleString('vi-VN')} VND`);
+        $(".total_price").append(`${(total-totalSale).toLocaleString('vi-VN')} VND`);
     }
 
 
     document.getElementById("complete-payment").addEventListener("click", function () {
 
-        name_user = document.getElementById('cusNam').textContent;
+        name_user = document.getElementById('cusNam').value;
         telephone_user = document.getElementById('cusNumber').value;
         address_user = document.getElementById('cusAddress').value;
 
@@ -91,15 +93,16 @@ $(document).ready(async function () {
         total_price = document.getElementById('total_price').value;
         var date = new Date();
         var timestamp = date.getTime();
-
+        
         $.ajax({
             method: "POST",
             url: "http://localhost:8080/order/insertOrder",
             data: {
                 user_id: userDetails.user_id,
                 address: address_user + "," + province.options[province.selectedIndex].text + "," + ward.options[ward.selectedIndex].text + "," + district.options[district.selectedIndex].text,
-                total_amount: total_price,
+                name: name_user,
                 telephone: telephone_user,
+                total_amount: total_price - totalSale,
                 date_order: timestamp
             }
         })
@@ -112,13 +115,14 @@ $(document).ready(async function () {
                             user_id: userDetails.user_id,
                             product_id: value.productDTO.product_id,
                             quantity: value.quantity,
-                            price: value.quantity * value.productDTO.price
+                            price: value.quantity * value.productDTO.price * (100-value.productDTO.discount) /100
                         }
                     })
                         .done(function (msg4) {
 
                         })
                 })
+                location.reload();
                 alert("Đặt hàng thành công")
             })
     })

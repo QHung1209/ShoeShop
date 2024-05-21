@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.payload.ResponseData;
+import com.example.demo.repository.CartRepository;
 import com.example.demo.repository.OrderRepository;
 import com.example.demo.service.imp.OrderDetailServiceImp;
 import com.example.demo.utils.JwtUtilsHelper;
@@ -24,6 +25,8 @@ public class OrderDetailController {
     @Autowired
     OrderRepository orderRepository;
     @Autowired
+    CartRepository cartRepository;
+    @Autowired
     JwtUtilsHelper jwtUtilsHelper;
 
     @PostMapping("/insertOrderDetail")
@@ -34,6 +37,7 @@ public class OrderDetailController {
         int order_id = orderRepository.findMaxOrderId(user_id);
         ResponseData responseData = new ResponseData();
         responseData.setData(orderDetailServiceImp.insertOrderDetail(order_id, product_id, quantity, price));
+        cartRepository.deleteAllCart(user_id);
         return new ResponseEntity<>(responseData, HttpStatus.OK);
 
     }

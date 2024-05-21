@@ -25,22 +25,21 @@ $(document).ready(function () {
     if (!token) {
       window.location.href = "./index.html"; // Redirect to login page if token is not present
     }
-    else {
-      window.location.href = "./desktop4.html";
-    }
+    window.location.href = "./desktop4.html";
   });
+  
   document.getElementById("account").addEventListener("click", function () {
     var token = localStorage.getItem("token");
     localStorage.setItem("url_temp", url_temp)
     if (!token) {
       window.location.href = "./index.html"; // Redirect to login page if token is not present
     }
-
+  
   });
   document.getElementById("logout").addEventListener("click", function () {
     localStorage.removeItem("token")
     window.location.href = "./desktop1.html"; // Redirect to login page if token is not present
-
+  
   });
-
+  
 })

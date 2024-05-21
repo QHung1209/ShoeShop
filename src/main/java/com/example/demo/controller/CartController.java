@@ -17,7 +17,7 @@ import com.example.demo.utils.JwtUtilsHelper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@CrossOrigin(origins = {"http://127.0.0.1:5500"})
+@CrossOrigin(origins = { "http://127.0.0.1:5500" })
 @RestController
 @RequestMapping("/cart")
 public class CartController {
@@ -38,6 +38,7 @@ public class CartController {
         responseData.setData(cartServiceImp.deleteCart(user_id, product_id, size_id));
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
+
     @GetMapping("/getAllCarts")
     public ResponseEntity<?> getCart(@RequestParam int user_id) {
 
@@ -57,6 +58,15 @@ public class CartController {
 
     }
 
-
+    @PostMapping("/updateCart")
+    public ResponseEntity<?> updateCart(@RequestParam int user_id,
+            @RequestParam int cart_id,
+            @RequestParam int product_id,
+            @RequestParam int size_id,
+            @RequestParam int quantity) {
+        ResponseData responseData = new ResponseData();
+        responseData.setData(cartServiceImp.updateCart(user_id, cart_id, product_id, size_id, quantity));
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
+    }
 
 }

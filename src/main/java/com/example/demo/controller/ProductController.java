@@ -59,6 +59,7 @@ public class ProductController {
     public ResponseEntity<?> list(@RequestParam(value = "style", required = false) String style,
             @RequestParam(value = "material", required = false) String material,
             @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "gender", required = false) String gender,
             @RequestParam(value = "price", required = false) String price) {
         ResponseData responseData = new ResponseData();
         List<String> styles = null;
@@ -74,16 +75,23 @@ public class ProductController {
         if (category != null) {
             categories = new ArrayList<>(Arrays.asList(category.split(",")));
         }
+
+        List<String> genders = null;
+        if (gender != null) {
+            genders = new ArrayList<>(Arrays.asList(gender.split(",")));
+            genders.add("unisex");
+        }
+
         List<String> prices = null;
-        if(price!=null)
-        {
+        if (price != null) {
             prices = new ArrayList<>(Arrays.asList(price.split(",")));
         }
-        responseData.setData(productServiceImp.filter(styles, materials, categories, prices));
+        responseData.setData(productServiceImp.filter(styles, materials, categories, genders, prices));
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
+
     @GetMapping("/detail")
-    public ResponseEntity<?> getDetail(@RequestParam(value ="id", required = false) int id) {
+    public ResponseEntity<?> getDetail(@RequestParam(value = "id", required = false) int id) {
 
         ResponseData responseData = new ResponseData();
         responseData.setData(productServiceImp.detail(id));
