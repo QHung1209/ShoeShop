@@ -98,4 +98,11 @@ public class ProductController {
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<?> search(@RequestParam String key) {
+
+        ResponseData responseData = new ResponseData();
+        responseData.setData(productServiceImp.searchProduct(key));
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
+    }
 }

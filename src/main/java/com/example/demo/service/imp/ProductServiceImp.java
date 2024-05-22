@@ -21,6 +21,7 @@ public interface ProductServiceImp {
 
     List<ProductDTO> getAllProduct();
     List<ProductDTO> filter(List<String> styles, List<String> material, List<String> categories, List<String> gender, List<String> price);
+    List<ProductDTO> searchProduct(String key);
     Set<String> getStyle();
     Set<String> getCategory();
     Set<String> getMaterial();

@@ -171,4 +171,15 @@ public class ProductService implements ProductServiceImp {
     {
         return ProductRepository.quantity(shoe_id, size_id);
     }*/
+
+    @Override
+    public List<ProductDTO> searchProduct(String key) {
+        List<ProductDTO> productDTOs = new ArrayList<>();
+        List<Products> lProducts = ProductRepository.SearchProduct(key);
+
+        for (Products data : lProducts) {
+            productDTOs.add(geProductDTO(data));
+        }
+        return productDTOs;
+    }
 }

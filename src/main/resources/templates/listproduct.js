@@ -245,6 +245,36 @@ $(document).ready(function () {
 
   });
 
+  document.getElementById("search-form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    document.getElementById("container-san-pham").scrollIntoView({ behavior: 'smooth' });
+    $.ajax({
+      method: "GET",
+      url: `http://localhost:8080/product/search`,
+      data:{
+        key: document.getElementById('search-input').value
+      }
+    })
+      .done(function (msg) {
+        if (msg) {
+          $("#container-san-pham").empty(); // Xóa hết nội dung cũ trước khi thêm mới
+          $.each(msg.data, function (index, value) {
+            var html = `<div class="san-pham">
+                      <div class="container-hover-image">
+                          <a href="desktop3.html?id=${value.product_id}"><img class="rectangle-38" src="${value.image_url}" alt=""></a>
+                          <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
+                      </div>
+                      <a href="" class="ten-giay">${value.shoe_name}</a>
+                      <span class ="color_name" >
+                        ${value.color_name}
+                      </span>
+                      <span class="vnd">${value.price.toLocaleString('vi-VN')} VND</span>
+                  </div>`;
+            $("#container-san-pham").append(html);
+          });
+        }
+      });
+  });
 
   $(document).on('click', '.myinputCheckbox', updateURL);
   $(document).on('click', '.kieu-dang', updateURL);
