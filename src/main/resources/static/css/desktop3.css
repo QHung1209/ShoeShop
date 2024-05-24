@@ -371,12 +371,6 @@ header .content a:hover{
   height: auto;
 }
 
-/* footer */
-footer {
-  max-width: 100%;
-  background-color: var(--grey-color);
-  height: 200px;
-}
 
 
 
@@ -405,3 +399,66 @@ footer {
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
+
+/* footer */
+footer {
+  width: 100%;
+  background-color: var(--grey-color);
+  height: auto;
+  display: flex;
+  column-gap: 3rem;
+  justify-content: space-around;
+  padding: 30px;
+}
+footer .column{
+  width: 100%;
+}
+footer .column .head{
+  font-size: 30px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--white-color);
+  margin-bottom: 20px;
+}
+footer .column .title{
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--light--grey-color);
+  text-align: justify;
+}
+footer .column ul li{
+  margin-top: 10px;
+}
+footer .column ul li a{
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--light--grey-color);
+}
+footer .column ul li p{
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--light--grey-color);
+  display: inline;
+}
+footer .column ul li .bx{
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--light--grey-color);
+  display: inline;
+}
+
+footer .column ul .social .bx{
+  font-size: 30px;
+  font-weight: 300;
+  color: var(--light--grey-color);
+  display: inline;
+}
+
+footer .column ul li a:hover{
+  color: var(--light--orange-color);
+  transition: all linear 0.2s;
+}
+footer .column ul li .bx:hover{
+  color: var(--light--orange-color);
+  transition: all linear 0.2s;
+}

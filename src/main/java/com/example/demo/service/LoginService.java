@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,6 +17,10 @@ public class LoginService implements LoginServiceImp{
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Override
     public List<UserDTO> getAllUsers() {
         List<Users> listUser = userRepository.findAll();
@@ -33,13 +38,12 @@ public class LoginService implements LoginServiceImp{
     }
 
     @Override
-    public UserDTO checkLogin(String username, String password) {
-       Users listUser = userRepository.findByUsernameAndPassword(username, password);
-        UserDTO temp = new UserDTO();
-        temp.setUser_id(listUser.getUser_id());
-        temp.setName(listUser.getName());
-        temp.setAddress(listUser.getAddress());
-       return temp;
+    public boolean checkLogin(String username, String password) {
+        Users users = userRepository.findByUsername(username);
+        if(users == null){
+            return false;
+        }
+        return passwordEncoder.matches(password, users.getPassword());
     }
 
 
