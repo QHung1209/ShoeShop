@@ -44,59 +44,77 @@ public class CustomFilterSecurity {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request -> request
-//                        .requestMatchers("/user/**").permitAll()
-//                        .requestMatchers("/admin/**").permitAll()
-//                        .requestMatchers("/product/**").permitAll()
-//                        .requestMatchers("/cart/**").permitAll()
-                        .requestMatchers("/login/**").permitAll()
-//                        .requestMatchers("/index/**").permitAll()
-//                        .requestMatchers("/main/**").permitAll()
-                        .anyRequest().authenticated())
-                .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http
+                .authorizeRequests(request -> request.requestMatchers(HttpMethod.GET, "/product/allproduct").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/allstylename").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/allcategoryname").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/allmaterialname").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login/signin").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/main/page").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/index").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/login/signup").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/login/signin").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin").permitAll()
+                        // Shoes
+                        .requestMatchers(HttpMethod.POST, "/admin/product/addShoes").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getShoes").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/admin/product/updateShoesName").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/admin/product/updateShoesPrice").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/checkShoesNameExists").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getShoesNames").permitAll()
 
-//        http.authorizeRequests(request -> request
-//        .requestMatchers(HttpMethod.GET, "/product/allproduct").permitAll()
-//        .requestMatchers(HttpMethod.GET, "/product/allstylename").permitAll()
-//        .requestMatchers(HttpMethod.GET, "/product/allcategoryname").permitAll()
-//        .requestMatchers(HttpMethod.GET, "/product/allmaterialname").permitAll()
-//        .requestMatchers(HttpMethod.POST, "/login/signin").permitAll()
-//        .requestMatchers(HttpMethod.POST, "/main/page").permitAll()
-//        .requestMatchers(HttpMethod.GET, "/index").permitAll()
-//        .requestMatchers(HttpMethod.POST, "/admin/login/signup").permitAll()
-//        .requestMatchers(HttpMethod.POST, "/admin/login/signin").permitAll()
-//        .requestMatchers(HttpMethod.GET, "/admin").permitAll()
-//        .requestMatchers(HttpMethod.POST, "/admin/product/shoes").permitAll()
-//        .requestMatchers(HttpMethod.POST, "/admin/product/colors").permitAll()
-//        .requestMatchers(HttpMethod.POST, "/admin/product/sizes").permitAll()
-//        .requestMatchers(HttpMethod.POST, "/admin/product/genders").permitAll()
-//        .requestMatchers(HttpMethod.POST, "/admin/product/materials").permitAll()
-//        .requestMatchers(HttpMethod.POST, "/admin/product/styles").permitAll()
-//        .requestMatchers(HttpMethod.POST, "/admin/product//categories").permitAll()
-//        .requestMatchers(HttpMethod.GET, "/admin/product/getShoes").permitAll()
-//        .requestMatchers(HttpMethod.GET, "/admin/product/getSizes").permitAll()
-//        .requestMatchers(HttpMethod.GET, "/admin/product/getMaterials").permitAll()
-//        .requestMatchers(HttpMethod.GET, "/admin/product/getStyles").permitAll()
-//        .requestMatchers(HttpMethod.GET, "/admin/product/getCategories").permitAll()
-//        .requestMatchers(HttpMethod.POST, "/admin/product/file/{filename:.+}").permitAll()
-//        .requestMatchers(HttpMethod.GET, "/product/allproduct").permitAll()
-//        .requestMatchers(HttpMethod.GET, "/product/allstylename").permitAll()
-//        .requestMatchers(HttpMethod.GET, "/product/allcategoryname").permitAll()
-//        .requestMatchers(HttpMethod.GET, "/product/allmaterialname").permitAll()
-//        .requestMatchers(HttpMethod.GET, "/product/filter").permitAll()
-//        .requestMatchers(HttpMethod.POST, "/login/signin").permitAll()
-//        .requestMatchers(HttpMethod.POST, "/main/page").permitAll()
-//        .requestMatchers(HttpMethod.GET, "/index").permitAll()
-//        .requestMatchers(HttpMethod.GET, "/user/**").permitAll()
-//        .requestMatchers(HttpMethod.POST, "/cart/**").permitAll()
-//        .requestMatchers(HttpMethod.GET, "/cart/**").permitAll()
-//        .requestMatchers(HttpMethod.GET, "/product/detail").permitAll()
-//        .anyRequest().authenticated());
+                        // Colors
+                        .requestMatchers(HttpMethod.POST, "/admin/product/addColors").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getColors").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/admin/product/updateColorName").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/admin/product/updateColorCode").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/checkColorNameExists").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/checkColorCodeExists").permitAll()
+                        // Sizes
+                        .requestMatchers(HttpMethod.POST, "/admin/product/addSizes").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getSizes").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/admin/product/updateSizeName").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/checkSizeExists").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getSizesNames").permitAll()
+                        // Styles
+                        .requestMatchers(HttpMethod.POST, "/admin/product/addStyles").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getStyles").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/admin/product/updateStyleName").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/checkStyleExists").permitAll()
+                        // Materials
+                        .requestMatchers(HttpMethod.POST, "/admin/product/addMaterials").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getMaterials").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/admin/product/updateMaterialName").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/checkMaterialExists").permitAll()
+                        // Categories
+                        .requestMatchers(HttpMethod.POST, "/admin/product/addCategories").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getCategories").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/admin/product/updateCategoryName").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/checkCategoryExists").permitAll()
+                        // Inventory
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getInventory").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product/addInventory").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/admin/product/updateInventory/**").permitAll()
 
+                        //Product
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getProduct").permitAll()
 
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
+                        .requestMatchers(HttpMethod.POST, "/admin/product/genders").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product/file/{filename:.+}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/allproduct").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/allstylename").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/allcategoryname").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/allmaterialname").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/filter").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login/signin").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/main/page").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/index").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/user/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/cart/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/cart/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product/detail").permitAll()
+                        .anyRequest().authenticated());
+        http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
 

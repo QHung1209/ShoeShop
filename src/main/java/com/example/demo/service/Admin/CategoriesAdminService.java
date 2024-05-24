@@ -18,7 +18,7 @@ public class CategoriesAdminService implements CategoriesAdminServiceImp {
     private CategoriesAdminRepository categoriesAdminRepository;
 
     @Override
-    //Thêm mới một category
+    // Thêm mới một category
     public boolean insertCategories(String category_name) {
         boolean isSuccess = false;
         try {
@@ -33,7 +33,7 @@ public class CategoriesAdminService implements CategoriesAdminServiceImp {
     }
 
     @Override
-    //Lấy danh sách các category
+    // Lấy danh sách các category
     public List<CategoriesDTO> getCategories() {
         // TODO Auto-generated method stub
         List<CategoriesDTO> listCategoriesDTO = new ArrayList<>();
@@ -49,7 +49,7 @@ public class CategoriesAdminService implements CategoriesAdminServiceImp {
     }
 
     @Override
-    //Xóa một category theo tên
+    // Xóa một category theo tên
     public ResponseEntity<Void> deleteCategoryByName(String category_name) {
         Categories categories = categoriesAdminRepository.findByCategoryName(category_name);
         if (categories != null) {
@@ -61,7 +61,7 @@ public class CategoriesAdminService implements CategoriesAdminServiceImp {
     }
 
     @Override
-    //Cập nhật tên category
+    // Cập nhật tên category
     public ResponseEntity<Void> updateCategoryName(String category_name, String newCategoryName) {
         Categories categories = categoriesAdminRepository.findByCategoryName(category_name);
         if (categories != null) {
@@ -70,5 +70,11 @@ public class CategoriesAdminService implements CategoriesAdminServiceImp {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @Override
+    // Kiểm tra category có tồn tại không
+    public boolean checkCategoryExists(String category_name) {
+        return categoriesAdminRepository.isCategoryNameExisted(category_name);
     }
 }

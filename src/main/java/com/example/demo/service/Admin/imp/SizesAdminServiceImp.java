@@ -14,4 +14,8 @@ public interface SizesAdminServiceImp {
     ResponseEntity<Void> deleteSizeByName(int size_name);
 
     ResponseEntity<Void> updateSizeName(int size_name, int newSizeName);
+
+    boolean checkSizeExists(int size_name);
+
+    List<Integer> getAllSizeName();
 }

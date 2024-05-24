@@ -13,4 +13,8 @@ public interface SizesAdminRepositoryImp {
     void updateSizeName(int size_name, int newSizeName);
 
     void delete(Sizes size);
+
+    boolean isSizeNameExisted(int size_name);
+
+    
 }
