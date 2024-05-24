@@ -14,7 +14,10 @@ function filter(param) {
                         <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
                     </div>
                     <a href="" class="ten-giay">${value.shoe_name}</a>
-                    <span class="vnd">${value.price} VND</span>
+                    <span class ="color_name" >
+                      ${value.color_name}
+                    </span>
+                    <span class="vnd">${value.price.toLocaleString('vi-VN')} VND</span>
                 </div>`;
           $("#container-san-pham").append(html);
         });
@@ -22,6 +25,7 @@ function filter(param) {
     });
 }
 function updateURL() {
+
   var checkedCheckboxes = document.querySelectorAll('.myinputCheckbox:checked');
   var queryParams = [];
   checkedCheckboxes.forEach(function (checkbox) {
@@ -45,11 +49,18 @@ function updateURL() {
   checkedCheckboxes_chatlieu.forEach(function (checkbox) {
     queryParams_chatlieu.push(checkbox.id);
   });
+
+  var checkedCheckboxes_gender= document.querySelectorAll('.gender:checked');
+  var queryParams_gender = [];
+  checkedCheckboxes_gender.forEach(function (checkbox) {
+    queryParams_gender.push(checkbox.id);
+    console.log(queryParams_gender)
+  });
   // Get base URL
   var url = window.location.href.split('?')[0];
 
   // Additional parameters such as gender and category
-  if (queryParams.length > 0 || queryParams_kieudang.length > 0 || queryParams_dongsanpham.length > 0 || queryParams_chatlieu.length > 0) {
+  if (queryParams.length > 0 || queryParams_kieudang.length > 0 || queryParams_dongsanpham.length > 0 || queryParams_chatlieu.length > 0 || queryParams_gender.length > 0) {
     url += '?'; // Add '?' if it doesn't exist
   }
 
@@ -85,6 +96,15 @@ function updateURL() {
     url += queryParams_chatlieu.join(',');
   }
 
+  if (queryParams_gender.length > 0) {
+    if (queryParams.length > 0 || queryParams_kieudang.length > 0 || queryParams_dongsanpham.length > 0 || queryParams_chatlieu.length > 0) {
+      url += '&gender='; // Add '&' to append to existing params
+    }
+    else
+      url += 'gender=';
+    url += queryParams_gender.join(',');
+  }
+
   window.history.replaceState({}, document.title, url);
   let searchParams = new URLSearchParams(window.location.search)
   console.log(searchParams.toString())
@@ -97,6 +117,7 @@ function updateURL() {
 $(document).ready(function () {
   var link_product = "http://localhost:8080/product/allproduct"
   var token = localStorage.getItem("token")
+  var url_temp = window.location.href
   console.log(token)
   $.ajax({
     method: "GET",
@@ -110,6 +131,14 @@ $(document).ready(function () {
       if (msg) {
         $.each(msg.data, function (index, value) {
           console.log(value);
+          var priceHtml = "";
+          if (value.discount != 0) {
+            // Calculate discounted price
+            var discountedPrice = value.price * (100 - value.discount)/100;
+            priceHtml = `<span class="vnd">${discountedPrice.toLocaleString('vi-VN')} VND   <s style="text-decoration: line-through; font-weight:500; font-size:14px">${value.price.toLocaleString('vi-VN')} VND</s></span>`;
+          } else {
+            priceHtml = `<span class="vnd">${value.price.toLocaleString('vi-VN')} VND</span>`;
+          }
           var html = `<div class="san-pham">
                     <div class="container-hover-image">
                       <a href="desktop3.html?id=${value.product_id}"><img class="rectangle-38" img src="${value.image_url}" alt=""></a>
@@ -118,9 +147,10 @@ $(document).ready(function () {
                     <a href="" class="ten-giay">
                       ${value.shoe_name}
                     </a>
-                    <span class="vnd">
-                      ${value.price} VND
+                    <span class ="color_name" >
+                      ${value.color_name}
                     </span>
+                    ${priceHtml}
                   </div>`
 
           $("#container-san-pham").append(html)
@@ -148,7 +178,7 @@ $(document).ready(function () {
           $("#kieu-dang").append(html)
         })
       }
-      updateURL();
+   
     });
 
   $.ajax({
@@ -168,7 +198,7 @@ $(document).ready(function () {
           $("#dong-san-pham").append(html)
         })
       }
-      updateURL();
+    
     });
 
   $.ajax({
@@ -188,15 +218,69 @@ $(document).ready(function () {
           $("#chat-lieu").append(html)
         })
       }
-      updateURL();
+    
     });
 
+  document.getElementById("cart").addEventListener("click", function () {
+    var token = localStorage.getItem("token");
+    localStorage.setItem("url_temp", url_temp)
+    if (!token) {
+      window.location.href = "./index.html"; // Redirect to login page if token is not present
+    }
+    else{
+    window.location.href = "./desktop4.html";
+    }
+  });
+  document.getElementById("account").addEventListener("click", function () {
+    var token = localStorage.getItem("token");
+    localStorage.setItem("url_temp", url_temp)
+    if (!token) {
+      window.location.href = "./index.html"; // Redirect to login page if token is not present
+    }
 
+  });
+  document.getElementById("logout").addEventListener("click", function () {
+    localStorage.removeItem("token")
+    window.location.href = "./desktop1.html"; // Redirect to login page if token is not present
+
+  });
+
+  document.getElementById("search-form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    document.getElementById("container-san-pham").scrollIntoView({ behavior: 'smooth' });
+    $.ajax({
+      method: "GET",
+      url: `http://localhost:8080/product/search`,
+      data:{
+        key: document.getElementById('search-input').value
+      }
+    })
+      .done(function (msg) {
+        if (msg) {
+          $("#container-san-pham").empty(); // Xóa hết nội dung cũ trước khi thêm mới
+          $.each(msg.data, function (index, value) {
+            var html = `<div class="san-pham">
+                      <div class="container-hover-image">
+                          <a href="desktop3.html?id=${value.product_id}"><img class="rectangle-38" src="${value.image_url}" alt=""></a>
+                          <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
+                      </div>
+                      <a href="" class="ten-giay">${value.shoe_name}</a>
+                      <span class ="color_name" >
+                        ${value.color_name}
+                      </span>
+                      <span class="vnd">${value.price.toLocaleString('vi-VN')} VND</span>
+                  </div>`;
+            $("#container-san-pham").append(html);
+          });
+        }
+      });
+  });
 
   $(document).on('click', '.myinputCheckbox', updateURL);
   $(document).on('click', '.kieu-dang', updateURL);
   $(document).on('click', '.dong-san-pham', updateURL);
   $(document).on('click', '.chat-lieu', updateURL);
+  $(document).on('click', '.gender', updateURL);
 
 
 

@@ -6,7 +6,7 @@ function toggleDropdown(event) {
 
 // Đóng dropdown khi click ra ngoài dropdown
 window.onclick = function (event) {
-    if (!event.target.matches('.btn-login')) {
+    if (!event.target.matches('.account')) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
         for (var i = 0; i < dropdowns.length; i++) {
             var openDropdown = dropdowns[i];
@@ -20,7 +20,15 @@ $(document).ready(function () {
 
     let searchParams = new URLSearchParams(window.location.search)
     var url_temp = window.location.href
-    document.getElementById("btn-login").addEventListener("click", function () {
+    document.getElementById("cart").addEventListener("click", function () {
+        var token = localStorage.getItem("token");
+        localStorage.setItem("url_temp", url_temp)
+        if (!token) {
+          window.location.href = "./index.html"; // Redirect to login page if token is not present
+        }
+
+      });
+    document.getElementById("account").addEventListener("click", function () {
         var token = localStorage.getItem("token");
         localStorage.setItem("url_temp", url_temp)
         if (!token) {

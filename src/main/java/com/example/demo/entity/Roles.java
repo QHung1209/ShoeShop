@@ -19,9 +19,6 @@ public class Roles {
     private String role_name;
 
     @OneToMany(mappedBy = "roles")
-    private List<Users> usersList;
-
-    @OneToMany(mappedBy = "roles")
     private List<Admins> adminsList;
 
     public int getRole_id() {
@@ -38,14 +35,6 @@ public class Roles {
 
     public void setRole_name(String role_name) {
         this.role_name = role_name;
-    }
-
-    public List<Users> getUserList() {
-        return usersList;
-    }
-
-    public void setUserList(List<Users> userList) {
-        this.usersList = userList;
     }
     
 }

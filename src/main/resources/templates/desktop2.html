@@ -9,13 +9,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="../static/css/desktop2.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
   <script src="https://unpkg.com/htmx.org@1.9.12"
     integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2"
     crossorigin="anonymous"></script>
-  
+
 </head>
 
 <body>
@@ -28,17 +33,15 @@
     </div>
     <!-- Giỏ hàng -->
     <div class="content">
-      <a href="#"><i class='bx bx-cart-alt'></i> Giỏ hàng</a>
+      <a href="#" class="cart" id="cart"><i class='bx bx-cart-alt'></i> Giỏ hàng</a>
     </div>
     <!-- Đăng nhập -->
     <div class="content">
       <!--<a href="#"><i class='bx bx-user'></i> Đăng nhập</a>-->
-      <a href="#" class="btn-login" id="btn-login" onclick="toggleDropdown(event)"><i class='bx bx-user'></i> Tài
-        Khoản</a>
+      <a href="#" class="account" id="account" onclick="toggleDropdown(event)"><i class='bx bx-user'></i> Tài Khoản</a>
       <div id="myDropdown" class="dropdown-content">
         <a href="#">Link 1</a>
         <a href="#" id="logout">Đăng xuất</a>
-        <a href="#">Link 3</a>
       </div>
     </div>
   </header>
@@ -47,7 +50,7 @@
     <a href="#" class="logo"><img src="../static/images/logo.png" alt=""></a>
 
     <ul class="navbar">
-      <li><a href="./desktop1.html">SẢN PHẨM</a></li>
+      <li><a href="./desktop2.html">SẢN PHẨM</a></li>
       <li>
         <p>|</p>
       </li>
@@ -59,10 +62,6 @@
       <li>
         <p>|</p>
       </li>
-      <li><a href="#new-products">SẢN PHẨM MỚI</a></li>
-      <li>
-        <p>|</p>
-      </li>
       <li><a href="#discount">KHUYẾN MÃI</a></li>
     </ul>
   </section>
@@ -70,10 +69,12 @@
   <section class="bannerr">
     <div class="content">
       <h2>Free Shipping với hóa đơn từ 900k</h2>
-      <div class="search">
-        <i class='bx bx-search'></i>
-        <input type="text" placeholder="Search">
-      </div>
+      <form id="search-form">
+        <div class="search">
+          <i class='bx bx-search'></i>
+          <input type="text" id="search-input" placeholder="Search">
+        </div>
+      </form>
     </div>
   </section>
 
@@ -82,33 +83,27 @@
     <div class="header">
       <div class="container-5">
         <div class="menu-1">
-          <div class="tt-cnam-n">
-            <div class="component-8">
-              <div class="component-81">
-                <a href="" class="tat-ca">
-                  TẤT CẢ
-                </a>
-              </div>
-            </div>
-            <div class="component-9">
-              <div class="component-82">
-                <a href="" class="tat-ca">
-                  NAM
-                </a>
-              </div>
-            </div>
-            <div class="component-10">
-              <div class="component-83">
-                <a href="" class="tat-ca">
-                  NỮ
-                </a>
-              </div>
-            </div>
+          <div class="Gen-der" id="gender">
+
+            <input type="checkbox" class="gender" id="unisex" name="unisex">
+            <label for="unisex">
+              <span class="text-gender"> TẤT CẢ</span>
+            </label>
+
+            <input type="checkbox" class="gender" id="men" name="unisex">
+            <label for="men">
+              <span class="text-gender"> NAM </span>
+            </label>
+
+            <input type="checkbox" class="gender" id="women" name="unisex">
+            <label for="women">
+              <span class="text-gender"> NỮ </span>
+            </label>
+
           </div>
 
           <div class="line-1">
           </div>
-
 
 
           <div class="trng-thi" id="kieu-dang">
@@ -181,7 +176,6 @@
         </div>
       </div>
     </div>
-
     <!-- footer section -->
   <footer>
     <div class="column company-name">
@@ -235,8 +229,10 @@
 
   </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
     <script src="./listproduct.js"></script>
-    <script src="./header.js"></script>
+    <script src="../static/js/x.js"></script>
 </body>
 
 </html>
