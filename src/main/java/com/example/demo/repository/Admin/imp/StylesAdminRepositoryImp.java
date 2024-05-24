@@ -15,4 +15,8 @@ public interface StylesAdminRepositoryImp {
     void delete(Styles style);
 
     void updateStyleName(String style_name, String newStyleName);
+
+    boolean isStyleNameExisted(String style_name);
+
+    
 }

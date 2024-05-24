@@ -14,4 +14,7 @@ public interface StylesAdminServiceImp {
     ResponseEntity<Void> deleteStyleByName(String style_name);
 
     ResponseEntity<Void> updateStyleName(String style_name, String newStyleName);
+
+    boolean checkStyleExists(String style_name);
+
 }
