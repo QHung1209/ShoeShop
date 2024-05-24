@@ -10,6 +10,7 @@ import com.example.demo.service.Admin.imp.StylesAdminServiceImp;
 import com.example.demo.dto.Admin.StylesDTO;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StylesServiceAdmin implements StylesAdminServiceImp {
@@ -71,5 +72,13 @@ public class StylesServiceAdmin implements StylesAdminServiceImp {
     @Override
     public boolean checkStyleExists(String style_name) {
         return stylesAdminRepository.isStyleNameExisted(style_name);
+    }
+
+    @Override
+    public List<String> getAllStyleName() {
+        List<Styles> stylesList = stylesAdminRepository.findAll();
+        return stylesList.stream()
+                .map(Styles::getStyle_name)
+                .collect(Collectors.toList());
     }
 }

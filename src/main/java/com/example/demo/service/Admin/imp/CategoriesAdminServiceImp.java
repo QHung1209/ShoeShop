@@ -22,4 +22,8 @@ public interface CategoriesAdminServiceImp {
     // Kiểm tra category có tồn tại không
     boolean checkCategoryExists(String category_name);
 
+
+    // Lấy danh sách tên category
+    List<String> getAllCategoryName();
+
 }

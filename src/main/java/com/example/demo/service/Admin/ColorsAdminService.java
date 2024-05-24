@@ -2,6 +2,7 @@ package com.example.demo.service.Admin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.repository.Admin.ColorsAdminRepository;
 import com.example.demo.dto.Admin.ColorsDTO;
 import com.example.demo.entity.Colors;
+import com.example.demo.entity.Styles;
 import com.example.demo.service.Admin.imp.ColorsAdminServiceImp;
 
 @Service
@@ -87,5 +89,13 @@ public class ColorsAdminService implements ColorsAdminServiceImp {
     public boolean checkColorCodeExists(String color_code) {
         // TODO Auto-generated method stub
         return colorsAdminRepository.isColorCodeExisted(color_code);
+    }
+
+    @Override
+    public List<String> getAllColorName() {
+        List<Colors> colorsList = colorsAdminRepository.findAll();
+        return colorsList.stream()
+                .map(Colors::getColor_name)
+                .collect(Collectors.toList());
     }
 }

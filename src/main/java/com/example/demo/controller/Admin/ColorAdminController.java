@@ -15,6 +15,7 @@ import com.example.demo.service.Admin.imp.ColorsAdminServiceImp;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import java.util.List;
 
 @CrossOrigin("*")
 @RestController
@@ -68,5 +69,11 @@ public class ColorAdminController {
     public ResponseEntity<?> checkColorCodeExists(@RequestParam String color_code) {
         boolean exists = colorsAdminServiceImp.checkColorCodeExists(color_code);
         return new ResponseEntity<>(exists, HttpStatus.OK);
+    }
+
+    // Lấy tất cả color_name từ colors table
+    @GetMapping("/getColorsNames")
+    public List<String> getAllColorName() {
+        return colorsAdminServiceImp.getAllColorName();
     }
 }

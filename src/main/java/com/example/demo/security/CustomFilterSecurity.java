@@ -70,6 +70,7 @@ public class CustomFilterSecurity {
                         .requestMatchers(HttpMethod.PUT, "/admin/product/updateColorCode").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/checkColorNameExists").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/checkColorCodeExists").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getColorsNames").permitAll()
                         // Sizes
                         .requestMatchers(HttpMethod.POST, "/admin/product/addSizes").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/getSizes").permitAll()
@@ -81,16 +82,21 @@ public class CustomFilterSecurity {
                         .requestMatchers(HttpMethod.GET, "/admin/product/getStyles").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/admin/product/updateStyleName").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/checkStyleExists").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getStylesNames").permitAll()
+
                         // Materials
                         .requestMatchers(HttpMethod.POST, "/admin/product/addMaterials").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/getMaterials").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/admin/product/updateMaterialName").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/checkMaterialExists").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getMaterialsNames").permitAll()
                         // Categories
                         .requestMatchers(HttpMethod.POST, "/admin/product/addCategories").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/getCategories").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/admin/product/updateCategoryName").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/checkCategoryExists").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getCategoriesNames").permitAll()
+
                         // Inventory
                         .requestMatchers(HttpMethod.GET, "/admin/product/getInventory").permitAll()
                         .requestMatchers(HttpMethod.POST, "/admin/product/addInventory").permitAll()
@@ -98,6 +104,8 @@ public class CustomFilterSecurity {
 
                         //Product
                         .requestMatchers(HttpMethod.GET, "/admin/product/getProduct").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product/addProduct").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/admin/product/updateProduct/**").permitAll()
 
                         .requestMatchers(HttpMethod.POST, "/admin/product/genders").permitAll()
                         .requestMatchers(HttpMethod.POST, "/admin/product/file/{filename:.+}").permitAll()

@@ -17,4 +17,6 @@ public interface StylesAdminServiceImp {
 
     boolean checkStyleExists(String style_name);
 
+    List<String> getAllStyleName();
+
 }

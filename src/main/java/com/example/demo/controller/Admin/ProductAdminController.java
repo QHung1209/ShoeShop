@@ -4,9 +4,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.example.demo.entity.Products;
 import com.example.demo.payload.ResponseData;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.demo.service.Admin.imp.FileAdminServiceImp;
@@ -56,9 +59,37 @@ public class ProductAdminController {
                 "attachment; filename=\"" + resource.getFilename() + "\"").body(resource);
     }
 
+    @PostMapping("/addProduct")
+    public Products createProduct(
+            @RequestParam String shoeName,
+            @RequestParam String colorName,
+            @RequestParam String genderName,
+            @RequestParam String styleName,
+            @RequestParam String materialName,
+            @RequestParam String categoryName,
+            @RequestParam int discount,
+            @RequestParam MultipartFile imageFile) {
+        return productAdminServiceImp.addProduct(shoeName, colorName, genderName, styleName, materialName, categoryName,
+                discount, imageFile);
+    }
+
     // Cập nhất giá trị sản phẩm
 
-    // Xóa sản phẩm
+    @PutMapping("/updateProduct/{productId}")
+    public Products updateProduct(
+            @PathVariable int productId,
+            @RequestParam(required = false) String shoeName,
+            @RequestParam(required = false) String colorName,
+            @RequestParam(required = false) String genderName,
+            @RequestParam(required = false) String styleName,
+            @RequestParam(required = false) String materialName,
+            @RequestParam(required = false) String categoryName,
+            @RequestParam(required = false) Integer discount,
+            @RequestParam(required = false) MultipartFile imageFile) {
+        return productAdminServiceImp.updateProduct(productId, shoeName, colorName, genderName, styleName, materialName,
+                categoryName, discount, imageFile);
+    }
+    // Xóa sản phẩmáđááđâsdáaaaaâ
 
     // // GENDER
 

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.example.demo.service.Admin.imp.CategoriesAdminServiceImp;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import java.util.List;
 
 @CrossOrigin("*")
 @RestController
@@ -55,6 +56,12 @@ public class CategoryAdminController {
     public ResponseEntity<?> checkCategoryExists(@RequestParam String category_name) {
         boolean exists = categoriesAdminServiceImp.checkCategoryExists(category_name);
         return new ResponseEntity<>(exists, HttpStatus.OK);
+    }
+
+    // Lay tat ca category_name tu bang category
+    @GetMapping("/getCategoriesNames")
+    public List<String> getCategoriesName() {
+        return categoriesAdminServiceImp.getAllCategoryName();
     }
 
 }

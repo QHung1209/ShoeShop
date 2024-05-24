@@ -19,4 +19,6 @@ public interface ColorsAdminServiceImp {
     boolean checkColorNameExists(String color_name);
 
     boolean checkColorCodeExists(String color_code);
+
+    List<String> getAllColorName();
 }
