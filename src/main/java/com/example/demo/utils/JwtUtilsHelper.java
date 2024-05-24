@@ -2,7 +2,6 @@ package com.example.demo.utils;
 
 import javax.crypto.SecretKey;
 
-import io.jsonwebtoken.Jwt;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
