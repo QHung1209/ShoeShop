@@ -7,8 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity(name = "Users")
@@ -29,13 +27,14 @@ public class Users {
     @Column(name = "address")
     private String address;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Roles roles;
+    @Column(name = "telephone")
+    private String telephone;
 
     @OneToMany(mappedBy = "users")
     List<Carts> listCarts;
 
+    @OneToMany(mappedBy = "users")
+    List<Orders> listOrders;
     public int getUser_id() {
         return user_id;
     }
@@ -77,14 +76,6 @@ public class Users {
         this.address = address;
     }
 
-    public Roles getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Roles roles) {
-        this.roles = roles;
-    }
-
     public String getName() {
         return name;
     }
@@ -99,6 +90,22 @@ public class Users {
 
     public void setListCarts(List<Carts> listCarts) {
         this.listCarts = listCarts;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public List<Orders> getListOrders() {
+        return listOrders;
+    }
+
+    public void setListOrders(List<Orders> listOrders) {
+        this.listOrders = listOrders;
     }
 
     

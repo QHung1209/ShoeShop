@@ -9,14 +9,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
   <!-- Link to desktop1.css -->
   <link rel="stylesheet" href="../static/css/desktop5.css" />
 
   <!-- Box icons-->
-  <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 </head>
+
 <body>
 
   <!-- Header section -->
@@ -27,27 +28,31 @@
     </div>
     <!-- Giỏ hàng -->
     <div class="content">
-      <a href="#"><i class='bx bx-cart-alt' ></i> Giỏ hàng</a>
+      <a href="#"><i class='bx bx-cart-alt'></i> Giỏ hàng</a>
     </div>
     <!-- Đăng nhập -->
     <div class="content">
-      <a href="#"><i class='bx bx-user' ></i> Đăng nhập</a>
+      <a href="#"><i class='bx bx-user'></i> Đăng nhập</a>
     </div>
   </header>
-  
+
   <!-- Navbar section -->
-  <section class="logo-and-navbar" >
+  <section class="logo-and-navbar">
     <a href="#" class="logo"><img src="../static/images/logo.png" alt=""></a>
 
     <ul class="navbar">
-      <li><a href="#products">SẢN PHẨM</a></li>
-      <li><p>|</p></li>
+      <li><a href="./desktop2.html">SẢN PHẨM</a></li>
+      <li>
+        <p>|</p>
+      </li>
       <li><a href="#male">NAM</a></li>
-      <li><p>|</p></li>
+      <li>
+        <p>|</p>
+      </li>
       <li><a href="#female">NỮ</a></li>
-      <li><p>|</p></li>
-      <li><a href="#new-products">SẢN PHẨM MỚI</a></li>
-      <li><p>|</p></li>
+      <li>
+        <p>|</p>
+      </li>
       <li><a href="#discount">KHUYẾN MÃI</a></li>
     </ul>
   </section>
@@ -58,114 +63,129 @@
       <h2>Free Shipping với hóa đơn từ 900k</h2>
       <div class="search">
         <i class='bx bx-search'></i>
-        <input type="text" placeholder="Search"> 
+        <input type="text" placeholder="Search">
       </div>
     </div>
 
     <!-- shipping information -->
     <section class="shipping-information">
 
-        <div class="column1">
-            <p class="row1 title">
-                thông tin giao hàng
-            </p>
-            <input class="info" type="text" name="cusName" id="cusNam" placeholder="  Họ tên">
-            <input class="info" type="text" name="cusNumber" id="cusNumber" placeholder="  Số điện thoại">
-            <input class="info" type="text" name="cusEmail" id="cusEmail" placeholder="  Email">
-            <input class="info" type="text" name="cusAddress" id="cusAddress" placeholder="  Địa chỉ">
+      <div class="column1">
+        <div class="form-detail">
+          <p class="row1 title">
+            thông tin giao hàng
+          </p>
+          
+        <input class="info" type="text" name="cusName" id="cusNam" placeholder="  Họ tên" value="hehe">
+        <input class="info" type="text" name="cusNumber" id="cusNumber" placeholder="  Số điện thoại">
+        <input class="info" type="text" name="cusAddress" id="cusAddress" placeholder="  Địa chỉ">
 
-            <select name="ls_province" class="ls_province"></select>
+        <select name="ls_province" id="ls_province" class="ls_province"></select>
+
+        <div class="district-ward">
+          <select name="ls_district" id="ls_district" class="ls_district"></select>
+          <select name="ls_ward" id="ls_ward" class="ls_ward"></select>
+        </div>
+    
+        </div>
+
+        <div class="row2">
+          <!--<input type="checkbox" id="" class="ck">-->
+          <p>Cập nhật các thông tin mới nhất về chương trình từ chúng tôi</p>
+        </div>
+
+        <p class="row3 title">Phương Thức Giao Hàng</p>
+
+        <div class="row4">
+          <!--
+          <input type="checkbox" id="shipMethod" class="ck">-->
+          <p>Tốc độ tiêu chuẩn (từ 2-5 ngày làm viêc)</p>
+
+        </div>
+
+        <p class="row5 title">Phương Thức Thanh Toán</p>
+        <div class="row6">
+          <div class="subrow">
+            <!--<input type="checkbox" id="directPayment" class="ck">-->
+            <p>Thanh toán trực tiếp khi giao hàng</p>
+
+          </div>
+          <!--
+          <div class="subrow">
+            <input type="checkbox" id="onlinePayment" class="ck">
+            <p>Thanh toán bằng Thẻ quốc tế/ Thẻ nội địa/ QR Code </p>
             
-            <div class="district-ward">
-                <select name="ls_district" class="ls_district"></select>
-                <select name="ls_ward" class="ls_ward"></select>
-            </div>
+          </div>
+          <div class="subrow">
+            <input type="checkbox" id="onlinePayment" class="ck">
+            <p>Thanh toán bằng ví MoMo </p>
+            
+          </div>-->
 
+        </div>
+
+      </div>
+
+      <div class="column2">
+        <div class="box">
+          <p class="row1">Đơn Hàng</p>
+
+          <div class="devider1">
+            <p></p>
+          </div>
+
+          <div class="list_product">
+            <!--
             <div class="row2">
-                <input type="checkbox" id="" class="ck">
-                <p>Cập nhật các thông tin mới nhất về chương trình từ chúng tôi</p>
+              <p class="name">Vintas Public 2000s - Low Top - Insignia Blue</p>
+              <p class="price">620.000 VND</p>
             </div>
 
-            <p class="row3 title">Phương Thức Giao Hàng</p>
+            <div class="row3">
+              <p class="size">Size: 37</p>
+              <p class="quantity">x 1</p>
+            </div>
+            -->
+          </div>
 
+
+          <div class="devider2">
+            <p></p>
+          </div>
+
+          <div class="price_detail">
+            <!--
             <div class="row4">
-                <input type="checkbox" id="shipMethod" class="ck">
-                <p>Tốc độ tiêu chuẩn (từ 2-5 ngày làm viêc)</p>
-                <i class='bx bx-question-mark'></i>
+              <p class="order">Đơn hàng</p>
+              <p class="price">620.000 VND</p>
             </div>
 
-            <p class="row5 title">Phương Thức Thanh Toán</p>
+            <div class="row5">
+              <p class="promo">Giảm</p>
+              <p class="price">-124.000 VND</p>
+            </div>
+
             <div class="row6">
-                <div class="subrow">
-                    <input type="checkbox" id="directPayment" class="ck">
-                    <p>Thanh toán trực tiếp khi giao hàng</p>
-                    <i class='bx bx-question-mark'></i>
-                </div>
-                <div class="subrow">
-                    <input type="checkbox" id="onlinePayment" class="ck">
-                    <p>Thanh toán bằng Thẻ quốc tế/ Thẻ nội địa/ QR Code </p>
-                    <i class='bx bx-question-mark'></i>
-                </div>
-                <div class="subrow">
-                    <input type="checkbox" id="onlinePayment" class="ck">
-                    <p>Thanh toán bằng ví MoMo </p>
-                    <i class='bx bx-question-mark'></i>
-                </div>
-
+              <p class="ship-fee">Phí vận chuyển</p>
+              <p class="price">0 VND</p>
             </div>
+            -->
+          </div>
 
+
+          <div class="devider2">
+            <p></p>
+          </div>
+
+          <div class="row8">
+            <p class="total">Tổng cộng</p>
+            <p class="total_price" id="total_price"> </p>
+          </div>
+
+          <a href="#" class="complete-payment" id="complete-payment">Hoàn tất đặt hàng</a>
         </div>
-
-        <div class="column2">
-            <div class="box">
-                <p class="row1">Đơn Hàng</p>
-
-                <div class="devider1"><p></p></div>
-
-                <div class="row2">
-                    <p class="name">Vintas Public 2000s - Low Top - Insignia Blue</p>
-                    <p class="price">620.000 VND</p>
-                </div>
-
-                <div class="row3">
-                    <p class="size">Size: 37</p>
-                    <p class="quantity">x 1</p>
-                </div>
-
-                <div class="devider2"><p></p></div>
-
-                <div class="row4">
-                    <p class="order">Đơn hàng</p>
-                    <p class="price">620.000 VND</p>
-                </div>
-
-                <div class="row5">
-                    <p class="promo">Giảm</p>
-                    <p class="price">-124.000 VND</p>
-                </div>
-
-                <div class="row6">
-                    <p class="ship-fee">Phí vận chuyển</p>
-                    <p class="price">0 VND</p>
-                </div>
-
-                <div class="row7">
-                    <p class="payment-fee">Phí thanh toán</p>
-                    <p class="price">0 VND</p>
-                </div>
-
-                <div class="devider2"><p></p></div>
-
-                <div class="row8">
-                    <p class="total">Tổng cộng</p>
-                    <p class="price">496.000 VND</p>
-                </div>
-
-                <button class="complete-payment">Hoàn tất đặt hàng</button>
-            </div>
-        </div>
+      </div>
     </section>
-  
 
   <!-- footer section -->
   <footer>
@@ -218,14 +238,19 @@
       </ul>
     </div>
 
-  </footer>
-<!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- footer section -->
+    <footer>
 
-<!-- Vietnam local selector: https://github.com/stommazh/vietnamlocalselector -->
-<script src="../static/js/vietnamlocalselector.js"></script>
+    </footer>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="./order.js"></script>
+    <!-- Vietnam local selector: https://github.com/stommazh/vietnamlocalselector -->
+    <script src="../static/js/vietnamlocalselector.js"></script>
 
-<!-- desktop3 JS-->
-<script src="../static/js/desktop5.js"></script>
+    <!-- desktop3 JS-->
+    <script src="../static/js/desktop5.js"></script>
+
 </body>
+
 </html>

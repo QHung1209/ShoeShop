@@ -27,16 +27,16 @@
     </div>
     <!-- Giỏ hàng -->
     <div class="content">
-      <a href="#"><i class='bx bx-cart-alt'></i> Giỏ hàng</a>
+      <a href="#" class="cart" id="cart"><i class='bx bx-cart-alt'></i> Giỏ hàng</a>
     </div>
     <!-- Đăng nhập -->
     <div class="content">
       <!--<a href="#"><i class='bx bx-user'></i> Đăng nhập</a>-->
-      <a href="#" class="btn-login" id="btn-login" onclick="toggleDropdown(event)"><i class='bx bx-user'></i> Tài Khoản</a>
+      <a href="#" class="account" id="account" onclick="toggleDropdown(event)"><i class='bx bx-user'></i> Tài Khoản</a>
       <div id="myDropdown" class="dropdown-content">
         <a href="#">Link 1</a>
         <a href="#" id="logout">Đăng xuất</a>
-        <a href="#">Link 3</a>
+
       </div>
     </div>
   </header>
@@ -46,7 +46,7 @@
     <a href="#" class="logo"><img src="../static/images/logo.png" alt=""></a>
 
     <ul class="navbar">
-      <li><a href="./desktop1.html">SẢN PHẨM</a></li>
+      <li><a href="./desktop2.html">SẢN PHẨM</a></li>
       <li>
         <p>|</p>
       </li>
@@ -55,10 +55,6 @@
         <p>|</p>
       </li>
       <li><a href="#female">NỮ</a></li>
-      <li>
-        <p>|</p>
-      </li>
-      <li><a href="#new-products">SẢN PHẨM MỚI</a></li>
       <li>
         <p>|</p>
       </li>
@@ -128,7 +124,7 @@
           <div class="select-size">
             <h4>Size</h4>
             <select name="size" id="size" class="size_option">
-              <option hidden disabled selected value> -- Chọn size -- </option>
+              <option value="" hidden disabled selected value> -- Chọn size -- </option>
 
             </select>
           </div>
@@ -136,7 +132,7 @@
           <div class="select-quantity">
             <h4>Số lượng</h4>
             <select name="quantity" id="quantity">
-              <option hidden disabled selected value> -- Chọn số lượng -- </option>
+              <option value="" hidden disabled selected value> -- Chọn số lượng -- </option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -154,6 +150,9 @@
           <a href="#" class="add-to-cart" id="add">thêm vào giỏ hàng</a>
           <br>
           <a href="#" class="pay">thanh toán</a>
+          <div class="warning">
+            <!-- <p style="color: red;">Chọn size/ số lượng phù hợp</p> -->
+          </div>
         </div>
 
         <div class="info-product">

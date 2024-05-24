@@ -27,12 +27,12 @@
     </div>
     <!-- Giỏ hàng -->
     <div class="content">
-      <a href="#"><i class='bx bx-cart-alt'></i> Giỏ hàng</a>
+      <a href="#"><i class='bx bx-cart-alt' class="cart" id="cart"></i> Giỏ hàng</a>
     </div>
     <!-- Đăng nhập -->
     <div class="content">
       <!--<a href="#"><i class='bx bx-user'></i> Đăng nhập</a>-->
-      <a href="#" class="btn-login" id="btn-login" onclick="toggleDropdown(event)"><i class='bx bx-user'></i> Tài Khoản</a>
+      <a href="#" class="account" id="account" onclick="toggleDropdown(event)"><i class='bx bx-user'></i> Tài Khoản</a>
       <div id="myDropdown" class="dropdown-content">
         <a href="#">Link 1</a>
         <a href="#" id="logout">Đăng xuất</a>
@@ -46,7 +46,7 @@
     <a href="#" class="logo"><img src="../static/images/logo.png" alt=""></a>
 
     <ul class="navbar">
-      <li><a href="#products">SẢN PHẨM</a></li>
+      <li><a href="./desktop2.html">SẢN PHẨM</a></li>
       <li>
         <p>|</p>
       </li>
@@ -55,10 +55,6 @@
         <p>|</p>
       </li>
       <li><a href="#female">NỮ</a></li>
-      <li>
-        <p>|</p>
-      </li>
-      <li><a href="#new-products">SẢN PHẨM MỚI</a></li>
       <li>
         <p>|</p>
       </li>
@@ -85,7 +81,9 @@
     <section class="detail-cart">
       <div class="column1">
 
+        <!--
         <div class="col">
+          
           <img src="../static/images/rectangle62.png" alt="">
           <div class="detail">
             <p class="name">Vintas Public 2000s - Low Top - Insignia Blue</p>
@@ -103,7 +101,6 @@
             </div>
           </div>
         </div>
-
         <div class="divider"></div>
 
         <div class="col">
@@ -124,36 +121,14 @@
           </div>
         </div>
         
+        -->
+
       </div>
 
 
 
       <div class="column2">
-        <div class="order">
-          <ul class="list-group">
-            <li class="li1">ĐƠN HÀNG</li>
-            <li class="li2">NHẬP MÃ KHUYẾN MÃI</li>
-            <li class="li3">
-              <input type="text">
-              <span>
-                <button class="btn" type="button">ÁP DỤNG</button>
-              </span>
-            </li>
-            <li class="li4">
-              <p class="order">Đơn hàng</p>
-              <p class="price">620.000 <span>VND</span></p>
-            </li>
-            <li class="li5">
-              <p class="discount">Giảm</p>
-              <p class="price">0 <span>VND</span></p>
-            </li>
-            <li class="li6">
-              <p class="provisional">Tạm tính</p>
-              <p class="price">620.000 <span>VND</span></p>
-            </li>
-          </ul>
-          <button class="pay-btn">THANH TOÁN</button>
-        </div>
+        
       </div>
     </section>
 
@@ -215,8 +190,9 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <!-- desktop3 JS-->
+    <script src="../static/js/x.js"></script>
     <script src="./cart.js"></script>
-    <script src="../static/js/desktop3.js"></script>
+   
 </body>
 
 </html>

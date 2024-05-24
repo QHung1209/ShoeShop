@@ -4,6 +4,7 @@ public class InventoryDTO {
     private int inventory_id;
     private int product_id;
     private int size_id;
+    
     private int quantity;
     private int size_name;
     public int getSize_name() {

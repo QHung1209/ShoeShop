@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Shoe Shop</title>
+        <!-- Link to login.css -->
+        <link rel="stylesheet" 
+        href="../static/css/signup.css" />
+
+        <!-- Link to Box icons -->
+        <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    </head>
+<body>
+    <!-- Form login-->
+    <div class="form-signup">
+        <div class="signup">
+            <h2>signup</h2>
+        </div>
+        <form action="">
+            <!-- name-->
+            <div class="username">
+                <i class='bx bx-user'></i>
+                <input type="text" name="fullName" id="fullName" placeholder="Enter your full name">
+            </div>
+            <!-- phonenumber-->
+            <div class="phonenumber">
+                <i class='bx bx-phone'></i>
+                <input type="text" name="phonenumber" id="phoneNumber" placeholder="Enter your phone number">
+            </div>
+            <!-- email -->
+            <div class="email">
+                <i class='bx bx-envelope' ></i>
+                <input type="text" name="email" id="email" placeholder="Enter your email">
+            </div>
+            <!-- password-->
+            <div class="password">
+                <i class='bx bx-phone'></i>
+                <input type="text" name="password" id="password" placeholder="Enter your password">
+                <input type="text" name="password" id="confirmPassword" placeholder="Confirm your password">
+            </div>
+            <!-- address -->
+            <div class="address">
+                <i class='bx bx-home-alt-2'></i>
+                <input type="text" name="email" id="address" placeholder="Address">
+            </div>
+
+            <!-- address selector -->
+            <div class="address-selector">
+
+                <select name="ls_province" class="ls_province"></select>
+            
+                <div class="district-ward">
+                    <select name="ls_district" class="ls_district"></select>
+                    <select name="ls_ward" class="ls_ward"></select>
+                </div>
+            </div>
+            <!-- button signup now -->
+            <div class="btn">
+                <button>signup now</button>
+            </div>
+
+        </form>
+    </div>
+    <!-- Vietnam local selector: https://github.com/stommazh/vietnamlocalselector -->
+    <script src="../static/js/vietnamlocalselector.js"></script>
+
+    <!-- desktop3 JS-->
+    <script src="../static/js/signup.js"></script>
+</body>
+</html>

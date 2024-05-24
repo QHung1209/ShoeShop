@@ -34,8 +34,9 @@ public class LoginController {
      @PostMapping("/signin")
      public ResponseEntity<?> signin(@RequestParam String username, @RequestParam String password) {
           ResponseData responseData = new ResponseData();
-          if (loginServiceImp.checkLogin(username, password)) {
-               String token = jwtUtilsHelper.generateToken(username);
+          UserDTO temp = loginServiceImp.checkLogin(username, password);
+          if (temp!=null) {
+               String token = jwtUtilsHelper.generateToken(temp);
                responseData.setData(token);
           } else {
                responseData.setData(false);

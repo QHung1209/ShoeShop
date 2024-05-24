@@ -6,4 +6,6 @@ public interface UserServiceImp {
 
     List<UserDTO> getAllUser();
     public UserDTO findUserByJwt(String jwt);
+
+    UserDTO findByUsernameAndPass(String username, String password);
 }

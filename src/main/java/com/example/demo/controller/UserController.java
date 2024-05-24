@@ -14,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -41,11 +40,6 @@ public class UserController {
         return "added";
     }
 
-    @GetMapping("/getDetail/{id}/{username}")
-    public String getDetail(@PathVariable("id") int id, @PathVariable() String username) {
-        return "Hello " + id + " " + username;
-    }
-
     @PostMapping("/update")
     public String updateUser(@RequestBody List<user> user) {
         //TODO: process POST request
@@ -55,7 +49,7 @@ public class UserController {
         }
         return "" ;
      }
-     @GetMapping("/getId")
+     @GetMapping("/Detail")
     public ResponseEntity<?>  getUser(@RequestHeader("Authorization") String jwt) {
 
         ResponseData responseData = new ResponseData();
