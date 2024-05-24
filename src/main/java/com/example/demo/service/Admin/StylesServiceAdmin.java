@@ -67,4 +67,9 @@ public class StylesServiceAdmin implements StylesAdminServiceImp {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @Override
+    public boolean checkStyleExists(String style_name) {
+        return stylesAdminRepository.isStyleNameExisted(style_name);
+    }
 }

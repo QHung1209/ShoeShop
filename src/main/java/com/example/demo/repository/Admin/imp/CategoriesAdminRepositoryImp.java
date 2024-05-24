@@ -13,4 +13,6 @@ public interface CategoriesAdminRepositoryImp {
     void delete(Categories categories);
 
     void updateCategoryName(String category_name, String newCategoryName);
+
+    boolean isCategoryNameExisted(String category_name);
 }

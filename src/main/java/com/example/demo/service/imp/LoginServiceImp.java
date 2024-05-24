@@ -6,7 +6,7 @@ import com.example.demo.dto.UserDTO;
 
 public interface LoginServiceImp {
     List<UserDTO> getAllUsers();
-    UserDTO checkLogin(String username, String password);
+    boolean checkLogin(String username, String password);
 
 }
  

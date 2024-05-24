@@ -1,11 +1,9 @@
 package com.example.demo.repository.Admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import com.example.demo.entity.Categories;
-import com.example.demo.entity.Sizes;
 import com.example.demo.repository.Admin.imp.CategoriesAdminRepositoryImp;
 import java.util.List;
 
@@ -18,13 +16,13 @@ public class CategoriesAdminRepository implements CategoriesAdminRepositoryImp {
     @Override
     public Categories findByCategoryName(String category_name) {
         String sql = "SELECT * FROM categories WHERE category_name = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[] { category_name }, (rs, rowNum) -> {
+        return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
             Categories categories = new Categories();
             categories.setCategory_id(rs.getInt("category_id"));
             categories.setCategory_name(rs.getString("category_name"));
             // Set các trường khác nếu cần
             return categories;
-        });
+        }, category_name);
     }
 
     @Override
@@ -57,5 +55,12 @@ public class CategoriesAdminRepository implements CategoriesAdminRepositoryImp {
     public void updateCategoryName(String category_name, String newCategoryName) {
         String sql = "UPDATE categories SET category_name = ? WHERE category_name = ?";
         jdbcTemplate.update(sql, newCategoryName, category_name);
+    }
+
+    @Override
+    public boolean isCategoryNameExisted(String category_name) {
+        String sql = "SELECT COUNT(*) FROM categories WHERE category_name = ?";
+        int count = jdbcTemplate.queryForObject(sql, Integer.class, category_name);
+        return count > 0;
     }
 }
