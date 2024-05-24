@@ -2,6 +2,7 @@ package com.example.demo.service.Admin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,7 +62,7 @@ public class SizesAdminService implements SizesAdminServiceImp {
     }
 
     @Override
-    public ResponseEntity<Void> updateSizeName(int size_name ,int newSizeName) {
+    public ResponseEntity<Void> updateSizeName(int size_name, int newSizeName) {
         Sizes existingSize = sizesAdminRepository.findBySizeName(size_name);
         if (existingSize != null) {
             sizesAdminRepository.updateSizeName(size_name, newSizeName);
@@ -69,5 +70,18 @@ public class SizesAdminService implements SizesAdminServiceImp {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @Override
+    public boolean checkSizeExists(int size_name) {
+        return sizesAdminRepository.isSizeNameExisted(size_name);
+    }
+
+    @Override
+    public List<Integer> getAllSizeName() {
+        List<Sizes> sizesList = sizesAdminRepository.findAll();
+        return sizesList.stream()
+                .map(Sizes::getSize_name)
+                .collect(Collectors.toList());
     }
 }

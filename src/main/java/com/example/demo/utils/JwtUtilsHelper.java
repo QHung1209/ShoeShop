@@ -2,6 +2,7 @@ package com.example.demo.utils;
 
 import javax.crypto.SecretKey;
 
+import io.jsonwebtoken.Jwt;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +31,16 @@ public class JwtUtilsHelper {
         
         Claims claims =Jwts.parser().verifyWith(key).build().parseSignedClaims(Jwt).getPayload();
         return claims;
+    }
+
+    public boolean verifyToken(String token){
+        try {
+            SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(privateKey));
+            Jwts.parser().verifyWith(key).build().parse(token);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 
 }

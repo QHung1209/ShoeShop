@@ -1,7 +1,6 @@
 package com.example.demo.repository.Admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -18,13 +17,13 @@ public class MaterialsAdminRepository implements MaterialAdminRepositoryImp {
     @Override
     public Materials findByMaterialName(String material_name) {
         String sql = "SELECT * FROM materials WHERE material_name = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[] { material_name }, (rs, rowNum) -> {
+        return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
             Materials materials = new Materials();
             materials.setMaterial_id(rs.getInt("material_id"));
             materials.setMaterial_name(rs.getString("material_name"));
             // Set các trường khác nếu cần
             return materials;
-        });
+        }, material_name);
     }
 
     @Override
@@ -57,5 +56,12 @@ public class MaterialsAdminRepository implements MaterialAdminRepositoryImp {
     public void updateMaterialName(String material_name, String newMaterialName) {
         String sql = "UPDATE materials SET material_name = ? WHERE material_name = ?";
         jdbcTemplate.update(sql, newMaterialName, material_name);
+    }
+
+    @Override
+    public boolean isMaterialNameExisted(String material_name) {
+        String sql = "SELECT COUNT(*) FROM materials WHERE material_name = ?";
+        int count = jdbcTemplate.queryForObject(sql, Integer.class, material_name);
+        return count > 0;
     }
 }

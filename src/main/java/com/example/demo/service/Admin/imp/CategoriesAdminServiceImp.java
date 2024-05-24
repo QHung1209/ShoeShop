@@ -18,4 +18,8 @@ public interface CategoriesAdminServiceImp {
 
     // Cập nhật tên category
     ResponseEntity<Void> updateCategoryName(String category_name, String newCategoryName);
+
+    // Kiểm tra category có tồn tại không
+    boolean checkCategoryExists(String category_name);
+
 }

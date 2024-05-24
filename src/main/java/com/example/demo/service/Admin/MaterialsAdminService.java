@@ -36,12 +36,12 @@ public class MaterialsAdminService implements MaterialsAdminServiceImp {
     }
 
     @Override
-      public List<MaterialsDTO> getMaterials() {
+    public List<MaterialsDTO> getMaterials() {
         // TODO Auto-generated method stub
         List<MaterialsDTO> listMaterialsDTO = new ArrayList<>();
         List<Materials> listData = materialsAdminRepository.findAll();
 
-        for(Materials data: listData ){
+        for (Materials data : listData) {
             MaterialsDTO MaterialsDTO = new MaterialsDTO();
             MaterialsDTO.setMaterial_name(data.getMaterial_name());
             listMaterialsDTO.add(MaterialsDTO);
@@ -50,7 +50,7 @@ public class MaterialsAdminService implements MaterialsAdminServiceImp {
     }
 
     @Override
-      public ResponseEntity<Void> deleteMaterialByName(String material_name) {
+    public ResponseEntity<Void> deleteMaterialByName(String material_name) {
         Materials materials = materialsAdminRepository.findByMaterialName(material_name);
         if (materials != null) {
             materialsAdminRepository.delete(materials);
@@ -69,5 +69,10 @@ public class MaterialsAdminService implements MaterialsAdminServiceImp {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @Override
+    public boolean checkMaterialExists(String material_name) {
+        return materialsAdminRepository.isMaterialNameExisted(material_name);
     }
 }

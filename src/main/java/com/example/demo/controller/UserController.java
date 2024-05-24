@@ -28,10 +28,10 @@ public class UserController {
 
     @Autowired
     JwtUtilsHelper jwtUtilsHelper;
+
     @GetMapping("/getall")
     public ResponseEntity<?> getAllUser()
     {
-
         return new ResponseEntity<>(userServiceImp.getAllUser(),HttpStatus.OK);
     }
 
