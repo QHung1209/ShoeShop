@@ -65,6 +65,7 @@ public class OrderService implements OrderServiceImp {
                 temp.setOrder_id(odt.getOrders().getOrder_id());
                 temp.setProductDTO(ProductService.geProductDTO(odt.getProducts()));
                 temp.setQuantity(odt.getQuantity());
+                temp.setSize_id(odt.getSizes().getSize_id());
                 lOrderDetailDTOs.add(temp);
             }
 

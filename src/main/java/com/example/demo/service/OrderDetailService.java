@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import org.hibernate.engine.jdbc.Size;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
