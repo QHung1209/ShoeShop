@@ -21,6 +21,10 @@ public class Sizes {
     @OneToMany(mappedBy = "sizes")
     private List<Inventory> listInventories;
     
+    @OneToMany(mappedBy = "sizes")
+    private List<Order_detail> lOrder_details;
+
+
     public List<Inventory> getListInventories() {
         return listInventories;
     }
@@ -28,6 +32,8 @@ public class Sizes {
     public void setListInventories(List<Inventory> lInventories) {
         this.listInventories = lInventories;
     }
+
+    
 
     public int getSize_id() {
         return size_id;
@@ -43,6 +49,14 @@ public class Sizes {
 
     public void setSize_name(int size_name) {
         this.size_name = size_name;
+    }
+
+    public List<Order_detail> getlOrder_details() {
+        return lOrder_details;
+    }
+
+    public void setlOrder_details(List<Order_detail> lOrder_details) {
+        this.lOrder_details = lOrder_details;
     }
 
     
