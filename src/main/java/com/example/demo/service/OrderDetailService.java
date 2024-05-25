@@ -3,6 +3,7 @@ package com.example.demo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.OrderDetailDTO;
 import com.example.demo.entity.Order_detail;
 import com.example.demo.entity.Orders;
 import com.example.demo.entity.Products;
@@ -33,5 +34,14 @@ public class OrderDetailService implements OrderDetailServiceImp {
         return true;
     }
 
+    public static OrderDetailDTO getOrderDetailDTO(Order_detail odt) {
+        OrderDetailDTO temp = new OrderDetailDTO();
+        temp.setOrder_detail_id(odt.getOrder_detail_id());
+        temp.setOrder_id(odt.getOrders().getOrder_id());
+        temp.setProductDTO(ProductService.geProductDTO(odt.getProducts()));
+        temp.setQuantity(odt.getQuantity());
+        temp.setSize_id(odt.getSizes().getSize_id());
+        return temp;
+    }
     
 }

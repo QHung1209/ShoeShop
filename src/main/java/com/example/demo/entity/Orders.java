@@ -31,6 +31,8 @@ public class Orders {
     @Column(name = "telephone")
     private String telephone;
 
+    @Column(name = "order_status")
+    private int order_status = 0;
     @Column(name = "total_amount")
     private double total_amount;
 
@@ -101,6 +103,14 @@ public class Orders {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public int getOrder_status() {
+        return order_status;
+    }
+
+    public void setOrder_status(int order_status) {
+        this.order_status = order_status;
     }
 
     

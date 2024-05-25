@@ -49,6 +49,15 @@ public class OrderController {
         return new ResponseEntity<>(responseData, HttpStatus.OK);
 
     }
+
+    @GetMapping("/getAllUnconfirmedOrders")
+    public ResponseEntity<?> findAllUnconfirmedOrders() {
+        ResponseData responseData = new ResponseData();
+        responseData.setData(orderServiceImp.getAllUnconfirmedOrders());
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
+
+    }
+
     
-    
+
 }

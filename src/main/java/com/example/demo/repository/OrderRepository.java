@@ -15,4 +15,7 @@ public interface OrderRepository extends JpaRepository<Orders, Integer> {
 
     @Query("SELECT o FROM Orders o WHERE o.users.user_id = :user_id")
     List<Orders> findAllOrder(int user_id);
+
+    @Query("SELECT o FROM Orders o WHERE o.order_status = 0")
+    List<Orders> getUnconfirmedOrders();
 }
