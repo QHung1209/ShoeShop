@@ -26,7 +26,7 @@ public class OrderService implements OrderServiceImp {
     @Autowired
     OrderDetailRepository orderDetailRepository;
     @Override
-    public boolean insertOrder(int user_id, String address, String telephone, String name,double total_amount,
+    public boolean insertOrder(int user_id, String address, String name, String telephone,double total_amount,
             Timestamp date_order) {
         Users user = new Users();
         user.setUser_id(user_id);
