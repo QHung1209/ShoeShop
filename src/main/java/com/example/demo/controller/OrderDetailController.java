@@ -32,11 +32,12 @@ public class OrderDetailController {
     @PostMapping("/insertOrderDetail")
     public ResponseEntity<?> insertCart(@RequestParam int user_id,
             @RequestParam int product_id,
+            @RequestParam int size_id,
             @RequestParam int quantity,
             @RequestParam int price) {
         int order_id = orderRepository.findMaxOrderId(user_id);
         ResponseData responseData = new ResponseData();
-        responseData.setData(orderDetailServiceImp.insertOrderDetail(order_id, product_id, quantity, price));
+        responseData.setData(orderDetailServiceImp.insertOrderDetail(order_id, product_id, size_id, quantity, price));
         cartRepository.deleteAllCart(user_id);
         return new ResponseEntity<>(responseData, HttpStatus.OK);
 

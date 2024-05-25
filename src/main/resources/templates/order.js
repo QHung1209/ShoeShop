@@ -42,7 +42,7 @@ $(document).ready(async function () {
                                     </div>
                         
                                     <div class="row3">
-                                        <p class="size" value ="${value.size_name}">Size: ${value.size_name}</p>
+                                        <p class="size" id="${value.size_id}" value ="${value.size_name}">Size: ${value.size_name}</p>
                                         <p class="quantity" value="${value.quantity}">x ${value.quantity}</p>
                                     </div>`;
 
@@ -78,7 +78,7 @@ $(document).ready(async function () {
         $(".total_price").append(`${(total-totalSale).toLocaleString('vi-VN')} VND`);
     }
 
-
+    console.log(document.querySelector('.size').id);
     document.getElementById("complete-payment").addEventListener("click", function () {
 
         name_user = document.getElementById('cusNam').value;
@@ -114,6 +114,7 @@ $(document).ready(async function () {
                         data: {
                             user_id: userDetails.user_id,
                             product_id: value.productDTO.product_id,
+                            size_id: document.querySelector('.size').id,
                             quantity: value.quantity,
                             price: value.quantity * value.productDTO.price * (100-value.productDTO.discount) /100
                         }

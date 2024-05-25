@@ -22,6 +22,10 @@ public class Order_detail {
     @JoinColumn(name = "product_id")
     private Products products;
 
+    @ManyToOne
+    @JoinColumn(name = "size_id")
+    private Sizes sizes;
+
     @Column(name = "quantity")
     private int quantity;
 
@@ -66,6 +70,14 @@ public class Order_detail {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Sizes getSizes() {
+        return sizes;
+    }
+
+    public void setSizes(Sizes sizes) {
+        this.sizes = sizes;
     }
 
 }
