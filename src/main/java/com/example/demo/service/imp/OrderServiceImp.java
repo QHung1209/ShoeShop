@@ -8,4 +8,5 @@ public interface OrderServiceImp {
     boolean insertOrder(int user_id, String address, String name,String telephone,double total_amount, Timestamp date_order);
 
     public List<OrderDTO> findAllOrderByUserId(int user_id);
+    public List<OrderDTO> getAllUnconfirmedOrders();
 }

@@ -7,6 +7,7 @@ public class OrderDTO {
     private int order_id;
     private UserDTO userDTO;
     private List<OrderDetailDTO> listOrderDetailDTOs;
+    private int order_status;
     private double total_amount;
     private Timestamp date_order;
     public int getOrder_id() {
@@ -38,5 +39,11 @@ public class OrderDTO {
     }
     public void setDate_order(Timestamp date_order) {
         this.date_order = date_order;
+    }
+    public int getOrder_status() {
+        return order_status;
+    }
+    public void setOrder_status(int order_status) {
+        this.order_status = order_status;
     }
 }

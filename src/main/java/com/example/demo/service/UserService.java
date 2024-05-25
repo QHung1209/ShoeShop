@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.UserDTO;
+import com.example.demo.entity.Orders;
 import com.example.demo.entity.Users;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.imp.UserServiceImp;
@@ -37,6 +38,15 @@ public class UserService implements UserServiceImp {
             lUserDTOs.add(temp);
         }
         return lUserDTOs;
+    }
+
+    public static UserDTO getUserDTOFromOrder(Orders order) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUser_id(order.getUsers().getUser_id());
+        userDTO.setAddress(order.getAddress());
+        userDTO.setTelephone(order.getTelephone());
+        userDTO.setName(order.getName());
+        return userDTO;
     }
 
     @Override
