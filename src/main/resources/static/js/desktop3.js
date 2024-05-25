@@ -18,18 +18,20 @@ const row2_info = document.getElementById('row2_info');
 const row2_exchange = document.getElementById('row2_exchange');
 const change1 = document.getElementById('change1');
 const change2 = document.getElementById("change2");
-
+ 
 info_btn.addEventListener('click', function () {
   if (row2_info.style.display == 'none') {
     row2_info.style.display = 'block';
     info_btn.classList.replace('bx-chevron-down', 'bx-x');
     info_btn.style.color = light_orange_color;
     change1.style.color = light_orange_color;
+    console.log(1);
   } else {
     row2_info.style.display = 'none';
     info_btn.classList.replace('bx-x', 'bx-chevron-down');
     info_btn.style.color = grey_color;
     change1.style.color = grey_color;
+    console.log(-1);
   }
 });
 
