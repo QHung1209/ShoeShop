@@ -54,7 +54,6 @@ public class CustomFilterSecurity {
                         .requestMatchers(HttpMethod.PUT, "/admin/product/updateShoesPrice").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/checkShoesNameExists").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/getShoesNames").permitAll()
-
                         // Colors
                         .requestMatchers(HttpMethod.POST, "/admin/product/addColors").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/getColors").permitAll()
@@ -99,9 +98,12 @@ public class CustomFilterSecurity {
                         .requestMatchers(HttpMethod.POST, "/admin/product/addProduct").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/admin/product/updateProduct/**").permitAll()
 
+
+                        //Orders
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getOrders").permitAll()
+
                         .requestMatchers(HttpMethod.POST, "/admin/product/genders").permitAll()
                         .requestMatchers(HttpMethod.POST, "/admin/product/file/{filename:.+}").permitAll()
-
                         .requestMatchers(HttpMethod.POST, "/login/signin").permitAll()
                         .requestMatchers(HttpMethod.POST, "/main/page").permitAll()
                         .requestMatchers(HttpMethod.GET, "/index").permitAll()

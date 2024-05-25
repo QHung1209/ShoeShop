@@ -26,7 +26,7 @@ async function getCartDetails(user_id) {
 $(document).ready(async function () {
 
     const userDetails = await getUserDetail()
-    console.log(userDetails.user_id)
+    console.log(userDetails)
     const cartDetails = await getCartDetails(userDetails.user_id)
     console.log(cartDetails)
 

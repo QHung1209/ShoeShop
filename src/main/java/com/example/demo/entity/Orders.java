@@ -37,6 +37,17 @@ public class Orders {
     @Column(name ="date_order")
     private Timestamp date_order;
 
+    @Column(name = "order_status")
+    private int order_status;
+
+    public int getOrder_status() {
+        return order_status;
+    }
+
+    public void setOrder_status(int order_status) {
+        this.order_status = order_status;
+    }
+
     @OneToMany(mappedBy = "orders")
     private List<Order_detail> List_order_details;
     public int getOrder_id() {

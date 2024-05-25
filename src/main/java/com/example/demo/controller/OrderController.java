@@ -27,7 +27,7 @@ public class OrderController {
     JwtUtilsHelper jwtUtilsHelper;
 
     @PostMapping("/insertOrder")
-    public ResponseEntity<?> insertCart(@RequestParam int user_id,
+    public ResponseEntity<?> insertOrder(@RequestParam int user_id,
             @RequestParam String address,
             @RequestParam String name,
             @RequestParam String telephone,
