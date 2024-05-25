@@ -22,6 +22,8 @@ public class Products {
     @OneToMany(mappedBy = "products")
     private List<Inventory> listInventories;
     
+    @OneToMany(mappedBy = "products")
+    private List<Order_detail> listOrder_details;
     public List<Inventory> getListInventories() {
         return listInventories;
     }
@@ -154,6 +156,14 @@ public class Products {
 
     public void setCarts(List<Carts> carts) {
         this.carts = carts;
+    }
+
+    public List<Order_detail> getListOrder_details() {
+        return listOrder_details;
+    }
+
+    public void setListOrder_details(List<Order_detail> listOrder_details) {
+        this.listOrder_details = listOrder_details;
     }
 
 }

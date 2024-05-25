@@ -9,17 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LoginService implements LoginServiceImp{
+public class LoginService implements LoginServiceImp {
 
     @Autowired
     UserRepository userRepository;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserDTO> getAllUsers() {
@@ -38,13 +34,16 @@ public class LoginService implements LoginServiceImp{
     }
 
     @Override
-    public boolean checkLogin(String username, String password) {
-        Users users = userRepository.findByUsername(username);
-        if(users == null){
-            return false;
-        }
-        return passwordEncoder.matches(password, users.getPassword());
+    public UserDTO checkLogin(String username, String password) {
+        Users listUser = userRepository.findByUsernameAndPassword(username, password);
+        UserDTO temp = new UserDTO();
+        temp.setUser_id(listUser.getUser_id());
+        temp.setUsername(username);
+        temp.setTelephone(listUser.getTelephone());
+        temp.setName(listUser.getName());
+        temp.setAddress(listUser.getAddress());
+        temp.setPassword(password);
+        return temp;
     }
-
 
 }

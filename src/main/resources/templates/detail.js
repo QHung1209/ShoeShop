@@ -1,3 +1,28 @@
+function checkSelects() {
+    var select1 = document.getElementById('size');
+    var select2 = document.getElementById('quantity');
+
+    if (select1.value !== "" && select2.value !== "") {
+        $.ajax({
+            method: "GET",
+            url: "http://localhost:8080/inventory/getQuantity",
+            data: {
+                product_id: $('span.product_id').attr('id'),
+                size_id: $('#size').val()
+            }
+        })
+            .done(function (msg) {
+                if (msg) {
+                    console.log(msg.data)
+                    if (msg.data == 0) {
+                        alert(`Sản phẩm đã hết size này`)
+                        select1.value = "";
+                        select2.value = "";
+                    }
+                }
+            });
+    }
+}
 $(document).ready(function () {
 
     let searchParams = new URLSearchParams(window.location.search)
@@ -11,6 +36,12 @@ $(document).ready(function () {
             if (msg) {
                 value = msg.data;
                 console.log(value);
+                var priceHtml = "";
+                if (value.discount != 0) {
+                    var discountedPrice = value.price * (100 - value.discount) / 100;
+                    priceHtml = `<span class="vnd">${discountedPrice.toLocaleString('vi-VN')} VND   <s style="text-decoration: line-through; font-size: 14px; margin-left:5%">${value.price.toLocaleString('vi-VN')} VND</s></span>`;
+                } else
+                    priceHtml = `<span class="vnd">${value.price.toLocaleString('vi-VN')} VND</span>`;
                 var html = `<ol class="breadcrumb">
                     <li><a href="#">Giày</a></li>
                     <li>|</li>
@@ -29,7 +60,7 @@ $(document).ready(function () {
                      
                     </h6>
                     <h5>
-                      <span> ${value.price} VND</span>
+                      ${priceHtml}
                     </h5>`
                 $(".name_id_price").append(html2)
 
@@ -64,41 +95,90 @@ $(document).ready(function () {
             window.location.href = "./index.html";
         }
         else {
-            console.log($('span.product_id').attr('id'))
-            console.log($('#size').val())
-            console.log($('#quantity').val())
-            $.ajax({
-                method: "GET",
-                url: "http://localhost:8080/user/getId",
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem("token")
-                }
-            })
-                .done(function (msg) {
-                    if (msg) {
-                        $.ajax({
-                            method: "POST",
-                            url: "http://localhost:8080/cart/insertCart",
-                            data: {
-                                user_id: msg.data.sub,
-                                product_id: $('span.product_id').attr('id'),
-                                size_id: $('#size').val(),
-                                quantity: $('#quantity').val()
-                            },
-                            
-                        })
-                        .done(function (msg2) {
-                            if(msg2)
-                                alert("Thêm thành công");
-                        })
+            if ($('#size').val() == null || $('#quantity').val() == null) {
+                $(".warning").append(`<p style="color: red;">Chọn size/ số lượng phù hợp</p>`)
+            }
+            else {
+                console.log($('span.product_id').attr('id'))
+                console.log($('#size').val())
+                console.log($('#quantity').val())
+                $.ajax({
+                    method: "GET",
+                    url: "http://localhost:8080/user/Detail",
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
                     }
-                });
-            
+                })
+                    .done(function (msg) {
+                        if (msg) {
+                            $.ajax({
+                                method: "POST",
+                                url: "http://localhost:8080/cart/insertCart",
+                                data: {
+                                    user_id: msg.data.user.user_id,
+                                    product_id: $('span.product_id').attr('id'),
+                                    size_id: $('#size').val(),
+                                    quantity: $('#quantity').val()
+                                },
+
+                            })
+                                .done(function (msg2) {
+                                    if (msg2) {
+                                        alert("Thêm thành công");
+                                        $(".warning").empty();
+                                    }
+                                })
+                        }
+                    });
+            }
         }
 
     });
 
-    document.getElementById("btn-login").addEventListener("click", function () {
+    document.getElementById("search-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        search_key =  document.getElementById('search-input').value;
+        window.location.href = "./desktop2.html"
+        document.getElementById("container-san-pham").scrollIntoView({ behavior: 'smooth' });
+        $.ajax({
+          method: "GET",
+          url: `http://localhost:8080/product/search`,
+          data:{
+            key: search_key
+          }
+        })
+          .done(function (msg) {
+            if (msg) {
+              $("#container-san-pham").empty(); // Xóa hết nội dung cũ trước khi thêm mới
+              $.each(msg.data, function (index, value) {
+                var html = `<div class="san-pham">
+                          <div class="container-hover-image">
+                              <a href="desktop3.html?id=${value.product_id}"><img class="rectangle-38" src="${value.image_url}" alt=""></a>
+                              <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
+                          </div>
+                          <a href="" class="ten-giay">${value.shoe_name}</a>
+                          <span class ="color_name" >
+                            ${value.color_name}
+                          </span>
+                          <span class="vnd">${value.price.toLocaleString('vi-VN')} VND</span>
+                      </div>`;
+                $("#container-san-pham").append(html);
+              });
+            }
+          });
+      });
+
+    document.getElementById("cart").addEventListener("click", function () {
+        var token = localStorage.getItem("token");
+        localStorage.setItem("url_temp", url_temp)
+        if (!token) {
+            window.location.href = "./index.html"; // Redirect to login page if token is not present
+        }
+        else {
+            window.location.href = "./desktop4.html";
+        }
+    });
+    document.getElementById("account").addEventListener("click", function () {
         var token = localStorage.getItem("token");
         localStorage.setItem("url_temp", url_temp)
         if (!token) {
@@ -112,6 +192,7 @@ $(document).ready(function () {
 
     });
 
-
+    document.getElementById('size').addEventListener('change', checkSelects);
+    document.getElementById('quantity').addEventListener('change', checkSelects);
 
 })  

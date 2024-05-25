@@ -5,19 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @SuppressWarnings("deprecation")
 @Configuration
@@ -45,10 +40,7 @@ public class CustomFilterSecurity {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests(request -> request.requestMatchers(HttpMethod.GET, "/product/allproduct").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/product/allstylename").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/product/allcategoryname").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/product/allmaterialname").permitAll()
+                .authorizeRequests(request -> request.requestMatchers("/product/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login/signin").permitAll()
                         .requestMatchers(HttpMethod.POST, "/main/page").permitAll()
                         .requestMatchers(HttpMethod.GET, "/index").permitAll()
@@ -102,32 +94,27 @@ public class CustomFilterSecurity {
                         .requestMatchers(HttpMethod.POST, "/admin/product/addInventory").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/admin/product/updateInventory/**").permitAll()
 
-                        //Product
+                        // Product
                         .requestMatchers(HttpMethod.GET, "/admin/product/getProduct").permitAll()
                         .requestMatchers(HttpMethod.POST, "/admin/product/addProduct").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/admin/product/updateProduct/**").permitAll()
 
                         .requestMatchers(HttpMethod.POST, "/admin/product/genders").permitAll()
                         .requestMatchers(HttpMethod.POST, "/admin/product/file/{filename:.+}").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/product/allproduct").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/product/allstylename").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/product/allcategoryname").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/product/allmaterialname").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/product/filter").permitAll()
+
                         .requestMatchers(HttpMethod.POST, "/login/signin").permitAll()
                         .requestMatchers(HttpMethod.POST, "/main/page").permitAll()
                         .requestMatchers(HttpMethod.GET, "/index").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/user/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/cart/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/cart/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/product/detail").permitAll()
+
+                        // .requestMatchers(HttpMethod.GET, "/product/detail").permitAll()
+                        .requestMatchers("/order/**").permitAll()
+                        .requestMatchers("/user/**").permitAll()
+                        .requestMatchers("/cart/**").permitAll()
+                        .requestMatchers("/orderDetail/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/inventory/**").permitAll()
                         .anyRequest().authenticated());
         http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }

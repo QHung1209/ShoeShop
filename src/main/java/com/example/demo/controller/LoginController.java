@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.UserDTO;
@@ -28,14 +27,12 @@ public class LoginController {
      @Autowired
      JwtUtilsHelper jwtUtilsHelper;
 
-     @Autowired
-     PasswordEncoder passwordEncoder;
-
      @PostMapping("/signin")
      public ResponseEntity<?> signin(@RequestParam String username, @RequestParam String password) {
           ResponseData responseData = new ResponseData();
-          if (loginServiceImp.checkLogin(username, password)) {
-               String token = jwtUtilsHelper.generateToken(username);
+          UserDTO temp = loginServiceImp.checkLogin(username, password);
+          if (temp!=null) {
+               String token = jwtUtilsHelper.generateToken(temp);
                responseData.setData(token);
           } else {
                responseData.setData(false);

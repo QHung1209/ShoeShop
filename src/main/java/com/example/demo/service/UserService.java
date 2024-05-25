@@ -18,8 +18,8 @@ public class UserService implements UserServiceImp {
     @Autowired
     UserRepository userRepository;
 
-       @Autowired
-     JwtUtilsHelper jwtUtilsHelper;
+    @Autowired
+    JwtUtilsHelper jwtUtilsHelper;
 
     @Override
     public List<UserDTO> getAllUser() {
@@ -32,6 +32,8 @@ public class UserService implements UserServiceImp {
             temp.setPassword(user.getPassword());
             temp.setAddress(user.getAddress());
             temp.setName(user.getname());
+            temp.setTelephone(user.getTelephone());
+
             lUserDTOs.add(temp);
         }
         return lUserDTOs;
@@ -40,12 +42,22 @@ public class UserService implements UserServiceImp {
     @Override
     public UserDTO findUserByJwt(String jwt) {
 
-        
         UserDTO temp = new UserDTO();
 
         return temp;
-      }
+    }
 
-
+    @Override
+    public UserDTO findByUsernameAndPass(String username, String password) {
+        Users user = userRepository.findByUsernameAndPassword(username, password);
+        UserDTO temp = new UserDTO();
+        temp.setUser_id(user.getUser_id());
+        temp.setUsername(username);
+        temp.setPassword(password);
+        temp.setTelephone(user.getTelephone());
+        temp.setAddress(user.getAddress());
+        temp.setName(user.getName());
+        return temp;
+    }
 
 }
