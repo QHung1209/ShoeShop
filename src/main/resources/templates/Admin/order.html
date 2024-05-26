@@ -192,25 +192,17 @@
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#"
-                        data-toggle="collapse" data-target="#collapsePages"
-                        aria-expanded="true" aria-controls="collapsePages">
+                    <a class="nav-link collapsed" href="inventory.html">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Quản lý kho hàng</span>
                     </a>
-                 
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#"
-                        data-toggle="collapse" data-target="#collapsePages"
-                        aria-expanded="true" aria-controls="collapsePages">
+                    <a class="nav-link collapsed" href="order.html">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Quản lý hoá đơn</span>
                     </a>
-                   {% comment %} //Quản lý sản pham {% endcomment %}
                 </li>
-
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
 
@@ -370,15 +362,12 @@
                                     <div id="table-container">
                                         <!-- Bảng dữ liệu sẽ được thêm vào đây -->
                                     </div>
+
+
+                                    <div id ="orderDetail-table-container"> 
+                                        
                                     <div>
-                                        <select id="shoe-name-select">
-                                            <option value="">Chọn tên giày</option>
-                                        </select>
-                                        <select id="size-name-select">
-                                            <option value="">Chọn size giày</option>
-                                        </select>
-                                        <input type="number" id="quantity" placeholder="Nhập số lượng">
-                                        <button id="submit-inventory-btn">Thêm vào kho</button>
+                                       
                                     </div>
                                 </div>
                             </body>
@@ -434,7 +423,7 @@
 
                     <!-- Custom scripts for all pages-->
                     <script src="js/sb-admin-2.min.js"></script>
-                    <script src="js/inventory.js"></script>
+                    <script src="js/order.js"></script>
 
                     <!-- Page level plugins -->
                     <script src="vendor/chart.js/Chart.min.js"></script>

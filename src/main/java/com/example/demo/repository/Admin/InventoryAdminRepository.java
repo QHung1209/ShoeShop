@@ -22,7 +22,8 @@ public class InventoryAdminRepository implements InventoryAdminRepositoryImp {
     private EntityManager entityManager;
 
     public List<InventoryAdminDTO> getInventory() {
-        String jpql = "SELECT new com.example.demo.dto.Admin.InventoryAdminDTO(i.inventory_id ,s.name, sz.size_name, i.quantity) " +
+        String jpql = "SELECT new com.example.demo.dto.Admin.InventoryAdminDTO(i.inventory_id ,s.name, sz.size_name, i.quantity) "
+                +
                 "FROM Inventory i " +
                 "JOIN i.products p " +
                 "JOIN p.shoes s " +

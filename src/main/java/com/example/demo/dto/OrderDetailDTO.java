@@ -6,6 +6,7 @@ public class OrderDetailDTO {
     private ProductDTO productDTO;
     private int size_id;
     private int quantity;
+    
     public int getOrder_detail_id() {
         return order_detail_id;
     }

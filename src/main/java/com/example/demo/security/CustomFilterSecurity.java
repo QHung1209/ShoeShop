@@ -97,10 +97,16 @@ public class CustomFilterSecurity {
                         .requestMatchers(HttpMethod.GET, "/admin/product/getProduct").permitAll()
                         .requestMatchers(HttpMethod.POST, "/admin/product/addProduct").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/admin/product/updateProduct/**").permitAll()
+                        
+
 
 
                         //Orders
                         .requestMatchers(HttpMethod.GET, "/admin/product/getOrders").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/admin/product/updateOrders/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getOrderDetail/**").permitAll()
+
+
 
                         .requestMatchers(HttpMethod.POST, "/admin/product/genders").permitAll()
                         .requestMatchers(HttpMethod.POST, "/admin/product/file/{filename:.+}").permitAll()
