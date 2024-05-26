@@ -11,8 +11,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.Image;
 import com.example.demo.entity.Inventory;
 import com.example.demo.entity.Products;
+import com.example.demo.dto.ImageDTO;
 import com.example.demo.dto.InventoryDTO;
 import com.example.demo.dto.ProductDTO;
 import com.example.demo.repository.ProductRepository;
@@ -41,6 +43,7 @@ public class ProductService implements ProductServiceImp {
         temp.setGender(data.getGenders().getGender_name());
         temp.setMaterial(data.getMaterials().getMaterial_name());
         temp.setStyle(data.getStyles().getStyle_name());
+        temp.setColor_code(data.getColors().getColor_code());
         temp.setImage_url(data.getImage());
         temp.setPrice(data.getShoes().getPrice());
         return temp;
@@ -106,14 +109,7 @@ public class ProductService implements ProductServiceImp {
             List<ProductDTO> related_product = new ArrayList<>();
             List<Products> related = ProductRepository.findByShoesName(productDTO.getShoe_name());
             for (Products re : related) {
-                ProductDTO temp = new ProductDTO();
-                temp.setColor_code(re.getColors().getColor_code());
-                temp.setColor_name(re.getColors().getColor_name());
-                temp.setShoe_name(re.getShoes().getName());
-                temp.setPrice(re.getShoes().getPrice());
-                temp.setDiscount(re.getDiscount());
-                temp.setImage_url(re.getImage_url());
-                temp.setProduct_id(re.getProduct_id());
+                ProductDTO temp = geProductDTO(re);
                 related_product.add(temp);
             }
             productDTO.setRelated_products(related_product);
@@ -121,15 +117,22 @@ public class ProductService implements ProductServiceImp {
             List<InventoryDTO> inventoryDTOs = new ArrayList<>();
             List<Inventory> inventories = productDetail.get().getListInventories();
             for (Inventory inv : inventories) {
-                InventoryDTO temp = new InventoryDTO();
-                temp.setInventory_id(inv.getInventory_id());
-                temp.setProduct_id(inv.getProducts().getProduct_id());
-                temp.setSize_id(inv.getSizes().getSize_id());
-                temp.setSize_name(inv.getSizes().getSize_name());
-                temp.setQuantity(inv.getQuantity());
+                InventoryDTO temp = InventoryService.getInventoryDTO(inv);
                 inventoryDTOs.add(temp);
             }
             productDTO.setInventoryDTOs(inventoryDTOs);
+
+            List<ImageDTO> imageDTOs = new ArrayList<>();
+            List<Image> images = productDetail.get().getListImages();
+            for (Image img : images) {
+                ImageDTO temp = new ImageDTO();
+                temp.setImage_id(img.getImage_id());
+                temp.setImage_url(img.getImage_url());
+                temp.setProduct_id(img.getProducts().getProduct_id());
+                imageDTOs.add(temp);
+            }
+            productDTO.setImageDTOs(imageDTOs);
+
         }
         return productDTO;
 
