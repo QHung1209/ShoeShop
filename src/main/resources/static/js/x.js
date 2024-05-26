@@ -1,4 +1,3 @@
-
 function toggleDropdown(event) {
   event.preventDefault();
   var dropdown = document.getElementById("myDropdown");
@@ -18,28 +17,28 @@ window.onclick = function (event) {
   }
 }
 $(document).ready(function () {
-
+  var url_temp = window.location.href
   document.getElementById("cart").addEventListener("click", function () {
     var token = localStorage.getItem("token");
     localStorage.setItem("url_temp", url_temp)
     if (!token) {
       window.location.href = "./index.html"; // Redirect to login page if token is not present
     }
-    window.location.href = "./desktop4.html";
+    else{
+    window.location.href = "./desktop4.html";}
   });
-  
+
   document.getElementById("account").addEventListener("click", function () {
     var token = localStorage.getItem("token");
     localStorage.setItem("url_temp", url_temp)
     if (!token) {
       window.location.href = "./index.html"; // Redirect to login page if token is not present
     }
-  
+
   });
   document.getElementById("logout").addEventListener("click", function () {
     localStorage.removeItem("token")
     window.location.href = "./desktop1.html"; // Redirect to login page if token is not present
-  
+
   });
-  
 })

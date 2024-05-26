@@ -35,13 +35,15 @@ public class LoginService implements LoginServiceImp {
 
     @Override
     public UserDTO checkLogin(String username, String password) {
-        Users listUser = userRepository.findByUsernameAndPassword(username, password);
+        Users user = userRepository.findByUsernameAndPassword(username, password);
+        if (user == null)
+            return null;
         UserDTO temp = new UserDTO();
-        temp.setUser_id(listUser.getUser_id());
+        temp.setUser_id(user.getUser_id());
         temp.setUsername(username);
-        temp.setTelephone(listUser.getTelephone());
-        temp.setName(listUser.getName());
-        temp.setAddress(listUser.getAddress());
+        temp.setTelephone(user.getTelephone());
+        temp.setName(user.getName());
+        temp.setAddress(user.getAddress());
         temp.setPassword(password);
         return temp;
     }

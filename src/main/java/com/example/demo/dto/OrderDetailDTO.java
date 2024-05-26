@@ -5,6 +5,7 @@ public class OrderDetailDTO {
     private int order_id;
     private ProductDTO productDTO;
     private int size_id;
+    private int size_name;
     private int quantity;
     public int getOrder_detail_id() {
         return order_detail_id;
@@ -35,5 +36,11 @@ public class OrderDetailDTO {
     }
     public void setSize_id(int size_id) {
         this.size_id = size_id;
+    }
+    public int getSize_name() {
+        return size_name;
+    }
+    public void setSize_name(int size_name) {
+        this.size_name = size_name;
     }
 }

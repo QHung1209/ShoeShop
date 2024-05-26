@@ -24,7 +24,8 @@ $(document).ready(function () {
 
                 }
                 else {
-                    alert("Sai thông tin đăng nhập");
+                    $(".warning").empty()
+                    $(".warning").append("Kiểm tra lại tài khoản và mật khẩu")
                 }
 
             });

@@ -8,4 +8,6 @@ public interface UserServiceImp {
     public UserDTO findUserByJwt(String jwt);
 
     UserDTO findByUsernameAndPass(String username, String password);
+
+    boolean insertUser(String username, String password, String name, String address, String telephone);
 }
