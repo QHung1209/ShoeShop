@@ -84,4 +84,14 @@ public class UserService implements UserServiceImp {
         return true;
     }
 
+    @Override
+    public boolean updateUser(String name, String telephone, String password, String address, int user_id) {
+        try {
+            userRepository.updateUser(name, telephone, password, address, user_id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }
