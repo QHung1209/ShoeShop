@@ -31,8 +31,7 @@ public class ProductService implements ProductServiceImp {
         throw new UnsupportedOperationException("Unimplemented method 'insertProduct'");
     }
 
-    public static ProductDTO geProductDTO(Products data)
-    {
+    public static ProductDTO geProductDTO(Products data) {
         ProductDTO temp = new ProductDTO();
         temp.setProduct_id(data.getProduct_id());
         temp.setShoe_name(data.getShoes().getName());
@@ -46,6 +45,7 @@ public class ProductService implements ProductServiceImp {
         temp.setPrice(data.getShoes().getPrice());
         return temp;
     }
+
     @Override
     public List<ProductDTO> getAllProduct() {
         List<ProductDTO> ProductDTOs = new ArrayList<>();
@@ -66,28 +66,29 @@ public class ProductService implements ProductServiceImp {
         return productDTOs;
     }
 
-    public List<ProductDTO> filter(List<String> styles, List<String> material, List<String> categories, List<String> gender,
+    public List<ProductDTO> filter(List<String> styles, List<String> material, List<String> categories,
+            List<String> gender,
             List<String> prices) {
         List<ProductDTO> productDTOs = new ArrayList<>();
         PageRequest pageRequest = PageRequest.of(0, Integer.MAX_VALUE);
 
         if (prices == null) {
             productDTOs.addAll(mapProductsToDTOs(
-                    ProductRepository.findProductsGT1000(styles, material, categories, gender,prices, pageRequest)));
+                    ProductRepository.findProductsGT1000(styles, material, categories, gender, prices, pageRequest)));
             return productDTOs;
         }
 
         if (prices.contains("1000")) {
             productDTOs.addAll(mapProductsToDTOs(
-                    ProductRepository.findProductsGT1000(styles, material, categories, gender,prices, pageRequest)));
+                    ProductRepository.findProductsGT1000(styles, material, categories, gender, prices, pageRequest)));
         }
         if (prices.contains("600-999")) {
             productDTOs.addAll(mapProductsToDTOs(
-                    ProductRepository.findProducts6_9(styles, material, categories, gender,prices, pageRequest)));
+                    ProductRepository.findProducts6_9(styles, material, categories, gender, prices, pageRequest)));
         }
         if (prices.contains("300-599")) {
             productDTOs.addAll(mapProductsToDTOs(
-                    ProductRepository.findProducts3_5(styles, material, categories, gender,prices, pageRequest)));
+                    ProductRepository.findProducts3_5(styles, material, categories, gender, prices, pageRequest)));
         }
 
         return productDTOs;
@@ -108,6 +109,10 @@ public class ProductService implements ProductServiceImp {
                 ProductDTO temp = new ProductDTO();
                 temp.setColor_code(re.getColors().getColor_code());
                 temp.setColor_name(re.getColors().getColor_name());
+                temp.setShoe_name(re.getShoes().getName());
+                temp.setPrice(re.getShoes().getPrice());
+                temp.setDiscount(re.getDiscount());
+                temp.setImage_url(re.getImage_url());
                 temp.setProduct_id(re.getProduct_id());
                 related_product.add(temp);
             }
@@ -165,18 +170,29 @@ public class ProductService implements ProductServiceImp {
         return materialSet;
 
     }
-    /* 
-    @Override
-    public int getQuantity(int shoe_id, int size_id)
-    {
-        return ProductRepository.quantity(shoe_id, size_id);
-    }*/
+    /*
+     * @Override
+     * public int getQuantity(int shoe_id, int size_id)
+     * {
+     * return ProductRepository.quantity(shoe_id, size_id);
+     * }
+     */
 
     @Override
     public List<ProductDTO> searchProduct(String key) {
         List<ProductDTO> productDTOs = new ArrayList<>();
         List<Products> lProducts = ProductRepository.SearchProduct(key);
 
+        for (Products data : lProducts) {
+            productDTOs.add(geProductDTO(data));
+        }
+        return productDTOs;
+    }
+
+    @Override
+    public List<ProductDTO> saleOff() {
+        List<ProductDTO> productDTOs = new ArrayList<>();
+        List<Products> lProducts = ProductRepository.saleOff();
         for (Products data : lProducts) {
             productDTOs.add(geProductDTO(data));
         }

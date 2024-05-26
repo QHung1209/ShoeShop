@@ -33,7 +33,7 @@
       <!--<a href="#"><i class='bx bx-user'></i> Đăng nhập</a>-->
       <a href="#" class="account" id="account" onclick="toggleDropdown(event)"><i class='bx bx-user'></i> Tài Khoản</a>
       <div id="myDropdown" class="dropdown-content">
-        <a href="#">Link 1</a>
+        <a class="user_account" href="./profile.html"></a>
         <a href="#" class="logout" id="logout">Đăng xuất</a>
       </div>
     </div>
@@ -41,16 +41,16 @@
   
   <!-- Navbar section -->
   <section class="logo-and-navbar" >
-    <a href="#" class="logo"><img src="../static/images/logo.png" alt=""></a>
+    <a href="./desktop1.html" class="logo"><img src="../static/images/logo.png" alt=""></a>
 
     <ul class="navbar">
       <li><a href="./desktop2.html">SẢN PHẨM</a></li>
       <li><p>|</p></li>
-      <li><a href="#male">NAM</a></li>
+      <li><a class="male" href="#" onclick="return false;">NAM</a></li>
       <li><p>|</p></li>
-      <li><a href="#female">NỮ</a></li>
+      <li><a class="female" href="#" onclick="return false;">NỮ</a></li>
       <li><p>|</p></li>
-      <li><a href="#discount">KHUYẾN MÃI</a></li>
+      <li><a class="sale" href="#" onclick="return false;">KHUYẾN MÃI</a></li>
     </ul>
   </section>
 
@@ -58,10 +58,12 @@
   <section class="banner"> 
     <div class="content">
       <h2>Free Shipping với hóa đơn từ 900k</h2>
-      <div class="search">
-        <i class='bx bx-search'></i>
-        <input type="text" placeholder="Search"> 
-      </div>
+      <form id="search-form">
+        <div class="search">
+          <i class='bx bx-search'></i>
+          <input type="text" id="search-input" placeholder="Search">
+        </div>
+      </form>
     </div>
     <img src="../static/images/PATTAS_TOMO.png" alt="" class="big-banner">
     <div class="sub-banner">
@@ -71,18 +73,6 @@
   </section>
 
   <!-- Shopping section -->
-  <section class="shop">
-    <h2 class="content">
-      Mua sắm theo nhu cầu
-    </h2>
-    <div class="content-container">
-      <a href="#"><img src="../static/images/grey.png" alt=""></a>
-      <a href="#"><img src="../static/images/grey.png" alt=""></a>
-      <a href="#"><img src="../static/images/grey.png" alt=""></a>
-      <a href="#"><img src="../static/images/grey.png" alt=""></a>
-      <a href="#"><img src="../static/images/grey.png" alt=""></a>
-    </div>
-  </section>
 
   <!-- Most selling products-->
   <section class="most-sell-products">
@@ -179,6 +169,5 @@
 
   </footer>
   <script src="../static/js/x.js"></script>
-  <script src="./header.js"></script>
 </body>
 </html>

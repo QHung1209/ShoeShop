@@ -61,6 +61,12 @@ header .content a:hover{
   color: var(--text-color);
   transition: 0.2s all linear;
 }
+#search-form {
+  position: absolute;
+  display: flex;
+  right: 3%;
+  align-items: center;
+}
 .dropdown-content {
   display: none;
   position: absolute;

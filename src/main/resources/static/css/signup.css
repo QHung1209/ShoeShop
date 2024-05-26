@@ -51,7 +51,7 @@
     border: none;
     outline: none;
 }
-.username, .phonenumber, .email, .password, .address {
+.fullname, .phonenumber, .username, .password, .address {
     display: flex;
     align-items: center;
     border-bottom: 1px solid var(--text-color);
@@ -87,9 +87,12 @@
     outline: none;
 }
 
-.form-signup button{
+.form-signup .btn a {
     margin-top: 20px;
     width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     height: 54px;
     font-size: 20px;
     font-weight: 600;
