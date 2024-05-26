@@ -70,4 +70,28 @@ public class UserService implements UserServiceImp {
         return temp;
     }
 
+    @Override
+    public boolean insertUser(String username, String password, String name, String address, String telephone) {
+        if (userRepository.findByUsername(username) != null)
+            return false;
+        Users temp = new Users();
+        temp.setUsername(username);
+        temp.setPassword(password);
+        temp.setName(name);
+        temp.setAddress(address);
+        temp.setTelephone(telephone);
+        userRepository.save(temp);
+        return true;
+    }
+
+    @Override
+    public boolean updateUser(String name, String telephone, String password, String address, int user_id) {
+        try {
+            userRepository.updateUser(name, telephone, password, address, user_id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }

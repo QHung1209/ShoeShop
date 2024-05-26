@@ -114,6 +114,52 @@ header .content a:hover{
   font-size: 20px;
 }
 
+.banner {
+  display: grid;
+}
+
+.banner .content {
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-around;
+  background: var(--light--grey-color);
+}
+
+.banner .content h2 {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.banner .content .search {
+  position: absolute;
+  right: 100px;
+  display: flex;
+  font-size: 20px;
+  font-weight: 600;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.banner .content .search input {
+  width: 200px;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  background: var(--light--grey-color);
+  color: var(--text-color);
+}
+
+#search-form {
+  position: absolute;
+  display: flex;
+  right: 3%;
+  align-items: center;
+}
+.banner .content .search input::placeholder {
+  color: var(--text-color);
+}
 
 /* user-profile */  
 .user-profile{
@@ -282,7 +328,7 @@ header .content a:hover{
     column-gap: 1rem;
 }
 .orders-history .box-order .row2 .info .contact{
-    width: 50%;
+    width: 100%;
 }
 .orders-history .box-order .row2 .info .main-li{
     font-size: 15px;
@@ -292,20 +338,22 @@ header .content a:hover{
     font-size: 15px;
     font-weight: 400;
 }
-.orders-history .box-order .row2 .products{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(180px, auto));
-}
+/* .orders-history .box-order .row2 .products{
+    display: flex;
+    flex-wrap: wrap;
+   justify-content: space-between;
+} */
 .orders-history .box-order .row2 .products .box{
     display: flex;
     column-gap: 0.5rem;
+    margin-bottom: 3%;
 }
 .orders-history .box-order .row2 .products .box img{
     width: 70px;
     height: 70px;
     object-fit: cover;
 }
-.orders-history .box-order .row2 .products .box li {
+.orders-history .box-order .row2 .products .box p {
     font-size: 15px;
     font-weight: 400;
 }
@@ -354,6 +402,9 @@ header .content a:hover{
 .profile-setting .change{
     margin-top: 20px;
     text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 200px;
     height: 40px;
     border: none;
@@ -363,7 +414,28 @@ header .content a:hover{
     color: var(--white-color);
     border-radius: 0.5rem;
 }
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
 
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
 
 /* footer */
 footer {

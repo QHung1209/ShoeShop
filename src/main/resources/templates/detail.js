@@ -25,6 +25,7 @@ function checkSelects() {
 }
 $(document).ready(function () {
 
+
     let searchParams = new URLSearchParams(window.location.search)
     var url_temp = window.location.href
     $.ajax({
@@ -81,6 +82,18 @@ $(document).ready(function () {
                         $(".size_option").append(size)
                     })
                 }
+
+                $.each(value.related_products, function (index, product) {
+                    var related_html = `<div class="box">
+                                            <a href = "./desktop3.html?id=${product.product_id}">
+                                            <img src="${product.image_url}" alt="">
+                                            </a>
+                                            <a href="desktop3.html?id=${product.product_id}" class="ten-giay">${product.shoe_name}</a>
+                                            <span class="color">${product.color_name}</span>
+                                            <span class="price">${product.price.toLocaleString('vi-VN')} <span>VND</span></span>
+                                        </div>`
+                    $(".big-box").append(related_html);
+                })
             }
 
         });
@@ -135,38 +148,52 @@ $(document).ready(function () {
 
     });
 
-    document.getElementById("search-form").addEventListener("submit", function (event) {
-        event.preventDefault();
-        search_key =  document.getElementById('search-input').value;
-        window.location.href = "./desktop2.html"
-        document.getElementById("container-san-pham").scrollIntoView({ behavior: 'smooth' });
-        $.ajax({
-          method: "GET",
-          url: `http://localhost:8080/product/search`,
-          data:{
-            key: search_key
-          }
-        })
-          .done(function (msg) {
-            if (msg) {
-              $("#container-san-pham").empty(); // Xóa hết nội dung cũ trước khi thêm mới
-              $.each(msg.data, function (index, value) {
-                var html = `<div class="san-pham">
-                          <div class="container-hover-image">
-                              <a href="desktop3.html?id=${value.product_id}"><img class="rectangle-38" src="${value.image_url}" alt=""></a>
-                              <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
-                          </div>
-                          <a href="" class="ten-giay">${value.shoe_name}</a>
-                          <span class ="color_name" >
-                            ${value.color_name}
-                          </span>
-                          <span class="vnd">${value.price.toLocaleString('vi-VN')} VND</span>
-                      </div>`;
-                $("#container-san-pham").append(html);
-              });
+
+    document.getElementById("pay").addEventListener("click", function () {
+        var token = localStorage.getItem("token");
+
+        if (!token) {
+            window.location.href = "./index.html";
+        }
+        else {
+            if ($('#size').val() == null || $('#quantity').val() == null) {
+                $(".warning").append(`<p style="color: red;">Chọn size/ số lượng phù hợp</p>`)
             }
-          });
-      });
+            else {
+                console.log($('span.product_id').attr('id'))
+                console.log($('#size').val())
+                console.log($('#quantity').val())
+                $.ajax({
+                    method: "GET",
+                    url: "http://localhost:8080/user/Detail",
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                })
+                    .done(function (msg) {
+                        if (msg) {
+                            $.ajax({
+                                method: "POST",
+                                url: "http://localhost:8080/cart/insertCart",
+                                data: {
+                                    user_id: msg.data.user.user_id,
+                                    product_id: $('span.product_id').attr('id'),
+                                    size_id: $('#size').val(),
+                                    quantity: $('#quantity').val()
+                                },
+
+                            })
+                                .done(function (msg2) {
+                                    if (msg2) {
+                                        window.location.href = "./desktop5.html";
+                                    }
+                                })
+                        }
+                    });
+            }
+        }
+
+    });
 
     document.getElementById("cart").addEventListener("click", function () {
         var token = localStorage.getItem("token");

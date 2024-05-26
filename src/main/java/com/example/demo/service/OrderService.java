@@ -63,6 +63,7 @@ public class OrderService implements OrderServiceImp {
             temp.setOrder_id(order.getOrder_id());
             temp.setDate_order(order.getDate_order());
             temp.setUserDTO(userDTO);
+
             temp.setOrder_status(order.getOrder_status());
             temp.setTotal_amount(order.getTotal_amount());
             temp.setListOrderDetailDTOs(lOrderDetailDTOs);
@@ -99,6 +100,20 @@ public class OrderService implements OrderServiceImp {
         }
 
         return lOrderDTOs;
+    }
+
+    @Override
+    public boolean deleteOrder(int order_id) {
+        try {
+            orderDetailRepository.DeleteAllOrderDetail(order_id);
+            orderRepository.DeleteOrder(order_id);
+            return true;
+        } catch (Exception e) {
+            // Log the exception (optional, but recommended)
+            System.err.println("Loi khi xoa Order: " + e.getMessage());
+            // Return false to indicate the deletion was not successful
+            return false;
+        }
     }
 
 }

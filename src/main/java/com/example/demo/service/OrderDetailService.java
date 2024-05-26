@@ -41,6 +41,7 @@ public class OrderDetailService implements OrderDetailServiceImp {
         temp.setProductDTO(ProductService.geProductDTO(odt.getProducts()));
         temp.setQuantity(odt.getQuantity());
         temp.setSize_id(odt.getSizes().getSize_id());
+        temp.setSize_name(odt.getSizes().getSize_name());
         return temp;
     }
     

@@ -25,6 +25,7 @@ async function getCartDetails(user_id) {
 
 $(document).ready(async function () {
 
+
     const userDetails = await getUserDetail()
     console.log(userDetails)
     const cartDetails = await getCartDetails(userDetails.user_id)
@@ -71,19 +72,18 @@ $(document).ready(async function () {
         document.getElementById('cusNumber').value = userDetails.telephone;
         document.getElementById('cusAddress').value = cleanedParts.slice(0, cleanedParts.length - 3).join(', ');
         document.getElementById('total_price').value = total;
-        $(".ls_ward").append(`<option value="${cleanedParts[cleanedParts.length - 1]}" id="${cleanedParts[cleanedParts.length - 1]}" hidden selected>${cleanedParts[cleanedParts.length - 1]}</option>`);
+        $(".ls_ward").append(`<option value="${cleanedParts[cleanedParts.length - 3]}" id="${cleanedParts[cleanedParts.length - 3]}" hidden selected>${cleanedParts[cleanedParts.length - 3]}</option>`);
         $(".ls_district").append(`<option value="${cleanedParts[cleanedParts.length - 2]}" id="${cleanedParts[cleanedParts.length - 2]}" hidden selected>${cleanedParts[cleanedParts.length - 2]}</option>`);
-        $(".ls_province").append(`<option value="${cleanedParts[cleanedParts.length - 3]}" id="${cleanedParts[cleanedParts.length - 3]}" hidden selected>${cleanedParts[cleanedParts.length - 3]}</option>`);
+        $(".ls_province").append(`<option value="${cleanedParts[cleanedParts.length - 1]}" id="${cleanedParts[cleanedParts.length - 1]}" hidden selected>${cleanedParts[cleanedParts.length - 1]}</option>`);
 
-        $(".total_price").append(`${(total-totalSale).toLocaleString('vi-VN')} VND`);
+        $(".total_price").append(`${(total - totalSale).toLocaleString('vi-VN')} VND`);
     }
 
-    console.log(document.querySelector('.size').id);
     document.getElementById("complete-payment").addEventListener("click", function () {
 
-        name_user = document.getElementById('cusNam').value;
-        telephone_user = document.getElementById('cusNumber').value;
-        address_user = document.getElementById('cusAddress').value;
+        name_user = document.getElementById('cusNam').value.trim();
+        telephone_user = document.getElementById('cusNumber').value.trim();
+        address_user = document.getElementById('cusAddress').value.trim();
 
         var district = document.getElementById('ls_district');
 
@@ -93,38 +93,50 @@ $(document).ready(async function () {
         total_price = document.getElementById('total_price').value;
         var date = new Date();
         var timestamp = date.getTime();
-        
-        $.ajax({
-            method: "POST",
-            url: "http://localhost:8080/order/insertOrder",
-            data: {
-                user_id: userDetails.user_id,
-                address: address_user + "," + province.options[province.selectedIndex].text + "," + ward.options[ward.selectedIndex].text + "," + district.options[district.selectedIndex].text,
-                name: name_user,
-                telephone: telephone_user,
-                total_amount: total_price - totalSale,
-                date_order: timestamp
-            }
-        })
-            .done(function (msg2) {
-                $.each(cartDetails, function (index, value) {
-                    $.ajax({
-                        method: "POST",
-                        url: "http://localhost:8080/orderDetail/insertOrderDetail",
-                        data: {
-                            user_id: userDetails.user_id,
-                            product_id: value.productDTO.product_id,
-                            size_id: document.querySelector('.size').id,
-                            quantity: value.quantity,
-                            price: value.quantity * value.productDTO.price * (100-value.productDTO.discount) /100
-                        }
-                    })
-                        .done(function (msg4) {
 
-                        })
-                })
-                location.reload();
-                alert("Đặt hàng thành công")
+        if (cartDetails.length == 0) {
+            $(".warning").empty()
+            $(".warning").append("Không có sản phẩm để thanh toán")
+        }
+        else if (!name_user || !telephone_user || !address_user || province.options[province.selectedIndex].text == "undefined" ||
+            ward.options[ward.selectedIndex].text == "undefined" || district.options[district.selectedIndex].text == "undefined"
+        ) {
+            $(".warning").empty()
+            $(".warning").append("Điền đầy đủ thông tin")
+        }
+        else {
+            $.ajax({
+                method: "POST",
+                url: "http://localhost:8080/order/insertOrder",
+                data: {
+                    user_id: userDetails.user_id,
+                    address: address_user + ", " + ward.options[ward.selectedIndex].text + ", " + district.options[district.selectedIndex].text + ", " + province.options[province.selectedIndex].text,
+                    name: name_user,
+                    telephone: telephone_user,
+                    total_amount: total_price - totalSale,
+                    date_order: timestamp
+                }
             })
+                .done(function (msg2) {
+                    $.each(cartDetails, function (index, value) {
+                        $.ajax({
+                            method: "POST",
+                            url: "http://localhost:8080/orderDetail/insertOrderDetail",
+                            data: {
+                                user_id: userDetails.user_id,
+                                product_id: value.productDTO.product_id,
+                                size_id: document.querySelector('.size').id,
+                                quantity: value.quantity,
+                                price: value.quantity * value.productDTO.price * (100 - value.productDTO.discount) / 100
+                            }
+                        })
+                            .done(function (msg4) {
+
+                            })
+                    })
+                    location.reload();
+                    alert("Đặt hàng thành công")
+                })
+        }
     })
 });

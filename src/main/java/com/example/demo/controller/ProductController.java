@@ -79,7 +79,11 @@ public class ProductController {
         List<String> genders = null;
         if (gender != null) {
             genders = new ArrayList<>(Arrays.asList(gender.split(",")));
-            genders.add("unisex");
+            if (genders.contains("unisex")) {
+                genders.add("male");
+                genders.add("female");
+            } else
+                genders.add("unisex");
         }
 
         List<String> prices = null;
@@ -103,6 +107,14 @@ public class ProductController {
 
         ResponseData responseData = new ResponseData();
         responseData.setData(productServiceImp.searchProduct(key));
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
+    }
+
+    @GetMapping("/saleoff")
+    public ResponseEntity<?> getSaleOff() {
+
+        ResponseData responseData = new ResponseData();
+        responseData.setData(productServiceImp.saleOff());
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 }

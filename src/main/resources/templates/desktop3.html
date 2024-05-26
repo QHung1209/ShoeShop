@@ -34,7 +34,7 @@
       <!--<a href="#"><i class='bx bx-user'></i> Đăng nhập</a>-->
       <a href="#" class="account" id="account" onclick="toggleDropdown(event)"><i class='bx bx-user'></i> Tài Khoản</a>
       <div id="myDropdown" class="dropdown-content">
-        <a href="#">Link 1</a>
+        <a class="user_account" href="./profile.html"></a>
         <a href="#" id="logout">Đăng xuất</a>
 
       </div>
@@ -43,22 +43,22 @@
 
   <!-- Navbar section -->
   <section class="logo-and-navbar">
-    <a href="#" class="logo"><img src="../static/images/logo.png" alt=""></a>
+    <a href="./desktop1.html" class="logo"><img src="../static/images/logo.png" alt=""></a>
 
     <ul class="navbar">
       <li><a href="./desktop2.html">SẢN PHẨM</a></li>
       <li>
         <p>|</p>
       </li>
-      <li><a href="#male">NAM</a></li>
+      <li><a class="male" href="#" onclick="return false;">NAM</a></li>
       <li>
         <p>|</p>
       </li>
-      <li><a href="#female">NỮ</a></li>
+      <li><a class="female" href="#" onclick="return false;">NỮ</a></li>
       <li>
         <p>|</p>
       </li>
-      <li><a href="#discount">KHUYẾN MÃI</a></li>
+      <li><a class="sale" href="#" onclick="return false;">KHUYẾN MÃI</a></li>
     </ul>
   </section>
 
@@ -149,9 +149,9 @@
         </div>
 
         <div class="box-pay">
-          <a href="#" class="add-to-cart" id="add">thêm vào giỏ hàng</a>
+          <a href="#" class="add-to-cart" id="add" onclick="return false;">thêm vào giỏ hàng</a>
           <br>
-          <a href="#" class="pay">thanh toán</a>
+          <a href="#" class="pay" id="pay" onclick="return false;">thanh toán</a>
           <div class="warning">
             <!-- <p style="color: red;">Chọn size/ số lượng phù hợp</p> -->
           </div>
@@ -202,7 +202,7 @@
     <section class="relate-products">
       <h4>sản phẩm liên quan</h4>
       <div class="big-box">
-        <div class="box">
+        <!-- <div class="box">
           <img src="../static/images/rectangle79.png" alt="">
           <p class="name">Tên giày</p>
           <p class="price">1.190.000 <span>VND</span></p>
@@ -221,7 +221,7 @@
           <img src="../static/images/rectangle82.png" alt="">
           <p class="name">Tên giày</p>
           <p class="price">1.190.000 <span>VND</span></p>
-        </div>
+        </div> -->
       </div>
     </section>
 
@@ -283,6 +283,7 @@
     <!-- desktop3 JS-->
     <script src="./detail.js"></script>
     <script src="../static/js/desktop3.js"></script>
+    <script src="../static/js/x.js"></script>
 </body>
 
 </html>
