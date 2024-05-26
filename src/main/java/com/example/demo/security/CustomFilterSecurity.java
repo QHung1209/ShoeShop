@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
 @SuppressWarnings("deprecation")
 @Configuration
 @EnableWebSecurity
@@ -39,7 +40,7 @@ public class CustomFilterSecurity {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-        .authorizeRequests(request -> request.requestMatchers("/product/**").permitAll()
+                .authorizeRequests(request -> request.requestMatchers("/product/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login/signin").permitAll()
                         .requestMatchers(HttpMethod.POST, "/main/page").permitAll()
                         .requestMatchers(HttpMethod.GET, "/index").permitAll()
@@ -60,6 +61,7 @@ public class CustomFilterSecurity {
                         .requestMatchers(HttpMethod.PUT, "/admin/product/updateColorCode").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/checkColorNameExists").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/checkColorCodeExists").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getColorsNames").permitAll()
                         // Sizes
                         .requestMatchers(HttpMethod.POST, "/admin/product/addSizes").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/getSizes").permitAll()
@@ -71,29 +73,47 @@ public class CustomFilterSecurity {
                         .requestMatchers(HttpMethod.GET, "/admin/product/getStyles").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/admin/product/updateStyleName").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/checkStyleExists").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getStylesNames").permitAll()
+
                         // Materials
                         .requestMatchers(HttpMethod.POST, "/admin/product/addMaterials").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/getMaterials").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/admin/product/updateMaterialName").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/checkMaterialExists").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getMaterialsNames").permitAll()
                         // Categories
                         .requestMatchers(HttpMethod.POST, "/admin/product/addCategories").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/getCategories").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/admin/product/updateCategoryName").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/checkCategoryExists").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getCategoriesNames").permitAll()
+
                         // Inventory
                         .requestMatchers(HttpMethod.GET, "/admin/product/getInventory").permitAll()
                         .requestMatchers(HttpMethod.POST, "/admin/product/addInventory").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/admin/product/updateInventory/**").permitAll()
 
-                        //Product
+                        // Product
                         .requestMatchers(HttpMethod.GET, "/admin/product/getProduct").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product/addProduct").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/admin/product/updateProduct/**").permitAll()
+                        
+
+
+
+                        //Orders
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getOrders").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/admin/product/updateOrders/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/product/getOrderDetail/**").permitAll()
+
+
 
                         .requestMatchers(HttpMethod.POST, "/admin/product/genders").permitAll()
                         .requestMatchers(HttpMethod.POST, "/admin/product/file/{filename:.+}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login/signin").permitAll()
                         .requestMatchers(HttpMethod.POST, "/main/page").permitAll()
                         .requestMatchers(HttpMethod.GET, "/index").permitAll()
+
                         .requestMatchers(HttpMethod.GET, "/product/detail").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/update").permitAll()
                         .requestMatchers("/signup/**").permitAll()
@@ -103,7 +123,7 @@ public class CustomFilterSecurity {
                         .requestMatchers("/orderDetail/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/inventory/**").permitAll()
                         .anyRequest().authenticated());
-                        http.csrf(AbstractHttpConfigurer::disable);
+        http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
 

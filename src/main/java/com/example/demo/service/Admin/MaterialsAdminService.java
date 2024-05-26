@@ -2,6 +2,8 @@ package com.example.demo.service.Admin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -74,5 +76,13 @@ public class MaterialsAdminService implements MaterialsAdminServiceImp {
     @Override
     public boolean checkMaterialExists(String material_name) {
         return materialsAdminRepository.isMaterialNameExisted(material_name);
+    }
+
+    @Override
+    public List<String> getAllMaterialName() {
+        List<Materials> materialsList = materialsAdminRepository.findAll();
+        return materialsList.stream()
+                .map(Materials::getMaterial_name)
+                .collect(Collectors.toList());
     }
 }

@@ -7,6 +7,7 @@ public class OrderDetailDTO {
     private int size_id;
     private int size_name;
     private int quantity;
+    
     public int getOrder_detail_id() {
         return order_detail_id;
     }

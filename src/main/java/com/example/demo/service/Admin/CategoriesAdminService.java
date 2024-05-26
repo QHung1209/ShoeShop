@@ -6,6 +6,8 @@ import com.example.demo.repository.Admin.CategoriesAdminRepository;
 import com.example.demo.service.Admin.imp.CategoriesAdminServiceImp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -76,5 +78,14 @@ public class CategoriesAdminService implements CategoriesAdminServiceImp {
     // Kiểm tra category có tồn tại không
     public boolean checkCategoryExists(String category_name) {
         return categoriesAdminRepository.isCategoryNameExisted(category_name);
+    }
+
+    @Override
+    // Lấy danh sách tên category
+    public List<String> getAllCategoryName() {
+        List<Categories> categoriesList = categoriesAdminRepository.findAll();
+        return categoriesList.stream()
+                .map(Categories::getCategory_name)
+                .collect(Collectors.toList());
     }
 }

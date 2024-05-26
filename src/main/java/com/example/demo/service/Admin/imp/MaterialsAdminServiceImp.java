@@ -15,4 +15,6 @@ public interface MaterialsAdminServiceImp {
 
     boolean checkMaterialExists(String material_name);
 
+    List<String> getAllMaterialName();
+
 }

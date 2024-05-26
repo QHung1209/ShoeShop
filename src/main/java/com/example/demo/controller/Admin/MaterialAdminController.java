@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.http.HttpStatus;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,5 +65,11 @@ public class MaterialAdminController {
     public ResponseEntity<?> checkMaterialExists(@RequestParam String material_name) {
         boolean exists = materialsAdminServiceImp.checkMaterialExists(material_name);
         return new ResponseEntity<>(exists, HttpStatus.OK);
+    }
+
+    // Lấy tất cả material_name từ sizes table
+    @GetMapping("/getMaterialsNames")
+    public List<String> getAllMaterialName() {
+        return materialsAdminServiceImp.getAllMaterialName();
     }
 }
