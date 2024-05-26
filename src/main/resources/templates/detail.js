@@ -94,6 +94,11 @@ $(document).ready(function () {
                                         </div>`
                     $(".big-box").append(related_html);
                 })
+
+                $.each(value.imageDTOs, function (index, image) {
+                    var image_html = `<div class="swiper-slide"><img src="${image.image_url}" alt=""></div>`
+                    $(".sub-images").append(image_html);
+                })
             }
 
         });
