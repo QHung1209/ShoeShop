@@ -16,8 +16,8 @@ public class ProductDTO {
     private int discount;
     private List<ProductDTO> related_products;
     private List<InventoryDTO> inventoryDTOs;
-
-    private double price;
+    private List<ImageDTO> imageDTOs;
+    private int price;
     private String image_url;
 
     public int getProduct_id() {
@@ -115,14 +115,6 @@ public class ProductDTO {
 
     public void setInventoryDTOs(List<InventoryDTO> inventoryDTOs) {
         this.inventoryDTOs = inventoryDTOs;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
 
