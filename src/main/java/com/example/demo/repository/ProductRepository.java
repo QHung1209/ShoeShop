@@ -47,4 +47,7 @@ public interface ProductRepository extends JpaRepository<Products, Integer> {
         int quantity(int shoe_id, int size_id);
          */
 
+         @Query("SELECT p FROM Products p WHERE p.discount > 0")
+         List<Products> saleOff();
+
 }

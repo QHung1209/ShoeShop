@@ -35,7 +35,7 @@
       <!--<a href="#"><i class='bx bx-user'></i> Đăng nhập</a>-->
       <a href="#" class="account" id="account" onclick="toggleDropdown(event)"><i class='bx bx-user'></i> Tài Khoản</a>
       <div id="myDropdown" class="dropdown-content">
-        <a href="./profile.html">Link 1</a>
+        <a class="user_account" href="./profile.html"></a>
         <a href="#" id="logout">Đăng xuất</a>
       </div>
     </div>
@@ -43,22 +43,22 @@
 
   <!-- Navbar section -->
   <section class="logo-and-navbar">
-    <a href="#" class="logo"><img src="../static/images/logo.png" alt=""></a>
+    <a href="./desktop1.html" class="logo"><img src="../static/images/logo.png" alt=""></a>
 
     <ul class="navbar">
       <li><a href="./desktop2.html">SẢN PHẨM</a></li>
       <li>
         <p>|</p>
       </li>
-      <li><a href="#male">NAM</a></li>
+      <li><a class="male" href="#" onclick="return false;">NAM</a></li>
       <li>
         <p>|</p>
       </li>
-      <li><a href="#female">NỮ</a></li>
+      <li><a class="female" href="#" onclick="return false;">NỮ</a></li>
       <li>
         <p>|</p>
       </li>
-      <li><a href="#discount">KHUYẾN MÃI</a></li>
+      <li><a class="sale" href="#" onclick="return false;">KHUYẾN MÃI</a></li>
     </ul>
   </section>
 
@@ -187,7 +187,7 @@
             <p class="total_price" id="total_price"> </p>
           </div>
           <p class="warning" style="color: red; margin-bottom: 2%;"></p>
-          <a href="#" class="complete-payment" id="complete-payment">Hoàn tất đặt hàng</a>
+          <a href="#" class="complete-payment" id="complete-payment" onclick="return false;">Hoàn tất đặt hàng</a>
         </div>
       </div>
     </section>

@@ -15,11 +15,8 @@ async function getUserDetail() {
   }
 }
 
-function ChangeSizeQuantity() {
-
-}
-
 $(document).ready(async function () {
+
   var url_temp = window.location.href
   const userDetails = await getUserDetail()
 
@@ -36,7 +33,7 @@ $(document).ready(async function () {
         var totalSale = 0;
         $.each(msg2.data, function (index, value) {
           totalPrice += value.productDTO.price * value.quantity;
-          totalSale += value.productDTO.price * value.quantity * value.productDTO.discount /100;
+          totalSale += value.productDTO.price * value.quantity * value.productDTO.discount / 100;
           var html = `<div class="col" data-cart-id="${value.cart_id}" data-size-id="${value.size_id}" data-product-id="${value.productDTO.product_id}">
                         <img src="${value.productDTO.image_url}" alt="">
                         <div class="detail">
@@ -167,28 +164,5 @@ $(document).ready(async function () {
       });
   })
 
-
-  document.getElementById("cart").addEventListener("click", function () {
-    var token = localStorage.getItem("token");
-    localStorage.setItem("url_temp", url_temp)
-    if (!token) {
-      window.location.href = "./index.html"; // Redirect to login page if token is not present
-    }
-    window.location.href = "./desktop4.html";
-  });
-
-  document.getElementById("account").addEventListener("click", function () {
-    var token = localStorage.getItem("token");
-    localStorage.setItem("url_temp", url_temp)
-    if (!token) {
-      window.location.href = "./index.html"; // Redirect to login page if token is not present
-    }
-
-  });
-  document.getElementById("logout").addEventListener("click", function () {
-    localStorage.removeItem("token")
-    window.location.href = "./desktop1.html"; // Redirect to login page if token is not present
-
-  })
 
 })
