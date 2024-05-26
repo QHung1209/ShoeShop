@@ -32,7 +32,7 @@ public class OrderAdminRepository implements OrderAdminRepositoryImp {
             orders.setTotal_amount(rs.getDouble("total_amount"));
             orders.setDate_order(rs.getTimestamp("date_order"));
             orders.setOrder_status(rs.getInt("order_status"));
-          
+           
             // Các trường khác nếu cần
             return orders;
         });

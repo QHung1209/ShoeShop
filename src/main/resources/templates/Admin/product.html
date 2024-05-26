@@ -191,24 +191,25 @@
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#"
-                        data-toggle="collapse" data-target="#collapsePages"
-                        aria-expanded="true" aria-controls="collapsePages">
+                 <!-- Nav Item - Pages Collapse Menu -->
+                 <li class="nav-item">
+                    <a class="nav-link collapsed" href="product.html">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Quản lý giày</span>
+                    </a>
+                </li>
+
+                 <li class="nav-item">
+                    <a class="nav-link collapsed" href="inventory.html">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Quản lý kho hàng</span>
                     </a>
-                 
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#"
-                        data-toggle="collapse" data-target="#collapsePages"
-                        aria-expanded="true" aria-controls="collapsePages">
+                    <a class="nav-link collapsed" href="order.html">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Quản lý hoá đơn</span>
                     </a>
-                   {% comment %} //Quản lý sản pham {% endcomment %}
                 </li>
 
                 <!-- Divider -->
@@ -374,11 +375,27 @@
                                         <select id="shoe-name-select">
                                             <option value="">Chọn tên giày</option>
                                         </select>
-                                        <select id="size-name-select">
-                                            <option value="">Chọn size giày</option>
+                                        <select id="color-name-select">
+                                            <option value="">Chọn màu</option>
                                         </select>
-                                        <input type="number" id="quantity" placeholder="Nhập số lượng">
-                                        <button id="submit-inventory-btn">Thêm vào kho</button>
+                                        <select id="gender-name-select">
+                                            <option value="">Chọn giới tính</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="unisex">Unisex</option>
+                                        </select>
+                                        <select id="style-name-select">
+                                            <option value="">Chọn kiểu dáng</option>
+                                        </select>
+                                        <select id="material-name-select">
+                                            <option value="">Chọn chất liệu</option>
+                                        </select>
+                                        <select id="category-name-select">
+                                            <option value="">Chọn dòng</option>
+                                        </select>
+                                        
+
+                                        <button id="submit-product-btn">Thêm vào kho</button>
                                     </div>
                                 </div>
                             </body>
@@ -434,7 +451,7 @@
 
                     <!-- Custom scripts for all pages-->
                     <script src="js/sb-admin-2.min.js"></script>
-                    <script src="js/inventory.js"></script>
+                    <script src="js/product.js"></script>
 
                     <!-- Page level plugins -->
                     <script src="vendor/chart.js/Chart.min.js"></script>

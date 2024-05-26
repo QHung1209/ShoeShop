@@ -8,7 +8,7 @@ public class ProductDTO {
     private int product_id;
     private String shoe_name;
     private String color_code;
-    private String color_name;
+    private String color_name; 
     private String gender;
     private String style;
     private String material;
@@ -16,7 +16,8 @@ public class ProductDTO {
     private int discount;
     private List<ProductDTO> related_products;
     private List<InventoryDTO> inventoryDTOs;
-    private int price;
+
+    private double price;
     private String image_url;
 
     public int getProduct_id() {
@@ -91,13 +92,6 @@ public class ProductDTO {
         this.style = style;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
 
     public String getColor_code() {
         return color_code;
@@ -121,6 +115,14 @@ public class ProductDTO {
 
     public void setInventoryDTOs(List<InventoryDTO> inventoryDTOs) {
         this.inventoryDTOs = inventoryDTOs;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
 

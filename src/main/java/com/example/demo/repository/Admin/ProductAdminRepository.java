@@ -215,7 +215,7 @@ public class ProductAdminRepository {
 
     private String saveImage(MultipartFile imageFile) {
         String fileName = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename();
-        Path directoryPath = Paths.get("java/uploads");
+        Path directoryPath = Paths.get("/src/main/resources/static/images");
         Path imagePath = directoryPath.resolve(fileName);
         try {
             // Ensure the directory exists
