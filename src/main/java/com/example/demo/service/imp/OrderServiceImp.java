@@ -9,4 +9,5 @@ public interface OrderServiceImp {
 
     public List<OrderDTO> findAllOrderByUserId(int user_id);
     public List<OrderDTO> getAllUnconfirmedOrders();
+    public boolean deleteOrder(int order_id);
 }

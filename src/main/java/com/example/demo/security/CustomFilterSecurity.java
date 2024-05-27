@@ -115,6 +115,9 @@ public class CustomFilterSecurity {
                         .requestMatchers(HttpMethod.GET, "/index").permitAll()
 
                         // .requestMatchers(HttpMethod.GET, "/product/detail").permitAll()
+
+                        .requestMatchers(HttpMethod.GET, "/product/detail").permitAll()
+                        .requestMatchers("/signup/**").permitAll()
                         .requestMatchers("/order/**").permitAll()
                         .requestMatchers("/user/**").permitAll()
                         .requestMatchers("/cart/**").permitAll()

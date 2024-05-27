@@ -28,11 +28,16 @@
     </div>
     <!-- Giỏ hàng -->
     <div class="content">
-      <a href="#"><i class='bx bx-cart-alt'></i> Giỏ hàng</a>
+      <a href="./desktop4.html" class="cart" id="cart"><i class='bx bx-cart-alt' class="cart" id="cart"></i> Giỏ hàng</a>
     </div>
     <!-- Đăng nhập -->
     <div class="content">
-      <a href="#"><i class='bx bx-user'></i> Đăng nhập</a>
+      <!--<a href="#"><i class='bx bx-user'></i> Đăng nhập</a>-->
+      <a href="#" class="account" id="account" onclick="toggleDropdown(event)"><i class='bx bx-user'></i> Tài Khoản</a>
+      <div id="myDropdown" class="dropdown-content">
+        <a href="./profile.html">Link 1</a>
+        <a href="#" id="logout">Đăng xuất</a>
+      </div>
     </div>
   </header>
 
@@ -181,7 +186,7 @@
             <p class="total">Tổng cộng</p>
             <p class="total_price" id="total_price"> </p>
           </div>
-
+          <p class="warning" style="color: red; margin-bottom: 2%;"></p>
           <a href="#" class="complete-payment" id="complete-payment">Hoàn tất đặt hàng</a>
         </div>
       </div>
@@ -239,16 +244,13 @@
     </div>
 
     <!-- footer section -->
-    <footer>
-
-    </footer>
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="./order.js"></script>
-    <!-- Vietnam local selector: https://github.com/stommazh/vietnamlocalselector -->
     <script src="../static/js/vietnamlocalselector.js"></script>
 
     <!-- desktop3 JS-->
+    <script src="../static/js/x.js"></script>
     <script src="../static/js/desktop5.js"></script>
 
 </body>

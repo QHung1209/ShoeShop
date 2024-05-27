@@ -17,17 +17,14 @@ window.onclick = function (event) {
     }
 }
 $(document).ready(function () {
-
-    let searchParams = new URLSearchParams(window.location.search)
     var url_temp = window.location.href
     document.getElementById("cart").addEventListener("click", function () {
         var token = localStorage.getItem("token");
         localStorage.setItem("url_temp", url_temp)
         if (!token) {
-          window.location.href = "./index.html"; // Redirect to login page if token is not present
+            window.location.href = "./index.html"; // Redirect to login page if token is not present
         }
-
-      });
+    });
     document.getElementById("account").addEventListener("click", function () {
         var token = localStorage.getItem("token");
         localStorage.setItem("url_temp", url_temp)
