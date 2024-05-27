@@ -36,10 +36,6 @@ async function getUserDetail() {
 
 $(document).ready(async function () {
 
-  var userDetail = await getUserDetail();
-  console.log(userDetail)
-  $(".user_account").append(userDetail.name)
-
   document.getElementById("search-form").addEventListener("submit", function (event) {
     event.preventDefault();
     search_key = document.getElementById('search-input').value;
@@ -60,6 +56,12 @@ $(document).ready(async function () {
     window.location.href = "./desktop2.html";
   })
 
+  var token = localStorage.getItem("token");
+  var userDetail;
+  if (token != null) {
+    userDetail = await getUserDetail();
+    $(".user_account").append(userDetail.name)
+  }
   var url_temp = window.location.href
   document.getElementById("cart").addEventListener("click", function () {
     var token = localStorage.getItem("token");
@@ -67,9 +69,11 @@ $(document).ready(async function () {
     if (!token) {
       window.location.href = "./index.html"; // Redirect to login page if token is not present
     }
-    else{
-    window.location.href = "./desktop4.html";}
+    else {
+      window.location.href = "./desktop4.html";
+    }
   });
+
 
   document.getElementById("account").addEventListener("click", function () {
     var token = localStorage.getItem("token");
