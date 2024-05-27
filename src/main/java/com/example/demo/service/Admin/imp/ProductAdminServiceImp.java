@@ -17,4 +17,6 @@ public interface ProductAdminServiceImp {
 
     public Products updateProduct(int productId, String shoeName, String colorName, String genderName, String styleName, String materialName, String categoryName, Integer discount, MultipartFile imageFile);
 
+    public String saveImage(MultipartFile file, int productId);
+
 }

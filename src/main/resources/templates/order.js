@@ -25,6 +25,7 @@ async function getCartDetails(user_id) {
 
 $(document).ready(async function () {
 
+
     const userDetails = await getUserDetail()
     console.log(userDetails)
     const cartDetails = await getCartDetails(userDetails.user_id)
@@ -71,9 +72,9 @@ $(document).ready(async function () {
         document.getElementById('cusNumber').value = userDetails.telephone;
         document.getElementById('cusAddress').value = cleanedParts.slice(0, cleanedParts.length - 3).join(', ');
         document.getElementById('total_price').value = total;
-        $(".ls_ward").append(`<option value="${cleanedParts[cleanedParts.length - 1]}" id="${cleanedParts[cleanedParts.length - 1]}" hidden selected>${cleanedParts[cleanedParts.length - 1]}</option>`);
+        $(".ls_ward").append(`<option value="${cleanedParts[cleanedParts.length - 3]}" id="${cleanedParts[cleanedParts.length - 3]}" hidden selected>${cleanedParts[cleanedParts.length - 3]}</option>`);
         $(".ls_district").append(`<option value="${cleanedParts[cleanedParts.length - 2]}" id="${cleanedParts[cleanedParts.length - 2]}" hidden selected>${cleanedParts[cleanedParts.length - 2]}</option>`);
-        $(".ls_province").append(`<option value="${cleanedParts[cleanedParts.length - 3]}" id="${cleanedParts[cleanedParts.length - 3]}" hidden selected>${cleanedParts[cleanedParts.length - 3]}</option>`);
+        $(".ls_province").append(`<option value="${cleanedParts[cleanedParts.length - 1]}" id="${cleanedParts[cleanedParts.length - 1]}" hidden selected>${cleanedParts[cleanedParts.length - 1]}</option>`);
 
         $(".total_price").append(`${(total - totalSale).toLocaleString('vi-VN')} VND`);
     }
@@ -98,7 +99,7 @@ $(document).ready(async function () {
             $(".warning").append("Không có sản phẩm để thanh toán")
         }
         else if (!name_user || !telephone_user || !address_user || province.options[province.selectedIndex].text == "undefined" ||
-        ward.options[ward.selectedIndex].text == "undefined" ||  district.options[district.selectedIndex].text == "undefined"
+            ward.options[ward.selectedIndex].text == "undefined" || district.options[district.selectedIndex].text == "undefined"
         ) {
             $(".warning").empty()
             $(".warning").append("Điền đầy đủ thông tin")
@@ -109,7 +110,7 @@ $(document).ready(async function () {
                 url: "http://localhost:8080/order/insertOrder",
                 data: {
                     user_id: userDetails.user_id,
-                    address: address_user + ", " +  ward.options[ward.selectedIndex].text + ", " + district.options[district.selectedIndex].text + ", " + province.options[province.selectedIndex].text,
+                    address: address_user + ", " + ward.options[ward.selectedIndex].text + ", " + district.options[district.selectedIndex].text + ", " + province.options[province.selectedIndex].text,
                     name: name_user,
                     telephone: telephone_user,
                     total_amount: total_price - totalSale,

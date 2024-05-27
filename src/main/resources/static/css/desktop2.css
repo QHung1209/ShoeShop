@@ -17,6 +17,13 @@
   height: 100%;
 }
 
+
+#search-form {
+  position: absolute;
+  display: flex;
+  right: 3%;
+  align-items: center;
+}
 .bannerr {
   display: grid;
 }
@@ -25,7 +32,7 @@
   display: flex;
   padding: 20px;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   background: var(--light--grey-color);
 }
 
@@ -67,7 +74,7 @@
   --white-color: #fff;
   --black-color: #303030;
   --grey-color: #4d4d4d;
-  --light--grey-color: #bcbbbb;
+  --light--grey-color: #f3efef;
 }
 
 header {
@@ -163,47 +170,6 @@ header .content a:hover {
 
 .logo-and-navbar .navbar p {
   font-size: 20px;
-}
-
-.banner {
-  display: grid;
-}
-
-.banner .content {
-  display: flex;
-  padding: 20px;
-  align-items: center;
-  justify-content: space-around;
-  background: var(--light--grey-color);
-}
-
-.banner .content h2 {
-  font-size: 30px;
-  font-weight: 700;
-  color: var(--text-color);
-}
-
-.banner .content .search {
-  position: absolute;
-  right: 100px;
-  display: flex;
-  font-size: 20px;
-  font-weight: 600;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.banner .content .search input {
-  width: 200px;
-  font-size: 20px;
-  border: none;
-  outline: none;
-  background: var(--light--grey-color);
-  color: var(--text-color);
-}
-
-.banner .content .search input::placeholder {
-  color: var(--text-color);
 }
 
 .container-hover-image {

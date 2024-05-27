@@ -24,6 +24,10 @@ public class Products {
     
     @OneToMany(mappedBy = "products")
     private List<Order_detail> listOrder_details;
+
+    @OneToMany(mappedBy = "products")
+    private List<Image> listImages;
+
     public List<Inventory> getListInventories() {
         return listInventories;
     }
@@ -35,6 +39,7 @@ public class Products {
     @ManyToOne
     @JoinColumn(name = "shoe_id")
     private Shoes shoes;
+
 
     @ManyToOne
     @JoinColumn(name = "color_id")
@@ -164,6 +169,14 @@ public class Products {
 
     public void setListOrder_details(List<Order_detail> listOrder_details) {
         this.listOrder_details = listOrder_details;
+    }
+
+    public List<Image> getListImages() {
+        return listImages;
+    }
+
+    public void setListImages(List<Image> listImages) {
+        this.listImages = listImages;
     }
 
 }

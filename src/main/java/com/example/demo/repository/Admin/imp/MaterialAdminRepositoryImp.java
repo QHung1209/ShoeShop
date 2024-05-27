@@ -16,4 +16,6 @@ public interface MaterialAdminRepositoryImp {
     void updateMaterialName(String material_name, String newMaterialName);
 
     boolean isMaterialNameExisted(String material_name);
+
+    
 }

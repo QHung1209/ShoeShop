@@ -44,8 +44,9 @@ public class CustomFilterSecurity {
                         .requestMatchers(HttpMethod.POST, "/login/signin").permitAll()
                         .requestMatchers(HttpMethod.POST, "/main/page").permitAll()
                         .requestMatchers(HttpMethod.GET, "/index").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/admin/login/signup").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/admin/login/signin").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/logout").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/signup").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/signin").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin").permitAll()
                         // Shoes
                         .requestMatchers(HttpMethod.POST, "/admin/product/addShoes").permitAll()
@@ -97,6 +98,7 @@ public class CustomFilterSecurity {
                         .requestMatchers(HttpMethod.GET, "/admin/product/getProduct").permitAll()
                         .requestMatchers(HttpMethod.POST, "/admin/product/addProduct").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/admin/product/updateProduct/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/product/uploadImage").permitAll()
                         
 
 
@@ -116,7 +118,9 @@ public class CustomFilterSecurity {
 
                         // .requestMatchers(HttpMethod.GET, "/product/detail").permitAll()
 
+
                         .requestMatchers(HttpMethod.GET, "/product/detail").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/user/update").permitAll()
                         .requestMatchers("/signup/**").permitAll()
                         .requestMatchers("/order/**").permitAll()
                         .requestMatchers("/user/**").permitAll()

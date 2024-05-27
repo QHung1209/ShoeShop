@@ -33,7 +33,7 @@
       <!--<a href="#"><i class='bx bx-user'></i> Đăng nhập</a>-->
       <a href="#" class="account" id="account" onclick="toggleDropdown(event)"><i class='bx bx-user'></i> Tài Khoản</a>
       <div id="myDropdown" class="dropdown-content">
-        <a href="./profile.html">Link 1</a>
+        <a href="./profile.html" class="username">Link 1</a>
         <a href="#" class="logout" id="logout">Đăng xuất</a>
       </div>
     </div>
@@ -41,17 +41,29 @@
   
   <!-- Navbar section -->
   <section class="logo-and-navbar" >
-    <a href="#" class="logo"><img src="../static/images/logo.png" alt=""></a>
+    <a href="./desktop1.html" class="logo"><img src="../static/images/logo.png" alt=""></a>
 
     <ul class="navbar">
       <li><a href="./desktop2.html">SẢN PHẨM</a></li>
       <li><p>|</p></li>
-      <li><a href="#male">NAM</a></li>
+      <li><a class="male" href="#male">NAM</a></li>
       <li><p>|</p></li>
-      <li><a href="#female">NỮ</a></li>
+      <li><a class="female" href="#female">NỮ</a></li>
       <li><p>|</p></li>
-      <li><a href="#discount">KHUYẾN MÃI</a></li>
+      <li><a class="sale" href="#discount">KHUYẾN MÃI</a></li>
     </ul>
+  </section>
+
+  <section class="banner">
+    <div class="content">
+      <h2>Free Shipping với hóa đơn từ 900k</h2>
+      <form id="search-form">
+        <div class="search">
+          <i class='bx bx-search'></i>
+          <input type="text" id="search-input" placeholder="Search">
+        </div>
+      </form>
+    </div>
   </section>
 
   <!-- User profile -->
@@ -68,7 +80,7 @@
           <a href="#" id="profile_setting_controller" onclick="profile_setting_controller_click()">Sửa thông tin</a>
         </li>
         <li>
-          <a href="#" id="log_out_controller">Đăng xuất</a>
+          <a href="#" class="log_out_user" id="log_out_controller">Đăng xuất</a>
         </li>
       </ul>
     </div>
@@ -161,7 +173,7 @@
           <div class="box">
             <p>Mật khẩu</p>
             <input class="password" id="password" type="password"  placeholder="Nhập mật khẩu mới">
-            <input type="checkbox" class="show" style="width: 10%; right: auto;" onclick="myFunction()">
+           
           </div>
           <div class="box">
             <p>Địa chỉ</p>

@@ -191,24 +191,25 @@
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#"
-                        data-toggle="collapse" data-target="#collapsePages"
-                        aria-expanded="true" aria-controls="collapsePages">
+                 <!-- Nav Item - Pages Collapse Menu -->
+                 <li class="nav-item">
+                    <a class="nav-link collapsed" href="product.html">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Quản lý giày</span>
+                    </a>
+                </li>
+
+                 <li class="nav-item">
+                    <a class="nav-link collapsed" href="inventory.html">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Quản lý kho hàng</span>
                     </a>
-                 
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#"
-                        data-toggle="collapse" data-target="#collapsePages"
-                        aria-expanded="true" aria-controls="collapsePages">
+                    <a class="nav-link collapsed" href="order.html">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Quản lý hoá đơn</span>
                     </a>
-                   {% comment %} //Quản lý sản pham {% endcomment %}
                 </li>
 
                 <!-- Divider -->
@@ -293,21 +294,6 @@
                                 <div
                                     class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                     aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
-                                        <i
-                                            class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Profile
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i
-                                            class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Settings
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i
-                                            class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Activity Log
-                                    </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#"
                                         data-toggle="modal"
@@ -363,6 +349,47 @@
                                     background: none;
                                     cursor: pointer;
                                 }
+
+                                
+                                    .edit-btn {
+                                        background-color: #4CAF50; /* Green */
+                                        border: none;
+                                        color: white;
+                                        padding: 15px 32px;
+                                        text-align: center;
+                                        text-decoration: none;
+                                        display: inline-block;
+                                        font-size: 16px;
+                                        margin: 4px 2px;
+                                        cursor: pointer;
+                                        transition-duration: 0.4s;
+                                    }
+                                    
+                                    .edit-btn:hover {
+                                        background-color: #45a049;
+                                    }
+
+                                    .upload-image-btn{
+                                        background-color: #4CAF50; /* Green */
+                                        border: none;
+                                        color: white;
+                                        padding: 15px 32px;
+                                        text-align: center;
+                                        text-decoration: none;
+                                        display: inline-block;
+                                        font-size: 16px;
+                                        margin: 4px 2px;
+                                        cursor: pointer;
+                                        transition-duration: 0.4s;
+                                    }
+
+                                    .upload-image-btn:hover {
+                                        background-color: #45a049;
+                                    }
+
+
+                                    
+                                 
                             </style>
                             </head>
                             <body>
@@ -370,16 +397,46 @@
                                     <div id="table-container">
                                         <!-- Bảng dữ liệu sẽ được thêm vào đây -->
                                     </div>
-                                    <div>
+                                    <form id="productForm" enctype="multipart/form-data">
                                         <select id="shoe-name-select">
                                             <option value="">Chọn tên giày</option>
                                         </select>
-                                        <select id="size-name-select">
-                                            <option value="">Chọn size giày</option>
+                                        <select id="color-name-select">
+                                            <option value="">Chọn màu</option>
                                         </select>
-                                        <input type="number" id="quantity" placeholder="Nhập số lượng">
-                                        <button id="submit-inventory-btn">Thêm vào kho</button>
-                                    </div>
+                                        <select id="gender-name-select">
+                                            <option value="">Chọn giới tính</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="unisex">Unisex</option>
+                                        </select>
+                                        <select id="style-name-select">
+                                            <option value="">Chọn kiểu dáng</option>
+                                        </select>
+                                        <select id="material-name-select">
+                                            <option value="">Chọn chất liệu</option>
+                                        </select>
+                                        <select id="category-name-select">
+                                            <option value="">Chọn dòng</option>
+                                        </select>
+                                        <input type="number" id="discount" name="discount" placeholder="Discount">
+                                        <input type="file" id="imageFile" name="imageFile">
+                                        <button id="submit-product-btn">Thêm vào kho</button>
+                                        
+                                    </form>
+
+                                    
+                                    <div id="upload-image-form" style="display: none;">
+                                        <h3>Upload Images for Product ID: <span id="current-product-id"></span></h3>
+                                        <input type="file" id="image-file-1" accept="image/*"><br>
+                                        <input type="file" id="image-file-2" accept="image/*"><br>
+                                        <input type="file" id="image-file-3" accept="image/*"><br>
+                                        <input type="file" id="image-file-4" accept="image/*"><br>
+                                        <input type="hidden" id="product-id">
+                                        <button id="upload-images-btn">Upload Images</button>
+                                        <button id="cancel-upload-btn">Cancel</button>
+                                      </div>
+                                    
                                 </div>
                             </body>
                         </html>
@@ -400,15 +457,6 @@
                         aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title"
-                                        id="exampleModalLabel">Ready
-                                        to Leave?</h5>
-                                    <button class="close" type="button"
-                                        data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
                                 <div class="modal-body">Select "Logout" below if
                                     you are
                                     ready to end your current session.</div>
@@ -434,7 +482,7 @@
 
                     <!-- Custom scripts for all pages-->
                     <script src="js/sb-admin-2.min.js"></script>
-                    <script src="js/inventory.js"></script>
+                    <script src="js/product.js"></script>
 
                     <!-- Page level plugins -->
                     <script src="vendor/chart.js/Chart.min.js"></script>

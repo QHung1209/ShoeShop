@@ -1,12 +1,3 @@
-function myFunction() {
-    var x = document.getElementById("password");
-    if (x.type === "password") {
-      x.type = "text";
-    } else {
-      x.type = "password";
-    }
-  }
-
 async function getUserDetail() {
     try {
         const response = await $.ajax({
@@ -138,4 +129,44 @@ $(document).ready(async function () {
             })
     })
 
+    $(document).on("click", ".change", function () {
+        $.ajax({
+            method: "POST",
+            url: "http://localhost:8080/user/update",
+            data: {
+                name: document.getElementById('name').value,
+                telephone: document.getElementById('telephone').value,
+                password: document.getElementById('password').value,
+                address: document.getElementById('address').value,
+                user_id: userDetails.user_id
+            }
+        })
+            .done(function (msg2) {
+                if (msg2) {
+                    alert("update thanh cong");
+                    $.ajax({
+                        method: "POST",
+                        url: "http://localhost:8080/login/signin",
+                        data: {
+                            username: userDetails.username,
+                            password: document.getElementById('password').value
+                        }
+                    })
+                        .done(function (msg) {
+                            console.log(msg)
+                            if (msg.success) {
+                                localStorage.setItem("token", msg.data)
+                                location.reload();
+
+                            }
+
+                        });
+                }
+            })
+    })
+
+    document.getElementById("log_out_controller").addEventListener("click", function () {
+        localStorage.removeItem("token")
+        window.location.href = "./desktop1.html"; // Redirect to login page if token is not present
+      });
 })
