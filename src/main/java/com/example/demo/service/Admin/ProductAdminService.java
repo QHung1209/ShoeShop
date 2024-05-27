@@ -7,6 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.dto.ProductDTO;
 import com.example.demo.repository.Admin.ProductAdminRepository;
 import com.example.demo.service.Admin.imp.ProductAdminServiceImp;
+
+import java.io.IOException;
 import java.util.List;
 import com.example.demo.entity.Products;
 
@@ -34,5 +36,16 @@ public class ProductAdminService implements ProductAdminServiceImp {
             String materialName, String categoryName, Integer discount, MultipartFile imageFile) {
         return productAdminRepository.updateProduct(productId, shoeName, colorName, genderName, styleName, materialName,
                 categoryName, discount, imageFile);
+    }
+
+    @Override
+    public String saveImage(MultipartFile file, int productId) {
+        try {
+            return productAdminRepository.saveImage(file, productId);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
     }
 }

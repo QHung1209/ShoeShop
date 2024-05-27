@@ -97,6 +97,22 @@ public class ProductDTO {
         return color_code;
     }
 
+    public List<ImageDTO> getImageDTOs() {
+        return imageDTOs;
+    }
+
+    public void setImageDTOs(List<ImageDTO> imageDTOs) {
+        this.imageDTOs = imageDTOs;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     public void setColor_code(String color_code) {
         this.color_code = color_code;
     }

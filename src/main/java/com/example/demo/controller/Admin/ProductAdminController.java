@@ -104,4 +104,23 @@ public class ProductAdminController {
     // return new ResponseEntity<>(HttpStatus.OK);
     // }
 
+    @PostMapping("/uploadImage")
+    public ResponseEntity<String> uploadImage(
+            @RequestParam("image-file1") MultipartFile file1,
+            @RequestParam("image-file2") MultipartFile file2,
+            @RequestParam("image-file3") MultipartFile file3,
+            @RequestParam("image-file4") MultipartFile file4,
+            @RequestParam("product-id") int productId) {
+        try {
+            productAdminServiceImp.saveImage(file1, productId);
+            productAdminServiceImp.saveImage(file2, productId);
+            productAdminServiceImp.saveImage(file3, productId);
+            productAdminServiceImp.saveImage(file4, productId);
+
+            return ResponseEntity.ok("Tải lên hình ảnh thành công!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Có lỗi xảy ra khi tải lên hình ảnh!");
+        }
+    }
+
 }

@@ -2,6 +2,8 @@ package com.example.demo.repository.Admin;
 
 import java.util.stream.Collectors;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.dto.ProductDTO;
@@ -12,9 +14,16 @@ import com.example.demo.entity.Materials;
 import com.example.demo.entity.Products;
 import com.example.demo.entity.Shoes;
 import com.example.demo.entity.Styles;
+import com.example.demo.repository.Admin.imp.ProductAdminRepositoryImp;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,9 +35,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public class ProductAdminRepository {
+public class ProductAdminRepository implements ProductAdminRepositoryImp {
     @Autowired
     private EntityManager entityManager;
+
+    @Autowired
+    private DataSource dataSource;
 
     public List<ProductDTO> getAllProducts() {
         String jpql = "SELECT p FROM Products p";
@@ -37,7 +49,7 @@ public class ProductAdminRepository {
         return products.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
-    private ProductDTO convertToDTO(Products product) {
+    public ProductDTO convertToDTO(Products product) {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setProduct_id(product.getProduct_id());
 
@@ -67,9 +79,6 @@ public class ProductAdminRepository {
 
         productDTO.setDiscount(product.getDiscount());
         productDTO.setImage_url(product.getImage_url());
-
-        // You may set other properties like price, related_products, inventoryDTOs if
-        // needed
 
         return productDTO;
     }
@@ -213,19 +222,66 @@ public class ProductAdminRepository {
         return product;
     }
 
-    private String saveImage(MultipartFile imageFile) {
-        String fileName = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename();
-        Path directoryPath = Paths.get("/src/main/resources/static/images");
-        Path imagePath = directoryPath.resolve(fileName);
-        try {
-            // Ensure the directory exists
-            Files.createDirectories(directoryPath);
-            // Save the file
-            Files.copy(imageFile.getInputStream(), imagePath);
+    @Override
+    public String saveImage(MultipartFile imageFile) {
+        String fileName = imageFile.getOriginalFilename();
+        String uploadDir = "src/main/resources/static/images/";
+        Path uploadPath = Paths.get(uploadDir);
+
+        if (!Files.exists(uploadPath)) {
+            try {
+                Files.createDirectories(uploadPath);
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to create directory", e);
+            }
+        }
+
+        try (InputStream inputStream = imageFile.getInputStream()) {
+            Path filePath = uploadPath.resolve(fileName);
+            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             throw new RuntimeException("Failed to store file", e);
         }
-        return imagePath.toString(); // Or return the URL if using a storage service
+
+        String imageUrl = "/src/main/resources/static/images/" + fileName; // Adjust the URL for web access
+        return imageUrl;
+    }
+
+    @Override
+    public String saveImage(MultipartFile file, int productId) throws IOException {
+        // Save the file to a specific location
+        String uploadDir = "src/main/resources/static/images/";
+        String fileName = file.getOriginalFilename();
+        Path uploadPath = Paths.get(uploadDir);
+
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        }
+
+        try (InputStream inputStream = file.getInputStream()) {
+            Path filePath = uploadPath.resolve(fileName);
+            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+        }
+
+        // Save the image information to the database
+        String imageUrl = "/src/main/resources/static/images/" + fileName;
+        saveImageToDatabase(imageUrl, productId);
+
+        return imageUrl;
+    }
+
+    @Override
+    public void saveImageToDatabase(String imageUrl, int productId) {
+        String sql = "INSERT INTO Image (image_url, product_id) VALUES (?, ?)";
+
+        try (Connection conn = dataSource.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, imageUrl);
+            ps.setInt(2, productId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to save image information to database", e);
+        }
     }
 
 }
