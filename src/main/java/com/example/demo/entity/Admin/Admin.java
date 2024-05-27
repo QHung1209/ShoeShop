@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 @Entity(name = "admin")
-public class Admins {
+public class Admin {
     @Id
     @GeneratedValue
 

@@ -5,7 +5,7 @@ import com.example.demo.repository.Admin.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import com.example.demo.entity.Admin.Admins;
+import com.example.demo.entity.Admin.Admin;
 import java.util.ArrayList;
 import com.example.demo.service.Admin.imp.LoginAdminServiceImp;
 import com.example.demo.payload.Admin.SignUpAdminRequest;
@@ -19,10 +19,10 @@ public class LoginAdminService implements LoginAdminServiceImp {
 
     @Override
     public List<AdminDTO> getAllAdmins() {
-        List<Admins> listAdmin = adminRepository.findAll();
+        List<Admin> listAdmin = adminRepository.findAll();
         List<AdminDTO> lAdminDTOs = new ArrayList<>();
 
-        for (Admins admin : listAdmin) {
+        for (Admin admin : listAdmin) {
             AdminDTO adminDTO = new AdminDTO();
             adminDTO.setId(admin.getId());
             adminDTO.setUsername(admin.getUsername());
@@ -36,7 +36,7 @@ public class LoginAdminService implements LoginAdminServiceImp {
 
     @Override
     public boolean checkLogin(String username, String password) {
-        List<Admins> listAdmin = adminRepository.findByUsernameAndPassword(username, password);
+        List<Admin> listAdmin = adminRepository.findByUsernameAndPassword(username, password);
         if (listAdmin.size() > 0) {
             return true;
         }
@@ -45,7 +45,7 @@ public class LoginAdminService implements LoginAdminServiceImp {
 
     @Override
     public boolean addUser(SignUpAdminRequest signUpAdminRequest) {
-        Admins admins = new Admins();
+        Admin admins = new Admin();
 
         Roles roles = new Roles();
         roles.setRole_id(signUpAdminRequest.getRole_id());

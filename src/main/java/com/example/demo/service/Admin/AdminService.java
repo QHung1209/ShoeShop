@@ -1,7 +1,7 @@
 package com.example.demo.service.Admin;
 
 import com.example.demo.dto.Admin.AdminDTO;
-import com.example.demo.entity.Admin.Admins;
+import com.example.demo.entity.Admin.Admin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +19,10 @@ public class AdminService implements AdminServiceImp {
 
     @Override
     public List<AdminDTO> getAllUser() {
-        List<Admins> listAdmin = adminRepository.findAll();
+        List<Admin> listAdmin = adminRepository.findAll();
         List<AdminDTO> lAdminDTOs = new ArrayList<>();
 
-        for (Admins admin : listAdmin) {
+        for (Admin admin : listAdmin) {
             AdminDTO adminDTO = new AdminDTO();
             adminDTO.setId(admin.getId());
             adminDTO.setUsername(admin.getUsername());

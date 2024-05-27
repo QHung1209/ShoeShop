@@ -44,6 +44,7 @@ public class CustomFilterSecurity {
                         .requestMatchers(HttpMethod.POST, "/login/signin").permitAll()
                         .requestMatchers(HttpMethod.POST, "/main/page").permitAll()
                         .requestMatchers(HttpMethod.GET, "/index").permitAll()
+                        
                         .requestMatchers(HttpMethod.GET, "/admin/logout").permitAll()
                         .requestMatchers(HttpMethod.POST, "/admin/signup").permitAll()
                         .requestMatchers(HttpMethod.POST, "/admin/signin").permitAll()
