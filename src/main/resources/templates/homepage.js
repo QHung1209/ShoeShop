@@ -20,5 +20,13 @@ $(document).ready(function () {
             }
 
         });
+    document.getElementById("allblack").addEventListener("click", function (event) {
+        localStorage.setItem('search', 'black')
+        window.location.href = "./productlist.html"
+    })
 
+    document.getElementById("saleoff").addEventListener("click", function (event) {
+        localStorage.setItem('saleoff', true);
+        window.location.href = "./productlist.html";
+    })
 })
