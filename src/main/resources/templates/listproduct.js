@@ -208,6 +208,7 @@ $(document).ready(function () {
     }
     else if (sale_check != null) {
       SaleOff();
+      document.getElementById("container-san-pham").scrollIntoView({ behavior: 'smooth' });
       localStorage.removeItem('saleoff')
     }
     else {
