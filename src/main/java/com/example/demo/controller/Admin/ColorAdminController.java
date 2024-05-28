@@ -48,13 +48,14 @@ public class ColorAdminController {
     // Cập nhật dữ liệu từ colors table
     @PutMapping("/updateColorName")
     public ResponseEntity<Void> updateColorName(@RequestParam String color_name, @RequestParam String newColorName) {
-        return colorsAdminServiceImp.updateColorName(color_name, newColorName);
+        colorsAdminServiceImp.updateColorName(color_name, newColorName);
+        return ResponseEntity.ok().build();
     }
-
-    // Cập nhật dữ liệu từ colors table
+    
     @PutMapping("/updateColorCode")
     public ResponseEntity<Void> updateColorCode(@RequestParam String color_code, @RequestParam String newColorCode) {
-        return colorsAdminServiceImp.updateColorCode(color_code, newColorCode);
+        colorsAdminServiceImp.updateColorCode(color_code, newColorCode);
+        return ResponseEntity.ok().build();
     }
 
     // Kiểm tra color_name có tồn tại không

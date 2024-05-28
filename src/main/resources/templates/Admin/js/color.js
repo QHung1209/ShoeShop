@@ -1,7 +1,7 @@
 $(document).ready(function () {
   // Gọi hàm lấy dữ liệu và thêm bảng vào khi trang web được tải
   fetchDataAndPopulateTable();
-  $("#add-color-btn").click(function () {
+  $("#add-color-btn").click(function (event) {
     event.preventDefault();
     addColor();
   });
@@ -16,7 +16,9 @@ $(document).ready(function () {
     updateColor(colorName, colorCode, newColorName, newColorCode, row);
   });
 });
+
 var itemCount = 0; // Biến đếm số lượng sản phẩm
+
 function fetchDataAndPopulateTable() {
   $.ajax({
     method: "GET",
@@ -31,13 +33,12 @@ function fetchDataAndPopulateTable() {
       itemCount = 0;
       msg.data.forEach(function (color) {
         itemCount++;
-        tableHTML += "<tr data-color-code-id='" + color.color_code + "'>";
-        tableHTML += "<tr data-color-name-id='" + color.color_name + "'>";
+        tableHTML += "<tr data-color-code-id='" + color.color_code + "' data-color-name-id='" + color.color_name + "'>";
         tableHTML += "<td>" + itemCount + "</td>";
         tableHTML +=
           "<td><span class='color-code-display'>" +
           color.color_code +
-          "</span><input class='color-name-input' type='text' value='" +
+          "</span><input class='color-code-input' type='text' value='" +
           color.color_code +
           "' style='display:none;'/></td>";
         tableHTML +=
@@ -83,73 +84,34 @@ function addColor() {
     return;
   }
 
-  // Kiểm tra xem colorCode đã tồn tại chưa
-  checkColorCodeExists(colorCode, function (codeExists) {
-    if (codeExists) {
-      alert("Mã màu đã tồn tại!");
-    } else {
-      // Kiểm tra xem colorName đã tồn tại chưa
-      checkColorNameExists(colorName, function (nameExists) {
-        if (nameExists) {
-          alert("Tên màu đã tồn tại!");
-        } else {
-          // Nếu cả colorCode và colorName chưa tồn tại, tạo đối tượng newColor từ dữ liệu người dùng nhập
-          var newColor = {
-            color_name: colorName,
-            color_code: colorCode,
-          };
+  // Tạo đối tượng newColor từ dữ liệu người dùng nhập
+  var newColor = {
+    color_name: colorName,
+    color_code: colorCode,
+  };
 
-          // Gửi yêu cầu POST để thêm màu mới
-          $.ajax({
-            method: "POST",
-            url: "http://127.0.0.1:8080/admin/product/addColors",
-            data: newColor,
-          })
-            .done(function (response) {
-              // Sau khi thêm màu, cập nhật lại bảng dữ liệu
-              fetchDataAndPopulateTable();
-            })
-            .fail(function (xhr, status, error) {
-              // Xử lý lỗi nếu có
-              console.error("Error:", error);
-              alert("Có lỗi xảy ra khi thêm màu!");
-            });
-        }
-      });
-    }
-  });
+  // Gửi yêu cầu POST để thêm màu mới
+  $.ajax({
+    method: "POST",
+    url: "http://127.0.0.1:8080/admin/product/addColors",
+    data: newColor,
+  })
+    .done(function (response) {
+      // Sau khi thêm màu, cập nhật lại bảng dữ liệu
+      fetchDataAndPopulateTable();
+    })
+    .fail(function (xhr, status, error) {
+      // Xử lý lỗi nếu có
+      console.error("Error:", error);
+      alert("Có lỗi xảy ra khi thêm màu!");
+    });
 }
 
-function updateColor(
-  oldColorName,
-  oldColorCode,
-  newColorName,
-  newColorCode,
-  row
-) {
-  checkColorNameExists(newColorName, function (nameExists) {
-    if (nameExists) {
-      alert("Tên màu đã tồn tại!");
-    } else {
-      checkColorCodeExists(newColorCode, function (codeExists) {
-        if (codeExists) {
-          alert("Mã màu đã tồn tại!");
-        } else {
-          updateColorOnServer(
-            oldColorName,
-            oldColorCode,
-            newColorName,
-            newColorCode,
-            row
-          );
-        }
-      });
-    }
-  });
+function updateColor(oldColorName, oldColorCode, newColorName, newColorCode, row) {
+  updateColorOnServer(oldColorName, oldColorCode, newColorName, newColorCode, row);
 }
 
 // Hàm cập nhật dữ liệu trên giao diện
-
 function updateUI(row, newColorName, newColorCode) {
   row.find(".color-name-display").text(newColorName);
   row.find(".color-code-display").text(newColorCode);
@@ -163,32 +125,31 @@ function updateUI(row, newColorName, newColorCode) {
   row.data("color-code", newColorCode);
 }
 
-function updateColorOnServer(
-  colorName,
-  colorCode,
-  newColorName,
-  newColorCode,
-  row
-) {
-  // Update color name first
+function updateColorOnServer(colorName, colorCode, newColorName, newColorCode, row) {
+  console.log(
+    "Updating color with:",
+    colorName,
+    colorCode,
+    newColorName,
+    newColorCode
+  ); // Debugging line
+
   $.ajax({
     method: "PUT",
     url: "http://127.0.0.1:8080/admin/product/updateColorName",
     data: {
-      color_name: ColorName,
+      color_name: colorName,
       newColorName: newColorName,
     },
     success: function (response) {
-      // After updating color name, update color code
       $.ajax({
         method: "PUT",
-        url: "http://localhost:8080/admin/product/updateColorCode",
+        url: "http://127.0.0.1:8080/admin/product/updateColorCode",
         data: {
           color_code: colorCode,
           newColorCode: newColorCode,
         },
         success: function (response) {
-          // After both updates are successful, update the UI
           updateUI(row, newColorName, newColorCode);
         },
         error: function (xhr, status, error) {
@@ -202,38 +163,4 @@ function updateColorOnServer(
       alert("Có lỗi xảy ra khi cập nhật tên màu!");
     },
   });
-}
-
-function checkColorCodeExists(colorCode, callback) {
-  $.ajax({
-    method: "GET",
-    url: "http://127.0.0.1:8080/admin/product/checkColorCodeExists",
-    data: { color_code: colorCode },
-  })
-    .done(function (msg) {
-      // Gọi callback với kết quả kiểm tra (true nếu style đã tồn tại, false nếu chưa)
-      callback(msg);
-    })
-    .fail(function (xhr, status, error) {
-      // Xử lý lỗi nếu có
-      console.error("Error:", error);
-      alert("Có lỗi xảy ra khi kiểm tra code màu!");
-    });
-}
-
-function checkColorNameExists(colorName, callback) {
-  $.ajax({
-    method: "GET",
-    url: "http://127.0.0.1:8080/admin/product/checkColorNameExists",
-    data: { color_name: colorName },
-  })
-    .done(function (msg) {
-      // Gọi callback với kết quả kiểm tra (true nếu style đã tồn tại, false nếu chưa)
-      callback(msg);
-    })
-    .fail(function (xhr, status, error) {
-      // Xử lý lỗi nếu có
-      console.error("Error:", error);
-      alert("Có lỗi xảy ra khi kiểm tra tên màu!");
-    });
 }

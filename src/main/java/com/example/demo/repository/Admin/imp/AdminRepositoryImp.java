@@ -19,4 +19,6 @@ public interface AdminRepositoryImp {
     public boolean isNameExisted(String name); 
     
     public List<Admins> findByUsernameAndPassword(String username, String password);
+
+    boolean deleteAdmin(int id);
 }

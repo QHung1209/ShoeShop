@@ -53,4 +53,9 @@ public class AdminService implements AdminServiceImp {
     public Admins addAdmin(Admins admin) {
         return adminRepository.saveAdmin(admin);
     }
+
+    @Override
+    public boolean deleteAdmin(Integer id) {
+        return adminRepository.deleteAdmin(id);
+    }
 }

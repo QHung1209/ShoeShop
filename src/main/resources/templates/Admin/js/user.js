@@ -35,6 +35,11 @@ $(document).ready(function () {
       });
     }
   });
+
+  $(document).on("click", ".delete-btn", function () {
+    var userId = $(this).data("id");
+    deleteUser(userId);
+  });
 });
 
 var itemCount = 0;
@@ -90,7 +95,7 @@ function fetchDataAndPopulateTable() {
             user.telephone +
             "' style='display:none;'/></td>";
           tableHTML +=
-            "<td><button class='edit-btn'><i class='fas fa-edit'></i> Sửa</button><button class='save-btn' style='display:none;'><i class='fas fa-save'></i> Lưu</button></td>";
+            "<td><button class='edit-btn'><i class='fas fa-edit'></i> Sửa</button><button class='save-btn' style='display:none;'><i class='fas fa-save'></i> Lưu</button><button class='delete-btn' data-id='" + user.user_id + "'><i class='fas fa-trash'></i> Xóa</button></td>";
           tableHTML += "</tr>";
         });
 
@@ -124,7 +129,6 @@ function fetchDataAndPopulateTable() {
 }
 
 function addUser() {
-  
   var username = $("#username").val();
   var password = $("#password").val();
   var name = $("#name").val();
@@ -204,4 +208,19 @@ function cancelEdit(row) {
   row.find(".username-display").show();
   row.find(".edit-btn").show();
   row.find(".save-btn").hide();
+}
+
+function deleteUser(userId) {
+  $.ajax({
+    url: "http://127.0.0.1:8080/admin/deleteAdmin/" + userId,
+    type: 'DELETE',
+    success: function(result) {
+      alert("User deleted successfully");
+      fetchDataAndPopulateTable(); // Reload the table data
+    },
+    error: function(xhr, status, error) {
+      console.error("Error:", error);
+      alert("Có lỗi xảy ra khi xóa dữ liệu!");
+    }
+  });
 }
