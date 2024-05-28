@@ -12,6 +12,8 @@ var swiper = new Swiper(".mySwiper", {
 const light_orange_color = '#f75f1d';
 const grey_color = '#4d4d4d';
 
+const info_sanpham = document.getElementById('info_sanpham');
+const info_doitra = document.getElementById('info_doitra');
 const info_btn = document.getElementById('info_btn');
 const exchange_btn = document.getElementById('exchange_btn');
 const row2_info = document.getElementById('row2_info');
@@ -19,7 +21,7 @@ const row2_exchange = document.getElementById('row2_exchange');
 const change1 = document.getElementById('change1');
 const change2 = document.getElementById("change2");
  
-info_btn.addEventListener('click', function () {
+info_sanpham.addEventListener('click', function () {
   if (row2_info.style.display == 'none') {
     row2_info.style.display = 'block';
     info_btn.classList.replace('bx-chevron-down', 'bx-x');
@@ -35,7 +37,7 @@ info_btn.addEventListener('click', function () {
   }
 });
 
-exchange_btn.addEventListener('click', function () {
+info_doitra.addEventListener('click', function () {
   if (row2_exchange.style.display == 'none') {
     row2_exchange.style.display = 'block';
     exchange_btn.classList.replace('bx-chevron-down', 'bx-x');

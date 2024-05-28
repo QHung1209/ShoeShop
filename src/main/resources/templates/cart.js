@@ -100,7 +100,7 @@ $(document).ready(async function () {
             <p class="price">${(totalPrice - totalSale).toLocaleString('vi-Vn')} <span>VND</span></p>
           </li>
         </ul>
-        <a href="./desktop5.html" class="pay-btn">THANH TOÁN</a>
+        <a href="./pay.html" class="pay-btn">THANH TOÁN</a>
       </div>`
         $(".column2").append(order)
       }

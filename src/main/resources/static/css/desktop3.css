@@ -405,8 +405,6 @@ header .content a:hover {
   flex-direction: row;
   justify-content: center;
   column-gap: 30px;
-  width: 915px;
-
 }
 
 .relate-products .big-box .box {

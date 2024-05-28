@@ -49,7 +49,7 @@ $(document).ready(function () {
                     }
                     else{
                         alert("Tạo tài khoản thành công")
-                        window.location.href = "./index.html"
+                        window.location.href = "./signin.html"
                     }
                 })
         }

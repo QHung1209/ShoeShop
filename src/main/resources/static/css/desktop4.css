@@ -95,6 +95,12 @@ header .content a:hover{
   font-size: 20px;
 }
 
+#search-form {
+  position: absolute;
+  display: flex;
+  right: 3%;
+  align-items: center;
+}
 /* Banner section */
 .banner{
   display: grid;

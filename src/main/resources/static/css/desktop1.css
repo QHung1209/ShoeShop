@@ -211,7 +211,7 @@ header .content a:hover{
 }
 .most-sell-products .content-container{
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   column-gap: 1rem;
   margin-bottom: 40px;
 }
@@ -221,7 +221,33 @@ header .content a:hover{
   object-fit: contain;
   object-position: center;
 }
+.products {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 225px;
+  box-sizing: border-box;
+  margin-bottom: 2%;
+}
+.ten-giay {
+  overflow-wrap: break-word;
+  font-weight: 850;
+  font-size: 16px;
+  letter-spacing: 0.6px;
+  color: #000000;
+  text-decoration: none;
+  border-radius: 3px;
+  margin: 3% 0 3% 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  box-sizing: border-box;
+  text-align: center;
+}
 
+.ten-giay:hover {
+  color: #F15E2C;
+}
 /* News and Posts */ 
 .news-and-posts{
   margin: auto;

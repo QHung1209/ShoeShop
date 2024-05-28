@@ -17,6 +17,7 @@ import com.example.demo.entity.Products;
 import com.example.demo.dto.ImageDTO;
 import com.example.demo.dto.InventoryDTO;
 import com.example.demo.dto.ProductDTO;
+import com.example.demo.repository.InventoryReposity;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.service.imp.ProductServiceImp;
 
@@ -25,6 +26,9 @@ public class ProductService implements ProductServiceImp {
 
     @Autowired
     ProductRepository ProductRepository;
+
+    @Autowired
+    InventoryReposity inventoryReposity;
 
     @Override
     public boolean insertProduct(int shoe_id, int color_id, int size_id, int gender_id, int style_id, int material_id,
@@ -200,5 +204,16 @@ public class ProductService implements ProductServiceImp {
             productDTOs.add(geProductDTO(data));
         }
         return productDTOs;
+    }
+
+    @Override
+    public List<ProductDTO> top5MostSell() {
+        List<Products> listProducts = inventoryReposity.findMostSell();
+        List<ProductDTO> lProductDTOs = new ArrayList<>();
+        for(Products data : listProducts)
+        {
+            lProductDTOs.add(geProductDTO(data));
+        }
+        return lProductDTOs;
     }
 }

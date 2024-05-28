@@ -22,20 +22,20 @@ $(document).ready(function () {
         var token = localStorage.getItem("token");
         localStorage.setItem("url_temp", url_temp)
         if (!token) {
-            window.location.href = "./index.html"; // Redirect to login page if token is not present
+            window.location.href = "./signin.html"; // Redirect to login page if token is not present
         }
     });
     document.getElementById("account").addEventListener("click", function () {
         var token = localStorage.getItem("token");
         localStorage.setItem("url_temp", url_temp)
         if (!token) {
-            window.location.href = "./index.html"; // Redirect to login page if token is not present
+            window.location.href = "./signin.html"; // Redirect to login page if token is not present
         }
 
     });
     document.getElementById("logout").addEventListener("click", function () {
         localStorage.removeItem("token")
-        window.location.href = "./desktop1.html"; // Redirect to login page if token is not present
+        window.location.href = "./homepage.html"; // Redirect to login page if token is not present
 
     });
 })  

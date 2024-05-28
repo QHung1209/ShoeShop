@@ -16,7 +16,7 @@ function fetchDataAndPopulateTable() {
       url: "http://127.0.0.1:8080/admin/product/getInventory",
     }).done(function (msg) {
       if (msg.data) {
-       
+        console.log(msg.data)
         var tableHTML = "<table>";
         tableHTML += "<tr><th>STT</th><th>Tên sản phẩm</th><th>Size</th><th>Số lượng</th><th>Chức năng</th></tr>";
         itemCount = 0;
