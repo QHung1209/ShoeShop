@@ -99,7 +99,7 @@ public class CartService implements CartServiceImp {
             cartRepository.deleteAllCartByCartId(cart_id);
         } else if(existingCart != null && existingCart.getCart_id() == cart_id || existingCart == null) {
             cartRepository.updateCartBy(cart_id, size_id, quantity);
-        } 
+        }
         return true;
     }
 

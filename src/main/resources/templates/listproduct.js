@@ -154,7 +154,6 @@ function updateURL() {
     gender: getCheckedIds('.gender')
   };
 
-  // Get base URL
   var url = "./productlist.html"
 
   var queryString = Object.keys(queryParams)
@@ -167,10 +166,10 @@ function updateURL() {
   }
 
   window.history.replaceState({}, document.title, url);
-  let searchParams = new URLSearchParams(window.location.search)
-  console.log(searchParams.toString())
+  //let searchParams = new URLSearchParams(window.location.search)
+  console.log(queryString.toString())
 
-  filter(searchParams);
+  filter(queryString);
 
 }
 
