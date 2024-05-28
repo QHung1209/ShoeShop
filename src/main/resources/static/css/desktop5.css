@@ -357,6 +357,12 @@ header .content a:hover {
   text-align: center;
   line-height: 50px;
 }
+#search-form {
+  position: absolute;
+  display: flex;
+  right: 3%;
+  align-items: center;
+}
 .dropdown-content {
   display: none;
   position: absolute;

@@ -80,13 +80,7 @@ $(document).ready(async function () {
         var order = `<div class="order">
         <ul class="list-group">
           <li class="li1">ĐƠN HÀNG</li>
-          <li class="li2">NHẬP MÃ KHUYẾN MÃI</li>
-          <li class="li3">
-            <input type="text">
-            <span>
-              <button class="btn" type="button">ÁP DỤNG</button>
-            </span>
-          </li>
+          
           <li class="li4">
             <p class="order">Đơn hàng</p>
             <p class="price">${totalPrice.toLocaleString('vi-Vn')} <span>VND</span></p>
@@ -110,14 +104,12 @@ $(document).ready(async function () {
 
 
   $(".column1").on("click", ".boxx", function () {
-    var detailElement = $(this).closest('.detail');
+    var detailElement = $(this).closest('.col'); // Changed from '.detail' to '.col' to find the closest col element
     var product_id = detailElement.find('.name').attr('id');
-    var size_id = detailElement.find('#size').val();
-    console.log(product_id)
-    console.log(size_id)
+    var size_id = detailElement.find('.size-select').val(); // Changed from '#size' to '.size-select'
 
-    console.log(product_id)
-    console.log(size_id)
+    console.log(product_id);
+    console.log(size_id);
 
     $.ajax({
       method: "DELETE",
