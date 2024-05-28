@@ -24,6 +24,7 @@ public class InventoryAdminService implements InventoryAdminServiceImp {
         return inventoryAdminRepository.addInventory(
                 addInventoryDTO.getShoeName(),
                 addInventoryDTO.getSizeName(),
+                addInventoryDTO.getColorName(),
                 addInventoryDTO.getQuantity());
     }
 

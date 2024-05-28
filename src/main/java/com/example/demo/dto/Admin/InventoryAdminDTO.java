@@ -12,6 +12,7 @@ public class InventoryAdminDTO {
     }
 
     private String shoeName;
+    private String colorName;
     private int sizeName;
     private int quantity;
 
@@ -23,10 +24,11 @@ public class InventoryAdminDTO {
         this.quantity = quantity;
     }
 
-    public InventoryAdminDTO(int inventoryId, String shoeName, int sizeName, int quantity) {
+    public InventoryAdminDTO(int inventoryId, String shoeName, int sizeName, String colorName, int quantity) {
         this.inventoryId = inventoryId;
         this.shoeName = shoeName;
         this.sizeName = sizeName;
+        this.colorName = colorName;
         this.quantity = quantity;
     }
 
@@ -44,5 +46,13 @@ public class InventoryAdminDTO {
 
     public void setSizeName(int sizeName) {
         this.sizeName = sizeName;
+    }
+
+    public String getColorName() {
+        return colorName;
+    }
+
+    public void setColorName(String colorName) {
+        this.colorName = colorName;
     }
 }
