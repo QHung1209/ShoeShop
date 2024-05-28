@@ -66,13 +66,13 @@ public class AdminController {
         return new ResponseEntity<>(Collections.singletonMap("message", "User updated successfully"), HttpStatus.OK);
     }
 
-    // @DeleteMapping("deleteAdmin/{id}")
-    // public ResponseEntity<?> deleteUser(@PathVariable Integer id) {
-    // boolean isDeleted = adminServiceImp.deleteAdmin(id);
-    // if (!isDeleted) {
-    // return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
-    // }
-    // return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
-    // }
+    @DeleteMapping("deleteAdmin/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable Integer id) {
+    boolean isDeleted = adminServiceImp.deleteAdmin(id);
+    if (!isDeleted) {
+    return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+    }
+    return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
+    }
 
 }

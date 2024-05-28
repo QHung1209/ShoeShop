@@ -93,4 +93,10 @@ public class AdminRepository implements AdminRepositoryImp {
         }, username, password);
         return admins;
     }
+
+    @Override
+    public boolean deleteAdmin(int id) {
+        String sql = "DELETE FROM admins WHERE user_id = ?";
+        return jdbcTemplate.update(sql, id) > 0;
+    }
 }

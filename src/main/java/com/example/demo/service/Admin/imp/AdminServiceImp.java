@@ -9,7 +9,7 @@ public interface AdminServiceImp {
 
     public void updateAdmin(int userId, String newUserName, String newPassword, String newName, String newAddress, String newTelephone);   
 
-    // boolean deleteAdmin(Integer id);
+    boolean deleteAdmin(Integer id);
 
     Admins addAdmin(Admins admin);
 
