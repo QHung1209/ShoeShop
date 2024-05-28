@@ -17,12 +17,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-@Entity(name = "admin")
+@Entity(name = "admins")
 public class Admins {
     @Id
     @GeneratedValue
 
-    private Integer id;
+    private Integer user_id;
 
     @Column(name = "username")
     private String username;
@@ -42,14 +42,15 @@ public class Admins {
     @Column(name = "role_id", insertable = false, updatable = false)
     private Integer role_id;
 
-  
-    public int getId() {
-        return id;
+
+    public Integer getUser_id() {
+        return user_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
+ 
 
     public String getUsername() {
         return username;
@@ -90,6 +91,9 @@ public class Admins {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+
+
+
 
     @ManyToOne
     @JoinColumn(name = "role_id")

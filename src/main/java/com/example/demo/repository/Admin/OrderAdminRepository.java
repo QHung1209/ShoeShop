@@ -81,16 +81,19 @@ public class OrderAdminRepository implements OrderAdminRepositoryImp {
     }
 
     public List<OrderDetailAdminDTO> getOrderDetailsByOrderId(int orderId) {
-        String jpql = "SELECT new com.example.demo.dto.Admin.OrderDetailAdminDTO(od.order_detail_id, s.name, sz.size_name, od.quantity, od.price) "
-                +
-                "FROM Order_detail od " +
-                "JOIN od.products p " +
-                "JOIN p.shoes s " +
-                "JOIN od.sizes sz " +
-                "WHERE od.orders.order_id = :orderId";
+        String jpql = "SELECT new com.example.demo.dto.Admin.OrderDetailAdminDTO(od.order_detail_id, s.name, sz.size_name, c.color_name, od.quantity, od.price) "
+                    + "FROM Order_detail od "
+                    + "JOIN od.products p "
+                    + "JOIN p.shoes s "
+                    + "JOIN od.sizes sz "
+                    + "JOIN p.colors c "
+                    + "WHERE od.orders.order_id = :orderId";
         TypedQuery<OrderDetailAdminDTO> query = entityManager.createQuery(jpql, OrderDetailAdminDTO.class);
         query.setParameter("orderId", orderId);
-        return query.getResultList();
+        List<OrderDetailAdminDTO> results = query.getResultList();
+        
+        return results;
     }
+    
 
 }

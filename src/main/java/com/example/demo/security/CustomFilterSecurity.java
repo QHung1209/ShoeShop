@@ -44,10 +44,15 @@ public class CustomFilterSecurity {
                         .requestMatchers(HttpMethod.POST, "/login/signin").permitAll()
                         .requestMatchers(HttpMethod.POST, "/main/page").permitAll()
                         .requestMatchers(HttpMethod.GET, "/index").permitAll()
+
+                        // Admin
                         .requestMatchers(HttpMethod.GET, "/admin/logout").permitAll()
                         .requestMatchers(HttpMethod.POST, "/admin/signup").permitAll()
                         .requestMatchers(HttpMethod.POST, "/admin/signin").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/addAdmin").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/admin/updateAdmin/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/admin/deleteAdmin/**").permitAll()
                         // Shoes
                         .requestMatchers(HttpMethod.POST, "/admin/product/addShoes").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/product/getShoes").permitAll()
