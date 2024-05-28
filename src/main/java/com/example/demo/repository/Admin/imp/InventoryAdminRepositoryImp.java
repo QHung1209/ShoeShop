@@ -8,7 +8,7 @@ public interface InventoryAdminRepositoryImp {
 
     public List<InventoryAdminDTO> getInventory();
 
-    public Inventory addInventory(String shoeName, int sizeName, int quantity);
+    public Inventory addInventory(String shoeName, int sizeName, String colorName,int quantity);
 
     public Inventory updateInventory(int inventoryId, int quantity);
 

@@ -2,6 +2,7 @@ $(document).ready(function () {
   fetchDataAndPopulateTable();
   fetchShoeNames();
   fetchSizeNames();
+  fetchColorNames();
 
   $("#submit-inventory-btn").click(function (event) {
     event.preventDefault();
@@ -18,7 +19,7 @@ function fetchDataAndPopulateTable() {
       if (msg.data) {
         console.log(msg.data)
         var tableHTML = "<table>";
-        tableHTML += "<tr><th>STT</th><th>Tên sản phẩm</th><th>Size</th><th>Số lượng</th><th>Chức năng</th></tr>";
+        tableHTML += "<tr><th>STT</th><th>Tên sản phẩm</th><th>Size</th><th>Màu sắc</th><th>Số lượng</th><th>Chức năng</th></tr>";
         itemCount = 0;
         msg.data.forEach(function (inventory) {
           itemCount++;
@@ -27,6 +28,7 @@ function fetchDataAndPopulateTable() {
     
           tableHTML += "<td><span class='name-display'>" + inventory.shoeName + "</span></td>";
           tableHTML += "<td><span class='size-display'>" + inventory.sizeName + "</span></td>";
+          tableHTML += "<td><span class='color-display'>" + inventory.colorName + "</span></td>";
           tableHTML += "<td><span class='quantity-display'>" + inventory.quantity + "</span></td>";
           tableHTML += "<td>";
           tableHTML += "<button class='edit-btn'>Sửa</button>";
@@ -105,12 +107,33 @@ function fetchSizeNames() {
     });
 }
 
+function fetchColorNames() {
+  $.ajax({
+    method: "GET",
+    url: "http://127.0.0.1:8080/admin/product/getColorsNames",
+  })
+    .done(function (data) {
+      var colorNameSelect = $("#color-name-select");
+      colorNameSelect.empty(); // Clear existing options
+      data.forEach(function (colorName) {
+        colorNameSelect.append(new Option(colorName, colorName));
+      });
+    })
+    .fail(function (xhr, status, error) {
+      console.error("Error:", error);
+      alert("Có lỗi xảy ra khi lấy tên giày!");
+    });
+}
+
+
+
 function addInventory() {
   var shoeName = $("#shoe-name-select").val();
   var sizeName = $("#size-name-select").val();
+  var colorName = $("#color-name-select").val();
   var quantity = $("#quantity").val();
 
-  if (!shoeName || !sizeName || !quantity) {
+  if (!shoeName || !sizeName || !colorName||!quantity) {
     alert("Vui lòng nhập đầy đủ thông tin sản phẩm");
     return;
   }
@@ -118,6 +141,7 @@ function addInventory() {
   var newInventory = {
     shoeName: shoeName,
     sizeName: sizeName,
+    colorName: colorName,
     quantity: parseInt(quantity),
   };
 
