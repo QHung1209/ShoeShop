@@ -21,9 +21,6 @@
   <!-- Header section -->
   <header>
     <!-- Tra cứu đơn hàng -->
-    <div class="content">
-      <a href="#"><i class='bx bx-archive'></i> Tra cứu đơn hàng</a>
-    </div>
     <!-- Giỏ hàng -->
     <div class="content">
       <a href="#" class="cart" id="cart"><i class='bx bx-cart-alt' ></i> Giỏ hàng</a>
@@ -34,23 +31,24 @@
       <a href="#" class="account" id="account" onclick="toggleDropdown(event)"><i class='bx bx-user'></i> Tài Khoản</a>
       <div id="myDropdown" class="dropdown-content">
         <a class="user_account" href="./profile.html"></a>
-        <a href="#" class="logout" id="logout">Đăng xuất</a>
+        <a href="#" id="logout">Đăng xuất</a>
+
       </div>
     </div>
   </header>
   
   <!-- Navbar section -->
   <section class="logo-and-navbar" >
-    <a href="./desktop1.html" class="logo"><img src="../static/images/logo.png" alt=""></a>
+    <a href="./homepage.html" class="logo"><img src="/src/main/resources/static/images/logogiay.jpg" style="width: 130px; height: 130px;" alt=""></a>
 
     <ul class="navbar">
-      <li><a href="./desktop2.html">SẢN PHẨM</a></li>
+      <li><a href="./productlist.html">SẢN PHẨM</a></li>
       <li><p>|</p></li>
       <li><a class="male" href="#" onclick="return false;">NAM</a></li>
       <li><p>|</p></li>
       <li><a class="female" href="#" onclick="return false;">NỮ</a></li>
       <li><p>|</p></li>
-      <li><a class="sale" href="#" onclick="return false;">KHUYẾN MÃI</a></li>
+      <li><a class="sale" href="#" onclick="return false;">GIẢM GIÁ</a></li>
     </ul>
   </section>
 
@@ -79,42 +77,17 @@
     <h2 class="content">
       sản phẩm bán chạy
     </h2>
-    <div class="content-container">
+    <div class="content-container" id="most-sell">
+      
+      <!-- <a href="#"><img src="../static/images/grey.png" alt=""></a>
       <a href="#"><img src="../static/images/grey.png" alt=""></a>
       <a href="#"><img src="../static/images/grey.png" alt=""></a>
       <a href="#"><img src="../static/images/grey.png" alt=""></a>
-      <a href="#"><img src="../static/images/grey.png" alt=""></a>
-      <a href="#"><img src="../static/images/grey.png" alt=""></a>
+      <a href="#"><img src="../static/images/grey.png" alt=""></a> -->
     </div>
   </section>
 
   <!-- News and Posts -->
-  <section class="news-and-posts">
-    <h2 class="content">
-      Tin tức & bài viết
-    </h2>
-    <div class="content-container">
-      <div class="box">
-        <img src="../static/images/rectangle25.png" alt="">
-        <p class="name">Tên tin tức</p>
-        <p class="info">nội dung có chữ <br><a href="#">xem them</a></p>
-        
-      </div>
-      <div class="box">
-        <img src="../static/images/rectangle26.png" alt="">
-        <p class="name">tên tin tức</p>
-        <p class="info">nội dung có chữ <br><a href="#">xem them</a></p>
-        
-      </div>
-      <div class="box">
-        <img src="../static/images/rectangle27.png" alt="">
-        <p class="name">tên tin tức</p>
-        <p class="info">nội dung có chữ <br><a href="#">xem them</a></p>
-        
-      </div>
-    </div>
-
-  </section>
 
   <!-- footer section -->
   <footer>
@@ -168,6 +141,8 @@
     </div>
 
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="../static/js/x.js"></script>
+  <script src="./homepage.js"></script>
 </body>
 </html>

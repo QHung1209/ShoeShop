@@ -1,4 +1,50 @@
 
+function GetAllProduct() {
+  var link_product = "http://localhost:8080/product/allproduct"
+  var token = localStorage.getItem("token")
+  var url_temp = window.location.href
+  console.log(token)
+  $.ajax({
+    method: "GET",
+    url: link_product,
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+
+  })
+    .done(function (msg) {
+      if (msg) {
+        $.each(msg.data, function (index, value) {
+          console.log(value);
+          var priceHtml = "";
+          if (value.discount != 0) {
+            // Calculate discounted price
+            var discountedPrice = value.price * (100 - value.discount) / 100;
+            priceHtml = `<span class="vnd">${discountedPrice.toLocaleString('vi-VN')} VND   <s style="text-decoration: line-through; font-weight:500; font-size:14px">${value.price.toLocaleString('vi-VN')} VND</s></span>`;
+          } else {
+            priceHtml = `<span class="vnd">${value.price.toLocaleString('vi-VN')} VND</span>`;
+          }
+          var html = `<div class="san-pham">
+                    <div class="container-hover-image">
+                      <a href="productdetail.html?id=${value.product_id}"><img class="rectangle-38" img src="${value.image_url}" alt=""></a>
+                      <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
+                    </div>
+                    <a href="productdetail.html?id=${value.product_id}" class="ten-giay">
+                      ${value.shoe_name}
+                    </a>
+                    <span class ="color_name" >
+                      ${value.color_name}
+                    </span>
+                    ${priceHtml}
+                  </div>`
+
+          $("#container-san-pham").append(html)
+
+        })
+      }
+
+    });
+}
 function search(search_key) {
   $.ajax({
     method: "GET",
@@ -13,11 +59,11 @@ function search(search_key) {
         $.each(msg.data, function (index, value) {
           var html = `<div class="san-pham">
                     <div class="container-hover-image">
-                        <a href="desktop3.html?id=${value.product_id}"><img class="rectangle-38" src="${value.image_url}" alt=""></a>
+                        <a href="productdetail.html?id=${value.product_id}"><img class="rectangle-38" src="${value.image_url}" alt=""></a>
                         <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
                     </div>
                     
-                    <a href="desktop3.html?id=${value.product_id}" class="ten-giay">${value.shoe_name}</a>
+                    <a href="productdetail.html?id=${value.product_id}" class="ten-giay">${value.shoe_name}</a>
                     <span class ="color_name" >
                       ${value.color_name}
                     </span>
@@ -39,7 +85,6 @@ function filter(param) {
         $.each(msg.data, function (index, value) {
           var priceHtml = "";
           if (value.discount != 0) {
-            // Calculate discounted price
             var discountedPrice = value.price * (100 - value.discount) / 100;
             priceHtml = `<span class="vnd">${discountedPrice.toLocaleString('vi-VN')} VND   <s style="text-decoration: line-through; font-weight:500; font-size:14px">${value.price.toLocaleString('vi-VN')} VND</s></span>`;
           } else {
@@ -47,10 +92,10 @@ function filter(param) {
           }
           var html = `<div class="san-pham">
                     <div class="container-hover-image">
-                        <a href="desktop3.html?id=${value.product_id}"><img class="rectangle-38" src="${value.image_url}" alt=""></a>
+                        <a href="productdetail.html?id=${value.product_id}"><img class="rectangle-38" src="${value.image_url}" alt=""></a>
                         <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
                     </div>
-                    <a href="desktop3.html?id=${value.product_id}" class="ten-giay">${value.shoe_name}</a>
+                    <a href="productdetail.html?id=${value.product_id}" class="ten-giay">${value.shoe_name}</a>
                     <span class ="color_name" >
                       ${value.color_name}
                     </span>
@@ -81,10 +126,10 @@ function SaleOff() {
           }
           var html = `<div class="san-pham">
                     <div class="container-hover-image">
-                        <a href="desktop3.html?id=${value.product_id}"><img class="rectangle-38" src="${value.image_url}" alt=""></a>
+                        <a href="productdetail.html?id=${value.product_id}"><img class="rectangle-38" src="${value.image_url}" alt=""></a>
                         <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
                     </div>
-                    <a href="desktop3.html?id=${value.product_id}" class="ten-giay">${value.shoe_name}</a>
+                    <a href="productdetail.html?id=${value.product_id}" class="ten-giay">${value.shoe_name}</a>
                     <span class ="color_name" >
                       ${value.color_name}
                     </span>
@@ -97,83 +142,28 @@ function SaleOff() {
 }
 function updateURL() {
 
-  var checkedCheckboxes = document.querySelectorAll('.myinputCheckbox:checked');
-  var queryParams = [];
-  checkedCheckboxes.forEach(function (checkbox) {
-    queryParams.push(checkbox.id);
-  });
+  function getCheckedIds(selector) {
+    return Array.from(document.querySelectorAll(selector + ':checked')).map(checkbox => checkbox.id);
+  }
 
-  var checkedCheckboxes_kieudang = document.querySelectorAll('.kieu-dang:checked');
-  var queryParams_kieudang = [];
-  checkedCheckboxes_kieudang.forEach(function (checkbox) {
-    queryParams_kieudang.push(checkbox.id);
-  });
+  var queryParams = {
+    price: getCheckedIds('.myinputCheckbox'),
+    style: getCheckedIds('.kieu-dang'),
+    category: getCheckedIds('.dong-san-pham'),
+    material: getCheckedIds('.chat-lieu'),
+    gender: getCheckedIds('.gender')
+  };
 
-  var checkedCheckboxes_dongsanpham = document.querySelectorAll('.dong-san-pham:checked');
-  var queryParams_dongsanpham = [];
-  checkedCheckboxes_dongsanpham.forEach(function (checkbox) {
-    queryParams_dongsanpham.push(checkbox.id);
-  });
-
-  var checkedCheckboxes_chatlieu = document.querySelectorAll('.chat-lieu:checked');
-  var queryParams_chatlieu = [];
-  checkedCheckboxes_chatlieu.forEach(function (checkbox) {
-    queryParams_chatlieu.push(checkbox.id);
-  });
-
-  var checkedCheckboxes_gender = document.querySelectorAll('.gender:checked');
-  var queryParams_gender = [];
-  checkedCheckboxes_gender.forEach(function (checkbox) {
-    queryParams_gender.push(checkbox.id);
-    console.log(queryParams_gender)
-  });
   // Get base URL
-  var url = window.location.href.split('?')[0];
+  var url = "./productlist.html"
 
-  // Additional parameters such as gender and category
-  if (queryParams.length > 0 || queryParams_kieudang.length > 0 || queryParams_dongsanpham.length > 0 || queryParams_chatlieu.length > 0 || queryParams_gender.length > 0) {
-    url += '?'; // Add '?' if it doesn't exist
-  }
+  var queryString = Object.keys(queryParams)
+    .filter(key => queryParams[key].length > 0)
+    .map(key => `${key}=${queryParams[key].join(',')}`)
+    .join('&');
 
-  if (queryParams.length > 0) {
-    url += 'price=';
-    url += queryParams.join(',');
-  }
-
-  if (queryParams_kieudang.length > 0) {
-    if (queryParams.length > 0) {
-      url += '&style='; // Add '&' to append to existing params
-    }
-    else
-      url += 'style=';
-    url += queryParams_kieudang.join(',');
-  }
-
-  if (queryParams_dongsanpham.length > 0) {
-    if (queryParams.length > 0 || queryParams_kieudang.length > 0) {
-      url += '&category='; // Add '&' to append to existing params
-    }
-    else
-      url += 'category=';
-    url += queryParams_dongsanpham.join(',');
-  }
-
-  if (queryParams_chatlieu.length > 0) {
-    if (queryParams.length > 0 || queryParams_kieudang.length > 0 || queryParams_dongsanpham.length > 0) {
-      url += '&material='; // Add '&' to append to existing params
-    }
-    else
-      url += 'material=';
-    url += queryParams_chatlieu.join(',');
-  }
-
-  if (queryParams_gender.length > 0) {
-    if (queryParams.length > 0 || queryParams_kieudang.length > 0 || queryParams_dongsanpham.length > 0 || queryParams_chatlieu.length > 0) {
-      url += '&gender='; // Add '&' to append to existing params
-    }
-    else
-      url += 'gender=';
-    url += queryParams_gender.join(',');
+  if (queryString) {
+    url += '?' + queryString;
   }
 
   window.history.replaceState({}, document.title, url);
@@ -221,52 +211,7 @@ $(document).ready(function () {
       localStorage.removeItem('saleoff')
     }
     else {
-
-      var link_product = "http://localhost:8080/product/allproduct"
-      var token = localStorage.getItem("token")
-      var url_temp = window.location.href
-      console.log(token)
-      $.ajax({
-        method: "GET",
-        url: link_product,
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-
-      })
-        .done(function (msg) {
-          if (msg) {
-            $.each(msg.data, function (index, value) {
-              console.log(value);
-              var priceHtml = "";
-              if (value.discount != 0) {
-                // Calculate discounted price
-                var discountedPrice = value.price * (100 - value.discount) / 100;
-                priceHtml = `<span class="vnd">${discountedPrice.toLocaleString('vi-VN')} VND   <s style="text-decoration: line-through; font-weight:500; font-size:14px">${value.price.toLocaleString('vi-VN')} VND</s></span>`;
-              } else {
-                priceHtml = `<span class="vnd">${value.price.toLocaleString('vi-VN')} VND</span>`;
-              }
-              var html = `<div class="san-pham">
-                    <div class="container-hover-image">
-                      <a href="desktop3.html?id=${value.product_id}"><img class="rectangle-38" img src="${value.image_url}" alt=""></a>
-                      <div class="button-hover"><a class="mua-ngay" href="#"> MUA NGAY </a></div>
-                    </div>
-                    <a href="desktop3.html?id=${value.product_id}" class="ten-giay">
-                      ${value.shoe_name}
-                    </a>
-                    <span class ="color_name" >
-                      ${value.color_name}
-                    </span>
-                    ${priceHtml}
-                  </div>`
-
-              $("#container-san-pham").append(html)
-
-            })
-          }
-
-        });
-
+      GetAllProduct();
     }
   }
 
@@ -335,23 +280,23 @@ $(document).ready(function () {
     var token = localStorage.getItem("token");
     localStorage.setItem("url_temp", url_temp)
     if (!token) {
-      window.location.href = "./index.html"; // Redirect to login page if token is not present
+      window.location.href = "./signin.html"; // Redirect to login page if token is not present
     }
     else {
-      window.location.href = "./desktop4.html";
+      window.location.href = "./cart.html";
     }
   });
   document.getElementById("account").addEventListener("click", function () {
     var token = localStorage.getItem("token");
     localStorage.setItem("url_temp", url_temp)
     if (!token) {
-      window.location.href = "./index.html"; // Redirect to login page if token is not present
+      window.location.href = "./signin.html"; // Redirect to login page if token is not present
     }
 
   });
   document.getElementById("logout").addEventListener("click", function () {
     localStorage.removeItem("token")
-    window.location.href = "./desktop1.html"; // Redirect to login page if token is not present
+    window.location.href = "./homepage.html"; // Redirect to login page if token is not present
 
   });
 

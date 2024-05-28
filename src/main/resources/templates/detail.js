@@ -68,7 +68,7 @@ $(document).ready(function () {
                 if (msg.data.related_products) {
                     $.each(msg.data.related_products, function (index, value) {
                         console.log(value);
-                        var color = ` <li class="color2" ><a href="desktop3.html?id=${value.product_id}"><i class='bx bxs-square' style="color: ${value.color_code}; "></i></a></li>`
+                        var color = ` <li class="color2" ><a href="productdetail.html?id=${value.product_id}"><i class='bx bxs-square' style="color: ${value.color_code}; "></i></a></li>`
 
                         $(".related_color").append(color)
                     })
@@ -82,18 +82,33 @@ $(document).ready(function () {
                         $(".size_option").append(size)
                     })
                 }
-
+                var i = 0;
                 $.each(value.related_products, function (index, product) {
+                    if (index >= 4) {
+                        return false;
+                    }
                     var related_html = `<div class="box">
-                                            <a href = "./desktop3.html?id=${product.product_id}">
+                                            <a href = "./productdetail.html?id=${product.product_id}">
                                             <img src="${product.image_url}" alt="">
                                             </a>
-                                            <a href="desktop3.html?id=${product.product_id}" class="ten-giay">${product.shoe_name}</a>
+                                            <a href="productdetail.html?id=${product.product_id}" class="ten-giay">${product.shoe_name}</a>
                                             <span class="color">${product.color_name}</span>
                                             <span class="price">${product.price.toLocaleString('vi-VN')} <span>VND</span></span>
                                         </div>`
                     $(".big-box").append(related_html);
                 })
+
+                $.each(value.imageDTOs, function (index, image) {
+                    var image_html = `<div class="swiper-slide"><img src="${image.image_url}" alt=""></div>`
+                    $(".sub-images").append(image_html);
+
+                })
+
+                var info_html = `<p style="text-transform: capitalize;">Gender: ${value.gender}</p>
+                                <p>Material: ${value.material}</p>
+                                <p>Style: ${value.style}</p>
+                                <img src="../static/images/image1.png" alt="">`
+                $(".info-gender").append(info_html)
             }
 
         });
@@ -105,10 +120,11 @@ $(document).ready(function () {
         var token = localStorage.getItem("token");
 
         if (!token) {
-            window.location.href = "./index.html";
+            window.location.href = "./signin.html";
         }
         else {
             if ($('#size').val() == null || $('#quantity').val() == null) {
+                $(".warning").empty()
                 $(".warning").append(`<p style="color: red;">Chọn size/ số lượng phù hợp</p>`)
             }
             else {
@@ -153,10 +169,11 @@ $(document).ready(function () {
         var token = localStorage.getItem("token");
 
         if (!token) {
-            window.location.href = "./index.html";
+            window.location.href = "./signin.html";
         }
         else {
             if ($('#size').val() == null || $('#quantity').val() == null) {
+                $(".warning").empty()
                 $(".warning").append(`<p style="color: red;">Chọn size/ số lượng phù hợp</p>`)
             }
             else {
@@ -185,7 +202,7 @@ $(document).ready(function () {
                             })
                                 .done(function (msg2) {
                                     if (msg2) {
-                                        window.location.href = "./desktop5.html";
+                                        window.location.href = "./pay.html";
                                     }
                                 })
                         }
@@ -199,23 +216,23 @@ $(document).ready(function () {
         var token = localStorage.getItem("token");
         localStorage.setItem("url_temp", url_temp)
         if (!token) {
-            window.location.href = "./index.html"; // Redirect to login page if token is not present
+            window.location.href = "./signin.html"; // Redirect to login page if token is not present
         }
         else {
-            window.location.href = "./desktop4.html";
+            window.location.href = "./cart.html";
         }
     });
     document.getElementById("account").addEventListener("click", function () {
         var token = localStorage.getItem("token");
         localStorage.setItem("url_temp", url_temp)
         if (!token) {
-            window.location.href = "./index.html"; // Redirect to login page if token is not present
+            window.location.href = "./signin.html"; // Redirect to login page if token is not present
         }
 
     });
     document.getElementById("logout").addEventListener("click", function () {
         localStorage.removeItem("token")
-        window.location.href = "./desktop1.html"; // Redirect to login page if token is not present
+        window.location.href = "./homepage.html"; // Redirect to login page if token is not present
 
     });
 

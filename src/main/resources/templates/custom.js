@@ -20,7 +20,7 @@ $(document).ready(function () {
                         window.location.href = localStorage.getItem("url_temp")
                     }
                     else
-                        window.location.href = "./desktop1.html"
+                        window.location.href = "./homepage.html"
 
                 }
                 else {

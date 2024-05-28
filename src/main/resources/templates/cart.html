@@ -22,12 +22,9 @@
   <!-- Header section -->
   <header>
     <!-- Tra cứu đơn hàng -->
-    <div class="content">
-      <a href="#"><i class='bx bx-archive'></i> Tra cứu đơn hàng</a>
-    </div>
     <!-- Giỏ hàng -->
     <div class="content">
-      <a href="./desktop4.html" id="cart"><i class='bx bx-cart-alt' class="cart" id="cart"></i> Giỏ hàng</a>
+      <a href="./cart.html" id="cart"><i class='bx bx-cart-alt' class="cart" id="cart"></i> Giỏ hàng</a>
     </div>
     <!-- Đăng nhập -->
     <div class="content">
@@ -42,10 +39,10 @@
 
   <!-- Navbar section -->
   <section class="logo-and-navbar">
-    <a href="./desktop1.html" class="logo"><img src="../static/images/logo.png" alt=""></a>
+    <a href="./homepage.html" class="logo"><img src="/src/main/resources/static/images/logogiay.jpg" style="width: 130px; height: 130px;" alt=""></a>
 
     <ul class="navbar">
-      <li><a href="./desktop2.html">SẢN PHẨM</a></li>
+      <li><a href="./productlist.html">SẢN PHẨM</a></li>
       <li>
         <p>|</p>
       </li>
@@ -57,7 +54,7 @@
       <li>
         <p>|</p>
       </li>
-      <li><a class="sale" href="#" onclick="return false;">KHUYẾN MÃI</a></li>
+      <li><a class="sale" href="#" onclick="return false;">GIẢM GIÁ</a></li>
     </ul>
   </section>
 
@@ -65,10 +62,12 @@
   <section class="banner">
     <div class="content">
       <h2>Free Shipping với hóa đơn từ 900k</h2>
-      <div class="search">
-        <i class='bx bx-search'></i>
-        <input type="text" placeholder="Search">
-      </div>
+      <form id="search-form">
+        <div class="search">
+          <i class='bx bx-search'></i>
+          <input type="text" id="search-input" placeholder="Search">
+        </div>
+      </form>
     </div>
 
     <!-- Cart -->

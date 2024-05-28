@@ -117,4 +117,12 @@ public class ProductController {
         responseData.setData(productServiceImp.saleOff());
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
+
+    @GetMapping("/mostsell")
+    public ResponseEntity<?> getMostSale() {
+
+        ResponseData responseData = new ResponseData();
+        responseData.setData(productServiceImp.top5MostSell());
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
+    }
 }

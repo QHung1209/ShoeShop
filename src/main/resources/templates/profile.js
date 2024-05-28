@@ -167,6 +167,6 @@ $(document).ready(async function () {
 
     document.getElementById("log_out_controller").addEventListener("click", function () {
         localStorage.removeItem("token")
-        window.location.href = "./desktop1.html"; // Redirect to login page if token is not present
+        window.location.href = "./homepage.html"; // Redirect to login page if token is not present
       });
 })
