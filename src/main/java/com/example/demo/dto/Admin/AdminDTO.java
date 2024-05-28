@@ -1,24 +1,22 @@
 package com.example.demo.dto.Admin;
-
-
 import lombok.Data;
 
 @Data
 
 public class AdminDTO {
-    private Integer id;
+    private Integer user_id;
     private String name;
+    private String password;
     private String username;
     private String address;
     private String telephone;
-    
 
-    public Integer getId() {
-        return id;
+    public Integer getUser() {
+        return user_id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer user_id) {
+        this.user_id = user_id;
     }
 
     public String getName() {
@@ -51,5 +49,13 @@ public class AdminDTO {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -5,11 +5,11 @@ import com.example.demo.repository.Admin.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import com.example.demo.entity.Admin.Admin;
+import com.example.demo.entity.Admin.Admins;
 import java.util.ArrayList;
 import com.example.demo.service.Admin.imp.LoginAdminServiceImp;
 import com.example.demo.payload.Admin.SignUpAdminRequest;
-import com.example.demo.entity.Roles;
+
 
 @Service
 public class LoginAdminService implements LoginAdminServiceImp {
@@ -19,12 +19,12 @@ public class LoginAdminService implements LoginAdminServiceImp {
 
     @Override
     public List<AdminDTO> getAllAdmins() {
-        List<Admin> listAdmin = adminRepository.findAll();
+        List<Admins> listAdmin = adminRepository.findAll();
         List<AdminDTO> lAdminDTOs = new ArrayList<>();
 
-        for (Admin admin : listAdmin) {
+        for (Admins admin : listAdmin) {
             AdminDTO adminDTO = new AdminDTO();
-            adminDTO.setId(admin.getId());
+            adminDTO.setUser_id(admin.getUser_id());
             adminDTO.setUsername(admin.getUsername());
             adminDTO.setName(admin.getName());
             adminDTO.setTelephone(admin.getTelephone());
@@ -36,7 +36,7 @@ public class LoginAdminService implements LoginAdminServiceImp {
 
     @Override
     public boolean checkLogin(String username, String password) {
-        List<Admin> listAdmin = adminRepository.findByUsernameAndPassword(username, password);
+        List<Admins> listAdmin = adminRepository.findByUsernameAndPassword(username, password);
         if (listAdmin.size() > 0) {
             return true;
         }
@@ -45,18 +45,18 @@ public class LoginAdminService implements LoginAdminServiceImp {
 
     @Override
     public boolean addUser(SignUpAdminRequest signUpAdminRequest) {
-        Admin admins = new Admin();
+        Admins admins = new Admins();
 
-        Roles roles = new Roles();
-        roles.setRole_id(signUpAdminRequest.getRole_id());
+        
+  
         admins.setName(signUpAdminRequest.getName());
         admins.setUsername(signUpAdminRequest.getUsername());
         admins.setPassword(signUpAdminRequest.getPassword());
         admins.setAddress(signUpAdminRequest.getAddress());
         admins.setTelephone(signUpAdminRequest.getTelephone());
-        admins.setRoles(roles);
+
         try{
-            admins = adminRepository.save(admins);
+            admins = adminRepository.saveAdmin(admins);
             return true;
         }
         catch (Exception e){

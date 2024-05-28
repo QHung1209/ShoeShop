@@ -96,6 +96,8 @@ function displayOrderDetails(details) {
       detail.shoeName +
       ", Kích cỡ: " +
       detail.sizeName +
+      ", Màu sắc: " +
+      detail.colorName +
       ", Số lượng: " +
       detail.quantity +
       ", Giá: " +
