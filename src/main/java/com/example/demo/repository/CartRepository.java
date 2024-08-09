@@ -9,21 +9,21 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.entity.Carts;
+import com.example.demo.domain.entity.Cart;
 
 @Repository
-public interface CartRepository extends JpaRepository<Carts, Integer> {
+public interface CartRepository extends JpaRepository<Cart, Integer> {
     @Query("SELECT c FROM Carts c JOIN c.products p JOIN c.sizes s JOIN c.users u WHERE (:user_id = u.user_id) AND (:product_id = p.product_id) AND (:size_id = s.size_id)")
-    public Carts findCart(@Param("user_id") int user_id,
+    public Cart findCart(@Param("user_id") int user_id,
             @Param("product_id") int product_id,
             @Param("size_id") int size_id);
 
     @Query("SELECT c FROM Carts c WHERE c.users.user_id = :user_id AND c.products.product_id = :product_id AND c.sizes.size_id = :size_id")
-    Carts findCartByUserIdAndProductId(@Param("user_id") int user_id, @Param("product_id") int product_id,
+    Cart findCartByUserIdAndProductId(@Param("user_id") int user_id, @Param("product_id") int product_id,
             @Param("size_id") int size_id);
 
     @Query("SELECT c FROM Carts c WHERE c.users.user_id = :user_id")
-    List<Carts> findAllCartById(@Param("user_id") int user_id);
+    List<Cart> findAllCartById(@Param("user_id") int user_id);
 
     @Modifying
     @Transactional

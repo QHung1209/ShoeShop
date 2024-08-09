@@ -8,18 +8,18 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.entity.Orders;
+import com.example.demo.domain.entity.Order;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Orders, Integer> {
+public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Query("SELECT MAX(o.order_id) FROM Orders o WHERE o.users.user_id = :user_id")
     int findMaxOrderId(int user_id);
 
     @Query("SELECT o FROM Orders o WHERE o.users.user_id = :user_id")
-    List<Orders> findAllOrder(int user_id);
+    List<Order> findAllOrder(int user_id);
 
     @Query("SELECT o FROM Orders o WHERE o.order_status = 0")
-    List<Orders> getUnconfirmedOrders();
+    List<Order> getUnconfirmedOrders();
 
     @Modifying
     @Transactional

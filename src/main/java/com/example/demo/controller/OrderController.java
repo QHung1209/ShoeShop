@@ -14,7 +14,7 @@ import com.example.demo.payload.ResponseData;
 import com.example.demo.repository.OrderDetailRepository;
 import com.example.demo.repository.OrderRepository;
 import com.example.demo.service.imp.OrderServiceImp;
-import com.example.demo.utils.JwtUtilsHelper;
+import com.example.demo.util.JwtUtilsHelper;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;

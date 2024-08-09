@@ -3,11 +3,11 @@ package com.example.demo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.domain.entity.Order_detail;
+import com.example.demo.domain.entity.Order;
+import com.example.demo.domain.entity.Product;
+import com.example.demo.domain.entity.Size;
 import com.example.demo.dto.OrderDetailDTO;
-import com.example.demo.entity.Order_detail;
-import com.example.demo.entity.Orders;
-import com.example.demo.entity.Products;
-import com.example.demo.entity.Sizes;
 import com.example.demo.repository.OrderDetailRepository;
 import com.example.demo.service.imp.OrderDetailServiceImp;
 
@@ -19,9 +19,9 @@ public class OrderDetailService implements OrderDetailServiceImp {
     @Override
     public boolean insertOrderDetail(int order_id, int product_id, int size_id, int quantity, int price) {
         Order_detail temp = new Order_detail();
-        Orders orders = new Orders();
-        Products products = new Products();
-        Sizes size = new Sizes();
+        Order orders = new Order();
+        Product products = new Product();
+        Size size = new Size();
         size.setSize_id(size_id);
         orders.setOrder_id(order_id);
         products.setProduct_id(product_id);

@@ -5,18 +5,18 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.demo.dto.CartDTO;
-import com.example.demo.dto.ProductDTO;
-import com.example.demo.entity.Carts;
-import com.example.demo.entity.Products;
-import com.example.demo.entity.Sizes;
-import com.example.demo.entity.Users;
+
+import com.example.demo.domain.entity.Cart;
+import com.example.demo.domain.entity.Product;
+import com.example.demo.domain.entity.Size;
+import com.example.demo.domain.entity.User;
+import com.example.demo.domain.dto.CartDTO;
+import com.example.demo.domain.dto.ProductDTO;
 import com.example.demo.repository.CartRepository;
 import com.example.demo.repository.InventoryReposity;
-import com.example.demo.service.imp.CartServiceImp;
 
 @Service
-public class CartService implements CartServiceImp {
+public class CartService {
 
     @Autowired
     CartRepository cartRepository;
@@ -27,9 +27,9 @@ public class CartService implements CartServiceImp {
     @Override
     public List<CartDTO> getAllCart(int user_id) {
         List<CartDTO> listCartDTOs = new ArrayList<>();
-        List<Carts> listData = cartRepository.findAllCartById(user_id);
+        List<Cart> listData = cartRepository.findAllCartById(user_id);
 
-        for (Carts ca : listData) {
+        for (Cart ca : listData) {
             // Kiểm tra sản phẩm đó trong kho còn không, nếu không còn thì không hiện lên
             // giao diện
             if (inventoryReposity.Quantity(ca.getProducts().getProduct_id(), ca.getSizes().getSize_id()) == 0)
@@ -56,7 +56,7 @@ public class CartService implements CartServiceImp {
 
     @Override
     public boolean insertCart(int user_id, int product_id, int size_id, int quantity) {
-        Carts existingCart = cartRepository.findCart(user_id, product_id, size_id);
+        Cart existingCart = cartRepository.findCart(user_id, product_id, size_id);
 
         if (existingCart != null) {
             // If the cart already exists, update the quantity
@@ -64,10 +64,10 @@ public class CartService implements CartServiceImp {
             cartRepository.save(existingCart);
         } else {
             // If the cart does not exist, create a new cart entry
-            Carts cart = new Carts();
+            Cart cart = new Cart();
             Users user = new Users();
-            Products product = new Products();
-            Sizes size = new Sizes();
+            Product product = new Product();
+            Size size = new Size();
             product.setProduct_id(product_id);
             size.setSize_id(size_id);
             user.setUser_id(user_id);
@@ -85,14 +85,14 @@ public class CartService implements CartServiceImp {
     @Override
     public boolean deleteCart(int user_id, int product_id, int size_id) {
         // Tìm và xóa giỏ hàng dựa trên user_id và product_id
-        Carts carts = cartRepository.findCartByUserIdAndProductId(user_id, product_id, size_id);
+        Cart carts = cartRepository.findCartByUserIdAndProductId(user_id, product_id, size_id);
         cartRepository.delete(carts);
         return true;
     }
 
     @Override
     public boolean updateCart(int user_id, int cart_id, int product_id, int size_id, int quantity) {
-        Carts existingCart = cartRepository.findCartByUserIdAndProductId(user_id, product_id, size_id);
+        Cart existingCart = cartRepository.findCartByUserIdAndProductId(user_id, product_id, size_id);
         if (existingCart != null && existingCart.getCart_id() != cart_id) {
             existingCart.setQuantity(quantity);
             cartRepository.save(existingCart);

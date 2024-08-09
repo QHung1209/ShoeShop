@@ -7,12 +7,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.domain.entity.Order_detail;
+import com.example.demo.domain.entity.Order;
+import com.example.demo.domain.entity.Users;
 import com.example.demo.dto.OrderDTO;
 import com.example.demo.dto.OrderDetailDTO;
 import com.example.demo.dto.UserDTO;
-import com.example.demo.entity.Order_detail;
-import com.example.demo.entity.Orders;
-import com.example.demo.entity.Users;
 import com.example.demo.repository.OrderDetailRepository;
 import com.example.demo.repository.OrderRepository;
 import com.example.demo.service.imp.OrderServiceImp;
@@ -33,7 +33,7 @@ public class OrderService implements OrderServiceImp {
         user.setUser_id(user_id);
         user.setAddress(address);
         user.setTelephone(telephone);
-        Orders temp = new Orders();
+        Order temp = new Order();
         temp.setName(name);
         temp.setAddress(address);
         temp.setTotal_amount(total_amount);
@@ -46,10 +46,10 @@ public class OrderService implements OrderServiceImp {
 
     @Override
     public List<OrderDTO> findAllOrderByUserId(int user_id) {
-        List<Orders> lOrders = orderRepository.findAllOrder(user_id);
+        List<Order> lOrders = orderRepository.findAllOrder(user_id);
         List<OrderDTO> lOrderDTOs = new ArrayList<>();
 
-        for (Orders order : lOrders) {
+        for (Order order : lOrders) {
             UserDTO userDTO = UserService.getUserDTOFromOrder(order);
 
             List<OrderDetailDTO> lOrderDetailDTOs = new ArrayList<>();
@@ -76,10 +76,10 @@ public class OrderService implements OrderServiceImp {
     @Override
     public List<OrderDTO> getAllUnconfirmedOrders() {
 
-        List<Orders> lOrders = orderRepository.getUnconfirmedOrders();
+        List<Order> lOrders = orderRepository.getUnconfirmedOrders();
         List<OrderDTO> lOrderDTOs = new ArrayList<>();
 
-        for (Orders order : lOrders) {
+        for (Order order : lOrders) {
             UserDTO userDTO = UserService.getUserDTOFromOrder(order);
 
             List<OrderDetailDTO> lOrderDetailDTOs = new ArrayList<>();

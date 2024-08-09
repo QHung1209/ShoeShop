@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.payload.ResponseData;
 import com.example.demo.service.imp.CartServiceImp;
 import com.example.demo.service.imp.InventoryImp;
-import com.example.demo.utils.JwtUtilsHelper;
+import com.example.demo.util.JwtUtilsHelper;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

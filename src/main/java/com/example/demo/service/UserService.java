@@ -1,97 +1,177 @@
 package com.example.demo.service;
 
+import java.util.Optional;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dto.UserDTO;
-import com.example.demo.entity.Orders;
-import com.example.demo.entity.Users;
+import com.turkraft.springfilter.boot.Filter;
+
+import com.example.demo.domain.entity.Role;
+import com.example.demo.domain.entity.User;
+import com.example.demo.domain.response.ResultPaginationDTO;
+import com.example.demo.domain.response.user.ResCreateUserDTO;
+import com.example.demo.domain.response.user.ResUpdateUserDTO;
+import com.example.demo.domain.response.user.ResUserDTO;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.service.imp.UserServiceImp;
-import com.example.demo.utils.JwtUtilsHelper;
 
 @Service
-public class UserService implements UserServiceImp {
+public class UserService {
+    private final UserRepository userRepository;
+    private final RoleService roleService;
 
-    @Autowired
-    UserRepository userRepository;
+    public UserService(UserRepository userRepository, RoleService roleService) {
+        this.userRepository = userRepository;
+        this.roleService = roleService;
 
-    @Autowired
-    JwtUtilsHelper jwtUtilsHelper;
+    }
 
-    @Override
-    public List<UserDTO> getAllUser() {
-        List<Users> listUser = userRepository.findAll();
-        List<UserDTO> lUserDTOs = new ArrayList<>();
-        for (Users user : listUser) {
-            UserDTO temp = new UserDTO();
-            temp.setUser_id(user.getUser_id());
-            temp.setUsername(user.getUsername());
-            temp.setPassword(user.getPassword());
-            temp.setAddress(user.getAddress());
-            temp.setName(user.getname());
-            temp.setTelephone(user.getTelephone());
-
-            lUserDTOs.add(temp);
+    public User handleCreateUser(User user) {
+        if (user.getRole() != null) {
+            Role role = this.roleService.handleGetRole(user.getRole().getId());
+            user.setRole(role != null ? role : null);
         }
-        return lUserDTOs;
+
+        return this.userRepository.save(user);
     }
 
-    public static UserDTO getUserDTOFromOrder(Orders order) {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setUser_id(order.getUsers().getUser_id());
-        userDTO.setAddress(order.getAddress());
-        userDTO.setTelephone(order.getTelephone());
-        userDTO.setName(order.getName());
-        return userDTO;
+    public void handleDeleteUser(long id) {
+        this.userRepository.deleteById(id);
     }
 
-    @Override
-    public UserDTO findUserByJwt(String jwt) {
-
-        UserDTO temp = new UserDTO();
-
-        return temp;
+    public User handleGetUser(long id) {
+        Optional<User> userOptional = this.userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            return userOptional.get();
+        }
+        return null;
     }
 
-    @Override
-    public UserDTO findByUsernameAndPass(String username, String password) {
-        Users user = userRepository.findByUsernameAndPassword(username, password);
-        UserDTO temp = new UserDTO();
-        temp.setUser_id(user.getUser_id());
-        temp.setUsername(username);
-        temp.setPassword(password);
-        temp.setTelephone(user.getTelephone());
-        temp.setAddress(user.getAddress());
-        temp.setName(user.getName());
-        return temp;
+    public ResultPaginationDTO handleGetAllUser(@Filter Specification<User> specification, Pageable pageable) {
+        Page<User> pageUser = this.userRepository.findAll(specification, pageable);
+        ResultPaginationDTO rs = new ResultPaginationDTO();
+        ResultPaginationDTO.Meta mt = new ResultPaginationDTO.Meta();
+
+        mt.setPage(pageable.getPageNumber() + 1);
+        mt.setPageSize(pageable.getPageSize());
+
+        mt.setPages(pageUser.getTotalPages());
+        mt.setTotal(pageUser.getTotalElements());
+
+        rs.setMeta(mt);
+        List<User> listUsers = pageUser.getContent();
+        rs.setResult(this.convertToListUserDTO(listUsers));
+        return rs;
     }
 
-    @Override
-    public boolean insertUser(String username, String password, String name, String address, String telephone) {
-        if (userRepository.findByUsername(username) != null)
-            return false;
-        Users temp = new Users();
-        temp.setUsername(username);
-        temp.setPassword(password);
-        temp.setName(name);
-        temp.setAddress(address);
-        temp.setTelephone(telephone);
-        userRepository.save(temp);
-        return true;
+    public User handleUpdateUser(User user) {
+        User currentUser = this.handleGetUser(user.getId());
+        if (currentUser != null) {
+            currentUser.setName(user.getName());
+            currentUser.setGender(user.getGender());
+            currentUser.setAddress(user.getAddress());
+            currentUser.setAge(user.getAge());
+
+            if (user.getRole() != null) {
+                Role role = this.roleService.handleGetRole(user.getRole().getId());
+                currentUser.setRole(role != null ? role : null);
+            }
+
+            currentUser = this.userRepository.save(currentUser);
+        }
+
+        return currentUser;
     }
 
-    @Override
-    public boolean updateUser(String name, String telephone, String password, String address, int user_id) {
-        try {
-            userRepository.updateUser(name, telephone, password, address, user_id);
-            return true;
-        } catch (Exception e) {
-            return false;
+    public User handleGetUserByUserName(String username) {
+        return this.userRepository.findByEmail(username);
+    }
+
+    public boolean isEmailExist(String email) {
+        return this.userRepository.existsByEmail(email);
+    }
+
+    public ResCreateUserDTO convertToResCreateUserDTO(User user) {
+        ResCreateUserDTO res = new ResCreateUserDTO();
+        ResCreateUserDTO.RoleUser rol = new ResCreateUserDTO.RoleUser();
+        res.setAddress(user.getAddress());
+        res.setAge(user.getAge());
+        res.setCreatedAt(user.getCreatedAt());
+        res.setEmail(user.getEmail());
+        res.setGenderEnum(user.getGender());
+        res.setId(user.getId());
+        res.setName(user.getName());
+
+        if (user.getRole() != null) {
+            rol.setId(user.getRole().getId());
+            rol.setName(user.getRole().getName());
+            res.setRole(rol);
+        }
+
+        return res;
+    }
+
+    public ResUserDTO convertToResUserDTO(User user) {
+        ResUserDTO res = new ResUserDTO();
+        res.setAddress(user.getAddress());
+        res.setAge(user.getAge());
+        res.setCreatedAt(user.getCreatedAt());
+        res.setEmail(user.getEmail());
+        res.setGenderEnum(user.getGender());
+        res.setId(user.getId());
+        res.setName(user.getName());
+        res.setCreatedBy(user.getCreatedBy());
+
+        ResCreateUserDTO.RoleUser rol = new ResCreateUserDTO.RoleUser();
+        if (user.getRole() != null) {
+            rol.setId(user.getRole().getId());
+            rol.setName(user.getRole().getName());
+            res.setRole(rol);
+        }
+        return res;
+    }
+
+    public List<ResUserDTO> convertToListUserDTO(List<User> listUsers) {
+        List<ResUserDTO> listUserDTOs = new ArrayList<>();
+        for (User user : listUsers) {
+            ResUserDTO res = convertToResUserDTO(user);
+            listUserDTOs.add(res);
+        }
+        return listUserDTOs;
+    }
+
+    public ResUpdateUserDTO convertToResUpdateUserDTO(User user) {
+        ResUpdateUserDTO res = new ResUpdateUserDTO();
+        res.setAddress(user.getAddress());
+        res.setAge(user.getAge());
+        res.setGender(user.getGender());
+        res.setName(user.getName());
+        res.setId(user.getId());
+        res.setUpdatedAt(user.getUpdatedAt());
+
+        ResCreateUserDTO.RoleUser rol = new ResCreateUserDTO.RoleUser();
+        if (user.getRole() != null) {
+            rol.setId(user.getRole().getId());
+            rol.setName(user.getRole().getName());
+            res.setRole(rol);
+        }
+
+        return res;
+    }
+
+    public void updateUserToken(String token, String email) {
+        User current = this.handleGetUserByUserName(email);
+        if (current != null) {
+            current.setRefreshToken(token);
+            this.userRepository.save(current);
         }
     }
 
+    public User getUserByRefreshTokenAndEmail(String token, String email) {
+        return this.userRepository.findByRefreshTokenAndEmail(token, email);
+    }
 }

@@ -1,31 +1,43 @@
 package com.example.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dto.InventoryDTO;
-import com.example.demo.entity.Inventory;
-import com.example.demo.repository.InventoryReposity;
-import com.example.demo.service.imp.InventoryImp;
+import com.example.demo.domain.entity.Inventory;
+import com.example.demo.repository.InventoryRepository;
 
 @Service
-public class InventoryService implements InventoryImp {
+public class InventoryService {
 
-    @Autowired
-    InventoryReposity inventoryReposity;
+    private final InventoryRepository inventoryRepository;
 
-    @Override
-    public int Quantity(int product_id, int size_id) {
-        return inventoryReposity.Quantity(product_id, size_id);
+    public InventoryService(InventoryRepository inventoryRepository) {
+        this.inventoryRepository = inventoryRepository;
     }
 
-    static public InventoryDTO getInventoryDTO(Inventory inv) {
-        InventoryDTO temp = new InventoryDTO();
-        temp.setInventory_id(inv.getInventory_id());
-        temp.setProduct_id(inv.getProducts().getProduct_id());
-        temp.setSize_id(inv.getSizes().getSize_id());
-        temp.setSize_name(inv.getSizes().getSize_name());
-        temp.setQuantity(inv.getQuantity());
-        return temp;
+    public Inventory createInventory(Inventory inventory) {
+        return this.inventoryRepository.save(inventory);
+    }
+
+    public Inventory getInventoryById(long id) {
+        Optional<Inventory> inventoryOptional = this.inventoryRepository.findById(id);
+        return inventoryOptional.isPresent() ? inventoryOptional.get() : null;
+    }
+
+    public Inventory updateInventory(Inventory inventory) {
+        Inventory update = this.getInventoryById(inventory.getId());
+        if (inventory.getProduct() != null)
+            update.setProduct(inventory.getProduct());
+        if (inventory.getSize() != null)
+            update.setSize(inventory.getSize());
+        update.setQuantity(inventory.getQuantity());
+
+        update = this.inventoryRepository.save(update);
+        return update;
+    }
+
+    public void deleteInventory(long id) {
+        this.inventoryRepository.deleteById(id);
     }
 }

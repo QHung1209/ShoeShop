@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.entity.Order_detail;
+import com.example.demo.domain.entity.Order_detail;
 
 import jakarta.transaction.Transactional;
 

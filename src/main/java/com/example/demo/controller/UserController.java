@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.payload.ResponseData;
 import com.example.demo.service.imp.UserServiceImp;
-import com.example.demo.utils.JwtUtilsHelper;
+import com.example.demo.util.JwtUtilsHelper;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,7 +47,7 @@ public class UserController {
     public ResponseEntity<?> getUser(@RequestHeader("Authorization") String jwt) {
 
         ResponseData responseData = new ResponseData();
-        responseData.setData(jwtUtilsHelper.getIdFromJwtToken(jwt));
+        //responseData.setData(jwtUtilsHelper.getIdFromJwtToken(jwt));
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 

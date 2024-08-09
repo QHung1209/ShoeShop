@@ -2,10 +2,10 @@ package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.dto.UserDTO;
+import com.example.demo.domain.dto.UserDTO;
 import com.example.demo.payload.ResponseData;
 import com.example.demo.service.imp.LoginServiceImp;
-import com.example.demo.utils.JwtUtilsHelper;
+import com.example.demo.util.JwtUtilsHelper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
