@@ -14,8 +14,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
 
-@Entity(name = "Shoes")
+@Entity
+@Table(name = "shoes")
 public class Shoe {
 
     @Id
@@ -26,7 +28,7 @@ public class Shoe {
 
     private int price;
 
-    @OneToMany(mappedBy = "shoes", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "shoe", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Product> Products;
 

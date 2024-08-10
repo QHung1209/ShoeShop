@@ -14,8 +14,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
 
-@Entity(name = "Styles")
+@Entity
+@Table(name = "styles")
 public class Style {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +25,7 @@ public class Style {
 
     private String name;
 
-    @OneToMany(mappedBy = "styles", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "style", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Product> Products;
 

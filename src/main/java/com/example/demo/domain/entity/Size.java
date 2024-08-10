@@ -1,5 +1,6 @@
 package com.example.demo.domain.entity;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
 
@@ -14,23 +15,24 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
 
-@Entity(name = "Sizes")
-public class Size {
-
+@Entity
+@Table(name = "sizes")
+public class Size implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int name;
+    private String name;
 
-    @OneToMany(mappedBy = "sizes", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "size", fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<Inventory> Inventories;
+    private List<Inventory> inventories;
 
-    @OneToMany(mappedBy = "sizes", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "size", fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<Order_detail> OrderDetails;
+    private List<OrderDetail> orderDetails;
 
     private Instant createdAt;
     private Instant updatedAt;
@@ -55,19 +57,19 @@ public class Size {
     }
 
     public List<Inventory> getInventories() {
-        return Inventories;
+        return this.inventories;
     }
 
     public void setInventories(List<Inventory> inventories) {
-        Inventories = inventories;
+        this.inventories = inventories;
     }
 
-    public List<Order_detail> getOrderDetails() {
-        return OrderDetails;
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
     }
 
-    public void setOrderDetails(List<Order_detail> orderDetails) {
-        OrderDetails = orderDetails;
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 
     public Instant getCreatedAt() {
@@ -110,11 +112,11 @@ public class Size {
         this.id = id;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 

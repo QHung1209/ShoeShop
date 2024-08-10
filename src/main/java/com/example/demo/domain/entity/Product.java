@@ -19,8 +19,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
 
-@Entity(name = "Products")
+@Entity
+@Table(name = "products")
 public class Product {
 
     @Id
@@ -39,15 +41,15 @@ public class Product {
     private String createdBy;
     private String updatedBy;
 
-    @OneToMany(mappedBy = "products", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Inventory> Inventories;
 
-    @OneToMany(mappedBy = "products", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<Order_detail> OrderDetails;
+    private List<OrderDetail> OrderDetails;
 
-    @OneToMany(mappedBy = "products", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Image> Images;
 
@@ -71,7 +73,7 @@ public class Product {
     @JoinColumn(name = "style_id")
     private Style style;
 
-    @OneToMany(mappedBy = "products", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Cart> carts;
 
@@ -108,11 +110,11 @@ public class Product {
         Inventories = inventories;
     }
 
-    public List<Order_detail> getOrderDetails() {
+    public List<OrderDetail> getOrderDetails() {
         return OrderDetails;
     }
 
-    public void setOrderDetails(List<Order_detail> orderDetails) {
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
         OrderDetails = orderDetails;
     }
 

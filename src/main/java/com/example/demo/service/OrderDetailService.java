@@ -1,48 +1,24 @@
 package com.example.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.domain.entity.Order_detail;
-import com.example.demo.domain.entity.Order;
-import com.example.demo.domain.entity.Product;
-import com.example.demo.domain.entity.Size;
-import com.example.demo.dto.OrderDetailDTO;
+import com.example.demo.domain.entity.OrderDetail;
 import com.example.demo.repository.OrderDetailRepository;
-import com.example.demo.service.imp.OrderDetailServiceImp;
 
 @Service
-public class OrderDetailService implements OrderDetailServiceImp {
+public class OrderDetailService {
 
-    @Autowired
-    OrderDetailRepository orderDetailRepository;
-    @Override
-    public boolean insertOrderDetail(int order_id, int product_id, int size_id, int quantity, int price) {
-        Order_detail temp = new Order_detail();
-        Order orders = new Order();
-        Product products = new Product();
-        Size size = new Size();
-        size.setSize_id(size_id);
-        orders.setOrder_id(order_id);
-        products.setProduct_id(product_id);
-        temp.setOrders(orders);
-        temp.setProducts(products);
-        temp.setSizes(size);
-        temp.setQuantity(quantity);
-        temp.setPrice(price);
-        orderDetailRepository.save(temp);
-        return true;
+    private final OrderDetailRepository orderDetailRepository;
+
+    
+
+    public OrderDetailService(OrderDetailRepository orderDetailRepository) {
+        this.orderDetailRepository = orderDetailRepository;
     }
 
-    public static OrderDetailDTO getOrderDetailDTO(Order_detail odt) {
-        OrderDetailDTO temp = new OrderDetailDTO();
-        temp.setOrder_detail_id(odt.getOrder_detail_id());
-        temp.setOrder_id(odt.getOrders().getOrder_id());
-        temp.setProductDTO(ProductService.geProductDTO(odt.getProducts()));
-        temp.setQuantity(odt.getQuantity());
-        temp.setSize_id(odt.getSizes().getSize_id());
-        temp.setSize_name(odt.getSizes().getSize_name());
-        return temp;
+    public OrderDetail createOrderDetail(OrderDetail orderDetail) {
+        return this.orderDetailRepository.save(orderDetail);
     }
+
     
 }

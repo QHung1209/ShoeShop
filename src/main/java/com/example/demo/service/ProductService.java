@@ -1,219 +1,215 @@
 package com.example.demo.service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
 import com.example.demo.domain.entity.Image;
 import com.example.demo.domain.entity.Inventory;
 import com.example.demo.domain.entity.Product;
-import com.example.demo.dto.ImageDTO;
-import com.example.demo.dto.InventoryDTO;
-import com.example.demo.dto.ProductDTO;
-import com.example.demo.repository.InventoryRepository;
+import com.example.demo.domain.response.ResultPaginationDTO;
+import com.example.demo.domain.response.product.ResCreateProductDTO;
+import com.example.demo.domain.response.product.ResGetProductDTO;
+import com.example.demo.domain.response.product.ResUpdateProductDTO;
 import com.example.demo.repository.ProductRepository;
-import com.example.demo.service.imp.ProductServiceImp;
 
 @Service
-public class ProductService implements ProductServiceImp {
+public class ProductService {
+    private final ProductRepository productRepository;
 
-    @Autowired
-    ProductRepository ProductRepository;
-
-    @Autowired
-    InventoryRepository inventoryReposity;
-
-    @Override
-    public boolean insertProduct(int shoe_id, int color_id, int size_id, int gender_id, int style_id, int material_id,
-            int category_id, int discount_id, int quantity_id, int price, String image_url) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insertProduct'");
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
-    public static ProductDTO geProductDTO(Product data) {
-        ProductDTO temp = new ProductDTO();
-        temp.setProduct_id(data.getProduct_id());
-        temp.setShoe_name(data.getShoes().getName());
-        temp.setColor_name(data.getColors().getColor_name());
-        temp.setCategory(data.getCategories().getCategory_name());
-        temp.setDiscount(data.getDiscount());
-        temp.setGender(data.getGenders().getGender_name());
-        temp.setMaterial(data.getMaterials().getMaterial_name());
-        temp.setStyle(data.getStyles().getStyle_name());
-        temp.setColor_code(data.getColors().getColor_code());
-        temp.setImage_url(data.getImage());
-        temp.setPrice(data.getShoes().getPrice());
-        return temp;
+    public Product getProductById(long id) {
+        Optional<Product> optionalProduct = this.productRepository.findById(id);
+        return optionalProduct.isPresent() ? optionalProduct.get() : null;
     }
 
-    @Override
-    public List<ProductDTO> getAllProduct() {
-        List<ProductDTO> ProductDTOs = new ArrayList<>();
-        PageRequest pageRequest = PageRequest.of(0, Integer.MAX_VALUE);
-        Page<Product> listData = ProductRepository.findAll(pageRequest);
-
-        for (Product data : listData) {
-            ProductDTOs.add(geProductDTO(data));
-        }
-        return ProductDTOs;
-    }
-
-    public List<ProductDTO> mapProductsToDTOs(Page<Product> productsPage) {
-        List<ProductDTO> productDTOs = new ArrayList<>();
-        for (Product data : productsPage) {
-            productDTOs.add(geProductDTO(data));
-        }
-        return productDTOs;
-    }
-
-    public List<ProductDTO> filter(List<String> styles, List<String> material, List<String> categories,
-            List<String> gender,
-            List<String> prices) {
-        List<ProductDTO> productDTOs = new ArrayList<>();
-        PageRequest pageRequest = PageRequest.of(0, Integer.MAX_VALUE);
-
-        if (prices == null) {
-            productDTOs.addAll(mapProductsToDTOs(
-                    ProductRepository.findProductsGT1000(styles, material, categories, gender, prices, pageRequest)));
-            return productDTOs;
-        }
-
-        if (prices.contains("1000")) {
-            productDTOs.addAll(mapProductsToDTOs(
-                    ProductRepository.findProductsGT1000(styles, material, categories, gender, prices, pageRequest)));
-        }
-        if (prices.contains("600-999")) {
-            productDTOs.addAll(mapProductsToDTOs(
-                    ProductRepository.findProducts6_9(styles, material, categories, gender, prices, pageRequest)));
-        }
-        if (prices.contains("300-599")) {
-            productDTOs.addAll(mapProductsToDTOs(
-                    ProductRepository.findProducts3_5(styles, material, categories, gender, prices, pageRequest)));
-        }
-
-        return productDTOs;
-    }
-
-    @Override
-    public ProductDTO detail(int id) {
-        Optional<Product> productDetail = ProductRepository.findById(id);
-
-        ProductDTO productDTO = new ProductDTO();
-        if (productDetail.isPresent()) {
-
-            productDTO = geProductDTO(productDetail.get());
-
-            List<ProductDTO> related_product = new ArrayList<>();
-            List<Product> related = ProductRepository.findByShoesName(productDTO.getShoe_name());
-            for (Product re : related) {
-                ProductDTO temp = geProductDTO(re);
-                related_product.add(temp);
-            }
-            productDTO.setRelated_products(related_product);
-
-            List<InventoryDTO> inventoryDTOs = new ArrayList<>();
-            List<Inventory> inventories = productDetail.get().getListInventories();
-            for (Inventory inv : inventories) {
-                InventoryDTO temp = InventoryService.getInventoryDTO(inv);
-                inventoryDTOs.add(temp);
-            }
-            productDTO.setInventoryDTOs(inventoryDTOs);
-
-            List<ImageDTO> imageDTOs = new ArrayList<>();
-            List<Image> images = productDetail.get().getListImages();
-            for (Image img : images) {
-                ImageDTO temp = new ImageDTO();
-                temp.setImage_id(img.getImage_id());
-                temp.setImage_url(img.getImage_url());
-                temp.setProduct_id(img.getProducts().getProduct_id());
-                imageDTOs.add(temp);
-            }
-            productDTO.setImageDTOs(imageDTOs);
-
-        }
+    public ResCreateProductDTO convertToCreateProductDTO(Product product) {
+        ResCreateProductDTO.ProductColor color = new ResCreateProductDTO.ProductColor(product.getColor().getName(),
+                product.getColor().getCode());
+        ResCreateProductDTO.ProductMaterial material = new ResCreateProductDTO.ProductMaterial(
+                product.getMaterial().getName());
+        ResCreateProductDTO.ProductShoe shoe = new ResCreateProductDTO.ProductShoe(product.getShoe().getName(),
+                product.getShoe().getPrice());
+        ResCreateProductDTO.ProductStyle style = new ResCreateProductDTO.ProductStyle(product.getStyle().getName());
+        ResCreateProductDTO.ProductCategory category = new ResCreateProductDTO.ProductCategory(
+                product.getCategory().getName());
+        ResCreateProductDTO productDTO = new ResCreateProductDTO();
+        productDTO.setColor(color);
+        productDTO.setCategory(category);
+        productDTO.setMaterial(material);
+        productDTO.setStyle(style);
+        productDTO.setShoe(shoe);
+        productDTO.setId(product.getId());
+        productDTO.setGender(product.getGender());
+        productDTO.setUrl(product.getUrl());
+        productDTO.setCreatedAt(product.getCreatedAt());
+        productDTO.setCreatedBy(product.getCreatedBy());
         return productDTO;
-
     }
 
-    @Override
-    public Set<String> getStyle() {
-        PageRequest pageRequest = PageRequest.of(0, Integer.MAX_VALUE);
-        Page<Product> listData = ProductRepository.findAll(pageRequest);
-        Set<String> styleSet = new HashSet<String>();
-        for (Product data : listData) {
-            styleSet.add(data.getStyles().getStyle_name());
+    public ResCreateProductDTO createProduct(Product product) {
+        this.productRepository.save(product);
+
+        return convertToCreateProductDTO(product);
+    }
+
+    public ResUpdateProductDTO updateProduct(Product product) {
+        Product update = this.getProductById(product.getId());
+        ResUpdateProductDTO res = new ResUpdateProductDTO();
+        if (product.getCategory() != null) {
+            update.setCategory(product.getCategory());
+            ResCreateProductDTO.ProductCategory category = new ResCreateProductDTO.ProductCategory(
+                    product.getCategory().getName());
+            res.setCategory(category);
         }
-        return styleSet;
 
-    }
-
-    @Override
-    public Set<String> getCategory() {
-        PageRequest pageRequest = PageRequest.of(0, Integer.MAX_VALUE);
-        Page<Product> listData = ProductRepository.findAll(pageRequest);
-        Set<String> categorySet = new HashSet<String>();
-        for (Product data : listData) {
-            categorySet.add(data.getCategories().getCategory_name());
+        if (product.getColor() != null) {
+            update.setColor(product.getColor());
+            ResCreateProductDTO.ProductColor color = new ResCreateProductDTO.ProductColor(product.getColor().getName(),
+                    product.getColor().getCode());
+            res.setColor(color);
         }
-        return categorySet;
-
-    }
-
-    @Override
-    public Set<String> getMaterial() {
-        PageRequest pageRequest = PageRequest.of(0, Integer.MAX_VALUE);
-        Page<Product> listData = ProductRepository.findAll(pageRequest);
-        Set<String> materialSet = new HashSet<String>();
-        for (Product data : listData) {
-            materialSet.add(data.getMaterials().getMaterial_name());
+        if (product.getMaterial() != null) {
+            update.setMaterial(product.getMaterial());
+            ResCreateProductDTO.ProductMaterial material = new ResCreateProductDTO.ProductMaterial(
+                    product.getMaterial().getName());
+            res.setMaterial(material);
         }
-        return materialSet;
-
-    }
-    /*
-     * @Override
-     * public int getQuantity(int shoe_id, int size_id)
-     * {
-     * return ProductRepository.quantity(shoe_id, size_id);
-     * }
-     */
-
-    @Override
-    public List<ProductDTO> searchProduct(String key) {
-        List<ProductDTO> productDTOs = new ArrayList<>();
-        List<Product> lProducts = ProductRepository.SearchProduct(key);
-
-        for (Product data : lProducts) {
-            productDTOs.add(geProductDTO(data));
+        if (product.getShoe() != null) {
+            update.setShoe(product.getShoe());
+            ResCreateProductDTO.ProductShoe shoe = new ResCreateProductDTO.ProductShoe(product.getShoe().getName(),
+                    product.getShoe().getPrice());
+            res.setShoe(shoe);
         }
-        return productDTOs;
+        if (product.getStyle() != null) {
+            update.setStyle(product.getStyle());
+            ResCreateProductDTO.ProductStyle style = new ResCreateProductDTO.ProductStyle(product.getStyle().getName());
+            res.setStyle(style);
+        }
+
+        update.setDiscount(product.getDiscount());
+        update.setGender(product.getGender());
+        update.setUrl(product.getUrl());
+
+        this.productRepository.save(update);
+
+        res.setGender(product.getGender());
+        res.setId(product.getId());
+        res.setUpdatedAt(product.getUpdatedAt());
+        res.setUpdatedBy(product.getUpdatedBy());
+        res.setUrl(product.getUrl());
+
+        return res;
     }
 
-    @Override
-    public List<ProductDTO> saleOff() {
-        List<ProductDTO> productDTOs = new ArrayList<>();
-        List<Product> lProducts = ProductRepository.saleOff();
-        for (Product data : lProducts) {
-            productDTOs.add(geProductDTO(data));
+    public ResGetProductDTO convertToResProductDTO(Product product) {
+
+        ResGetProductDTO res = new ResGetProductDTO();
+        ResCreateProductDTO.ProductColor color = new ResCreateProductDTO.ProductColor(product.getColor().getName(),
+                product.getColor().getCode());
+        ResCreateProductDTO.ProductMaterial material = new ResCreateProductDTO.ProductMaterial(
+                product.getMaterial().getName());
+        ResCreateProductDTO.ProductShoe shoe = new ResCreateProductDTO.ProductShoe(product.getShoe().getName(),
+                product.getShoe().getPrice());
+        ResCreateProductDTO.ProductStyle style = new ResCreateProductDTO.ProductStyle(product.getStyle().getName());
+        ResCreateProductDTO.ProductCategory category = new ResCreateProductDTO.ProductCategory(
+                product.getCategory().getName());
+
+        res.setGender(product.getGender());
+        res.setId(product.getId());
+        res.setUpdatedAt(product.getUpdatedAt());
+        res.setUpdatedBy(product.getUpdatedBy());
+        res.setUrl(product.getUrl());
+        res.setCreatedAt(product.getCreatedAt());
+        res.setCreatedBy(product.getCreatedBy());
+        res.setCategory(category);
+        res.setStyle(style);
+        res.setShoe(shoe);
+        res.setMaterial(material);
+        res.setColor(color);
+
+        List<Inventory> inventories = product.getInventories();
+
+        if (!inventories.isEmpty()) {
+            List<ResGetProductDTO.ProductInventory> listInventories = new ArrayList<>();
+            listInventories.addAll(inventories.stream()
+                    .map(inventory -> new ResGetProductDTO.ProductInventory(
+                            inventory.getId(),
+                            inventory.getQuantity(),
+                            Integer.parseInt(inventory.getSize().getName())))
+                    .collect(Collectors.toList()));
+            res.setInventories(listInventories);
         }
-        return productDTOs;
+
+        List<Image> images = product.getImages();
+        if (!images.isEmpty()) {
+            List<ResGetProductDTO.ProductImage> listImages = new ArrayList<>();
+            listImages.addAll(images.stream().map(image -> new ResGetProductDTO.ProductImage(image.getUrl()))
+                    .collect(Collectors.toList()));
+            res.setImages(listImages);
+        }
+        return res;
+
     }
 
-    @Override
-    public List<ProductDTO> top5MostSell() {
-        List<Product> listProducts = inventoryReposity.findMostSell();
-        List<ProductDTO> lProductDTOs = new ArrayList<>();
-        for(Product data : listProducts)
-        {
-            lProductDTOs.add(geProductDTO(data));
-        }
-        return lProductDTOs;
+    public ResultPaginationDTO getAllProduct(Specification<Product> specification, Pageable pageable) {
+        Page<Product> pageProduct = this.productRepository.findAll(specification, pageable);
+        ResultPaginationDTO rs = new ResultPaginationDTO();
+        ResultPaginationDTO.Meta mt = new ResultPaginationDTO.Meta();
+
+        mt.setPage(pageable.getPageNumber() + 1);
+        mt.setPageSize(pageable.getPageSize());
+
+        mt.setPages(pageProduct.getTotalPages());
+        mt.setTotal(pageProduct.getTotalPages());
+
+        rs.setMeta(mt);
+
+        List<Product> products = pageProduct.getContent();
+        List<ResGetProductDTO> res = new ArrayList<>();
+        res.addAll(products.stream().map(p -> this.convertToResProductDTO(p)).collect(Collectors.toList()));
+        rs.setResult(res);
+        return rs;
     }
+
+    // public List<ProductDTO> filter(List<String> styles, List<String> material,
+    // List<String> categories,
+    // List<String> gender,
+    // List<String> prices) {
+    // List<ProductDTO> productDTOs = new ArrayList<>();
+    // PageRequest pageRequest = PageRequest.of(0, Integer.MAX_VALUE);
+
+    // if (prices == null) {
+    // productDTOs.addAll(mapProductsToDTOs(
+    // ProductRepository.findProductsGT1000(styles, material, categories, gender,
+    // prices, pageRequest)));
+    // return productDTOs;
+    // }
+
+    // if (prices.contains("1000")) {
+    // productDTOs.addAll(mapProductsToDTOs(
+    // ProductRepository.findProductsGT1000(styles, material, categories, gender,
+    // prices, pageRequest)));
+    // }
+    // if (prices.contains("600-999")) {
+    // productDTOs.addAll(mapProductsToDTOs(
+    // ProductRepository.findProducts6_9(styles, material, categories, gender,
+    // prices, pageRequest)));
+    // }
+    // if (prices.contains("300-599")) {
+    // productDTOs.addAll(mapProductsToDTOs(
+    // ProductRepository.findProducts3_5(styles, material, categories, gender,
+    // prices, pageRequest)));
+    // }
+
+    // return productDTOs;
+    // }
 }

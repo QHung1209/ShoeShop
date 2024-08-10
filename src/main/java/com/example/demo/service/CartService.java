@@ -1,106 +1,79 @@
 package com.example.demo.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.entity.Cart;
-import com.example.demo.domain.entity.Product;
-import com.example.demo.domain.entity.Size;
-import com.example.demo.domain.entity.User;
-import com.example.demo.domain.dto.CartDTO;
-import com.example.demo.domain.dto.ProductDTO;
 import com.example.demo.repository.CartRepository;
-import com.example.demo.repository.InventoryReposity;
-
 @Service
 public class CartService {
 
-    @Autowired
-    CartRepository cartRepository;
+    private final CartRepository cartRepository;
+    private final ProductService productService;
 
-    @Autowired
-    InventoryReposity inventoryReposity;
-
-    @Override
-    public List<CartDTO> getAllCart(int user_id) {
-        List<CartDTO> listCartDTOs = new ArrayList<>();
-        List<Cart> listData = cartRepository.findAllCartById(user_id);
-
-        for (Cart ca : listData) {
-            // Kiểm tra sản phẩm đó trong kho còn không, nếu không còn thì không hiện lên
-            // giao diện
-            if (inventoryReposity.Quantity(ca.getProducts().getProduct_id(), ca.getSizes().getSize_id()) == 0)
-                continue;
-            ProductDTO proTemp = new ProductDTO();
-            proTemp.setProduct_id(ca.getProducts().getProduct_id());
-            proTemp.setColor_name(ca.getProducts().getColors().getColor_name());
-            proTemp.setDiscount(ca.getProducts().getDiscount());
-            proTemp.setImage_url(ca.getProducts().getImage_url());
-            proTemp.setShoe_name(ca.getProducts().getShoes().getName());
-            proTemp.setPrice(ca.getProducts().getShoes().getPrice());
-
-            CartDTO temp = new CartDTO();
-            temp.setCart_id(ca.getCart_id());
-            temp.setUser_id(ca.getUsers().getUser_id());
-            temp.setProductDTO(proTemp);
-            temp.setSize_id(ca.getSizes().getSize_id());
-            temp.setSize_name(ca.getSizes().getSize_name());
-            temp.setQuantity(ca.getQuantity());
-            listCartDTOs.add(temp);
-        }
-        return listCartDTOs;
+    public CartService(CartRepository cartRepository, ProductService productService) {
+        this.cartRepository = cartRepository;
+        this.productService = productService;
     }
 
-    @Override
-    public boolean insertCart(int user_id, int product_id, int size_id, int quantity) {
-        Cart existingCart = cartRepository.findCart(user_id, product_id, size_id);
+    public List<Cart> getAllCart(Long id) {
+        List<Cart> listData = cartRepository.findByUserId(id);
 
-        if (existingCart != null) {
+        // for (Cart ca : listData) {
+        // // Kiểm tra sản phẩm đó trong kho còn không, nếu không còn thì không hiện lên
+        // // giao diện
+        // if (inventoryReposity.Quantity(ca.getProducts().getProduct_id(),
+        // ca.getSizes().getSize_id()) == 0)
+        // continue;
+        // ProductDTO proTemp = new ProductDTO();
+        // proTemp.setProduct_id(ca.getProducts().getProduct_id());
+        // proTemp.setColor_name(ca.getProducts().getColors().getColor_name());
+        // proTemp.setDiscount(ca.getProducts().getDiscount());
+        // proTemp.setImage_url(ca.getProducts().getImage_url());
+        // proTemp.setShoe_name(ca.getProducts().getShoes().getName());
+        // proTemp.setPrice(ca.getProducts().getShoes().getPrice());
+
+        // CartDTO temp = new CartDTO();
+        // temp.setCart_id(ca.getCart_id());
+        // temp.setUser_id(ca.getUsers().getUser_id());
+        // temp.setProductDTO(proTemp);
+        // temp.setSize_id(ca.getSizes().getSize_id());
+        // temp.setSize_name(ca.getSizes().getSize_name());
+        // temp.setQuantity(ca.getQuantity());
+        // listCartDTOs.add(temp);
+        // }
+        // return listCartDTOs;
+        return listData;
+    }
+
+    public Cart insertCart(Cart cart) {
+        Cart existsCart = this.cartRepository.findByUserIdAndProductIdAndSizeId(cart.getUser().getId(),
+                cart.getProduct().getId(), cart.getSize().getId());
+
+        if (existsCart != null) {
             // If the cart already exists, update the quantity
-            existingCart.setQuantity(existingCart.getQuantity() + quantity);
-            cartRepository.save(existingCart);
-        } else {
-            // If the cart does not exist, create a new cart entry
-            Cart cart = new Cart();
-            Users user = new Users();
-            Product product = new Product();
-            Size size = new Size();
-            product.setProduct_id(product_id);
-            size.setSize_id(size_id);
-            user.setUser_id(user_id);
-            cart.setProducts(product);
-            cart.setUsers(user);
-            cart.setSizes(size);
-            cart.setQuantity(quantity);
-
-            cartRepository.save(cart);
+            existsCart.setQuantity(existsCart.getQuantity() + cart.getQuantity());
+            return this.cartRepository.save(existsCart);
         }
 
-        return true;
+        return this.cartRepository.save(cart);
     }
 
-    @Override
-    public boolean deleteCart(int user_id, int product_id, int size_id) {
-        // Tìm và xóa giỏ hàng dựa trên user_id và product_id
-        Cart carts = cartRepository.findCartByUserIdAndProductId(user_id, product_id, size_id);
-        cartRepository.delete(carts);
-        return true;
+    public void deleteCart(long id) {
+
+        this.cartRepository.deleteById(id);
+
     }
 
-    @Override
-    public boolean updateCart(int user_id, int cart_id, int product_id, int size_id, int quantity) {
-        Cart existingCart = cartRepository.findCartByUserIdAndProductId(user_id, product_id, size_id);
-        if (existingCart != null && existingCart.getCart_id() != cart_id) {
-            existingCart.setQuantity(quantity);
-            cartRepository.save(existingCart);
-            cartRepository.deleteAllCartByCartId(cart_id);
-        } else if(existingCart != null && existingCart.getCart_id() == cart_id || existingCart == null) {
-            cartRepository.updateCartBy(cart_id, size_id, quantity);
-        }
-        return true;
+    public Cart updateCart(Cart cart) {
+        Cart existsCart = this.cartRepository.findByUserIdAndProductIdAndSizeId(cart.getUser().getId(),
+                cart.getProduct().getId(), cart.getSize().getId());
+
+        existsCart.setQuantity(cart.getQuantity());
+        existsCart.setSize(cart.getSize());
+        return this.cartRepository.save(existsCart);
+
     }
 
 }

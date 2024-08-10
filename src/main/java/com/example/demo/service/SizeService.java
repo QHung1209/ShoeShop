@@ -43,8 +43,6 @@ public class SizeService {
 
     public void deleteSize(long id) {
         Size size = this.getSizeById(id);
-        List<Product> listProducts = this.productRepository.findBySize(size);
-        this.productRepository.deleteAll(listProducts);
         this.sizeRepository.deleteById(id);
     }
 }

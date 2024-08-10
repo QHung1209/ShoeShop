@@ -1,119 +1,33 @@
 package com.example.demo.service;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.domain.entity.Order_detail;
 import com.example.demo.domain.entity.Order;
-import com.example.demo.domain.entity.Users;
-import com.example.demo.dto.OrderDTO;
-import com.example.demo.dto.OrderDetailDTO;
-import com.example.demo.dto.UserDTO;
 import com.example.demo.repository.OrderDetailRepository;
 import com.example.demo.repository.OrderRepository;
-import com.example.demo.service.imp.OrderServiceImp;
 
 @Service
-public class OrderService implements OrderServiceImp {
+public class OrderService {
 
-    @Autowired
-    OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
+
+    public OrderService(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
     @Autowired
     OrderDetailRepository orderDetailRepository;
 
-    @Override
-    public boolean insertOrder(int user_id, String address, String name, String telephone, double total_amount,
-            Timestamp date_order) {
-        Users user = new Users();
-        user.setUser_id(user_id);
-        user.setAddress(address);
-        user.setTelephone(telephone);
-        Order temp = new Order();
-        temp.setName(name);
-        temp.setAddress(address);
-        temp.setTotal_amount(total_amount);
-        temp.setUsers(user);
-        temp.setTelephone(telephone);
-        temp.setDate_order(date_order);
-        orderRepository.save(temp);
-        return true;
+    public Order createOrder(Order order) {
+        return this.orderRepository.save(order);
     }
 
-    @Override
-    public List<OrderDTO> findAllOrderByUserId(int user_id) {
-        List<Order> lOrders = orderRepository.findAllOrder(user_id);
-        List<OrderDTO> lOrderDTOs = new ArrayList<>();
-
-        for (Order order : lOrders) {
-            UserDTO userDTO = UserService.getUserDTOFromOrder(order);
-
-            List<OrderDetailDTO> lOrderDetailDTOs = new ArrayList<>();
-            List<Order_detail> lOrder_details = orderDetailRepository.findAllOrderDetail(order.getOrder_id());
-            for (Order_detail odt : lOrder_details) {
-                OrderDetailDTO temp = OrderDetailService.getOrderDetailDTO(odt);
-                lOrderDetailDTOs.add(temp);
-            }
-
-            OrderDTO temp = new OrderDTO();
-            temp.setOrder_id(order.getOrder_id());
-            temp.setDate_order(order.getDate_order());
-            temp.setUserDTO(userDTO);
-
-            temp.setOrder_status(order.getOrder_status());
-            temp.setTotal_amount(order.getTotal_amount());
-            temp.setListOrderDetailDTOs(lOrderDetailDTOs);
-            lOrderDTOs.add(temp);
-        }
-
-        return lOrderDTOs;
-    }
-
-    @Override
-    public List<OrderDTO> getAllUnconfirmedOrders() {
-
-        List<Order> lOrders = orderRepository.getUnconfirmedOrders();
-        List<OrderDTO> lOrderDTOs = new ArrayList<>();
-
-        for (Order order : lOrders) {
-            UserDTO userDTO = UserService.getUserDTOFromOrder(order);
-
-            List<OrderDetailDTO> lOrderDetailDTOs = new ArrayList<>();
-            List<Order_detail> lOrder_details = orderDetailRepository.findAllOrderDetail(order.getOrder_id());
-            for (Order_detail odt : lOrder_details) {
-                OrderDetailDTO temp = OrderDetailService.getOrderDetailDTO(odt);
-                lOrderDetailDTOs.add(temp);
-            }
-
-            OrderDTO temp = new OrderDTO();
-            temp.setOrder_id(order.getOrder_id());
-            temp.setDate_order(order.getDate_order());
-            temp.setUserDTO(userDTO);
-            temp.setOrder_status(order.getOrder_status());
-            temp.setTotal_amount(order.getTotal_amount());
-            temp.setListOrderDetailDTOs(lOrderDetailDTOs);
-            lOrderDTOs.add(temp);
-        }
-
-        return lOrderDTOs;
-    }
-
-    @Override
-    public boolean deleteOrder(int order_id) {
-        try {
-            orderDetailRepository.DeleteAllOrderDetail(order_id);
-            orderRepository.DeleteOrder(order_id);
-            return true;
-        } catch (Exception e) {
-            // Log the exception (optional, but recommended)
-            System.err.println("Loi khi xoa Order: " + e.getMessage());
-            // Return false to indicate the deletion was not successful
-            return false;
-        }
+    public List<Order> findAllOrderByUserId(int user_id) {
+        
+        return this.findAllOrderByUserId(user_id);
     }
 
 }

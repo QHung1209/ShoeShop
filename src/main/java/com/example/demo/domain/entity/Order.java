@@ -17,8 +17,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
 
-@Entity(name = "Orders")
+@Entity
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +44,7 @@ public class Order {
     private Instant date;
 
     @OneToMany(mappedBy = "orders")
-    private List<Order_detail> OrderDetails;
+    private List<OrderDetail> OrderDetails;
 
     private Instant createdAt;
     private Instant updatedAt;
@@ -122,11 +124,11 @@ public class Order {
         this.date = date;
     }
 
-    public List<Order_detail> getOrderDetails() {
+    public List<OrderDetail> getOrderDetails() {
         return OrderDetails;
     }
 
-    public void setOrderDetails(List<Order_detail> orderDetails) {
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
         OrderDetails = orderDetails;
     }
 

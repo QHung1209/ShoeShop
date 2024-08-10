@@ -12,9 +12,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
 
-@Entity(name = "Order_detail")
-public class Order_detail {
+@Entity
+@Table(name = "OrderDetail")
+public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,11 +27,11 @@ public class Order_detail {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private Product products;
+    private Product product;
 
     @ManyToOne
     @JoinColumn(name = "size_id")
-    private Size sizes;
+    private Size size;
 
     private int quantity;
 
@@ -73,20 +75,20 @@ public class Order_detail {
         this.orders = orders;
     }
 
-    public Product getProducts() {
-        return products;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProducts(Product products) {
-        this.products = products;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public Size getSizes() {
-        return sizes;
+    public Size getSize() {
+        return size;
     }
 
-    public void setSizes(Size sizes) {
-        this.sizes = sizes;
+    public void setSize(Size size) {
+        this.size = size;
     }
 
     public int getQuantity() {
