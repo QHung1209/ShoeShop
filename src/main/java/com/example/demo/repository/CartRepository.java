@@ -2,17 +2,15 @@ package com.example.demo.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.example.demo.domain.entity.Cart;
 
 @Repository
-public interface CartRepository extends JpaRepository<Cart, Long> {
+public interface CartRepository extends JpaRepository<Cart, Long>, JpaSpecificationExecutor<Cart> {
 //     @Query("SELECT c FROM Carts c JOIN c.products p JOIN c.sizes s JOIN c.users u WHERE (:user_id = u.user_id) AND (:product_id = p.product_id) AND (:size_id = s.size_id)")
 //     public Cart findCart(@Param("user_id") int user_id,
 //             @Param("product_id") int product_id,
@@ -40,6 +38,6 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
 //     @Query("DELETE FROM Carts c WHERE c.users.user_id = :user_id")
 //     void deleteAllCart(@Param("user_id") int user_id);
 
-    List<Cart> findByUserId(long id);
+    Page<Cart> findByUserId(long id, Pageable pageable);
     Cart findByUserIdAndProductIdAndSizeId(long userId, long productId, long sizeId);
 }

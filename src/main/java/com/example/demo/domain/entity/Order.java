@@ -41,8 +41,6 @@ public class Order {
 
     private double total;
 
-    private Instant date;
-
     @OneToMany(mappedBy = "orders")
     private List<OrderDetail> OrderDetails;
 
@@ -116,13 +114,6 @@ public class Order {
         this.total = total;
     }
 
-    public Instant getDate() {
-        return date;
-    }
-
-    public void setDate(Instant date) {
-        this.date = date;
-    }
 
     public List<OrderDetail> getOrderDetails() {
         return OrderDetails;

@@ -49,4 +49,9 @@ public class CategoryService {
 
         this.categoryRepository.deleteById(id);
     }
+
+    public List<Category> getAllCategories()
+    {
+        return this.categoryRepository.findAll();
+    }
 }

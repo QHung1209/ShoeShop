@@ -1,45 +1,50 @@
-// package com.example.demo.controller;
+package com.example.demo.controller;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.http.HttpStatus;
-// import org.springframework.http.ResponseEntity;
-// import org.springframework.web.bind.annotation.CrossOrigin;
-// import org.springframework.web.bind.annotation.RequestMapping;
-// import org.springframework.web.bind.annotation.RequestParam;
-// import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-// import com.example.demo.payload.ResponseData;
-// import com.example.demo.repository.CartRepository;
-// import com.example.demo.repository.OrderRepository;
-// import com.example.demo.service.imp.OrderDetailServiceImp;
-// import com.example.demo.util.JwtUtilsHelper;
+import com.example.demo.domain.entity.OrderDetail;
+import com.example.demo.repository.CartRepository;
+import com.example.demo.repository.OrderRepository;
+import com.example.demo.service.OrderDetailService;
+import com.example.demo.util.error.IdInvalidException;
 
-// import org.springframework.web.bind.annotation.PostMapping;
+import jakarta.validation.Valid;
 
-// @CrossOrigin("*")
-// @RestController
-// @RequestMapping("/orderDetail")
-// public class OrderDetailController {
-//     @Autowired
-//     OrderDetailServiceImp orderDetailServiceImp;
-//     @Autowired
-//     OrderRepository orderRepository;
-//     @Autowired
-//     CartRepository cartRepository;
-//     @Autowired
-//     JwtUtilsHelper jwtUtilsHelper;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-//     @PostMapping("/insertOrderDetail")
-//     public ResponseEntity<?> insertCart(@RequestParam int user_id,
-//             @RequestParam int product_id,
-//             @RequestParam int size_id,
-//             @RequestParam int quantity,
-//             @RequestParam int price) {
-//         int order_id = orderRepository.findMaxOrderId(user_id);
-//         ResponseData responseData = new ResponseData();
-//         responseData.setData(orderDetailServiceImp.insertOrderDetail(order_id, product_id, size_id, quantity, price));
-//         cartRepository.deleteAllCart(user_id);
-//         return new ResponseEntity<>(responseData, HttpStatus.OK);
+@CrossOrigin("*")
+@RestController
+@RequestMapping("/orderDetail")
+public class OrderDetailController {
 
-//     }
-// }
+    private final CartRepository cartRepository;
+
+    private final OrderDetailService orderDetailService;
+
+    public OrderDetailController(CartRepository cartRepository, OrderDetailService orderDetailService) {
+        this.cartRepository = cartRepository;
+        this.orderDetailService = orderDetailService;
+    }
+
+    @PostMapping("/orderdetails")
+    public ResponseEntity<?> insertCart(@Valid @RequestBody OrderDetail orderDetail) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.orderDetailService.createOrderDetail(orderDetail));
+    }
+
+    @DeleteMapping("/orderdetails/{id}")
+    public ResponseEntity<Void> deleteOrderDetail(@PathVariable("id") long id) throws IdInvalidException {
+        if (this.orderDetailService.getOrderDetail(id) == null)
+            throw new IdInvalidException("OrderDetail id = " + id + " doesn't exist.");
+        this.orderDetailService.deleteOrderDetail(id);
+        return ResponseEntity.ok(null);
+    }
+}

@@ -1,16 +1,12 @@
 
 function GetAllProduct() {
-  var link_product = "http://localhost:8080/product/allproduct"
+  var link_product = "http://localhost:8080/products"
   var token = localStorage.getItem("token")
   var url_temp = window.location.href
   console.log(token)
   $.ajax({
     method: "GET",
-    url: link_product,
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
-
+    url: link_product
   })
     .done(function (msg) {
       if (msg) {

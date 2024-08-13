@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -160,8 +161,7 @@ public class ProductService {
 
     }
 
-    public ResultPaginationDTO getAllProduct(Specification<Product> specification, Pageable pageable) {
-        Page<Product> pageProduct = this.productRepository.findAll(specification, pageable);
+    public ResultPaginationDTO pagination(Page<Product> pageProduct, Pageable pageable) {
         ResultPaginationDTO rs = new ResultPaginationDTO();
         ResultPaginationDTO.Meta mt = new ResultPaginationDTO.Meta();
 
@@ -180,36 +180,42 @@ public class ProductService {
         return rs;
     }
 
-    // public List<ProductDTO> filter(List<String> styles, List<String> material,
-    // List<String> categories,
-    // List<String> gender,
-    // List<String> prices) {
-    // List<ProductDTO> productDTOs = new ArrayList<>();
-    // PageRequest pageRequest = PageRequest.of(0, Integer.MAX_VALUE);
+    public ResultPaginationDTO getAllProduct(Specification<Product> specification, Pageable pageable) {
+        Page<Product> pageProduct = this.productRepository.findAll(specification, pageable);
+        return pagination(pageProduct, pageable);
+    }
 
-    // if (prices == null) {
-    // productDTOs.addAll(mapProductsToDTOs(
-    // ProductRepository.findProductsGT1000(styles, material, categories, gender,
-    // prices, pageRequest)));
-    // return productDTOs;
-    // }
+    public ResultPaginationDTO filterProduct(List<String> styles, List<String> material,
+            List<String> categories,
+            List<String> gender,
+            List<String> prices, Pageable pageable) {
 
-    // if (prices.contains("1000")) {
-    // productDTOs.addAll(mapProductsToDTOs(
-    // ProductRepository.findProductsGT1000(styles, material, categories, gender,
-    // prices, pageRequest)));
-    // }
-    // if (prices.contains("600-999")) {
-    // productDTOs.addAll(mapProductsToDTOs(
-    // ProductRepository.findProducts6_9(styles, material, categories, gender,
-    // prices, pageRequest)));
-    // }
-    // if (prices.contains("300-599")) {
-    // productDTOs.addAll(mapProductsToDTOs(
-    // ProductRepository.findProducts3_5(styles, material, categories, gender,
-    // prices, pageRequest)));
-    // }
+        if ( prices == null ) {
+            Page<Product> pageProduct = this.productRepository.findProductsGT1K(styles, material, categories, gender,
+                    prices, pageable);
+            return pagination(pageProduct, pageable);
+        }
 
-    // return productDTOs;
-    // }
+        Page<Product> pageProduct = null;
+        List<Product> allProducts = new ArrayList<>();
+
+        if (prices.contains("1000")) {
+            pageProduct = this.productRepository.findProductsGT1K(styles, material, categories, gender,
+                    prices, pageable);
+            allProducts.addAll(pageProduct.getContent());
+        }
+        if (prices.contains("600-999")) {
+            pageProduct = this.productRepository.findProductsBetween6N9(styles, material, categories, gender,
+                    prices, pageable);
+            allProducts.addAll(pageProduct.getContent());
+        }
+        if (prices.contains("300-599")) {
+            pageProduct = this.productRepository.findProductsBetween3N5(styles, material, categories, gender,
+                    prices, pageable);
+            allProducts.addAll(pageProduct.getContent());
+        }
+        pageProduct = new PageImpl<>(allProducts, pageable, allProducts.size());
+
+        return pagination(pageProduct, pageable);
+    }
 }

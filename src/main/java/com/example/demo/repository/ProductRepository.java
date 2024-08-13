@@ -6,7 +6,6 @@ import com.example.demo.domain.entity.Category;
 import com.example.demo.domain.entity.Color;
 import com.example.demo.domain.entity.Material;
 import com.example.demo.domain.entity.Product;
-import com.example.demo.domain.entity.Size;
 import com.example.demo.domain.entity.Style;
 
 import java.util.List;
@@ -31,32 +30,26 @@ public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpec
 
         // public List<Product> findBySize(Size size);
 
-        // @Query("SELECT p FROM Products p  WHERE (:style IS NULL OR p.styles.style_name IN :style) AND (:material IS NULL OR p.materials.material_name IN :material) AND (:category IS NULL OR p.categories.category_name IN :category) AND (:gender IS NULL OR p.genders.gender_name IN :gender) AND (:price IS NULL OR p.shoes.price >= 1000000) ")
-        // public Page<Product> findProductsGT1K(@Param("style") List<String> styles,
-        //                 @Param("material") List<String> material, @Param("category") List<String> categories,
-        //                 @Param("gender") List<String> gender,
-        //                 @Param("price") List<String> price,
-        //                 Pageable pageable);
+        @Query("SELECT p FROM Product p  WHERE (:style IS NULL OR p.style.name IN :style) AND (:material IS NULL OR p.material.name IN :material) AND (:category IS NULL OR p.category.name IN :category) AND (:gender IS NULL OR p.gender IN :gender) AND (:price IS NULL OR p.shoe.price >= 1000000) ")
+        public Page<Product> findProductsGT1K(@Param("style") List<String> styles,
+                        @Param("material") List<String> material, @Param("category") List<String> categories,
+                        @Param("gender") List<String> gender,
+                        @Param("price") List<String> price,
+                        Pageable pageable);
+        
+        @Query("SELECT p FROM Product p WHERE (:style IS NULL OR p.style.name IN :style) AND (:material IS NULL OR p.material.name IN :material) AND (:category IS NULL OR p.category.name IN :category) AND (:gender IS NULL OR p.gender IN :gender) AND (:price IS NULL OR p.shoe.price BETWEEN 600000 AND 999999) ")
+        public Page<Product> findProductsBetween6N9(@Param("style") List<String> styles,
+                        @Param("material") List<String> material,
+                        @Param("category") List<String> categories, @Param("gender") List<String> gender,
+                        @Param("price") List<String> price,
+                        Pageable pageable);
 
-        // @Query("SELECT p FROM Products p WHERE (:style IS NULL OR p.styles.style_name IN :style) AND (:material IS NULL OR p.materials.material_name IN :material) AND (:category IS NULL OR p.categories.category_name IN :category) AND (:gender IS NULL OR p.genders.gender_name IN :gender) AND (:price IS NULL OR p.shoes.price BETWEEN 600000 AND 999999) ")
-        // public Page<Product> findProductsBetween6N9(@Param("style") List<String> styles,
-        //                 @Param("material") List<String> material,
-        //                 @Param("category") List<String> categories, @Param("gender") List<String> gender,
-        //                 @Param("price") List<String> price,
-        //                 Pageable pageable);
-
-        // @Query("SELECT p FROM Products p WHERE (:style IS NULL OR p.styles.style_name IN :style) AND (:material IS NULL OR p.materials.material_name IN :material) AND (:category IS NULL OR p.categories.category_name IN :category) AND (:gender IS NULL OR p.genders.gender_name IN :gender) AND (:price IS NULL OR p.shoes.price BETWEEN 300000 AND 599999) ")
-        // public Page<Product> findProductsBetween3N5(@Param("style") List<String> styles,
-        //                 @Param("material") List<String> material,
-        //                 @Param("category") List<String> categories,
-        //                 @Param("gender") List<String> gender,
-        //                 @Param("price") List<String> price,
-        //                 Pageable pageable);
-
-        // @Query("SELECT p FROM Products p WHERE ( p.styles.style_name LIKE %:key% ) OR (p.materials.material_name LIKE %:key% ) OR (categories.category_name LIKE %:key% ) OR (p.shoes.name LIKE %:key%) OR (p.colors.color_name LIKE %:key%)")
-        // List<Product> SearchProduct(String key);
-
-        // @Query("SELECT p FROM Products p WHERE p.discount > 0")
-        // List<Product> saleOff();
+        @Query("SELECT p FROM Product p WHERE (:style IS NULL OR p.style.name IN :style) AND (:material IS NULL OR p.material.name IN :material) AND (:category IS NULL OR p.category.name IN :category) AND (:gender IS NULL OR p.gender IN :gender) AND (:price IS NULL OR p.shoe.price BETWEEN 300000 AND 599999) ")
+        public Page<Product> findProductsBetween3N5(@Param("style") List<String> styles,
+                        @Param("material") List<String> material,
+                        @Param("category") List<String> categories,
+                        @Param("gender") List<String> gender,
+                        @Param("price") List<String> price,
+                        Pageable pageable);
 
 }

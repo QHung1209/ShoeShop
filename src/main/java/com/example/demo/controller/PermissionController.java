@@ -4,6 +4,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import com.example.demo.repository.PermissionRepository;
 import com.example.demo.service.PermissionService;
 import com.example.demo.util.error.IdInvalidException;
 
+@CrossOrigin("*")
 @RestController
 public class PermissionController {
 
@@ -71,7 +73,7 @@ public class PermissionController {
         return ResponseEntity.ok(this.permissionService.handleUpdatePermission(permission));
     }
 
-    @DeleteMapping("permissions")
+    @DeleteMapping("permissions/{id}")
     public ResponseEntity<Void> deletePermission(@PathVariable("id") long id) throws IdInvalidException {
         if (this.permissionService.handleGetPermissionById(id) == null) {
             throw new IdInvalidException("Permission id khong ton tai");

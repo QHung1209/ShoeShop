@@ -25,6 +25,8 @@ public class Inventory {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    @ManyToOne
+    @JoinColumn(name = "size_id")
     private Size size;
 
     private int quantity;

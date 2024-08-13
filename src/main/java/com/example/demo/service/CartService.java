@@ -1,11 +1,15 @@
 package com.example.demo.service;
 
-import java.util.List;
-
+import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.entity.Cart;
+import com.example.demo.domain.response.ResultPaginationDTO;
 import com.example.demo.repository.CartRepository;
+
 @Service
 public class CartService {
 
@@ -17,42 +21,33 @@ public class CartService {
         this.productService = productService;
     }
 
-    public List<Cart> getAllCart(Long id) {
-        List<Cart> listData = cartRepository.findByUserId(id);
-
-        // for (Cart ca : listData) {
-        // // Kiểm tra sản phẩm đó trong kho còn không, nếu không còn thì không hiện lên
-        // // giao diện
-        // if (inventoryReposity.Quantity(ca.getProducts().getProduct_id(),
-        // ca.getSizes().getSize_id()) == 0)
-        // continue;
-        // ProductDTO proTemp = new ProductDTO();
-        // proTemp.setProduct_id(ca.getProducts().getProduct_id());
-        // proTemp.setColor_name(ca.getProducts().getColors().getColor_name());
-        // proTemp.setDiscount(ca.getProducts().getDiscount());
-        // proTemp.setImage_url(ca.getProducts().getImage_url());
-        // proTemp.setShoe_name(ca.getProducts().getShoes().getName());
-        // proTemp.setPrice(ca.getProducts().getShoes().getPrice());
-
-        // CartDTO temp = new CartDTO();
-        // temp.setCart_id(ca.getCart_id());
-        // temp.setUser_id(ca.getUsers().getUser_id());
-        // temp.setProductDTO(proTemp);
-        // temp.setSize_id(ca.getSizes().getSize_id());
-        // temp.setSize_name(ca.getSizes().getSize_name());
-        // temp.setQuantity(ca.getQuantity());
-        // listCartDTOs.add(temp);
-        // }
-        // return listCartDTOs;
-        return listData;
+    public Cart getCartById(long id) {
+        Optional<Cart> cartOptional = this.cartRepository.findById(id);
+        return cartOptional.isPresent() ? cartOptional.get() : null;
     }
 
-    public Cart insertCart(Cart cart) {
+    public ResultPaginationDTO getAllCart(Long id, Specification<Cart> specification, Pageable pageable) {
+        ResultPaginationDTO rs = new ResultPaginationDTO();
+        Page<Cart> pageCart = this.cartRepository.findByUserId(id,pageable);
+
+        ResultPaginationDTO.Meta mt = new ResultPaginationDTO.Meta();
+
+        mt.setPage(pageable.getPageNumber() + 1);
+        mt.setPageSize(pageable.getPageSize());
+
+        mt.setPages(pageCart.getTotalPages());
+        mt.setTotal(pageCart.getTotalPages());
+
+        rs.setMeta(mt);
+        rs.setResult(pageCart.getContent());
+        return rs;
+    }
+
+    public Cart createCart(Cart cart) {
         Cart existsCart = this.cartRepository.findByUserIdAndProductIdAndSizeId(cart.getUser().getId(),
                 cart.getProduct().getId(), cart.getSize().getId());
 
         if (existsCart != null) {
-            // If the cart already exists, update the quantity
             existsCart.setQuantity(existsCart.getQuantity() + cart.getQuantity());
             return this.cartRepository.save(existsCart);
         }
