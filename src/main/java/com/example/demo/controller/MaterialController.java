@@ -44,6 +44,16 @@ public class MaterialController {
         return ResponseEntity.ok(material);
     }
 
+    @PutMapping("/material")
+    public ResponseEntity<Material> updateMaterial(@Valid @RequestBody Material material) throws IdInvalidException {
+        Material update = this.materialService.getMaterialById(material.getId());
+        if (material == null)
+            throw new IdInvalidException("Material id = " + material.getId() + " doesn't exist.");
+        if (this.materialService.isExistsMaterial(material.getName()))
+            throw new IdInvalidException("The material name exists.");
+        return ResponseEntity.ok(this.materialService.updateMaterial(update));
+    }
+
     @GetMapping("/materials")
     public ResponseEntity<List<Material>> getAllMaterial() {
         return ResponseEntity.ok(this.materialService.getAllMaterial());
