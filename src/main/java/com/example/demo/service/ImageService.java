@@ -34,4 +34,9 @@ public class ImageService {
         update = this.imageRepository.save(update);
         return update;
     }
+    
+    public void deleteImage(long id)
+    {
+        this.imageRepository.deleteById(id);
+    }
 }

@@ -47,7 +47,7 @@ public class MaterialController {
     @PutMapping("/material")
     public ResponseEntity<Material> updateMaterial(@Valid @RequestBody Material material) throws IdInvalidException {
         Material update = this.materialService.getMaterialById(material.getId());
-        if (material == null)
+        if (update == null)
             throw new IdInvalidException("Material id = " + material.getId() + " doesn't exist.");
         if (this.materialService.isExistsMaterial(material.getName()))
             throw new IdInvalidException("The material name exists.");

@@ -107,4 +107,6 @@ public class ProductController {
                 .ok(this.productService.filterProduct(styles, materials, categories, genders, prices, pageable));
     }
 
+
+
 }

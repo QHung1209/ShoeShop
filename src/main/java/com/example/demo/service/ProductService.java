@@ -190,7 +190,7 @@ public class ProductService {
             List<String> gender,
             List<String> prices, Pageable pageable) {
 
-        if ( prices == null ) {
+        if (prices == null) {
             Page<Product> pageProduct = this.productRepository.findProductsGT1K(styles, material, categories, gender,
                     prices, pageable);
             return pagination(pageProduct, pageable);
@@ -218,4 +218,5 @@ public class ProductService {
 
         return pagination(pageProduct, pageable);
     }
+
 }
